@@ -102,7 +102,7 @@ public class Lab01 {
     private static void printMatrix(double[][] arr) {
         for (double[] line : arr) {
             for (double val : line) {
-                System.out.printf("%.4f ", val);
+                System.out.printf("%7.4f ", val);
             }
             System.out.println(); // New line
         }
