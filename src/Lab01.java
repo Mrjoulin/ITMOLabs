@@ -2,55 +2,68 @@ import static java.lang.Math.*;
 
 public class Lab01 {
     public static void main(String[] args) {
+        // Constants given in the task
+        final int aStart = 6;
+        final int aEnd = 22;
+        final float xStart = -5.0F;
+        final float xEnd = 5.0F;
+        final int xLen = 20;
+        // Values for conditions (given in the task)
+        final int first_condition = 14;
+        final int[] second_condition = {8, 18, 20, 22};
+
         // Step 1
-        long[] arrayA = gen_a_array();
+        long[] arrayA = gen_a_array(aStart, aEnd);
 
         // Step 2
-        float[] arrayX = gen_x_array();
+        float[] arrayX = gen_x_array(xStart, xEnd, xLen);
 
         // Step 3
-        double[][] arrayE = gen_e_array(arrayA, arrayX);
+        double[][] arrayE = gen_e_array(arrayA, arrayX, first_condition, second_condition);
 
         // Step 4
         printMatrix(arrayE);
     }
 
-    private static long[] gen_a_array() {
-        // Given in the task
-        int aStart = 6;
-        int aEnd = 22;
+    private static long[] gen_a_array(int aStart, int aEnd) {
+        /*
+            Count array length for only EVEN numbers
+            (aStart & aEnd % 2) gives 1 if aStart and aEnd are odd else gives zero
+            This is necessary for a correct calculation of aLen
+        */
+        int aLen = (aEnd - aStart + 2 - aStart & aEnd % 2) / 2;
+        long[] arrayA = new long[aLen];
 
-        int aLen = (aEnd - aStart + 2) / 2;
-        long[] a = new long[aLen];
-
-        // Step 2 in a loop to get only even numbers
-        for (int val = aStart; val <= aEnd; val += 2) {
-            int index = (val - aStart) / 2;
-            a[index] = val;
+        for (int i = 0; i < aLen; i++) {
+            /*
+                We calculate all even numbers in the desired interval,
+                adding the shift - the first even number in the interval
+            */
+            arrayA[i] = i * 2 + aStart + aStart % 2;
         }
 
-        return a;
+        return arrayA;
     }
 
-    private static float[] gen_x_array() {
-        // Given in the task
-        float xStart = -5.0F;
-        float xEnd = 5.0F;
-        int xLen = 20;
+    private static float[] gen_x_array(float xStart, float xEnd, int xLen) {
         float[] arrayX = new float[xLen];
 
-        // Get random numbers and write them to array
-        for (int i = 0; i < xLen; i++) arrayX[i] = get_random(xStart, xEnd);
+        for (int i = 0; i < xLen; i++) {
+            // Get random number and write it to array
+            arrayX[i] = get_random(xStart, xEnd);
+        }
 
         return arrayX;
     }
 
-    private static double[][] gen_e_array(long[] arrayA, float[] arrayX) {
-        double[][] arrayE = new double[arrayA.length][arrayX.length];
+    private static double[][] gen_e_array(
+            long[] arrayA,
+            float[] arrayX,
+            int first_condition,
+            int[] second_condition
+        ) {
 
-        // Values for conditions (given in the task)
-        int first_condition = 14;
-        int[] second_condition = {8, 18, 20, 22};
+        double[][] arrayE = new double[arrayA.length][arrayX.length];
 
         // Go throw array
         for (int i = 0; i < arrayA.length; i++) {
@@ -102,6 +115,7 @@ public class Lab01 {
     private static void printMatrix(double[][] arr) {
         for (double[] line : arr) {
             for (double val : line) {
+                // 7 - number spaces for digit, .4 - number of digits after dot
                 System.out.printf("%7.4f ", val);
             }
             System.out.println(); // New line
