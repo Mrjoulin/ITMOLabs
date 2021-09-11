@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import static java.lang.Math.*;
 
 public class Lab01 {
@@ -28,10 +30,10 @@ public class Lab01 {
     private static long[] gen_a_array(int aStart, int aEnd) {
         /*
             Count array length for only EVEN numbers
-            (aStart & aEnd % 2) gives 1 if aStart and aEnd are odd else gives zero
+            (aStart & aEnd) % 2 gives 1 if aStart and aEnd are odd else gives zero
             This is necessary for a correct calculation of aLen
         */
-        int aLen = (aEnd - aStart + 2 - aStart & aEnd % 2) / 2;
+        int aLen = (aEnd - aStart + 2 - (aStart & aEnd) % 2) / 2;
         long[] arrayA = new long[aLen];
 
         for (int i = 0; i < aLen; i++) {
