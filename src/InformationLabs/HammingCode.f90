@@ -80,6 +80,6 @@ program HammingCode
   if (wrongBit > 0) then
      write(*, "(A, I1)") "Wrong Bit: ", wrongBit
   else
-     write(*, "(A)") "No Wrong Bis"
+     write(*, "(A)") "No Wrong Bits"
   end if
 end program HammingCode
