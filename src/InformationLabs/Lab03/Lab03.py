@@ -4,7 +4,7 @@ import re
 def task_one(text: str) -> int:
     # Variant 0-1-1 :<)
 
-    re_smile = r"(\s|\n|^):<\)"
+    re_smile = r"(\s|^):<\)"
 
     return len(re.findall(re_smile, text)) if isinstance(text, str) else 0
 
@@ -51,7 +51,7 @@ def task_two(text: str) -> str:
 
 
 def task_three(text: str) -> str:
-    # Variant 5
+    # Variant 1
     # Set Russian vowels
     vowels = "АЕЁИОУЫЭЮЯаеёиоуыэюя"
 
@@ -69,12 +69,19 @@ def task_three(text: str) -> str:
 
     split_text = list(filter(lambda x: x, text.split()))
 
+    # Regular expressions to find all vowels in word
+
     re_one_vowel_in_word = re.compile("[%s]" % vowels)
+
+    # Find all matched words
 
     result = []
 
     for word in split_text:
+        # Find all vowels, remove duplicate values and check, that in word only one unique vowel
         if len(set(re_one_vowel_in_word.findall(word))) == 1:
             result.append(word)
+
+    # Sort founded words by they length and return each on new line
 
     return "\n".join(sorted(result, key=lambda cur: len(cur)))
