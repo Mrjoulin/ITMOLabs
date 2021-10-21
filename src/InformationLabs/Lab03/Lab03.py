@@ -1,5 +1,12 @@
 import re
 
+# Set Russian vowels
+VOWELS = "АЕЁИОУЫЭЮЯаеёиоуыэюя"
+# Get Russian consonants (go throw alphabet and if character not in vowels - it's consonant)
+CONSONANTS = "".join(map(
+    lambda cur: chr(cur), filter(lambda c: chr(c) not in VOWELS, range(ord(VOWELS[0]), ord(VOWELS[-1])))
+))
+
 
 def task_one(text: str) -> int:
     # Variant 0-1-1 :<)
@@ -11,12 +18,6 @@ def task_one(text: str) -> int:
 
 def task_two(text: str) -> str:
     # Variant 5
-    # Set Russian vowels
-    vowels = "АЕЁИОУЫЭЮЯаеёиоуыэюя"
-    # Set Russian consonants (go throw alphabet and if character not in vowels - it's consonant)
-    consonants = "".join(map(
-        lambda cur: chr(cur), filter(lambda c: chr(c) not in vowels, range(ord(vowels[0]), ord(vowels[-1])))
-    ))
 
     # Check if text is incorrect
     if not isinstance(text, str) or not text:
@@ -24,7 +25,7 @@ def task_two(text: str) -> str:
 
     # Remove special characters
 
-    special_chars = "!,./:;'\")(-\n"
+    special_chars = "!,./:;'\"')(-\n"
     for char in special_chars:
         text = text.replace(char, " ")
 
@@ -34,15 +35,15 @@ def task_two(text: str) -> str:
 
     # Create regular expressions for word with two vowels and counting consonants
 
-    re_two_vowels = re.compile("[а-яА-Я]*([%s]|^)([%s]{2})([%s]|$)[а-яА-Я]*" % (consonants, vowels, consonants))
-    re_consonants = re.compile("([%s])" % consonants)
+    re_two_vowels = re.compile("[а-яА-Я]*([%s]|^)([%s]){2}([%s]|$)[а-яА-Я]*" % (CONSONANTS, VOWELS, CONSONANTS))
+    re_consonants = re.compile("^([%s]*[%s]?){3}[%s]*$" % (VOWELS, CONSONANTS, VOWELS))
 
     # Find all matched words
 
     result = []
 
     for i in range(len(split_text) - 1):
-        if re_two_vowels.match(split_text[i]) and len(re_consonants.findall(split_text[i + 1])) <= 3:
+        if re_two_vowels.match(split_text[i]) and re_consonants.match(split_text[i + 1]):
             result.append(split_text[i])
 
     # Return founded words, each on new line
@@ -52,8 +53,6 @@ def task_two(text: str) -> str:
 
 def task_three(text: str) -> str:
     # Variant 1
-    # Set Russian vowels
-    vowels = "АЕЁИОУЫЭЮЯаеёиоуыэюя"
 
     # Check if text is incorrect
     if not isinstance(text, str) or not text:
@@ -71,16 +70,11 @@ def task_three(text: str) -> str:
 
     # Regular expressions to find all vowels in word
 
-    re_one_vowel_in_word = re.compile("[%s]" % vowels)
+    re_only_one_unique_vowel = re.compile(r"^[%s]*([%s])([%s]|(\1))*$" % (CONSONANTS, VOWELS, CONSONANTS))
 
     # Find all matched words
 
-    result = []
-
-    for word in split_text:
-        # Find all vowels, remove duplicate values and check, that in word only one unique vowel
-        if len(set(re_one_vowel_in_word.findall(word))) == 1:
-            result.append(word)
+    result = filter(lambda word: re_only_one_unique_vowel.match(word), split_text)
 
     # Sort founded words by they length and return each on new line
 
