@@ -1,0 +1,13 @@
+name,extends,type,power,accuracy,priority,hits,oppEffects,selfEffects,oppDamage,selfDamage,describe
+PowderSnow,Special,ICE,40.0,1.0,0.0,1.0,FREEZE;-1.0;0.1;0.0,null,DEFAULT,null,let it snow let it powder snow
+Swagger,Status,NORMAL,0.0,0.9,0.0,1.0,CONFUSE;1.0/ADD_ATTACK;1.0;2.0,null,DEFAULT,null,swaaaaaaag
+AncientPower,Special,ROCK,60.0,1.0,0.0,1.0,null,ADD_ALL;0.1;2.0,DEFAULT,null,ancient power in opponent face
+Confusion,Special,PSYCHIC,50.0,1.0,0.0,1.0,CONFUSE;0.1,null,DEFAULT,null,cunfuse this slave
+DoubleTeam,Status,NORMAL,0.0,1.0,0.0,1.0,null,ADD_EVASION;1.0;1.0,DEFAULT,null,"evasion raised on one stage, you know"
+DazzlingGleam,Special,FAIRY,80.0,1.0,0.0,1.0,null,null,DEFAULT,null,dazzzzzzling Gleeeeam
+ChargeBeam,Special,ELECTRIC,50.0,0.9,0.0,1.0,null,ADD_SPECIAL_ATTACK;0.7;1.0,DEFAULT,null,charging pokemon to win
+Thunder,Special,ELECTRIC,110.0,0.7,0.0,1.0,PARALYZE;-1.0;0.7;0.75,null,DEFAULT,null,thunder explode and paralyze 
+WildCharge,Physical,ELECTRIC,90.0,1.0,0.0,1.0,null,null,DEFAULT,DAMAGE_PERCENT;1.0;0.25,zzzzz electric shut me zzz
+Rest,Status,PSYCHIC,0.0,1.0,0.0,1.0,null,SLEEP;2;1.0;0.0;ADD_FULL_HP;1.0;0.0,DEFAULT,null,resting and healing 2 turns
+Leer,Status,NORMAL,0.0,1.0,0.0,1.0,ADD_DEFENSE;1.0;-1.0,null,DEFAULT,null,hehe minus defense 
+Psychic,Special,PSYCHIC,90.0,1.0,0.0,1.0,ADD_SPECIAL_DEFENSE;0.1;-1.0,null,DEFAULT,null,"psychic attack, give up"

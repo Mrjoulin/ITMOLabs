@@ -5,7 +5,8 @@
 
 ### Lab 1: `№21509`
 #### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/Lab01/Lab01.java) to view code
-
+### Lab 2: `№21532`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/Lab02/) to view code
 
 ## Information Technologies Labs:
 ### Lab 2: `№50`

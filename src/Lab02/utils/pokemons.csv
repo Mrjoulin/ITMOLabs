@@ -1,0 +1,8 @@
+name,extends,type,hp,attack,defense,specialAttack,specialDefense,speed,attacks
+Muk,null,POISON,105.0,105.0,75.0,65.0,100.0,50.0,PowderSnow;Swagger;AncientPower;Confide
+Zapdos,null,ELECTRIC;FLYING,90.0,90.0,85.0,125.0,90.0,100.0,Confusion;DoubleTeam;DazzlingGleam;ChargeBeam
+Stunky,null,POISON,63.0,63.0,47.0,41.0,41.0,74.0,Swagger;Thunder;ChargeBeam
+Skuntank,Stunky,POISON,103.0,93.0,67.0,71.0,61.0,84.0,Swagger;Thunder;ChargeBeam;WildCharge
+Starly,null,NORMAL;FLYING,40.0,55.0,30.0 ,30.0,30.0 ,60.0,Rest;Leer
+Staravia,Starly ,NORMAL;FLYING,55.0,75.0,50.0,40.0,40.0,80.0,Rest;Leer;WildCharge
+Staraptor,Staravia,NORMAL;FLYING,85.0,120.0,70.0,50.0,60.0,100.0,Rest;Leer;WildCharge;Psychic
