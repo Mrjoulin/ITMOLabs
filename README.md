@@ -16,6 +16,8 @@
 #### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/InformationLabs/Lab03/Lab03.py) to view code
 #### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/InformationLabs/Lab03/Lab03Tests.py) to view tests
 
+### Lab 4: `№17`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/InformationLabs/Lab04/) to view code
 
 ## OPD Labs:
 ### Lab 1: `№1509`
