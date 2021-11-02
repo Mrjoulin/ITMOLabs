@@ -7,40 +7,42 @@ import Lab02.utils.DefaultStats;
 import ru.ifmo.se.pokemon.Pokemon;
 import ru.ifmo.se.pokemon.Type;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 
 
 public class UniversalPokemon extends Pokemon {
+    public UniversalPokemon() { super(); }
+
     public UniversalPokemon(String pokemonClassName, String name, int lvl) {
         super(name, lvl);
 
-        List<Type> pokemonTypes = DefaultStats.getDefaultPokemonTypes(pokemonClassName);
-        HashMap<String, Double> pokemonStats = DefaultStats.getDefaultPokemonStats(pokemonClassName);
+        try {
+            DefaultStats ds = new DefaultStats(DefaultStats.pokemonsFileName, pokemonClassName);
 
-        if (pokemonTypes != null && pokemonStats != null) {
-            setPokemonStats(
-                    pokemonTypes,
-                    pokemonStats.get(DefaultStats.HP),
-                    pokemonStats.get(DefaultStats.ATTACK),
-                    pokemonStats.get(DefaultStats.DEFENSE),
-                    pokemonStats.get(DefaultStats.SPECIAL_ATTACK),
-                    pokemonStats.get(DefaultStats.SPECIAL_DEFENSE),
-                    pokemonStats.get(DefaultStats.SPEED)
-            );
+            List<Type> pokemonTypes = ds.getDefaultPokemonTypes();
+            HashMap<String, Double> pokemonStats = ds.getDefaultPokemonStats();
+            List<String> pokemonAttacks = ds.getDefaultPokemonAttacks();
+
+            setPokemonStats(pokemonTypes, pokemonStats);
+            setPokemonAttacks(pokemonAttacks);
+        } catch (FileNotFoundException e) {
+            System.out.println("Get exception while reading pokemons file:");
+            e.printStackTrace();
         }
+    }
 
-        List<String> pokemonAttacks = DefaultStats.getDefaultPokemonAttacks(pokemonClassName);
+    private void setPokemonAttacks(List<String> pokemonAttacks) {
+        if (pokemonAttacks == null) return;
 
-        if (pokemonAttacks != null) {
-            System.out.println("Num attacks for " + pokemonClassName + ": " + pokemonAttacks.size());
+        for (String pokemonAttackName: pokemonAttacks) {
+            try {
+                DefaultStats ds = new DefaultStats(DefaultStats.attacksFileName, pokemonAttackName);
 
-            for (String pokemonAttackName: pokemonAttacks) {
-                Type attackType = DefaultStats.getDefaultAttackType(pokemonAttackName);
-                HashMap<String, Double> attackStats = DefaultStats.getDefaultAttackStats(pokemonAttackName);
-                String attackExtends = DefaultStats.getDefaultAttackExtends(pokemonAttackName);
-
-                System.out.println("Add attacks to " + pokemonClassName + ": " + pokemonAttackName);
+                Type attackType = ds.getDefaultAttackType();
+                HashMap<String, Double> attackStats = ds.getDefaultAttackStats();
+                String attackExtends = ds.getDefaultAttackExtends();
 
                 if (attackType != null && attackStats != null && attackExtends != null) {
                     switch (attackExtends) {
@@ -57,23 +59,26 @@ public class UniversalPokemon extends Pokemon {
                         }
                     }
                 }
+            } catch (FileNotFoundException e) {
+                System.out.println("Get exception while reading attacks file:");
+                e.printStackTrace();
             }
         }
     }
 
-    private void setPokemonStats(
-            List<Type> types,
-            double hp,
-            double attack,
-            double defense,
-            double specialAttack,
-            double specialDefense,
-            double speed
-        ) {
+    private void setPokemonStats(List<Type> types, HashMap<String, Double> stats) {
+        if (types == null || stats == null) return;
 
         Type[] typesArray = types.toArray(new Type[0]);
 
         this.setType(typesArray);
-        this.setStats(hp, attack, defense, specialAttack, specialDefense, speed);
+        this.setStats(
+                stats.get(DefaultStats.HP),
+                stats.get(DefaultStats.ATTACK),
+                stats.get(DefaultStats.DEFENSE),
+                stats.get(DefaultStats.SPECIAL_ATTACK),
+                stats.get(DefaultStats.SPECIAL_DEFENSE),
+                stats.get(DefaultStats.SPEED)
+        );
     }
 }

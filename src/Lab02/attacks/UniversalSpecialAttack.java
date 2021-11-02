@@ -1,8 +1,8 @@
 package Lab02.attacks;
 
 import Lab02.utils.DefaultStats;
-import ru.ifmo.se.pokemon.Pokemon;
 import ru.ifmo.se.pokemon.SpecialMove;
+import ru.ifmo.se.pokemon.Pokemon;
 import ru.ifmo.se.pokemon.Type;
 
 import java.util.HashMap;
@@ -12,8 +12,7 @@ public class UniversalSpecialAttack extends SpecialMove {
     public static String attackClassName;
     private final UniversalAttack universalAttack;
 
-
-    public UniversalSpecialAttack(String attackName, Type attackType, HashMap<String ,Double> attackStats) {
+    public UniversalSpecialAttack(String attackName, Type attackType, HashMap<String, Double> attackStats) {
         super(
                 attackType,
                 attackStats.get(DefaultStats.POWER),

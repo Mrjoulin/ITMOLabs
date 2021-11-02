@@ -6,22 +6,29 @@ import ru.ifmo.se.pokemon.Pokemon;
 import ru.ifmo.se.pokemon.Stat;
 import ru.ifmo.se.pokemon.Status;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 
 public class UniversalAttack {
-    private final List<List<String>> oppAttackEffects;
-    private final List<List<String>> selfAttackEffects;
-    private final List<String> oppAttackDamage;
-    private final List<String> selfAttackDamage;
-    public final String describe;
+    private List<List<String>> oppAttackEffects;
+    private List<List<String>> selfAttackEffects;
+    private List<String> oppAttackDamage;
+    private List<String> selfAttackDamage;
+    public String describe;
 
     public UniversalAttack (String attackClassName) {
-        oppAttackEffects = DefaultStats.getDefaultAttackOpponentEffects(attackClassName);
-        selfAttackEffects = DefaultStats.getDefaultAttackSelfEffects(attackClassName);
-        oppAttackDamage = DefaultStats.getDefaultAttackOpponentDamage(attackClassName);
-        selfAttackDamage = DefaultStats.getDefaultAttackSelfDamage(attackClassName);
-        describe = DefaultStats.getDefaultAttackDescribe(attackClassName);
+        try {
+            DefaultStats ds = new DefaultStats(DefaultStats.attacksFileName, attackClassName);
+
+            oppAttackEffects = ds.getDefaultAttackOpponentEffects();
+            selfAttackEffects = ds.getDefaultAttackSelfEffects();
+            oppAttackDamage = ds.getDefaultAttackOpponentDamage();
+            selfAttackDamage = ds.getDefaultAttackSelfDamage();
+            describe = ds.getDefaultAttackDescribe();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void applyOppEffects(Pokemon poke) {

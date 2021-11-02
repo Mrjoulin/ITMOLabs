@@ -1,0 +1,372 @@
+@startuml
+package Lab02 {
+  class Main {
+    + Main()
+    + main(String[]) {static}
+  }
+}
+package Lab02.pokemons {
+  class UniversalPokemon {
+    + UniversalPokemon()
+    + UniversalPokemon(String, String, int)
+    - setPokemonAttacks(List<String>)
+    - setPokemonStats(List<Type>, HashMap<String, Double>)
+  }
+}
+package Lab02.pokemons.names {
+  class Skuntank {
+    + Skuntank(String, int)
+  }
+  class Staraptor {
+    + Staraptor(String, int)
+  }
+  class Staravia {
+    + Staravia(String, int)
+  }
+  class Starly {
+    + Starly(String, int)
+  }
+  class Stunky {
+    + Stunky(String, int)
+  }
+  class Zapdos {
+    + Zapdos(String, int)
+  }
+}
+package Lab02.attacks {
+  class UniversalAttack {
+    + describe : String
+    - oppAttackDamage : List<String>
+    - oppAttackEffects : List<List<String>>
+    - selfAttackDamage : List<String>
+    - selfAttackEffects : List<List<String>>
+    + UniversalAttack(String)
+    # applyDamage(Pokemon, List<String>, double)
+    # applyEffects(Pokemon, List<List<String>>)
+    # applyOppDamage(Pokemon, double)
+    # applyOppEffects(Pokemon)
+    # applySelfDamage(Pokemon, double)
+    # applySelfEffects(Pokemon)
+  }
+  class UniversalPhysicalAttack {
+    + attackClassName : String {static}
+    - universalAttack : UniversalAttack
+    + UniversalPhysicalAttack(String, Type, HashMap<String, Double>)
+    # applyOppDamage(Pokemon, double)
+    # applyOppEffects(Pokemon)
+    # applySelfDamage(Pokemon, double)
+    # applySelfEffects(Pokemon)
+    # describe() : String
+  }
+  class UniversalSpecialAttack {
+    + attackClassName : String {static}
+    - universalAttack : UniversalAttack
+    + UniversalSpecialAttack(String, Type, HashMap<String, Double>)
+    # applyOppDamage(Pokemon, double)
+    # applyOppEffects(Pokemon)
+    # applySelfDamage(Pokemon, double)
+    # applySelfEffects(Pokemon)
+    # describe() : String
+  }
+  class UniversalStatusAttack {
+    + attackClassName : String {static}
+    - universalAttack : UniversalAttack
+    + UniversalStatusAttack(String, Type, HashMap<String, Double>)
+    # applyOppEffects(Pokemon)
+    # applySelfEffects(Pokemon)
+    # describe() : String
+  }
+}
+package Lab02.utils {
+  class DefaultStats {
+    + ACCURACY : String {static}
+    + ATTACK : String {static}
+    + ATTACKS : String {static}
+    + DEFAULT_LEVEL : int {static}
+    + DEFENSE : String {static}
+    + DESCRIBE : String {static}
+    + EXTENDS : String {static}
+    + HITS : String {static}
+    + HP : String {static}
+    + OPPONENT_DAMAGE : String {static}
+    + OPPONENT_EFFECTS : String {static}
+    + POWER : String {static}
+    + PRIORITY : String {static}
+    + SELF_DAMAGE : String {static}
+    + SELF_EFFECTS : String {static}
+    + SPECIAL_ATTACK : String {static}
+    + SPECIAL_DEFENSE : String {static}
+    + SPEED : String {static}
+    + TYPE : String {static}
+    + attacksFileName : String {static}
+    - nameColumnIndex : int {static}
+    - objectData : List<List<String>>
+    + pokemonsFileName : String {static}
+    + DefaultStats(String, String)
+    - checkAttackInFile(String) : List<List<String>> {static}
+    - checkNameInFile(String, String) : List<List<String>> {static}
+    - checkPokemonInFile(String) : List<List<String>> {static}
+    - createListWithEffectsOrDamageInfo(List<String>, List<String>, String) : List<List<String>> {static}
+    - createMapWithStats(List<String>, List<String>) : HashMap<String, Double> {static}
+    + getDefaultAttackDescribe() : String
+    + getDefaultAttackDescribe(String) : String {static}
+    + getDefaultAttackExtends() : String
+    + getDefaultAttackExtends(String) : String {static}
+    + getDefaultAttackOpponentDamage() : List<String>
+    + getDefaultAttackOpponentDamage(String) : List<String> {static}
+    + getDefaultAttackOpponentEffects() : List<List<String>>
+    + getDefaultAttackOpponentEffects(String) : List<List<String>> {static}
+    + getDefaultAttackSelfDamage() : List<String>
+    + getDefaultAttackSelfDamage(String) : List<String> {static}
+    + getDefaultAttackSelfEffects() : List<List<String>>
+    + getDefaultAttackSelfEffects(String) : List<List<String>> {static}
+    + getDefaultAttackStats() : HashMap<String, Double>
+    + getDefaultAttackStats(String) : HashMap<String, Double> {static}
+    + getDefaultAttackType() : Type
+    + getDefaultAttackType(String) : Type {static}
+    + getDefaultPokemonAttacks() : List<String>
+    + getDefaultPokemonAttacks(String) : List<String> {static}
+    + getDefaultPokemonStats() : HashMap<String, Double>
+    + getDefaultPokemonStats(String) : HashMap<String, Double> {static}
+    + getDefaultPokemonTypes() : List<Type>
+    + getDefaultPokemonTypes(String) : List<Type> {static}
+    - getFileData(String) : List<List<String>> {static}
+    + getObjectAttacks(List<String>, List<String>) : List<String> {static}
+    + getObjectTypes(List<String>, List<String>) : List<Type> {static}
+  }
+}
+package ru.ifmo.se.pokemon {
+  class Battle {
+    - allies : Team
+    - allyName : String
+    - foeName : String
+    - foes : Team
+    + Battle()
+    + addAlly(Pokemon)
+    + addFoe(Pokemon)
+    - checkFirst(Pokemon, Pokemon) : boolean
+    + go()
+    + main(String[]) {static}
+  }
+  abstract class DamageMove {
+    + DamageMove()
+    + DamageMove(Type, double, double)
+    + DamageMove(Type, double, double, int, int)
+    # applyOppDamage(Pokemon, double)
+    # applySelfDamage(Pokemon, double)
+    + attack(Pokemon, Pokemon)
+    # calcAttDefFactor(Pokemon, Pokemon) : double {abstract}
+    # calcBaseDamage(Pokemon, Pokemon) : double
+    # calcCriticalHit(Pokemon, Pokemon) : double
+    # calcRandomDamage(Pokemon, Pokemon) : double
+    # calcSameTypeAttackBonus(Pokemon, Pokemon) : double
+    # calcTypeEffect(Pokemon, Pokemon) : double
+  }
+  class Effect {
+    - attackChance : double
+    - condition : Status
+    - effectChance : double
+    - mods : int[]
+    - turns : int
+    + Effect()
+    + attack() : double
+    + attack(double) : Effect
+    + burn(Pokemon) {static}
+    + chance(double) : Effect
+    + clear()
+    + condition() : Status
+    + condition(Status) : Effect
+    + confuse(Pokemon) {static}
+    + flinch(Pokemon) {static}
+    + freeze(Pokemon) {static}
+    + immediate() : boolean
+    + paralyze(Pokemon) {static}
+    + poison(Pokemon) {static}
+    + sleep(Pokemon) {static}
+    + stat(Stat) : int
+    + stat(Stat, int) : Effect
+    + success() : boolean
+    + turn() : boolean
+    + turns(int) : Effect
+  }
+  ~class FireMove {
+    + FireMove(Type, double, double)
+    + applyOppEffects(Pokemon)
+  }
+  abstract class Move {
+    # accuracy : double
+    - confusionMove : Move {static}
+    # hits : int
+    - noMove : Move {static}
+    # power : double
+    # priority : int
+    - struggleMove : Move {static}
+    # type : Type
+    + Move()
+    + Move(Type, double, double)
+    + Move(Type, double, double, int, int)
+    # applyOppEffects(Pokemon)
+    # applySelfEffects(Pokemon)
+    # attack(Pokemon, Pokemon) {abstract}
+    # checkAccuracy(Pokemon, Pokemon) : boolean
+    # describe() : String
+    + getConfusionMove() : Move {static}
+    + getNoMove() : Move {static}
+    + getPriority() : int
+    + getStruggleMove() : Move {static}
+  }
+  class PhysicalMove {
+    + PhysicalMove()
+    + PhysicalMove(Type, double, double)
+    + PhysicalMove(Type, double, double, int, int)
+    # calcAttDefFactor(Pokemon, Pokemon) : double
+  }
+  class Pokemon {
+    - base : double[]
+    - condition : Effect
+    - confusion : int
+    - effects : List<Effect>
+    - level : int
+    - moves : List<Move>
+    - name : String
+    - preparedMove : Move
+    - stage : Effect
+    - types : List<Type>
+    + Pokemon()
+    + Pokemon(String, int)
+    + addEffect(Effect)
+    # addMove(Move)
+    # addType(Type)
+    + attack(Pokemon) : boolean
+    + confuse()
+    - getAttackChance() : double
+    + getCondition() : Status
+    + getHP() : double
+    + getLevel() : int
+    # getPreparedMove() : Move
+    + getStat(Stat) : double
+    + getTypes() : Type[]
+    + hasType(Type) : boolean
+    + isAlive() : boolean
+    + prepareMove()
+    + restore()
+    + setCondition(Effect)
+    + setLevel(int)
+    + setMod(Stat, int)
+    # setMove(Move[])
+    + setStats(double, double, double, double, double, double)
+    # setType(Type[])
+    + toString() : String
+    + turn()
+  }
+  class SpecialMove {
+    + SpecialMove()
+    + SpecialMove(Type, double, double)
+    + SpecialMove(Type, double, double, int, int)
+    + calcAttDefFactor(Pokemon, Pokemon) : double
+  }
+  enum Stat {
+    + ACCURACY {static}
+    + ATTACK {static}
+    + DEFENSE {static}
+    + EVASION {static}
+    + HP {static}
+    + SPECIAL_ATTACK {static}
+    + SPECIAL_DEFENSE {static}
+    + SPEED {static}
+    - hidden : boolean
+    + isHidden() : boolean
+    + valueOf(String) : Stat {static}
+    + values() : Stat[] {static}
+  }
+  enum Status {
+    + BURN {static}
+    + FREEZE {static}
+    + NORMAL {static}
+    + PARALYZE {static}
+    + POISON {static}
+    + SLEEP {static}
+    + valueOf(String) : Status {static}
+    + values() : Status[] {static}
+  }
+  class StatusMove {
+    + StatusMove()
+    + StatusMove(Type, double, double)
+    + StatusMove(Type, double, double, int, int)
+    # applyOppEffects(Pokemon)
+    # applySelfEffects(Pokemon)
+    + attack(Pokemon, Pokemon)
+  }
+  ~class Team {
+    - name : String
+    - pokemon : Pokemon
+    - team : Queue<Pokemon>
+    ~ Team(String)
+    ~ add(Pokemon)
+    ~ getName() : String
+    ~ hasNext() : boolean
+    ~ next() : Pokemon
+    ~ poke() : Pokemon
+  }
+  enum Type {
+    + BUG {static}
+    + DARK {static}
+    + DRAGON {static}
+    + ELECTRIC {static}
+    + FAIRY {static}
+    + FIGHTING {static}
+    + FIRE {static}
+    + FLYING {static}
+    + GHOST {static}
+    + GRASS {static}
+    + GROUND {static}
+    + ICE {static}
+    + NONE {static}
+    + NORMAL {static}
+    + POISON {static}
+    + PSYCHIC {static}
+    + ROCK {static}
+    + STEEL {static}
+    + WATER {static}
+    - effects : int[][] {static}
+    - doub(Type[]) : Type
+    - effect(Type) : double
+    + getEffect(Type[]) : double
+    - half(Type[]) : Type
+    - setX(int, Type[]) : Type
+    + valueOf(String) : Type {static}
+    + values() : Type[] {static}
+    - zero(Type[]) : Type
+  }
+}
+
+UniversalPhysicalAttack --|> PhysicalMove
+UniversalSpecialAttack --|> SpecialMove
+UniversalStatusAttack --|> StatusMove
+UniversalSpecialAttack -->  "-universalAttack" UniversalAttack
+UniversalPhysicalAttack -->  "-universalAttack" UniversalAttack
+UniversalStatusAttack -->  "-universalAttack" UniversalAttack
+Skuntank --|> UniversalPokemon
+Staraptor --|> UniversalPokemon
+Staravia --|> UniversalPokemon
+Starly --|> UniversalPokemon
+Stunky --|> UniversalPokemon
+Zapdos --|> UniversalPokemon
+UniversalPokemon --|> Pokemon
+Battle -->  "-allies" Team
+Team -->  "-team" Pokemon
+Team -->  "-pokemon" Pokemon
+Pokemon -->  "-preparedMove" Move
+Pokemon -->  "-moves" Move
+Pokemon -->  "-types" Type
+Pokemon -->  "-stage" Effect
+Effect -->  "-condition" Status
+FireMove --|> SpecialMove
+SpecialMove --|> DamageMove
+PhysicalMove --|> DamageMove
+DamageMove --|> Move
+StatusMove --|> Move
+Move -->  "-type" Type
+Move -->  "-noMove" Move
+Move -->  "-confusionMove" Move
+@enduml

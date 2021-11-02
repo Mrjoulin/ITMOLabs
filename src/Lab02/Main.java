@@ -1,29 +1,29 @@
 package Lab02;
 
 import Lab02.pokemons.names.*;
+import Lab02.utils.DefaultStats;
 import ru.ifmo.se.pokemon.Battle;
-
-// Create UML
 
 public class Main {
     public static void main(String[] args) {
-        Battle b = new Battle();
-        Zapdos zapdos = new Zapdos("Лох позорный", 1);
-        Stunky stunky = new Stunky("Прыщавый ублюдок", 1);
-        Starly starly = new Starly("Мамкоебщик", 1);
-        Staravia staravia = new Staravia("Лоликонщик отбитый", 1);
-        Staraptor staraptor = new Staraptor("ХАЙП", 1);
-        Skuntank skuntank = new Skuntank("Эмо Кид", 1);
-
+        // Create pokemons
+        Zapdos zapdos = new Zapdos("Furia", DefaultStats.DEFAULT_LEVEL);
+        Stunky stunky = new Stunky("Shura", DefaultStats.DEFAULT_LEVEL);
+        Starly starly = new Starly("Shurizard", DefaultStats.DEFAULT_LEVEL);
+        Staravia staravia = new Staravia("Domp", DefaultStats.DEFAULT_LEVEL);
+        Staraptor staraptor = new Staraptor("Dompra", DefaultStats.DEFAULT_LEVEL);
+        Skuntank skuntank = new Skuntank("Domprapter", DefaultStats.DEFAULT_LEVEL);
+        // Create new battle
+        Battle battle = new Battle();
         // Add pokemons to Ally
-        b.addAlly(zapdos);
-        b.addAlly(starly);
-        b.addAlly(staraptor);
+        battle.addAlly(zapdos);
+        battle.addAlly(starly);
+        battle.addAlly(staraptor);
         // Add pokemons to Foe
-        b.addFoe(stunky);
-        b.addFoe(staravia);
-        b.addFoe(skuntank);
+        battle.addFoe(stunky);
+        battle.addFoe(staravia);
+        battle.addFoe(skuntank);
         // Run battle
-        b.go();
+        battle.go();
     }
 }

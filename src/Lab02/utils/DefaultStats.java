@@ -32,21 +32,20 @@ public class DefaultStats {
     public static final String SELF_DAMAGE = "selfDamage";
     public static final String DESCRIBE = "describe";
 
-    private static final String pokemonsFileName = "Lab02/utils/pokemons.csv";
-    private static final String attacksFileName = "Lab02/utils/attacks.csv";
-    private static List<List<String>> pokemonsFileData = null;
-    private static List<List<String>> attacksFileData = null;
+    public static final int DEFAULT_LEVEL = 1;
+
+    public static final String pokemonsFileName = "Lab02/utils/pokemons.csv";
+    public static final String attacksFileName = "Lab02/utils/attacks.csv";
+    private final List<List<String>> objectData;
     private static final int nameColumnIndex = 0;
 
-    public DefaultStats() {
-        pokemonsFileData = getFileData(pokemonsFileName);
-        attacksFileData = getFileData(attacksFileName);
+    public DefaultStats(String fileName, String className) throws FileNotFoundException {
+        objectData = checkNameInFile(fileName, className);
+
+        if (objectData == null) throw new FileNotFoundException();
     }
 
     private static List<List<String>> getFileData(String fileName) {
-        if (fileName.equals(pokemonsFileName) && pokemonsFileData != null) return pokemonsFileData;
-        if (fileName.equals(attacksFileName) && attacksFileData != null) return attacksFileData;
-
         List<List<String>> data = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(fileName))) {
             while (scanner.hasNextLine()) {
@@ -120,22 +119,41 @@ public class DefaultStats {
         return attackEffectsList;
     }
 
+    public static List<Type> getObjectTypes(List<String> keys, List<String> values) {
+        int indexOfTypeParam = keys.indexOf(TYPE);
+        String pokemonTypes = values.get(indexOfTypeParam);
+        List<Type> types = new ArrayList<>();
+
+        for (String pokemonType : pokemonTypes.split(";")) {
+            types.add(Type.valueOf(pokemonType));
+        }
+
+        return types;
+    }
+
+    public static List<String> getObjectAttacks(List<String> keys, List<String> values) {
+        int indexOfAttacksParam = keys.indexOf(ATTACKS);
+        String pokemonAttacks = values.get(indexOfAttacksParam);
+
+        if (!pokemonAttacks.equals("null")) {
+            return Arrays.asList(pokemonAttacks.split(";"));
+        }
+
+        return null;
+    }
+
     public static List<Type> getDefaultPokemonTypes(String pokemonClassName) {
         List<List<String>> pokemonData = checkPokemonInFile(pokemonClassName);
 
         if (pokemonData != null) {
-            int indexOfTypeParam = pokemonData.get(0).indexOf(TYPE);
-            String pokemonTypes = pokemonData.get(1).get(indexOfTypeParam);
-            List<Type> types = new ArrayList<>();
-
-            for (String pokemonType : pokemonTypes.split(";")) {
-                types.add(Type.valueOf(pokemonType));
-            }
-
-            return types;
+            return getObjectTypes(pokemonData.get(0), pokemonData.get(1));
         }
 
         return null;
+    }
+
+    public List<Type> getDefaultPokemonTypes() {
+        return getObjectTypes(objectData.get(0), objectData.get(1));
     }
 
     public static HashMap<String, Double> getDefaultPokemonStats(String pokemonClassName) {
@@ -148,34 +166,36 @@ public class DefaultStats {
         return null;
     }
 
+    public HashMap<String, Double> getDefaultPokemonStats() {
+        return createMapWithStats(objectData.get(0), objectData.get(1));
+    }
+
     public static List<String> getDefaultPokemonAttacks(String pokemonClassName) {
         List<List<String>> pokemonData = checkPokemonInFile(pokemonClassName);
 
         if (pokemonData != null) {
-            int indexOfAttacksParam = pokemonData.get(0).indexOf(ATTACKS);
-            String pokemonAttacks = pokemonData.get(1).get(indexOfAttacksParam);
-
-            if (!pokemonAttacks.equals("null")) {
-                return Arrays.asList(pokemonAttacks.split(";"));
-            }
-
-            return null;
+            return getObjectAttacks(pokemonData.get(0), pokemonData.get(1));
         }
 
         return null;
+    }
+
+    public List<String> getDefaultPokemonAttacks() {
+        return getObjectAttacks(objectData.get(0), objectData.get(1));
     }
 
     public static Type getDefaultAttackType(String attackClassName) {
         List<List<String>> attackData = checkAttackInFile(attackClassName);
 
         if (attackData != null) {
-            int indexOfTypeParam = attackData.get(0).indexOf(TYPE);
-            String pokemonType = attackData.get(1).get(indexOfTypeParam);
-
-            return Type.valueOf(pokemonType);
+            return getObjectTypes(attackData.get(0), attackData.get(1)).get(0);
         }
 
         return null;
+    }
+
+    public Type getDefaultAttackType() {
+        return getObjectTypes(objectData.get(0), objectData.get(1)).get(0);
     }
 
     public static HashMap<String, Double> getDefaultAttackStats(String attackClassName) {
@@ -188,6 +208,10 @@ public class DefaultStats {
         return null;
     }
 
+    public HashMap<String, Double> getDefaultAttackStats() {
+        return createMapWithStats(objectData.get(0), objectData.get(1));
+    }
+
     public static List<List<String>> getDefaultAttackOpponentEffects(String attackClassName) {
         List<List<String>> attackData = checkAttackInFile(attackClassName);
 
@@ -198,6 +222,10 @@ public class DefaultStats {
         return null;
     }
 
+    public List<List<String>> getDefaultAttackOpponentEffects() {
+        return createListWithEffectsOrDamageInfo(objectData.get(0), objectData.get(1), OPPONENT_EFFECTS);
+    }
+
     public static List<List<String>> getDefaultAttackSelfEffects(String attackClassName) {
         List<List<String>> attackData = checkAttackInFile(attackClassName);
 
@@ -206,6 +234,10 @@ public class DefaultStats {
         }
 
         return null;
+    }
+
+    public List<List<String>> getDefaultAttackSelfEffects() {
+        return createListWithEffectsOrDamageInfo(objectData.get(0), objectData.get(1), SELF_EFFECTS);
     }
 
     public static List<String> getDefaultAttackOpponentDamage(String attackClassName) {
@@ -222,6 +254,14 @@ public class DefaultStats {
         return null;
     }
 
+    public List<String> getDefaultAttackOpponentDamage() {
+        List<List<String>> opponentDamage = createListWithEffectsOrDamageInfo(
+                objectData.get(0), objectData.get(1), OPPONENT_DAMAGE
+        );
+        // Can be only one type of damage for pokemon
+        return opponentDamage.isEmpty() ? null : opponentDamage.get(0);
+    }
+
     public static List<String> getDefaultAttackSelfDamage(String attackClassName) {
         List<List<String>> attackData = checkAttackInFile(attackClassName);
 
@@ -236,6 +276,14 @@ public class DefaultStats {
         return null;
     }
 
+    public List<String> getDefaultAttackSelfDamage() {
+        List<List<String>> selfDamage = createListWithEffectsOrDamageInfo(
+                objectData.get(0), objectData.get(1), SELF_DAMAGE
+        );
+        // Can be only one type of damage for pokemon
+        return selfDamage.isEmpty() ? null : selfDamage.get(0);
+    }
+
     public static String getDefaultAttackDescribe(String attackClassName) {
         List<List<String>> attackData = checkAttackInFile(attackClassName);
 
@@ -248,6 +296,10 @@ public class DefaultStats {
         return null;
     }
 
+    public String getDefaultAttackDescribe() {
+        return objectData.get(1).get(objectData.get(0).indexOf(DESCRIBE));
+    }
+
     public static String getDefaultAttackExtends(String attackClassName) {
         List<List<String>> attackData = checkAttackInFile(attackClassName);
 
@@ -258,5 +310,9 @@ public class DefaultStats {
         }
 
         return null;
+    }
+
+    public String getDefaultAttackExtends() {
+        return objectData.get(1).get(objectData.get(0).indexOf(EXTENDS));
     }
 }

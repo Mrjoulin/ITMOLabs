@@ -12,7 +12,7 @@ public class UniversalPhysicalAttack extends PhysicalMove {
     public static String attackClassName;
     private final UniversalAttack universalAttack;
 
-    public UniversalPhysicalAttack(String attackName, Type attackType, HashMap<String ,Double> attackStats) {
+    public UniversalPhysicalAttack(String attackName, Type attackType, HashMap<String, Double> attackStats) {
         super(
                 attackType,
                 attackStats.get(DefaultStats.POWER),
