@@ -1,237 +1,129 @@
 article:
   _lang: ru
-  para:
-    anchor:
-      _id: 3day
-  informaltable:
-    _frame: all
+  info:
+    dayinfo:
+      _day: 3day
+      _name: Wednesday
+  table:
     tgroup:
-      -
-      colspec:
-        _colnum: 1
-        _colname: c1
-      -
-      colspec:
-        _colnum: 2
-        _colname: c2
-      -
-      colspec:
-        _colnum: 3
-        _colname: c3
       tbody:
         -
-        row:
-          -
-          entry:
-            -
-            para:
+        lesson:
+          date:
+            time:
               - 08:20-09:50 
-            -
-            para:
+            parity:
               - четная неделя 
-            -
-            para:
+          place:
+            audience:
               - 303/2 (усл) ауд. 
-            -
-            para:
+            address:
               - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - 303/2 (усл) ауд. 
-            -
-            para:
-              - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - Программирование(Лаб)четная неделя
-            -
-            para:
+          subject:
+            name:
+              - Программирование(Лаб)
+            teacher:
               - Усков Иван Владимирович 
-          -
-          entry:
-            para:
+          type:
+            name:
               - Очно - дистанционный 
         -
-        row:
-          -
-          entry:
-            -
-            para:
+        lesson:
+          date:
+            time:
               - 10:00-11:30 
-            -
-            para:
+            parity:
               - четная неделя 
-            -
-            para:
+          place:
+            audience:
               - 303/2 (усл) ауд. 
-            -
-            para:
+            address:
               - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - 303/2 (усл) ауд. 
-            -
-            para:
-              - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - Программирование(Лаб)четная неделя
-            -
-            para:
+          subject:
+            name:
+              - Программирование(Лаб)
+            teacher:
               - Усков Иван Владимирович 
-          -
-          entry:
-            para:
+          type:
+            name:
               - Очно - дистанционный 
         -
-        row:
-          -
-          entry:
-            -
-            para:
+        lesson:
+          date:
+            time:
               - 11:40-13:10 
-            -
-            para:
+            parity:
               - четная неделя 
-            -
-            para:
+          place:
+            audience:
               - 381 ауд. 
-            -
-            para:
+            address:
               - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - 381 ауд. 
-            -
-            para:
-              - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - Информатика(Лаб)четная неделя
-            -
-            para:
+          subject:
+            name:
+              - Информатика(Лаб)
+            teacher:
               - Малышева Татьяна Алексеевна 
-          -
-          entry:
-            para:
+          type:
+            name:
               - Очно - дистанционный 
         -
-        row:
-          -
-          entry:
-            -
-            para:
+        lesson:
+          date:
+            time:
               - 11:40-13:10 
-            -
-            para:
+            parity:
               - 3, 5, 7, 9, 11, 13, 15, 17
-            -
-            para:
+          place:
+            audience:
               - 305 ауд. 
-            -
-            para:
+            address:
               - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - 305 ауд. 
-            -
-            para:
-              - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - Основы профессиональной деятельности(Лаб)нечетная неделя
-            -
-            para:
+          subject:
+            name:
+              - Основы профессиональной деятельности (Лаб)
+            teacher:
               - Ткешелашвили Нино Мерабиевна 
-          -
-          entry:
-            para:
+          type:
+            name:
               - Очно - дистанционный 
         -
-        row:
-          -
-          entry:
-            -
-            para:
+        lesson:
+          date:
+            time:
               - 13:30-15:00 
-            -
-            para:
+            parity:
               - четная неделя 
-            -
-            para:
+          place:
+            audience:
               - 381 ауд. 
-            -
-            para:
+            address:
               - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - 381 ауд. 
-            -
-            para:
-              - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - Информатика(Лаб)четная неделя
-            -
-            para:
+          subject:
+            name:
+              - Информатика(Лаб)
+            teacher:
               - Малышева Татьяна Алексеевна 
-          -
-          entry:
-            para:
+          type:
+            name:
               - Очно - дистанционный 
         -
-        row:
-          -
-          entry:
-            -
-            para:
+        lesson:
+          date:
+            time:
               - 13:30-15:00 
-            -
-            para:
+            parity:
               - 3, 5, 7, 9, 11, 13, 15, 17
-            -
-            para:
+          place:
+            audience:
               - 305 ауд. 
-            -
-            para:
-              - Кронверкский пр., д.49, лит.А 
-          -
-          entry:
-            -
-            para:
-              - 305 ауд. 
-            -
-            para:
+            address:
               - Кронверкский пр., д.49, лит.А
-          -
-          entry:
-            -
-            para:
-              - Основы профессиональной деятельности(Лаб)нечетная неделя
-            -
-            para:
+          subject:
+            name:
+              - Основы профессиональной деятельности(Лаб)
+            teacher:
               - Ткешелашвили Нино Мерабиевна 
-          -
-          entry:
-            para:
+          type:
+            name:
               - Очно - дистанционный 

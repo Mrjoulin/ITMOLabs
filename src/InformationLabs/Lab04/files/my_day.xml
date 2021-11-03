@@ -1,129 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <article lang="ru">
-  <para>
-    <anchor id="3day"/>
-  </para>
-  <informaltable frame="all">
+  <info>
+    <dayinfo day="3day" name="Wednesday"/>
+  </info>
+  <table>
     <tgroup>
-      <colspec colnum="1" colname="c1"/>
-      <colspec colnum="2" colname="c2"/>
-      <colspec colnum="3" colname="c3"/>
       <tbody>
-        <row>
-          <entry>
-            <para>08:20-09:50 </para>
-            <para>четная неделя </para>
-            <para>303/2 (усл) ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>303/2 (усл) ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>Программирование(Лаб)четная неделя</para>
-            <para>Усков Иван Владимирович </para>
-          </entry>
-          <entry>
-            <para>Очно - дистанционный </para>
-          </entry>
-        </row>
-        <row>
-          <entry>
-            <para>10:00-11:30 </para>
-            <para>четная неделя </para>
-            <para>303/2 (усл) ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>303/2 (усл) ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>Программирование(Лаб)четная неделя</para>
-            <para>Усков Иван Владимирович </para>
-          </entry>
-          <entry>
-            <para>Очно - дистанционный </para>
-          </entry>
-        </row>
-        <row>
-          <entry>
-            <para>11:40-13:10 </para>
-            <para>четная неделя </para>
-            <para>381 ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>381 ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>Информатика(Лаб)четная неделя</para>
-            <para>Малышева Татьяна Алексеевна </para>
-          </entry>
-          <entry>
-            <para>Очно - дистанционный </para>
-          </entry>
-        </row>
-        <row>
-          <entry>
-            <para>11:40-13:10 </para>
-            <para>3, 5, 7, 9, 11, 13, 15, 17</para>
-            <para>305 ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>305 ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>Основы профессиональной деятельности(Лаб)нечетная неделя</para>
-            <para>Ткешелашвили Нино Мерабиевна </para>
-          </entry>
-          <entry>
-            <para>Очно - дистанционный </para>
-          </entry>
-        </row>
-        <row>
-          <entry>
-            <para>13:30-15:00 </para>
-            <para>четная неделя </para>
-            <para>381 ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>381 ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>Информатика(Лаб)четная неделя</para>
-            <para>Малышева Татьяна Алексеевна </para>
-          </entry>
-          <entry>
-            <para>Очно - дистанционный </para>
-          </entry>
-        </row>
-        <row>
-          <entry>
-            <para>13:30-15:00 </para>
-            <para>3, 5, 7, 9, 11, 13, 15, 17</para>
-            <para>305 ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А </para>
-          </entry>
-          <entry>
-            <para>305 ауд. </para>
-            <para>Кронверкский пр., д.49, лит.А</para>
-          </entry>
-          <entry>
-            <para>Основы профессиональной деятельности(Лаб)нечетная неделя</para>
-            <para>Ткешелашвили Нино Мерабиевна </para>
-          </entry>
-          <entry>
-            <para>Очно - дистанционный </para>
-          </entry>
-        </row>
+        <lesson>
+          <date>
+            <time>08:20-09:50 </time>
+            <parity>четная неделя </parity>
+          </date>
+          <place>
+            <audience>303/2 (усл) ауд. </audience>
+            <address>Кронверкский пр., д.49, лит.А </address>
+          </place>
+          <subject>
+            <name>Программирование(Лаб)</name>
+            <teacher>Усков Иван Владимирович </teacher>
+          </subject>
+          <type>
+            <name>Очно - дистанционный </name>
+          </type>
+        </lesson>
+        <lesson>
+          <date>
+            <time>10:00-11:30 </time>
+            <parity>четная неделя </parity>
+          </date>
+          <place>
+            <audience>303/2 (усл) ауд. </audience>
+            <address>Кронверкский пр., д.49, лит.А </address>
+          </place>
+          <subject>
+            <name>Программирование(Лаб)</name>
+            <teacher>Усков Иван Владимирович </teacher>
+          </subject>
+          <type>
+            <name>Очно - дистанционный </name>
+          </type>
+        </lesson>
+        <lesson>
+          <date>
+            <time>11:40-13:10 </time>
+            <parity>четная неделя </parity>
+          </date>
+          <place>
+            <audience>381 ауд. </audience>
+            <address>Кронверкский пр., д.49, лит.А </address>
+          </place>
+          <subject>
+            <name>Информатика(Лаб)</name>
+            <teacher>Малышева Татьяна Алексеевна </teacher>
+          </subject>
+          <type>
+            <name>Очно - дистанционный </name>
+          </type>
+        </lesson>
+        <lesson>
+          <date>
+            <time>11:40-13:10 </time>
+            <parity>3, 5, 7, 9, 11, 13, 15, 17</parity>
+          </date>
+          <place>
+            <audience>305 ауд. </audience>
+            <address>Кронверкский пр., д.49, лит.А </address>
+          </place>
+          <subject>
+            <name>Основы профессиональной деятельности (Лаб)</name>
+            <teacher>Ткешелашвили Нино Мерабиевна </teacher>
+          </subject>
+          <type>
+            <name>Очно - дистанционный </name>
+          </type>
+        </lesson>
+        <lesson>
+          <date>
+            <time>13:30-15:00 </time>
+            <parity>четная неделя </parity>
+          </date>
+          <place>
+            <audience>381 ауд. </audience>
+            <address>Кронверкский пр., д.49, лит.А </address>
+          </place>
+          <subject>
+            <name>Информатика(Лаб)</name>
+            <teacher>Малышева Татьяна Алексеевна </teacher>
+          </subject>
+          <type>
+            <name>Очно - дистанционный </name>
+          </type>
+        </lesson>
+        <lesson>
+          <date>
+            <time>13:30-15:00 </time>
+            <parity>3, 5, 7, 9, 11, 13, 15, 17</parity>
+          </date>
+          <place>
+            <audience>305 ауд. </audience>
+            <address>Кронверкский пр., д.49, лит.А</address>
+          </place>
+          <subject>
+            <name>Основы профессиональной деятельности(Лаб)</name>
+            <teacher>Ткешелашвили Нино Мерабиевна </teacher>
+          </subject>
+          <type>
+            <name>Очно - дистанционный </name>
+          </type>
+        </lesson>
       </tbody>
     </tgroup>
-  </informaltable>
+  </table>
 </article>
