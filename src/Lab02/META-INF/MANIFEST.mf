@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: Matthew Ivanov
+Class-Path: Pokemon.jar Lab02/
+Main-Class: Lab02.Main

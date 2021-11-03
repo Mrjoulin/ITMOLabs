@@ -13,8 +13,6 @@ import java.util.List;
 
 
 public class UniversalPokemon extends Pokemon {
-    public UniversalPokemon() { super(); }
-
     public UniversalPokemon(String pokemonClassName, String name, int lvl) {
         super(name, lvl);
 
