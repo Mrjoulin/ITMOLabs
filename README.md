@@ -23,4 +23,6 @@
 
 ## OPD Labs:
 ### Lab 1: `№1509`
-#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/OPDLabs/Lab01.sh) to view script
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/OPDLabs/Lab01/Lab01.sh) to view script
+### Lab 2: `№1520`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/OPDLabs/Lab02/) to view programs
