@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: Matthew Ivanov
+Class-Path: Lab03/
+Main-Class: Lab03.MainStory
