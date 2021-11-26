@@ -19,41 +19,59 @@ package Lab03;
 */
 
 
-import Lab03.characters.abstracts.Character;
 import Lab03.characters.MainCharacter;
 import Lab03.characters.MinorCharacter;
+import Lab03.places.Cave;
 import Lab03.places.Work;
-import Lab03.things.abstracts.AbstractMaterial;
 import Lab03.things.Antilunite;
 import Lab03.things.Material;
+import Lab03.things.abstracts.AbstractMaterial;
 import Lab03.things.properties.Attraction;
 import Lab03.things.properties.Color;
 import Lab03.things.properties.Hardness;
+import Lab03.utils.abstracts.CharactersMessagesPrint;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainStory {
     public static void main(String[] args) {
         // Create characters
-        // In first part Znayka and Zvezdochkin work together
-        MainCharacter znaykaWithZvezdochkin = new MainCharacter("Знайка и Звёздочкин", true, false);
-        // Then they separate
-        MainCharacter znayka = new MainCharacter("Знайка", true);
-        MainCharacter zvezdochkin = new MainCharacter("Звёздочкин", true);
+        MainCharacter znayka = new MainCharacter("Знайка");
+        MainCharacter zvezdochkin = new MainCharacter("Звёздочкин");
 
         MinorCharacter others = new MinorCharacter("Все", false);
-        // Add materials to others to compare
+        // Create arrays with main and minor characters
+        MainCharacter[] mainCharacters = {zvezdochkin, znayka};
+        MinorCharacter[] minorCharacters = {others};
+
+        // Add materials to characters
         others.addMaterialsToBackpack(
                 new Material("Кремень", Color.GRAY, Hardness.HIGH, Attraction.NO),
                 new Material("Кусочки намагниченного железа", Color.WHITE, Hardness.MEDIUM, Attraction.ORDINARY)
         );
 
-        Work work = new Work(new Character[]{znaykaWithZvezdochkin}, new Character[]{others});
+        Cave cave = new Cave();
+        Work work = new Work(mainCharacters, minorCharacters);
 
         // Part 1
+        cave.fullCave();
+
+        // Main characters explore cave (without messages here, character will tell about the find at the end)
+        work.exploreCave(cave, mainCharacters);
 
         work.startWorking();
 
         if (others.isMisunderstanding()) {
-            znaykaWithZvezdochkin.decideToTellOtherCharacters(work.getAllCharacters());
+            List<String> messages = new ArrayList<>();
+
+            for (MainCharacter mainCharacter: mainCharacters) {
+                String message = mainCharacter.decideToTellOtherCharacters(work.getAllCharacters());
+                messages.add(message);
+            }
+
+            CharactersMessagesPrint.optimizePrintCharactersMessages(mainCharacters, messages);
+
             others.setMisunderstanding(false);
         }
 
@@ -70,6 +88,6 @@ public class MainStory {
                 znaykasAntilunite.compare(material);
         }
 
-        znayka.tellCharactersAboutHowTheyGotMaterial(work.getAllCharacters(), znaykasAntilunite);
+        znayka.tellCharactersAboutHowTheyFoundMaterial(work.getAllCharacters(), znaykasAntilunite);
     }
 }

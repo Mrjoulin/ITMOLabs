@@ -2,32 +2,28 @@ package Lab03.characters;
 
 import Lab03.characters.abstracts.Character;
 import Lab03.characters.properties.Status;
-import Lab03.things.abstracts.AbstractMaterial;
 import Lab03.things.Antilunite;
+import Lab03.things.abstracts.AbstractMaterial;
 import Lab03.things.properties.InCavePosition;
 import Lab03.utils.CompareCharacters;
 import Lab03.utils.interfaces.ComparableCharactersPosition;
+import Lab03.utils.properties.CharactersActions;
 
 public class MainCharacter extends Character {
     private boolean mocked = false;
 
-    public MainCharacter(String name, boolean haveAntilunite, boolean singular) {
+    public MainCharacter(String name, boolean singular) {
         setName(name);
         setSingular(singular);
-
-        if (haveAntilunite) {
-            Antilunite antilunite = new Antilunite();
-            addMaterialsToBackpack(antilunite);
-        }
     }
 
-    public MainCharacter(String name, boolean haveAntilunite) {
-        this(name, haveAntilunite, true);
+    public MainCharacter(String name) {
+        this(name, true);
     }
 
     @Override
-    public void reactOnChangedWeightlessness(Character[] characters) {
-        if (mocked || getStatus() == Status.WORKING) return;
+    public String reactOnChangedWeightlessness(Character[] characters) {
+        if (mocked || getStatus() == Status.WORKING) return null;
 
         ComparableCharactersPosition compareCharactersPosition = new CompareCharacters(this, characters);
 
@@ -37,18 +33,17 @@ public class MainCharacter extends Character {
         if (charactersOnOtherPositionNames != null) {
             this.mocked = true;
 
-            String action = isSingular() ? "посмеивался втихомолку и делал вид, что не слышит вопросов" :
-                    "посмеивались втихомолку и делали вид, что не слышат вопросов";
+            String action = CharactersActions.MOCK.getAction(isSingular());
 
-            System.out.printf(
-                    "%s %s, которые %s задают.\n", getName(), action, charactersOnOtherPositionNames
-            );
+            return String.format("<name> %s, которые %s задают.", action, charactersOnOtherPositionNames);
         }
+
+        return null;
     }
 
-    public void decideToTellOtherCharacters(Character[] characters) {
+    public String decideToTellOtherCharacters(Character[] characters) {
         // Main hero didn't mocked on others :)
-        if (!mocked || getStatus() == Status.WORKING) return;
+        if (!mocked || getStatus() == Status.WORKING) return null;
 
         ComparableCharactersPosition compareCharactersPosition = new CompareCharacters(this, characters);
 
@@ -58,22 +53,24 @@ public class MainCharacter extends Character {
         if (charactersOnOtherPositionNames != null && haveAntilunite()) {
             Antilunite antilunite = getAntilunite();
 
-            String action = isSingular() ? "признался, что нашёл" : "признались, что нашли";
+            String action = CharactersActions.CONFESSED.getAction(isSingular());
 
-            System.out.printf(
-                    "Натешившись вдоволь, %s %s %s, который и %s.\n",
-                    getName(), action, antilunite.getName(), antilunite.getUniqueAbility()
+            return String.format(
+                    "Натешившись вдоволь, <name> %s %s, который и %s.",
+                    action, antilunite.getName(), antilunite.getUniqueAbility()
             );
         }
+
+        return null;
     }
 
     public Antilunite popAntiluniteWithMessage() {
         if (haveAntilunite()) {
             Antilunite antilunite = popAntilunite();
 
-            String action = isSingular() ? " вытряхнул из своего рюкзака " : " вытряхнули из своих рюкзаков ";
+            String action = CharactersActions.POP_FROM_BACKPACK.getAction(isSingular());
 
-            System.out.println(getName() + action + antilunite.getName() + ".");
+            System.out.println(getName() + " " + action + " " + antilunite.getName() + ".");
 
             return antilunite;
         }
@@ -81,21 +78,23 @@ public class MainCharacter extends Character {
         return null;
     }
 
-    public void tellCharactersAboutHowTheyGotMaterial(Character[] characters, AbstractMaterial material) {
+    public void tellCharactersAboutHowTheyFoundMaterial(Character[] characters, AbstractMaterial material) {
         if (getStatus() == Status.WORKING) return;
 
         ComparableCharactersPosition compareCharactersPosition = new CompareCharacters(this, characters);
 
         String charactersOnMyPosition = compareCharactersPosition.getCharactersOnSamePositionNames();
 
-        // If any characters found and material is Antilunite
-        if (charactersOnMyPosition != null && material.equals(new Antilunite())) {
-            String action = isSingular() ? "сказал" : "сказали";
+        // If any characters found and material was founded
+        if (charactersOnMyPosition != null && inFoundedMaterials(material)) {
+            String action = CharactersActions.SAID.getAction(isSingular());
+
+            InCavePosition foundedMaterialPosition = getFoundedMaterialPosition(material);
 
             System.out.printf(
                     "%s %s, что им стоило большого труда отколоть %s от огромнейшей глыбы, " +
                             "найденной %s, так как %s %s.\n",
-                    getName(), action, material.getName(), InCavePosition.DEEP,
+                    getName(), action, material.getName(), foundedMaterialPosition,
                     material.getName(), material.getHardness()
             );
         }

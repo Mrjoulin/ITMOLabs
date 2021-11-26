@@ -4,24 +4,23 @@ import Lab03.characters.interfaces.PossessingAntilunite;
 import Lab03.characters.interfaces.WeightlessnessSusceptibility;
 import Lab03.characters.properties.CharacterPosition;
 import Lab03.characters.properties.Status;
-import Lab03.things.abstracts.AbstractMaterial;
 import Lab03.things.Antilunite;
+import Lab03.things.abstracts.AbstractMaterial;
 import Lab03.things.properties.InCavePosition;
+import Lab03.utils.properties.CharactersActions;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class Character implements WeightlessnessSusceptibility, PossessingAntilunite {
     private String name;
     private Status status = Status.CHILLING;
     private CharacterPosition position = CharacterPosition.ON_FLOOR;
     private InCavePosition inCavePosition = InCavePosition.CENTER;
+    private final HashMap<AbstractMaterial, InCavePosition> foundedMaterials = new HashMap<>();
     private final List<AbstractMaterial> backpack = new ArrayList<>();
     private boolean singular = true;
 
-    public abstract void reactOnChangedWeightlessness(Character[] characters);
+    public abstract String reactOnChangedWeightlessness(Character[] characters);
 
     @Override
     public boolean haveAntilunite() {
@@ -46,18 +45,18 @@ public abstract class Character implements WeightlessnessSusceptibility, Possess
     }
 
     @Override
-    public void exposedToChangedWeightlessness() {
+    public String exposedToChangedWeightlessness() {
         String action;
 
         if (!haveAntilunite()) {
             // Change current position to another
             setPosition(position.changed());
-            action = (singular ? " оказался " : " оказались ");
+            action = CharactersActions.ENDED_UP.getAction(singular);
         } else {
-            action = (singular ? " остался " : " остались ");
+            action = CharactersActions.STAY.getAction(singular);
         }
 
-        System.out.println(name + action + position + ".");
+        return "<name> " + action + " " + position + ".";
     }
 
     public String getName() {
@@ -74,6 +73,19 @@ public abstract class Character implements WeightlessnessSusceptibility, Possess
 
     public InCavePosition getInCavePosition() {
         return inCavePosition;
+    }
+
+    public HashMap<AbstractMaterial, InCavePosition> getFoundedMaterials() {
+        return foundedMaterials;
+    }
+
+    public InCavePosition getFoundedMaterialPosition(AbstractMaterial material) {
+        if (foundedMaterials.containsKey(material)) return foundedMaterials.get(material);
+        return null;
+    }
+
+    public boolean inFoundedMaterials(AbstractMaterial material) {
+        return foundedMaterials.containsKey(material);
     }
 
     public List<AbstractMaterial> getBackpack() {
@@ -102,6 +114,11 @@ public abstract class Character implements WeightlessnessSusceptibility, Possess
 
     public void setInCavePosition(InCavePosition inCavePosition) {
         this.inCavePosition = inCavePosition;
+    }
+
+    public void addFoundMaterialInCave(AbstractMaterial material, InCavePosition position) {
+        this.foundedMaterials.put(material, position);
+        addMaterialsToBackpack(material);
     }
 
     public void addMaterialsToBackpack(AbstractMaterial... newMaterials) {

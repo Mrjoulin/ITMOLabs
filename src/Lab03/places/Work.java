@@ -3,11 +3,14 @@ package Lab03.places;
 import Lab03.characters.abstracts.Character;
 import Lab03.characters.properties.CharacterPosition;
 import Lab03.characters.properties.Status;
-import Lab03.things.abstracts.AbstractWeightlessnessDevice;
+import Lab03.places.abstracts.AbstractCave;
 import Lab03.things.WeightlessnessDevice;
+import Lab03.things.abstracts.AbstractWeightlessnessDevice;
 import Lab03.things.properties.InCavePosition;
 import Lab03.things.properties.SwitchState;
+import Lab03.utils.abstracts.CharactersMessagesPrint;
 import Lab03.utils.abstracts.CharactersNames;
+import Lab03.utils.properties.CharactersActions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +35,73 @@ public class Work {
                     mainCharacters[i - minorCharacters.length];
     }
 
+    public void exploreCave(AbstractCave cave, Character[] characters) {
+        if (characters.length > 0) {
+            // Every character
+            for (Character character: characters) {
+                // Explore all places in cave
+                for (InCavePosition position: InCavePosition.values()) {
+                    character.setInCavePosition(position);
+
+                    // If he find something add to fondedMaterials and backpack
+                    if (cave.isSomethingInPosition(position)) {
+                        character.addFoundMaterialInCave(cave.getMaterialInPosition(position), position);
+                    }
+                }
+            }
+
+            // Move back to the center
+            for (Character character: characters) {
+                character.setInCavePosition(InCavePosition.CENTER);
+            }
+        }
+    }
+
+    public void startWorking() {
+        if (weightlessnessDevice.getState() == SwitchState.OFF) {
+            weightlessnessDevice.turnOn();
+
+            List<String> messages = new ArrayList<>();
+            List<Character> charactersOnFloor = new ArrayList<>();
+
+            for (Character character: allCharacters) {
+                String message = character.exposedToChangedWeightlessness();
+                messages.add(message);
+
+                if (character.getPosition() == CharacterPosition.ON_FLOOR)
+                    charactersOnFloor.add(character);
+            }
+
+            CharactersMessagesPrint.optimizePrintCharactersMessages(allCharacters, messages);
+
+            workingWithWeightlessnessDevice(charactersOnFloor.toArray(new Character[0]));
+
+            messages = new ArrayList<>();
+
+            for (Character character: allCharacters) {
+                String message = character.reactOnChangedWeightlessness(allCharacters);
+                messages.add(message);
+            }
+
+            CharactersMessagesPrint.optimizePrintCharactersMessages(allCharacters, messages);
+        }
+    }
+
+    public void stopWorking() {
+        if (weightlessnessDevice.getState() == SwitchState.ON) {
+            weightlessnessDevice.turnOff();
+
+            List<String> messages = new ArrayList<>();
+
+            for (Character character: allCharacters) {
+                String message = character.exposedToChangedWeightlessness();
+                messages.add(message);
+            }
+
+            CharactersMessagesPrint.optimizePrintCharactersMessages(allCharacters, messages);
+        }
+    }
+
     private void workingWithWeightlessnessDevice(Character[] characters) {
         if (characters.length > 0) {
             String charactersNames = CharactersNames.getCharactersNames(characters);
@@ -44,7 +114,7 @@ public class Work {
 
             for (Character worker: characters) worker.setInCavePosition(InCavePosition.CORNER);
 
-            String action = charactersNames.contains(" и ") ? "отошли" : "отошёл";
+            String action = CharactersActions.WALKED_AWAY.getAction(!charactersNames.contains(" и "));
             String appeal = charactersNames.contains(" и ") ? "Каждый из них" : "Он";
 
             System.out.printf("%s %s от прибора невесомости %s.\n", charactersNames, action, InCavePosition.CORNER);
@@ -53,35 +123,6 @@ public class Work {
             // End working
 
             for (Character worker: characters) worker.setStatus(Status.CHILLING);
-        }
-    }
-
-    public void startWorking() {
-        if (weightlessnessDevice.getState() == SwitchState.OFF) {
-            weightlessnessDevice.turnOn();
-
-            List<Character> charactersOnFloor = new ArrayList<>();
-
-            for (Character character: allCharacters) {
-                character.exposedToChangedWeightlessness();
-
-                if (character.getPosition() == CharacterPosition.ON_FLOOR)
-                    charactersOnFloor.add(character);
-            }
-
-            workingWithWeightlessnessDevice(charactersOnFloor.toArray(new Character[0]));
-
-            for (Character character: allCharacters)
-                character.reactOnChangedWeightlessness(allCharacters);
-        }
-    }
-
-    public void stopWorking() {
-        if (weightlessnessDevice.getState() == SwitchState.ON) {
-            weightlessnessDevice.turnOff();
-
-            for (Character character: allCharacters)
-                character.exposedToChangedWeightlessness();
         }
     }
 

@@ -25,7 +25,7 @@ public abstract class CharactersNames {
             return names.toString();
         }
 
-        return null;
+        return "";
     }
 
     public static String getCharactersNames(Character[] characters) {

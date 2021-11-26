@@ -4,6 +4,7 @@ import Lab03.characters.abstracts.Character;
 import Lab03.things.abstracts.AbstractMaterial;
 import Lab03.utils.CompareCharacters;
 import Lab03.utils.interfaces.ComparableCharactersPosition;
+import Lab03.utils.properties.CharactersActions;
 
 public class MinorCharacter extends Character {
     private boolean misunderstanding = false;
@@ -14,10 +15,14 @@ public class MinorCharacter extends Character {
         setSingular(singular);
     }
 
+    public MinorCharacter(String name) {
+        this(name, true);
+    }
+
     @Override
-    public void reactOnChangedWeightlessness(Character[] characters) {
+    public String reactOnChangedWeightlessness(Character[] characters) {
         // If Character already misunderstand what happen
-        if (this.misunderstanding) return;
+        if (this.misunderstanding) return null;
 
         ComparableCharactersPosition compareCharactersPosition = new CompareCharacters(this, characters);
 
@@ -27,20 +32,22 @@ public class MinorCharacter extends Character {
         if (!charactersOnOtherPositionNames.isEmpty()) {
             this.misunderstanding = true;
 
-            String action = charactersOnOtherPositionNames.contains(" и ") ? "остались" : "остался";
+            String action = CharactersActions.STAY.getAction(!charactersOnOtherPositionNames.contains(" и "));
 
-            System.out.printf(
-                    "%s в недоумении, что %s %s %s.\n",
-                    getName(), charactersOnOtherPositionNames, action, getPosition().changed()
+            return String.format(
+                    "<name> в недоумении, что %s %s %s.",
+                    charactersOnOtherPositionNames, action, getPosition().changed()
             );
         }
+
+        return null;
     }
 
     public void seeNewMaterial(AbstractMaterial material) {
         if (!inBackpack(material)) {
             interested = true;
 
-            String action = isSingular() ? "принялся" : "принялись";
+            String action = CharactersActions.BEGIN.getAction(isSingular());
 
             System.out.printf("%s с интересом %s разглядывать %s.\n", getName(), action, material.getName());
         }
