@@ -1,0 +1,380 @@
+@startuml
+package Lab03.utils.properties {
+  enum CharactersActions {
+    + BEGIN {static}
+    + CONFESSED {static}
+    + ENDED_UP {static}
+    + MOCK {static}
+    + POP_FROM_BACKPACK {static}
+    + SAID {static}
+    + STAY {static}
+    + WALKED_AWAY {static}
+    + getAction(boolean) : String {abstract}
+    + toString() : String
+    + valueOf(String) : CharactersActions {static}
+    + values() : CharactersActions[] {static}
+  }
+}
+package Lab03.utils.interfaces {
+  interface ComparableCharactersPosition {
+    + characterOnMyPosition(Character) : boolean {abstract}
+    + getCharactersOnOtherPosition() : List<Character> {abstract}
+    + getCharactersOnOtherPositionNames() : String {abstract}
+    + getCharactersOnSamePosition() : List<Character> {abstract}
+    + getCharactersOnSamePositionNames() : String {abstract}
+  }
+  interface ComparableMaterials {
+    + getCompareMaterialsText() : String {abstract}
+  }
+}
+package Lab03.utils.abstracts {
+  abstract class CharactersMessagesPrint {
+    - defaultFormatText : String {static}
+    + CharactersMessagesPrint()
+    + optimizePrintCharactersMessages(Character[], List<String>) {static}
+    + optimizePrintCharactersMessages(Character[], String[]) {static}
+    + optimizePrintCharactersMessages(Character[], String[], String) {static}
+  }
+  abstract class CharactersNames {
+    + CharactersNames()
+    + equals(Object) : boolean
+    + getCharactersNames(Character[]) : String {static}
+    + getCharactersNames(LinkedList<Character>) : String {static}
+    + hashCode() : int
+    + toString() : String
+  }
+  abstract class ComparableCharacters {
+    - myCharacter : Character
+    - otherCharacters : Character[]
+    + ComparableCharacters()
+    + equals(Object) : boolean
+    + getMyCharacter() : Character
+    + getOtherCharacters() : Character[]
+    + hashCode() : int
+    + setMyCharacter(Character)
+    + setOtherCharacters(Character[])
+    + toString() : String
+  }
+}
+package Lab03.places {
+  class Cave {
+    + Cave()
+    + fullCave()
+  }
+  class Work {
+    - allCharacters : Character[]
+    - mainCharacters : Character[]
+    - minorCharacters : Character[]
+    - weightlessnessDevice : AbstractWeightlessnessDevice
+    + Work(Character[], Character[])
+    + addMainCharacters(Character[])
+    + addMinorCharacters(Character[])
+    + equals(Object) : boolean
+    + exploreCave(AbstractCave, Character[])
+    + getAllCharacters() : Character[]
+    + getMainCharacters() : Character[]
+    + getMinorCharacters() : Character[]
+    + hashCode() : int
+    + removeMainCharacters(Character[])
+    + removeMinorCharacters(Character[])
+    + startWorking()
+    + stopWorking()
+    + toString() : String
+    - workingWithWeightlessnessDevice(Character[])
+  }
+}
+package Lab03.things.abstracts {
+  abstract class AbstractMaterial {
+    - attraction : Attraction
+    - color : Color
+    - hardness : Hardness
+    - name : String
+    + AbstractMaterial()
+    + compare(AbstractMaterial) {abstract}
+    + equals(Object) : boolean
+    + getAttraction() : Attraction
+    + getColor() : Color
+    + getHardness() : Hardness
+    + getName() : String
+    + hashCode() : int
+    + setAttraction(Attraction)
+    + setColor(Color)
+    + setHardness(Hardness)
+    + setName(String)
+    + toString() : String
+  }
+  abstract class AbstractWeightlessnessDevice {
+    - position : InCavePosition
+    - state : SwitchState
+    + AbstractWeightlessnessDevice()
+    + equals(Object) : boolean
+    + getPosition() : InCavePosition
+    + getState() : SwitchState
+    + hashCode() : int
+    + setPosition(InCavePosition)
+    + setState(SwitchState)
+    + toString() : String
+  }
+}
+package Lab03.characters {
+  class MainCharacter {
+    - mocked : boolean
+    + MainCharacter(String)
+    + MainCharacter(String, boolean)
+    + decideToTellOtherCharacters(Character[]) : String
+    + isMocked() : boolean
+    + popAntiluniteWithMessage() : Antilunite
+    + reactOnChangedWeightlessness(Character[]) : String
+    + setMocked(boolean)
+    + tellCharactersAboutHowTheyFoundMaterial(Character[], AbstractMaterial)
+  }
+  class MinorCharacter {
+    - interested : boolean
+    - misunderstanding : boolean
+    + MinorCharacter(String)
+    + MinorCharacter(String, boolean)
+    + isInterested() : boolean
+    + isMisunderstanding() : boolean
+    + reactOnChangedWeightlessness(Character[]) : String
+    + seeNewMaterial(AbstractMaterial)
+    + setInterested(boolean)
+    + setMisunderstanding(boolean)
+  }
+}
+package Lab03.things.interfaces {
+  interface MovableDevice {
+    + charactersMovesDevice(String, InCavePosition) {abstract}
+  }
+  interface Switchable {
+    + turnOff() {abstract}
+    + turnOn() {abstract}
+  }
+}
+package Lab03 {
+  class MainStory {
+    + MainStory()
+    + main(String[]) {static}
+  }
+}
+package Lab03.things {
+  class Antilunite {
+    - uniqueAbility : UniqueAbility
+    + Antilunite()
+    + getUniqueAbility() : UniqueAbility
+    + toString() : String
+  }
+  class Material {
+    - comparedMaterials : HashMap<String, String>
+    + Material(String, Color, Hardness, Attraction)
+    + compare(AbstractMaterial)
+  }
+  class WeightlessnessDevice {
+    + WeightlessnessDevice()
+    + charactersMovesDevice(String, InCavePosition)
+    + turnOff()
+    + turnOn()
+  }
+}
+package Lab03.characters.interfaces {
+  interface PossessingAntilunite {
+    + getAntilunite() : Antilunite {abstract}
+    + haveAntilunite() : boolean {abstract}
+    + popAntilunite() : Antilunite {abstract}
+  }
+  interface WeightlessnessSusceptibility {
+    + exposedToChangedWeightlessness() : String {abstract}
+  }
+}
+package Lab03.utils {
+  class CompareCharacters {
+    + CompareCharacters(Character, Character[])
+    + characterOnMyPosition(Character) : boolean
+    + getCharactersOnOtherPosition() : LinkedList<Character>
+    + getCharactersOnOtherPositionNames() : String
+    + getCharactersOnSamePosition() : LinkedList<Character>
+    + getCharactersOnSamePositionNames() : String
+  }
+  class CompareMaterials {
+    ~ anotherMaterial : AbstractMaterial
+    ~ myMaterial : AbstractMaterial
+    + CompareMaterials(AbstractMaterial, AbstractMaterial)
+    + equals(Object) : boolean
+    + getCompareMaterialsText() : String
+    + hashCode() : int
+    + toString() : String
+  }
+}
+package Lab03.characters.abstracts {
+  abstract class Character {
+    - backpack : List<AbstractMaterial>
+    - foundedMaterials : HashMap<AbstractMaterial, InCavePosition>
+    - inCavePosition : InCavePosition
+    - name : String
+    - position : CharacterPosition
+    - singular : boolean
+    - status : Status
+    + Character()
+    + addFoundMaterialInCave(AbstractMaterial, InCavePosition)
+    + addMaterialsToBackpack(AbstractMaterial[])
+    + equals(Object) : boolean
+    + exposedToChangedWeightlessness() : String
+    + getAntilunite() : Antilunite
+    + getBackpack() : List<AbstractMaterial>
+    + getFoundedMaterialPosition(AbstractMaterial) : InCavePosition
+    + getFoundedMaterials() : HashMap<AbstractMaterial, InCavePosition>
+    + getInCavePosition() : InCavePosition
+    + getName() : String
+    + getPosition() : CharacterPosition
+    + getStatus() : Status
+    + hashCode() : int
+    + haveAntilunite() : boolean
+    + inBackpack(AbstractMaterial) : boolean
+    + inFoundedMaterials(AbstractMaterial) : boolean
+    - indexOfAntilunite() : int
+    + isSingular() : boolean
+    + popAntilunite() : Antilunite
+    + reactOnChangedWeightlessness(Character[]) : String {abstract}
+    + setInCavePosition(InCavePosition)
+    + setName(String)
+    + setPosition(CharacterPosition)
+    + setSingular(boolean)
+    + setStatus(Status)
+    + toString() : String
+  }
+}
+package Lab03.places.abstracts {
+  abstract class AbstractCave {
+    - materialsInCave : HashMap<InCavePosition, AbstractMaterial>
+    + AbstractCave()
+    + addMaterialInCave(InCavePosition, AbstractMaterial)
+    + equals(Object) : boolean
+    + fullCave() {abstract}
+    + getMaterialInPosition(InCavePosition) : AbstractMaterial
+    + getMaterialsInCave() : HashMap<InCavePosition, AbstractMaterial>
+    + hashCode() : int
+    + isSomethingInPosition(InCavePosition) : boolean
+    + toString() : String
+  }
+}
+package Lab03.things.properties {
+  enum Attraction {
+    + NO {static}
+    + ORDINARY {static}
+    + STRONG {static}
+    + WEAK {static}
+    - level : String
+    + getLevel() : String
+    + toString() : String
+    + valueOf(String) : Attraction {static}
+    + values() : Attraction[] {static}
+  }
+  enum Color {
+    + BLACK {static}
+    + BLUE {static}
+    + BRIGHT_BLUE {static}
+    + BRIGHT_GRAY {static}
+    + BRIGHT_GREEN {static}
+    + BRIGHT_PURPLE {static}
+    + BRIGHT_RAD {static}
+    + GRAY {static}
+    + GREEN {static}
+    + PURPLE {static}
+    + RAD {static}
+    + WHITE {static}
+    - name : String
+    + getName() : String
+    + toString() : String
+    + valueOf(String) : Color {static}
+    + values() : Color[] {static}
+  }
+  enum Hardness {
+    + HIGH {static}
+    + LOW {static}
+    + MEDIUM {static}
+    - level : String
+    + getLevel() : String
+    + toString() : String
+    + valueOf(String) : Hardness {static}
+    + values() : Hardness[] {static}
+  }
+  enum InCavePosition {
+    + CENTER {static}
+    + CORNER {static}
+    + DEEP {static}
+    + INCOMPREHENSIBLE {static}
+    - position : String
+    - special : boolean
+    + getPosition() : String
+    + isSpecial() : boolean
+    + toString() : String
+    + valueOf(String) : InCavePosition {static}
+    + values() : InCavePosition[] {static}
+  }
+  enum SwitchState {
+    + OFF {static}
+    + ON {static}
+    - state : String
+    + getState() : String
+    + toString() : String
+    + valueOf(String) : SwitchState {static}
+    + values() : SwitchState[] {static}
+  }
+  enum UniqueAbility {
+    + FLY {static}
+    + KEEP_WEIGHT {static}
+    + WALK_ON_WATER {static}
+    - ability : String
+    + getAbility() : String
+    + toString() : String
+    + valueOf(String) : UniqueAbility {static}
+    + values() : UniqueAbility[] {static}
+  }
+}
+package Lab03.characters.properties {
+  enum CharacterPosition {
+    + ON_FLOOR {static}
+    + UNDER_CEILING {static}
+    - positionName : String
+    + changed() : CharacterPosition
+    + getPositionName() : String
+    + toString() : String
+    + valueOf(String) : CharacterPosition {static}
+    + values() : CharacterPosition[] {static}
+  }
+  enum Status {
+    + CHILLING {static}
+    + WORKING {static}
+    - status : String
+    + getStatus() : String
+    + toString() : String
+    + valueOf(String) : Status {static}
+    + values() : Status[] {static}
+  }
+}
+AbstractWeightlessnessDevice -->  "-state" SwitchState
+CompareMaterials -->  "-myMaterial" AbstractMaterial
+ComparableCharacters -->  "-myCharacter" Character
+Character -->  "-status" Status
+Character -->  "-inCavePosition" InCavePosition
+AbstractMaterial -->  "-color" Color
+AbstractMaterial -->  "-hardness" Hardness
+Work -->  "-weightlessnessDevice" AbstractWeightlessnessDevice
+Antilunite -->  "-uniqueAbility" UniqueAbility
+AbstractWeightlessnessDevice -->  "-position" InCavePosition
+Character -->  "-backpack" AbstractMaterial
+AbstractMaterial -->  "-attraction" Attraction
+Character -->  "-position" CharacterPosition
+MainCharacter --|> Character 
+MinorCharacter --|> Character 
+Character ..|> WeightlessnessSusceptibility 
+Character ..|> PossessingAntilunite 
+Cave --|> AbstractCave 
+Antilunite --|> Material 
+Material --|> AbstractMaterial 
+WeightlessnessDevice --|> AbstractWeightlessnessDevice 
+AbstractWeightlessnessDevice ..|> Switchable 
+AbstractWeightlessnessDevice ..|> MovableDevice 
+CompareCharacters --|> ComparableCharacters 
+CompareMaterials ..|> ComparableMaterials 
+ComparableCharacters ..|> ComparableCharactersPosition 
+@enduml
