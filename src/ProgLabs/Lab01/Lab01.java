@@ -1,3 +1,5 @@
+package Lab01;
+
 import static java.lang.Math.*;
 
 public class Lab01 {

@@ -135,7 +135,7 @@ package Lab02.utils {
     + getObjectTypes(List<String>, List<String>) : List<Type> {static}
   }
 }
-package ru.ifmo.se.pokemon {
+package ru.ifmo.se.ru.ifmo.se.pokemon {
   class Battle {
     - allies : Team
     - allyName : String
@@ -299,7 +299,7 @@ package ru.ifmo.se.pokemon {
   }
   ~class Team {
     - name : String
-    - pokemon : Pokemon
+    - ru.ifmo.se.ru.ifmo.se.pokemon : Pokemon
     - team : Queue<Pokemon>
     ~ Team(String)
     ~ add(Pokemon)
@@ -355,7 +355,7 @@ Zapdos --|> UniversalPokemon
 UniversalPokemon --|> Pokemon
 Battle -->  "-allies" Team
 Team -->  "-team" Pokemon
-Team -->  "-pokemon" Pokemon
+Team -->  "-ru.ifmo.se.ru.ifmo.se.pokemon" Pokemon
 Pokemon -->  "-preparedMove" Move
 Pokemon -->  "-moves" Move
 Pokemon -->  "-types" Type

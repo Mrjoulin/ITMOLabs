@@ -66,7 +66,7 @@ public class UniversalAttack {
                     double chance = Double.parseDouble(attackEffect.get(1));
                     if (Math.random() < chance) Effect.confuse(poke);
                 } else if (effectName.startsWith("ADD_") && effectName.split("_").length == 2) {
-                    // Add some stages to stat of pokemon
+                    // Add some stages to stat of ru.ifmo.se.ru.ifmo.se.pokemon
                     String stat = effectName.split("_")[1];
                     double chance = Double.parseDouble(attackEffect.get(1));
                     double add_stages = Double.parseDouble(attackEffect.get(2));
@@ -96,7 +96,7 @@ public class UniversalAttack {
         if (effectName.equals("DEFAULT")) {
             poke.setMod(Stat.HP, (int) Math.round(damage));
         } else if (effectName.equals("DAMAGE_PERCENT")) {
-            // Apply some percent of damage to pokemon
+            // Apply some percent of damage to ru.ifmo.se.ru.ifmo.se.pokemon
             double chance = Double.parseDouble(attackDamage.get(1));
             double percent = Double.parseDouble(attackDamage.get(2));
 

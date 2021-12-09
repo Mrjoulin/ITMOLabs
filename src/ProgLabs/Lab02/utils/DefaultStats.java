@@ -247,7 +247,7 @@ public class DefaultStats {
             List<List<String>> opponentDamage = createListWithEffectsOrDamageInfo(
                     attackData.get(0), attackData.get(1), OPPONENT_DAMAGE
             );
-            // Can be only one type of damage for pokemon
+            // Can be only one type of damage for ru.ifmo.se.ru.ifmo.se.pokemon
             return opponentDamage.isEmpty() ? null : opponentDamage.get(0);
         }
 
@@ -258,7 +258,7 @@ public class DefaultStats {
         List<List<String>> opponentDamage = createListWithEffectsOrDamageInfo(
                 objectData.get(0), objectData.get(1), OPPONENT_DAMAGE
         );
-        // Can be only one type of damage for pokemon
+        // Can be only one type of damage for ru.ifmo.se.ru.ifmo.se.pokemon
         return opponentDamage.isEmpty() ? null : opponentDamage.get(0);
     }
 
@@ -269,7 +269,7 @@ public class DefaultStats {
             List<List<String>> selfDamage = createListWithEffectsOrDamageInfo(
                     attackData.get(0), attackData.get(1), SELF_DAMAGE
             );
-            // Can be only one type of damage for pokemon
+            // Can be only one type of damage for ru.ifmo.se.ru.ifmo.se.pokemon
             return selfDamage.isEmpty() ? null : selfDamage.get(0);
         }
 
@@ -280,7 +280,7 @@ public class DefaultStats {
         List<List<String>> selfDamage = createListWithEffectsOrDamageInfo(
                 objectData.get(0), objectData.get(1), SELF_DAMAGE
         );
-        // Can be only one type of damage for pokemon
+        // Can be only one type of damage for ru.ifmo.se.ru.ifmo.se.pokemon
         return selfDamage.isEmpty() ? null : selfDamage.get(0);
     }
 
