@@ -26,26 +26,140 @@ package Lab04;
 
 import Lab03.characters.MainCharacter;
 import Lab03.characters.MinorCharacter;
+import Lab03.characters.abstracts.Character;
 import Lab03.places.Cave;
-import Lab03.places.Work;
 import Lab03.things.Antilunite;
 import Lab03.things.Material;
+import Lab03.things.SpecialMaterial;
 import Lab03.things.abstracts.AbstractMaterial;
 import Lab03.things.properties.Attraction;
 import Lab03.things.properties.Color;
 import Lab03.things.properties.Hardness;
-import Lab03.utils.abstracts.CharactersMessagesPrint;
+import Lab03.things.properties.UniqueAbility;
+import Lab04.characters.PrequelMainCharacter;
+import Lab04.characters.PrequelMinorCharacter;
+import Lab04.places.WorkWithPrequel;
+import Lab04.places.exceptions.UnexpectedExperimentResult;
+import Lab04.things.abstracts.AbstractEquipment;
+import Lab04.things.properties.Size;
+import Lab04.things.properties.Weight;
+import Lab04.utils.abstracts.CharactersMessagesPrint;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainStory {
     public static void main(String[] args) {
-        // Create characters
+        // Create places
+        Cave cave = new Cave();
+        cave.fullCave();
+
+        WorkWithPrequel work;
+
+        // Create prequel characters
+        PrequelMainCharacter fuksia = new PrequelMainCharacter("Фуксия");
+        PrequelMainCharacter seledochka = new PrequelMainCharacter("Селёдочка");
+
+        PrequelMinorCharacter korotishki = new PrequelMinorCharacter("Коротышки", false);
+
+        // Create arrays with main and minor prequel characters
+        PrequelMainCharacter[] mainPrequelCharacters = {seledochka, fuksia};
+        PrequelMinorCharacter[] minorPrequelCharacters = {korotishki};
+
+        // Add some equipment to minor characters
+        AbstractEquipment equipment = new AbstractEquipment("скафандре", Size.BIG, Weight.HEAVY){
+            @Override
+            public String toString() {
+                return "громоздком скафандре";
+            }
+        };
+
+        korotishki.addEquipment(equipment);
+
+        // Add characters to Work
+
+        work = new WorkWithPrequel(mainPrequelCharacters, minorPrequelCharacters);
+
+        // Create materials for prequel
+
+        SpecialMaterial lunit = new SpecialMaterial(
+                "Лунит", Color.WHITE, Hardness.HIGH, Attraction.ORDINARY, UniqueAbility.CHANGE_GRAVITY
+        );
+
+        SpecialMaterial magnet = new SpecialMaterial(
+                "Магнит", Color.WHITE, Hardness.LOW, Attraction.STRONG, null
+        );
+
+        //
+        // ----- Start prequel ------
+        //
+
+        // Main characters expectation of interaction
+
+        List<String> messages = new ArrayList<>();
+
+        for (PrequelMainCharacter mainCharacter: mainPrequelCharacters) {
+            messages.add(
+                mainCharacter.expectationFromMaterialsInteraction(lunit, magnet)
+            );
+        }
+
+        CharactersMessagesPrint.optimizePrintCharactersMessages(mainPrequelCharacters, messages);
+
+        // Do an experiment on the work and make a conclusion
+        boolean noUnexpectedResults = true;
+
+        try {
+            work.makeAnExperiment(lunit, magnet);
+
+            work.charactersExperimentConclusions(mainPrequelCharacters, fuksia.getExpectations());
+        } catch (UnexpectedExperimentResult e) {
+            System.out.println(e.getMessage());
+
+            noUnexpectedResults = false;
+        }
+
+        // Fuksia and Seledochka don't participate in further story
+        work.removeMainCharacters(fuksia, seledochka);
+
+        if (noUnexpectedResults) {
+            work.consequencesOfTheExperiment();
+
+            // Minor characters try to get down
+            messages = new ArrayList<>();
+            List<PrequelMinorCharacter> staidMinorCharacters = new ArrayList<>();
+
+            for (PrequelMinorCharacter minorCharacter: minorPrequelCharacters) {
+                messages.add(minorCharacter.tryToGetDown());
+                if (!minorCharacter.isSuccessfulTryToGetDown()) staidMinorCharacters.add(minorCharacter);
+            }
+
+            CharactersMessagesPrint.optimizePrintCharactersMessages(minorPrequelCharacters, messages);
+
+            // All characters who can't get down, try to use reactive forces
+            messages = new ArrayList<>();
+
+            for (PrequelMinorCharacter staidMinorCharacter: staidMinorCharacters)
+                messages.add(staidMinorCharacter.useReactiveForcesToGetDown());
+
+            CharactersMessagesPrint.optimizePrintCharactersMessages(
+                    staidMinorCharacters.toArray(new Character[0]), messages
+            );
+        }
+
+        // Korotishki in further story will be others ("Все")
+        work.removeMinorCharacters(korotishki);
+
+        //
+        // ------ End of the prequel ------
+        //
+
+        // Create main story characters
         MainCharacter znayka = new MainCharacter("Знайка");
         MainCharacter zvezdochkin = new MainCharacter("Звёздочкин");
 
         MinorCharacter others = new MinorCharacter("Все", false);
+
         // Create arrays with main and minor characters
         MainCharacter[] mainCharacters = {zvezdochkin, znayka};
         MinorCharacter[] minorCharacters = {others};
@@ -56,11 +170,15 @@ public class MainStory {
                 new Material("Кусочки намагниченного железа", Color.WHITE, Hardness.MEDIUM, Attraction.ORDINARY)
         );
 
-        Cave cave = new Cave();
-        Work work = new Work(mainCharacters, minorCharacters);
+        // Add characters to the work
+        work.addMainCharacters(mainCharacters);
+        work.addMinorCharacters(minorCharacters);
+
+        //
+        // ------ Start main story ------
+        //
 
         // Part 1
-        cave.fullCave();
 
         // Main characters explore cave (without messages here, character will tell about the find at the end)
         work.exploreCave(cave, mainCharacters);
@@ -68,7 +186,7 @@ public class MainStory {
         work.startWorking();
 
         if (others.isMisunderstanding()) {
-            List<String> messages = new ArrayList<>();
+            messages = new ArrayList<>();
 
             for (MainCharacter mainCharacter: mainCharacters) {
                 String message = mainCharacter.decideToTellOtherCharacters(work.getAllCharacters());
@@ -94,5 +212,9 @@ public class MainStory {
         }
 
         znayka.tellCharactersAboutHowTheyFoundMaterial(work.getAllCharacters(), znaykasAntilunite);
+
+        //
+        // ------ End of the main story ------
+        //
     }
 }

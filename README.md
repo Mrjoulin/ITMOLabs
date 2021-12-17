@@ -8,7 +8,9 @@
 ### Lab 2: `№21532`
 #### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/ProgLabs/Lab02/) to view code
 ### Lab 3: `№21575.3`
-#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/ProgLabs/Lab03/) to view code
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/ProgLabs/Lab03/) to view code and text
+### Lab 4: `undefined`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/src/ProgLabs/Lab04/) to view code and text
 
 ## Information Technologies Labs:
 ### Lab 2: `№50`
