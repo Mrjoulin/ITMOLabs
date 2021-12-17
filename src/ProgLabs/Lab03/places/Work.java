@@ -139,8 +139,8 @@ public class Work {
     }
 
     public void addMainCharacters(Character... charactersToAdd) {
-        List<Character> mainCharactersList = Arrays.asList(mainCharacters);
-        List<Character> allCharactersList = Arrays.asList(allCharacters);
+        ArrayList<Character> mainCharactersList = new ArrayList(Arrays.asList(mainCharacters));
+        ArrayList<Character> allCharactersList = new ArrayList(Arrays.asList(allCharacters));
 
         for (Character newCharacter : charactersToAdd) {
             mainCharactersList.add(newCharacter);
@@ -152,8 +152,8 @@ public class Work {
     }
 
     public void addMinorCharacters(Character... charactersToAdd) {
-        List<Character> minorCharactersList = Arrays.asList(minorCharacters);
-        List<Character> allCharactersList = Arrays.asList(allCharacters);
+        ArrayList<Character> minorCharactersList = new ArrayList(Arrays.asList(minorCharacters));
+        ArrayList<Character> allCharactersList = new ArrayList(Arrays.asList(allCharacters));
 
         for (Character newCharacter : charactersToAdd) {
             minorCharactersList.add(newCharacter);
@@ -165,8 +165,8 @@ public class Work {
     }
 
     public void removeMainCharacters(Character... charactersToRemove) {
-        List<Character> mainCharactersList = Arrays.asList(mainCharacters);
-        List<Character> allCharactersList = Arrays.asList(allCharacters);
+        ArrayList<Character> mainCharactersList = new ArrayList(Arrays.asList(mainCharacters));
+        ArrayList<Character> allCharactersList = new ArrayList(Arrays.asList(allCharacters));
 
         for (Character characterToRemove : charactersToRemove) {
             mainCharactersList.remove(characterToRemove);
@@ -178,8 +178,8 @@ public class Work {
     }
 
     public void removeMinorCharacters(Character... charactersToRemove) {
-        List<Character> minorCharactersList = Arrays.asList(minorCharacters);
-        List<Character> allCharactersList = Arrays.asList(allCharacters);
+        ArrayList<Character> minorCharactersList = new ArrayList(Arrays.asList(minorCharacters));
+        ArrayList<Character> allCharactersList = new ArrayList(Arrays.asList(allCharacters));
 
         for (Character characterToRemove : charactersToRemove) {
             minorCharactersList.remove(characterToRemove);
