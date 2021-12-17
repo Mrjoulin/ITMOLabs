@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage[nomessages]{fp}
+\usetikzlibrary{shapes}
+\usetikzlibrary{plotmarks}
+
+
+\newcounter{z}
+\newcommand{\drawhuman}{
+	\begin{tikzpicture} 
+	\FPeval{\angle}{clip(22.5*\arabic{z})}
+	\FPeval{\resx}{clip(-4*cos(max(pi*\arabic{z}/8,  pi/2)))}
+	\FPeval{\resy}{clip(-4*sin(min(pi*\arabic{z}/8,  pi/2)))}
+	% Legs
+	\filldraw[color=red!60, fill=red!5, very thick] (-1,-10) ellipse (1 and 3);
+	\filldraw[color=red!60, fill=red!5, very thick] (1,-10) ellipse (1 and 3);
+	% Body
+	\centering
+	\filldraw[color=red!60, fill=red!5, very thick] (0,-4) ellipse (2 and 5);
+	\filldraw[color=red!60, fill=red!5, very thick](0,0) circle (2);
+	\filldraw (-20pt, 10pt) ellipse (10pt and 3pt);
+	\filldraw (20pt, 10pt) ellipse (10pt and 3pt);
+	\filldraw (0, -25pt) ellipse (20pt and 8pt);
+	% Hands
+	\filldraw[color=red!60, fill=red!5, very thick] (-2,-4) ellipse (1 and 3);
+	\filldraw[
+		color=red!60, fill=red!5, very thick,
+		cm={cos(\angle) ,sin(\angle) ,-sin(\angle) ,cos(\angle) ,(\resx,\resy)}
+	] (2, -4) ellipse (1 and 3);
+	\end{tikzpicture}
+	\addtocounter{z}{1}
+	\newpage
+}
+
+\begin{document}
+	\drawhuman
+	\drawhuman
+	\drawhuman
+	\drawhuman
+	\drawhuman
+	\drawhuman
+	\drawhuman
+	\drawhuman
+\end{document}
