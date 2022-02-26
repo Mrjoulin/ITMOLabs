@@ -1,0 +1,31 @@
+427a
+427: 043D data - (START_CELL)
+428: 0200 data - 043D after 430 - 043E after 431 - (VARIABLE)
+429: 4000 data - 0003 after 42E - (NUM_CELLS, CONST = 3)
+42A: E000 data - 0000 after 42C - 1200 after 439 - (RESULT)
+
+42B: + 0200 - CLA, Start, clear AC
+42C: EEFD - ST, Save AC -> MEM(IP - 3 = 42A)
+42D: AF03 - LD #03, load 03 to AC
+42E: EEFA - ST, Save AC -> MEM(IP - 6 = 529)
+42F: AEF7 - LD, MEM(IP - 9 = 427) -> AC=043D
+430: EEF7 - ST, Save AC -> MEM(IP - 9 = 428)
+431: AAF6 - LD, MEM(043D) -> AC=1200
+432: 0480 - ROR, AC=0900, C=0
+433: F406 - BLO, IF C == 1 then IP + 6 -> IP (to 43A)
+434: 0480 - ROR, AC=0480, C=0
+435: F404 - BLO, IF C == 1 then IP + 4 -> IP (to 43A)
+436: 0400 - ROL, AC=0900
+437: 0400 - ROL, AC=1200
+438: 4EF1 - ADD, AC = 1200 + MEM(IP - F = 42A) = 1200
+439: EEF0 - ST, Save AC -> MEM(IP - 10 = 42A)
+43A: 8429 - LOOP, MEM(429) - 1 -> 429, IF MEM(429) <= 0 then IP + 1 -> IP (go to 43C)
+43B: CEF5 - else JUMP, IP - B -> IP (to 431)
+43C: 0100 - HLT
+
+43D: 1200 - data
+43E: 6434 - data
+43F: 1800 - data
+
+Программа выбирает из массива из 3х чисел, начиная с адреса MEM(427), только числа делящиеся без остатка на 4,
+складывает их и записывает в 42A
