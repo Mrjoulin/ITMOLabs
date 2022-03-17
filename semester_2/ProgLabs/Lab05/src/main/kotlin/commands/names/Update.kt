@@ -1,9 +1,12 @@
 package commands.names
 
-import commands.interfaces.*
+import commands.annotations.ConsoleCommand
+import commands.interfaces.Command
+import receiver.interfaces.ReceiverInterface
 import entities.Route
-import receiver.ReceiverInterface
-import utils.*
+import utils.getEntityByIdFromInputArgs
+import utils.CreateEntity
+import utils.objectMap
 
 import kotlin.collections.ArrayList
 

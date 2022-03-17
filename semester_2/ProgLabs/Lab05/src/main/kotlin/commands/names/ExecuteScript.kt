@@ -1,9 +1,11 @@
 package commands.names
 
 import Client
-import commands.interfaces.*
+import commands.annotations.ConsoleCommand
+import commands.interfaces.Command
+import receiver.interfaces.ReceiverInterface
 import entities.Route
-import receiver.ReceiverInterface
+import utils.ExecuteScriptPath
 import utils.logger
 
 import java.io.File
@@ -27,7 +29,7 @@ class ExecuteScript(val receiver: ReceiverInterface<Route>) : Command {
         } else if (!File(args[0]).exists()) {
             println("Input file ${args[0]} for executing script not found!")
             return false
-        } else if (!receiver.addToExecuteScriptPath(args[0])) {
+        } else if (!ExecuteScriptPath.addToExecuteScriptPath(args[0])) {
             println("Recursive execute script call! File ${args[0]} already has been called!")
             return false
         }
@@ -52,7 +54,7 @@ class ExecuteScript(val receiver: ReceiverInterface<Route>) : Command {
         // Set back previous input stream reader
         receiver.setInputStreamReader(newInputStreamReader = previousStream)
         // Remove current file from execute script path
-        if (!receiver.removeFromExecuteScriptPath(args[0]))
+        if (!ExecuteScriptPath.removeFromExecuteScriptPath(args[0]))
             logger.error("Can't remove file ${args[0]} from execute script path!")
 
         if (!success) println("Execution of script ${args[0]} failed!")

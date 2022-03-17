@@ -1,9 +1,10 @@
 package commands.names
 
-import commands.interfaces.*
+import commands.annotations.ConsoleCommand
+import commands.interfaces.Command
+import receiver.interfaces.ReceiverInterface
 import entities.Route
 import file.CollectionFileProcess
-import receiver.ReceiverInterface
 
 import kotlin.collections.ArrayList
 

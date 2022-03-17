@@ -1,7 +1,7 @@
 package file
 
 import entities.Route
-import receiver.ReceiverInterface
+import receiver.interfaces.ReceiverInterface
 import utils.checkCollectionFile
 import utils.COLLECTION_FILENAME
 import utils.logger

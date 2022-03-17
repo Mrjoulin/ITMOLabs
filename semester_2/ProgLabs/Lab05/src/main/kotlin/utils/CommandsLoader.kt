@@ -1,8 +1,9 @@
 package utils
 
-import commands.interfaces.*
+import commands.annotations.ConsoleCommand
+import commands.interfaces.Command
+import receiver.interfaces.ReceiverInterface
 import entities.Route
-import receiver.ReceiverInterface
 
 import java.security.CodeSource
 import java.util.zip.ZipInputStream

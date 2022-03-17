@@ -1,7 +1,7 @@
 import file.CollectionFileProcess
-import receiver.ReceiverInterface
+import receiver.interfaces.ReceiverInterface
 import receiver.RouteReceiver
-import invoker.InvokerInterface
+import invoker.interfaces.InvokerInterface
 import invoker.Invoker
 import entities.Route
 import utils.CommandsLoader

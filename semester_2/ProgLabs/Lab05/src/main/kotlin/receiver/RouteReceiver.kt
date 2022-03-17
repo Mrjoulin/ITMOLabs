@@ -1,6 +1,7 @@
 package receiver
 
 import entities.Route
+import receiver.interfaces.ReceiverInterface
 import utils.logger
 import utils.objectMap
 
@@ -22,7 +23,6 @@ class RouteReceiver(
     private var inputStreamReader: InputStreamReader = InputStreamReader(System.`in`)
 ) : ReceiverInterface<Route> {
 
-    private val executeScriptPath = ArrayList<String>()
     private val creationDate: String = SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(Date())
     private var entitiesSet = HashSet<Route>()
 
@@ -39,16 +39,6 @@ class RouteReceiver(
             "-> ${newInputStreamReader.javaClass.simpleName}"
         )
         this.inputStreamReader = newInputStreamReader
-    }
-
-    override fun addToExecuteScriptPath(filename: String) : Boolean {
-        if (!executeScriptPath.contains(filename))
-            return executeScriptPath.add(filename)
-        return false
-    }
-
-    override fun removeFromExecuteScriptPath(filename: String) : Boolean {
-        return executeScriptPath.remove(filename)
     }
 
     override fun getCreationDate(): String = creationDate

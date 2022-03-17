@@ -3,7 +3,7 @@ package utils
 import entities.Route
 import entities.validators.FieldValidator
 import entities.validators.annotations.*
-import receiver.ReceiverInterface
+import receiver.interfaces.ReceiverInterface
 
 import java.util.*
 import java.io.FileReader
