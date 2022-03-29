@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+  <route>
+    <id>1</id>
+    <creationDate>2022-03-10 08:00:00.0 UTC</creationDate>
+    <name>Test Route</name>
+    <coordinates>
+      <x>0</x>
+      <y>14</y>
+    </coordinates>
+    <from>
+      <name>Loc1</name>
+      <x>1.0</x>
+      <y>2.4</y>
+    </from>
+    <to>
+      <name>Loc2</name>
+      <x>113.1</x>
+      <y>223.0</y>
+    </to>
+    <distance>134.5</distance>
+  </route>
+  <route>
+    <id>2</id>
+    <creationDate>2022-03-10 09:00:00.0 UTC</creationDate>
+    <name>Sample Route</name>
+    <coordinates>
+      <x>123</x>
+      <y>233</y>
+    </coordinates>
+    <from>
+      <name>Start Location</name>
+      <x>13.01</x>
+      <y>17.04</y>
+    </from>
+    <to>
+      <name>End location</name>
+      <x>13.37</x>
+      <y>1488.0</y>
+    </to>
+    <distance>1000.7</distance>
+  </route>
+</routes>

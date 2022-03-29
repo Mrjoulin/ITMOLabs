@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+  <route>
+    <id>1</id>
+    <creationDate>2022-03-10 08:00:00.0 UTC</creationDate>
+    <name>Test Route</name>
+    <coordinates>
+      <x>0</x>
+      <y>14</y>
+    </coordinates>
+    <from>
+      <name>Loc1</name>
+      <x>1.0</x>
+      <y>2.4</y>
+    </from>
+    <to>
+      <name>Loc2</name>
+      <x>113.1</x>
+      <y>223.0</y>
+    </to>
+    <distance>134.5</distance>
+  </route>
+  <route>
+    <id>2</id>
+    <creationDate>2022-03-10 09:00:00.0 UTC</creationDate>
+    <name>Sample Route</name>
+    <coordinates>
+      <x>123</x>
+      <y>233</y>
+    </coordinates>
+    <from>
+      <name>Start Location</name>
+      <x>13.01</x>
+      <y>17.04</y>
+    </from>
+    <to>
+      <name>End location</name>
+      <x>13.37</x>
+      <y>1488.0</y>
+    </to>
+    <distance>1000.7</distance>
+  </route>
+  <route>
+    <id>3</id>
+    <creationDate>2022-03-12 18:06:24.290 UTC</creationDate>
+    <name>Test</name>
+    <coordinates>
+      <x>12</x>
+      <y>23</y>
+    </coordinates>
+    <from>
+      <name>Beloruskya</name>
+      <x>123.0</x>
+      <y>-400.0</y>
+    </from>
+    <to>
+      <name>Kroverkski prospect</name>
+      <x>12.0</x>
+      <y>-33.0</y>
+    </to>
+    <distance>22.0</distance>
+  </route>
+</routes>
