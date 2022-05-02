@@ -239,8 +239,6 @@ class DataBaseWorker {
     ): Boolean {
         val entityMap = dbObjectMap(obj)
 
-        logger.info("Entity map: $entityMap")
-
         var numSetColumns = 0
 
         for (colName in entityMap.keys) {
