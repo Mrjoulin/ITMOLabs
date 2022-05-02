@@ -4,14 +4,14 @@
 ## Запуск приложения:
 
 ### Чтобы запустить клиент (без DEBUG мода):
-#### `java -jar client/build/libs/client-3.0-SNAPSHOT.jar`
+`java -jar client/build/libs/client-3.0-SNAPSHOT.jar`
 ### Для запуска в режиме отладки (с DEBUG):
-#### `java -Dlogback.configurationFile=client/src/main/resources/logback-debug.xml -jar client/build/libs/client-3.0-SNAPSHOT.jar`
+`java -Dlogback.configurationFile=client/src/main/resources/logback-debug.xml -jar client/build/libs/client-3.0-SNAPSHOT.jar`
 
 ### Чтобы запустить сервер (без DEBUG мода):
-#### `java -jar server/build/libs/server-3.0-SNAPSHOT.jar`
+`java -jar server/build/libs/server-3.0-SNAPSHOT.jar`
 ### Для запуска в режиме отладки (с DEBUG):
-#### `java -Dlogback.configurationFile=server/src/main/resources/logback-debug.xml -jar server/build/libs/server-3.0-SNAPSHOT.jar`
+`java -Dlogback.configurationFile=server/src/main/resources/logback-debug.xml -jar server/build/libs/server-3.0-SNAPSHOT.jar`
 
 #### Входная точка на клиенте и сервере `main.kt`
 
