@@ -3,6 +3,7 @@ package network
 import entities.Route
 import java.io.Serializable
 import java.util.*
+import kotlin.collections.AbstractCollection
 
 
 /**
@@ -14,6 +15,7 @@ import java.util.*
  * @param isObjectNeeded Flag that shows, is user need to input entity object from this command
  * @param scriptFileToProcess Filename or null, script file to process on client
  * @param routeToUpdate Route object or null, is needed if user wants to update some info obout this object
+ * @param routesCollection Collection of routes objects
  *
  * @see Request
  *
@@ -24,7 +26,8 @@ class Response(
     val message: String,
     val isObjectNeeded: Boolean = false,
     val scriptFileToProcess: String? = null,
-    val routeToUpdate: Route? = null
+    val routeToUpdate: Route? = null,
+    val routesCollection: Collection<Route>? = null
 ): Serializable {
     override fun toString(): String {
         return "{" +
@@ -32,12 +35,13 @@ class Response(
                 "message: ${if (message.length > 30) message.take(30) + "..." else message}; " +
                 "isObjectNeeded: $isObjectNeeded; " +
                 "scriptFileToProcess: $scriptFileToProcess; " +
-                "haveRouteToUpdate: ${routeToUpdate != null}" +
+                "haveRouteToUpdate: ${routeToUpdate != null};" +
+                "routesCollectionSize: ${routesCollection?.size}" +
                 "}"
     }
 
     override fun hashCode(): Int {
-        return Objects.hash(success, message, isObjectNeeded, scriptFileToProcess, routeToUpdate)
+        return Objects.hash(success, message, isObjectNeeded, scriptFileToProcess, routeToUpdate, routesCollection)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -51,6 +55,7 @@ class Response(
         if (isObjectNeeded != other.isObjectNeeded) return false
         if (scriptFileToProcess != other.scriptFileToProcess) return false
         if (routeToUpdate != other.routeToUpdate) return false
+        if (routesCollection != other.routesCollection) return false
 
         return true
     }
