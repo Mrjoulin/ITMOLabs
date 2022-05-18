@@ -1,0 +1,31 @@
+/* Бокс логина */
+
+#logintextfield{
+    -fx-border-radius: 25;
+    -fx-border-color: black;
+    -fx-background-radius: 25;
+
+}
+
+#passwordtextfield{
+    -fx-border-radius: 25;
+    -fx-border-color: black;
+    -fx-background-radius: 25;
+
+}
+
+#loginbutton{
+    -fx-background-color: #6C69F5;
+    -fx-background-radius: 25;
+    -fx-text-fill: white;
+
+}
+
+#startregisteringbutton:focused{
+    -fx-border-width: 0;
+}
+
+
+#authorizationlabel{
+    -fx-font-family: Montserrat, "Open Sans", Helvetica, Arial, sans-serif;
+}
