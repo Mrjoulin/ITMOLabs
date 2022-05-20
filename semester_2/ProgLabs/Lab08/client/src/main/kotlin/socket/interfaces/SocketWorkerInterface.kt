@@ -6,5 +6,5 @@ import network.Response
 interface SocketWorkerInterface {
     fun connectToServer()
     fun closeConnection()
-    fun makeRequest(request: Request): Response?
+    fun makeRequest(request: Request): Response
 }

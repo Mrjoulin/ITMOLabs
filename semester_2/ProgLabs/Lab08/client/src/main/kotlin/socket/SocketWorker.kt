@@ -1,5 +1,6 @@
 package socket
 
+import utils.exceptions.UnsuccessfulRequestException
 import network.DEFAULT_PACKAGE_SIZE
 import network.SERVER_TIMEOUT_SEC
 import network.ObjectSerializer
@@ -14,6 +15,7 @@ import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.DatagramChannel
+import kotlin.jvm.Throws
 
 
 class SocketWorker: SocketWorkerInterface {
@@ -43,7 +45,8 @@ class SocketWorker: SocketWorkerInterface {
         }
     }
 
-    override fun makeRequest(request: Request): Response? {
+    @Throws(UnsuccessfulRequestException::class)
+    override fun makeRequest(request: Request): Response {
         val dataToSend = ObjectSerializer.toByteArray(request)
 
         if (!datagramChannel.isConnected)
@@ -58,15 +61,10 @@ class SocketWorker: SocketWorkerInterface {
                 datagramChannel.write(buf)
             } while (buf.hasRemaining())
 
-            val response = receiveAnswer()
-
-            if (response == null)
-                println("Server isn't available at the moment! Try again a bit later!")
-
-            return response
+            return receiveAnswer()
+                ?: throw UnsuccessfulRequestException("Server isn't available at the moment! Try again a bit later!")
         } catch (exception: IOException) {
-            print("Command didn't send, try again!")
-            return null
+            throw UnsuccessfulRequestException("Command didn't send, try again!")
         }
     }
 

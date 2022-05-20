@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authorization.LoginController">
    <children>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="68.0" prefWidth="215.0">
          <children>
@@ -24,7 +24,7 @@
                   <Image url="@icon.png" />
                </image>
                <effect>
-                  <DropShadow height="10.0" offsetX="-1.0" offsetY="1.0" radius="4.5" width="10.0" />
+                  <DropShadow blurType="GAUSSIAN" height="10.0" offsetX="-1.0" offsetY="1.0" radius="4.5" width="10.0" />
                </effect>
             </ImageView>
             <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="473.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
@@ -36,7 +36,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="81.0" prefWidth="500.0">
          <children>
-            <Label fx:id="authorizationlabel" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="1.0" prefHeight="103.0" prefWidth="320.0" stylesheets="@loginstyle.css" text="Войдите, для доступа к приложению" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="authorizationLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="1.0" prefHeight="103.0" prefWidth="320.0" stylesheets="@loginstyle.css" text="Войдите, для доступа к приложению" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Kefa Regular" size="24.0" />
                </font>
@@ -45,7 +45,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="76.0" prefWidth="500.0">
          <children>
-            <TextField fx:id="logintextfield" layoutX="50.0" layoutY="24.0" prefHeight="45.0" prefWidth="400.0" promptText="Логин" stylesheets="@loginstyle.css">
+            <TextField fx:id="loginTextField" layoutX="50.0" layoutY="24.0" prefHeight="45.0" prefWidth="400.0" promptText="Логин" stylesheets="@loginstyle.css">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -59,24 +59,33 @@
       </AnchorPane>
       <AnchorPane prefHeight="76.0" prefWidth="500.0">
          <children>
-            <PasswordField fx:id="passwordtextfield" layoutX="50.0" layoutY="25.0" prefHeight="45.0" prefWidth="400.0" promptText="Пароль" stylesheets="@loginstyle.css">
+            <PasswordField fx:id="passwordTextField" layoutX="50.0" layoutY="25.0" prefHeight="45.0" prefWidth="400.0" promptText="Пароль" stylesheets="@loginstyle.css">
                <font>
                   <Font size="16.0" />
                </font></PasswordField>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="58.0" prefWidth="500.0">
+      <AnchorPane prefHeight="38.0" prefWidth="500.0">
          <children>
-            <Hyperlink fx:id="startregisteringbutton" alignment="CENTER" layoutY="33.0" prefHeight="34.0" prefWidth="200.0" stylesheets="@loginstyle.css" text="Зарегистрироваться" textFill="#2e8eff">
+            <Hyperlink fx:id="startRegisteringButton" alignment="CENTER" layoutY="15.0" prefHeight="34.0" prefWidth="200.0" stylesheets="@loginstyle.css" text="Зарегистрироваться" textFill="#2e8eff">
                <font>
                   <Font size="16.0" />
                </font>
             </Hyperlink>
          </children>
       </AnchorPane>
+      <AnchorPane prefHeight="47.0" prefWidth="500.0">
+         <children>
+            <Label fx:id="errorMessage" layoutX="50.0" layoutY="7.0" prefHeight="59.0" prefWidth="400.0" textFill="RED" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="loginbutton" layoutX="150.0" layoutY="37.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" stylesheets="@loginstyle.css" text="Войти">
+            <Button fx:id="loginButton" layoutX="150.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" stylesheets="@loginstyle.css" text="Войти">
                <font>
                   <Font size="24.0" />
                </font>

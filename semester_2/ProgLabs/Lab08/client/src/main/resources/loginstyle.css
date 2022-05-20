@@ -1,31 +1,34 @@
-/* Бокс логина */
+/* Login and registration box*/
 
-#logintextfield{
+#loginTextField{
     -fx-border-radius: 25;
     -fx-border-color: black;
     -fx-background-radius: 25;
 
 }
 
-#passwordtextfield{
+#passwordTextField{
     -fx-border-radius: 25;
     -fx-border-color: black;
     -fx-background-radius: 25;
 
 }
 
-#loginbutton{
+#loginButton{
     -fx-background-color: #6C69F5;
     -fx-background-radius: 25;
     -fx-text-fill: white;
 
 }
 
-#startregisteringbutton:focused{
+#startRegisteringButton:focused{
     -fx-border-width: 0;
 }
 
+#startLoginButton:focused{
+    -fx-border-width: 0;
+}
 
-#authorizationlabel{
+#authorizationLabel{
     -fx-font-family: Montserrat, "Open Sans", Helvetica, Arial, sans-serif;
 }

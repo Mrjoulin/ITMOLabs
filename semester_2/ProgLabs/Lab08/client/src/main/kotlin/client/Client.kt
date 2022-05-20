@@ -1,7 +1,7 @@
 package client
 
+import authorization.Authorization
 import java.io.IOException
-import java.io.InputStreamReader
 import kotlin.system.exitProcess
 
 import entities.Route
@@ -64,7 +64,7 @@ class Client(private val session: ClientSession) {
             if (response == USER_NOT_FOUND_RESPONSE) {
                 println("You token has expired, please re-login")
 
-                return Authorization(session).processAuth()
+                return false // TODO re-login
             }
 
             println(response.message.ifEmpty { "Unsuccessful request to the server!" })
