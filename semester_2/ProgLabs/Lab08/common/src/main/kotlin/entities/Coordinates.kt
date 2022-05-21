@@ -43,8 +43,7 @@ class Coordinates (
     }
 
     override fun toString(): String {
-        return "- - X coordinate: $x\n" +
-                "- - Y coordinate: $y"
+        return "($x; $y)"
     }
 
     override fun hashCode(): Int {

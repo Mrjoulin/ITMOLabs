@@ -1,17 +1,11 @@
-import authorization.Authorization
+import menu.MenuController
 import authorization.LoginController
-import authorization.RegistrationController
-import client.Client
 import client.ClientSession
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
 import utils.*
-
-import java.lang.Exception
-import kotlin.system.exitProcess
 
 
 /**
@@ -30,7 +24,7 @@ class Main : Application() {
         val success = authorize(primaryStage)
 
         if (success) {
-            startProcess()
+            startProcess(primaryStage)
         }
     }
 
@@ -56,22 +50,19 @@ class Main : Application() {
         return false
     }
 
-    private fun startProcess() {
-        logger.debug("Start processing commands")
+    private fun startProcess(primaryStage: Stage) {
+        logger.debug("Start processing menu")
 
-        val client = Client(session)
+        val loader = FXMLLoader(javaClass.classLoader.getResource(APPLICATION_MENU_WINDOW))
+        loader.setControllerFactory { MenuController(session) }
 
-        println("Hello to the console application!")
+        val scene = Scene(loader.load(), MENU_WINDOW_WIDTH, MENU_WINDOW_HEIGHT)
+        scene.stylesheets.add(javaClass.classLoader.getResource(APPLICATION_MENU_STYLES)!!.toExternalForm())
 
-        while (true) {
-            println("To show available commands type: help")
+        primaryStage.title = APPLICATION_NAME
+        primaryStage.scene = scene
+        primaryStage.show()
 
-            try {
-                client.processCommands()
-            } catch (e: Exception) {
-                logger.debug("Error while processing client: {}", e)
-            }
-        }
     }
 }
 

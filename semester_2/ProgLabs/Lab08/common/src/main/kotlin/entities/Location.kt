@@ -17,7 +17,7 @@ import kotlin.math.sqrt
  *
  * @author Matthew I.
  */
-class Location (// Длина строки не должна быть больше 379, Поле не может быть null
+class Location(// Длина строки не должна быть больше 379, Поле не может быть null
     @InputField("location name")
     @ValueIntSize(lower_than = 380)
     val name: String,
@@ -44,9 +44,7 @@ class Location (// Длина строки не должна быть больш
     }
 
     override fun toString(): String {
-        return "- - Location name: $name\n" +
-                "- - Location X: $x\n" +
-                "- - Location Y: $y"
+        return "$name - ($x; $y)"
     }
 
     override fun hashCode(): Int {

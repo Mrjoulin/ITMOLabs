@@ -1,0 +1,22 @@
+#menupane{
+    -fx-background-color: #CCCCCC ;
+}
+
+#tablebutton{
+    -fx-background-color: #6C69F5;
+    -fx-background-radius: 5;
+}
+
+#visualizationbutton{
+    -fx-background-color: #8C79FF;
+    -fx-background-radius: 5;
+}
+
+#commandsbutton{
+    -fx-background-color: #A880FF;
+    -fx-background-radius: 5;
+}
+
+#accountbutton:focused{
+    -fx-border-width: 0;
+}

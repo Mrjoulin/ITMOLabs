@@ -1,5 +1,6 @@
 package authorization
 
+import menu.MenuController
 import client.ClientSession
 import utils.exceptions.UnsuccessfulRequestException
 import input.getInput
@@ -12,14 +13,10 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
 import network.*
-import utils.APPLICATION_AUTH_STYLES
-import utils.APPLICATION_NAME
-import utils.APPLICATION_SIGNUP_WINDOW
+import utils.*
 import utils.exceptions.IncorrectFieldDataException
-import utils.logger
 import java.io.FileReader
 import java.io.IOException
-import java.lang.NumberFormatException
 import java.security.MessageDigest
 import kotlin.jvm.Throws
 
@@ -56,7 +53,7 @@ open class Authorization (private val session: ClientSession) {
                 password = passwordTextField.text
             )
 
-            // TODO move to menu
+            moveToWindow(APPLICATION_NAME, APPLICATION_MENU_WINDOW, MenuController(session))
         }
         catch (e: UnsuccessfulRequestException) { errorMessage.text = e.message }
         catch (e: IncorrectFieldDataException) { errorMessage.text = "Неверный ввод: ${e.message}" }

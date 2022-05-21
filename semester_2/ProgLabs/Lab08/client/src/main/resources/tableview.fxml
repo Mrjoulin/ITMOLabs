@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.TableViewController">
+   <children>
+      <TableView fx:id="table" fixedCellSize="0.0" layoutX="10.0" layoutY="100.0" maxWidth="1000.0" minHeight="0.0" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" stylesheets="@tableviewstyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="70.0" resizable="false" styleClass="columns" text="Id" />
+            <TableColumn fx:id="authorColumn" prefWidth="102.0" resizable="false" styleClass="columns" text="Автор" />
+            <TableColumn fx:id="dateColumn" prefWidth="163.0" resizable="false" styleClass="columns" text="Дата создания" />
+            <TableColumn fx:id="nameColumn" minWidth="6.4000244140625" prefWidth="150.0" resizable="false" styleClass="columns" text="Название" />
+            <TableColumn fx:id="coordinatesColumn" prefWidth="116.0" resizable="false" styleClass="columns" text="Координаты" />
+            <TableColumn fx:id="fromColumn" prefWidth="192.0" resizable="false" styleClass="columns" text="Откуда" />
+            <TableColumn fx:id="toColumn" prefWidth="192.7999267578125" resizable="false" styleClass="columns" text="Куда " />
+            <TableColumn fx:id="distanceColumn" minWidth="0.0" prefWidth="157.5999755859375" resizable="false" styleClass="columns" text="Длина" />
+         </columns>
+      </TableView>
+      <Text fx:id="tableLabel" layoutX="367.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Таблица маршрутов в коллекции">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

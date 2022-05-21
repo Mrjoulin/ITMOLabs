@@ -1,0 +1,17 @@
+#table {
+
+}
+
+.columns{
+    -fx-color: #9D9BF9;
+    -fx-text-fill: black;
+    -fx-pref-height: 38;
+
+}
+
+.table-view .columns .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+
