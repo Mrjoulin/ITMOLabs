@@ -84,16 +84,4 @@ class Route(
                 "- To location:\n$to\n" +
                 "- Distance: $distance"
     }
-
-    override fun hashCode(): Int {
-        return Objects.hash(id, creationDate, author, name, coordinates, from, to, distance)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Route) return false
-
-        return author == other.author && name == other.name && coordinates == other.coordinates &&
-                from == other.from && to == other.to && distance == other.distance
-    }
 }

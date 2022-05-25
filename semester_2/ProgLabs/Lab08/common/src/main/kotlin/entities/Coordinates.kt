@@ -45,15 +45,4 @@ class Coordinates (
     override fun toString(): String {
         return "($x; $y)"
     }
-
-    override fun hashCode(): Int {
-        return Objects.hash(x, y)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Coordinates) return false
-
-        return x == other.x && y == other.y
-    }
 }

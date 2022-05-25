@@ -1,5 +1,6 @@
 import menu.MenuController
 import authorization.LoginController
+import client.Client
 import client.ClientSession
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
@@ -41,8 +42,6 @@ class Main : Application() {
 
         val scene = Scene(loader.load(), AUTHORIZATION_WINDOW_WIDTH, AUTHORIZATION_WINDOW_HEIGHT)
 
-        scene.stylesheets.add(javaClass.classLoader.getResource(APPLICATION_AUTH_STYLES)!!.toExternalForm())
-
         primaryStage.title = "Login to $APPLICATION_NAME"
         primaryStage.scene = scene
         primaryStage.show()
@@ -57,7 +56,6 @@ class Main : Application() {
         loader.setControllerFactory { MenuController(session) }
 
         val scene = Scene(loader.load(), MENU_WINDOW_WIDTH, MENU_WINDOW_HEIGHT)
-        scene.stylesheets.add(javaClass.classLoader.getResource(APPLICATION_MENU_STYLES)!!.toExternalForm())
 
         primaryStage.title = APPLICATION_NAME
         primaryStage.scene = scene

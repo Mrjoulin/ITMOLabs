@@ -46,15 +46,4 @@ class Location(// Длина строки не должна быть больш�
     override fun toString(): String {
         return "$name - ($x; $y)"
     }
-
-    override fun hashCode(): Int {
-        return Objects.hash(name, x, y)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Location) return false
-
-        return name == other.name && x == other.x && y == other.y
-    }
 }

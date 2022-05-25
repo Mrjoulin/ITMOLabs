@@ -7,11 +7,24 @@ import entities.Route
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
+import javafx.scene.Scene
+import javafx.scene.control.Label
 import javafx.scene.control.TableColumn
+import javafx.scene.control.TableRow
 import javafx.scene.control.TableView
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.input.MouseButton
+import javafx.scene.layout.VBox
+import javafx.scene.text.Text
+import javafx.stage.Modality
+import javafx.stage.Popup
+import javafx.stage.Stage
+import network.Request
+import utils.MENU_WINDOW_HEIGHT
+import utils.MENU_WINDOW_WIDTH
 import utils.TABLE_MAX_NUM_OBJECTS_WITHOUT_SCROLL
 import utils.TABLE_NUM_PIXELS_TO_HIDE_SCROLL
+import utils.exceptions.UnsuccessfulRequestException
 import java.net.URL
 import java.util.*
 
@@ -28,7 +41,27 @@ class TableViewController(private val session: ClientSession) : Initializable{
     @FXML lateinit var distanceColumn: TableColumn<Route, Double>
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        table.columnResizePolicy = TableView.CONSTRAINED_RESIZE_POLICY;
+        table.setRowFactory {
+            val row: TableRow<Route> = object: TableRow<Route>() {}
+
+            row.setOnMouseClicked { me ->
+                if (me.button == MouseButton.PRIMARY && me.clickCount == 2) { // Left double click
+                    val dialog = Stage()
+
+                    dialog.initModality(Modality.APPLICATION_MODAL)
+                    dialog.initOwner(table.scene.window)
+
+                    val dialogVbox = VBox(20.0)
+                    dialogVbox.children.add(Text("This is a Dialog"))
+
+                    val dialogScene = Scene(dialogVbox, 400.0, 300.0)
+                    dialog.scene = dialogScene
+                    dialog.show()
+                }
+            }
+
+            row
+        }
 
         val columns = arrayListOf(
             idColumn, authorColumn, dateColumn, nameColumn, coordinatesColumn, fromColumn, toColumn, distanceColumn
@@ -45,18 +78,24 @@ class TableViewController(private val session: ClientSession) : Initializable{
         val items = FXCollections.observableArrayList<Route>()
         table.items = items
 
-        // TODO get data from show command
-        val numObjects = 16
+        try {
+            val routes = session.socketWorker.makeRequest(
+                Request(token = session.userToken, command = "show")
+            ).routesCollection
 
-        for (i in 1..numObjects)
-            table.items.add(
-                Route(
-                    i, Date(), "Stepa", "Test", Coordinates(12, 13),
-                    Location("SPB", 1.3, 43.2F), Location("SRV", 1344.23, 13.37F), 123.5
-                )
-            )
+            if (routes != null && routes.isNotEmpty()) {
+                session.entitiesCollection.addAll(routes)
+                table.items.addAll(routes)
 
-        if (numObjects <= TABLE_MAX_NUM_OBJECTS_WITHOUT_SCROLL)
-            distanceColumn.prefWidth += TABLE_NUM_PIXELS_TO_HIDE_SCROLL
+                if (routes.size <= TABLE_MAX_NUM_OBJECTS_WITHOUT_SCROLL)
+                    distanceColumn.prefWidth += TABLE_NUM_PIXELS_TO_HIDE_SCROLL
+            } else {
+                // TODO write message than No objects in collection
+                println("No objects in collection")
+            }
+        } catch (e: UnsuccessfulRequestException) {
+            // TODO write exception message
+            println("No objects in collection")
+        }
     }
 }

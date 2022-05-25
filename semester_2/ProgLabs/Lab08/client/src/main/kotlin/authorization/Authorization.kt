@@ -37,7 +37,6 @@ open class Authorization (private val session: ClientSession) {
         val currentStage: Stage = loginButton.scene.window as Stage
 
         val scene = Scene(loader.load())
-        scene.stylesheets.add(javaClass.classLoader.getResource(APPLICATION_AUTH_STYLES)!!.toExternalForm())
 
         currentStage.title = windowTitle
         currentStage.scene = scene
@@ -52,6 +51,8 @@ open class Authorization (private val session: ClientSession) {
                 username = loginTextField.text,
                 password = passwordTextField.text
             )
+
+            println("User token: ${session.userToken}") // TODO remove
 
             moveToWindow(APPLICATION_NAME, APPLICATION_MENU_WINDOW, MenuController(session))
         }

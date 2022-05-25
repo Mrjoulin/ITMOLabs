@@ -43,6 +43,7 @@ class MenuController(private val session: ClientSession) : Initializable {
             loader.setControllerFactory { controller }
 
             val root: Parent = loader.load()
+            mainpane.children.removeAll()
             mainpane.children.add(root)
         } catch (e: IOException) {
             e.printStackTrace()

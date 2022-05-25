@@ -30,6 +30,6 @@ class Show(private val collectionManager: CollectionManagerInterface<Route>) : C
             else
                 "There is no entities added to the collection"
 
-        return Response(success = true, message = message)
+        return Response(success = true, message = message, routesCollection = col)
     }
 }
