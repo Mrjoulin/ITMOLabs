@@ -56,7 +56,6 @@ class Main : Application() {
         loader.setControllerFactory { MenuController(session) }
 
         val scene = Scene(loader.load(), MENU_WINDOW_WIDTH, MENU_WINDOW_HEIGHT)
-
         primaryStage.title = APPLICATION_NAME
         primaryStage.scene = scene
         primaryStage.show()

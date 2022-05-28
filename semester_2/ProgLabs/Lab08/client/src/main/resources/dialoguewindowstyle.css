@@ -1,0 +1,35 @@
+#editButton{
+    -fx-background-color: #2B80FF;
+    -fx-background-radius: 25;
+    -fx-text-fill: white;
+}
+
+#deleteButton {
+    -fx-background-color: red;
+    -fx-background-radius: 25;
+    -fx-text-fill: white;
+}
+
+#mainPane {
+    -fx-background-color: white;
+}
+
+.text-field:readonly {
+    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-border: gone;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 18;
+}
+
+.text-field {
+    -fx-text-fill: black;
+    -fx-font-size: 18;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+}
+
+#smallTextFields {
+    -fx-font-size: 16;
+}

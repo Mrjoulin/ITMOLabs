@@ -1,5 +1,5 @@
-#table {
-
+#mainpane {
+    -fx-background-color: white;
 }
 
 .columns{
@@ -13,5 +13,3 @@
     -fx-text-fill: white;
     -fx-font-size: 14;
 }
-
-

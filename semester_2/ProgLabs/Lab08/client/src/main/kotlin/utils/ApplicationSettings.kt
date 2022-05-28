@@ -15,6 +15,7 @@ const val MENU_WINDOW_WIDTH = 1440.0
 const val MENU_WINDOW_HEIGHT = 750.0
 const val APPLICATION_MENU_WINDOW = "menu.fxml"
 const val APPLICATION_TABLE_SECTION = "/tableview.fxml"
+const val APPLICATION_COMMANDS_SECTION = "/commands.fxml"
 const val APPLICATION_MENU_STYLES = "menustyle.css"
 const val APPLICATION_TABLE_STYLES = "tableviewstyle.css"
 

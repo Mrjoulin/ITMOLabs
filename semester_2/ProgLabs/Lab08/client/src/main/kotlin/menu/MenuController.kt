@@ -6,7 +6,10 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
+import javafx.scene.control.Label
 import javafx.scene.layout.AnchorPane
+import javafx.stage.Popup
+import utils.APPLICATION_COMMANDS_SECTION
 import utils.APPLICATION_TABLE_SECTION
 import java.io.IOException
 import java.net.URL
@@ -20,6 +23,7 @@ class MenuController(private val session: ClientSession) : Initializable {
     @FXML
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         loadUI(APPLICATION_TABLE_SECTION, TableViewController(session))
+
     }
 
     @FXML
@@ -34,7 +38,12 @@ class MenuController(private val session: ClientSession) : Initializable {
 
     @FXML
     fun commands(event: ActionEvent) {
-        loadUI(APPLICATION_TABLE_SECTION, TableViewController(session))
+        loadUI(APPLICATION_COMMANDS_SECTION, CommandsController(session))
+        val popup = Popup()
+        popup.content.add(Label("This is a popup"))
+        println(mainpane)
+        println(mainpane.scene)
+        popup.show(mainpane.scene.window)
     }
 
     private fun loadUI(ui: String, controller: Any) {
@@ -47,6 +56,6 @@ class MenuController(private val session: ClientSession) : Initializable {
             mainpane.children.add(root)
         } catch (e: IOException) {
             e.printStackTrace()
-        }
+        }   
     }
 }

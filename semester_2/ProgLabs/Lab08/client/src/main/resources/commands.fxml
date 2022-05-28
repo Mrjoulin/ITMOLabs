@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1180.0" stylesheets="@commandsstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.CommandsController">
+   <children>
+      <Label layoutX="56.0" prefHeight="122.0" prefWidth="776.0" text="Команды для работы с маршрутами">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Button layoutX="183.0" layoutY="326.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" styleClass="commandButtons" text="Помощь">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="96.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Удалить все маршруты">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="58.0" layoutY="426.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Найти маршруты по имени">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="646.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="391.0" styleClass="commandButtons" text="Вывести все объекты">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="126.0" layoutY="127.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Информация о коллекции">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="698.0" layoutY="127.0" mnemonicParsing="false" onAction="#add" prefHeight="60.0" prefWidth="335.0" styleClass="commandButtons" text="Добавить маршрут">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="616.0" layoutY="326.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="501.0" styleClass="commandButtons" text="Выполнить скрипт из файла">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button id="clearButton" layoutX="58.0" layoutY="576.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" text="Очистить консоль">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <VBox id="vbox" layoutX="616.0" layoutY="426.0" prefHeight="300.0" prefWidth="500.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="54.0" prefWidth="430.0" text="Консоль">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Line endX="398.0" startX="-100.0" strokeWidth="2.0" />
+            <TextArea cache="true" depthTest="DISABLE" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="184.0" prefWidth="462.0" text="asd&#10;asad&#10;asd&#10;asdasdsadasd&#10;asd&#10;as&#10;d&#10;">
+               <VBox.margin>
+                  <Insets left="15.0" top="5.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <TextField id="consoleTextField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="428.0" promptText="Введите команду">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="14.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

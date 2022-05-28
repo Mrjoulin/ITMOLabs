@@ -2,6 +2,10 @@
     -fx-background-color: #CCCCCC ;
 }
 
+#mainpane {
+    -fx-background-color: white;
+}
+
 #tablebutton{
     -fx-background-color: #6C69F5;
     -fx-background-radius: 5;
