@@ -10,19 +10,19 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1180.0" stylesheets="@commandsstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.CommandsController">
+<AnchorPane fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="750.0" prefWidth="1180.0" stylesheets="@commandsstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.CommandsController">
    <children>
       <Label layoutX="56.0" prefHeight="122.0" prefWidth="776.0" text="Команды для работы с маршрутами">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="183.0" layoutY="326.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" styleClass="commandButtons" text="Помощь">
+      <Button fx:id="helpButton" layoutX="183.0" layoutY="326.0" mnemonicParsing="false" onAction="#help" prefHeight="60.0" prefWidth="250.0" styleClass="commandButtons" text="Помощь">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="96.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Удалить все маршруты">
+      <Button layoutX="96.0" layoutY="226.0" mnemonicParsing="false" onAction="#delete" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Удалить все маршруты">
          <font>
             <Font size="28.0" />
          </font>
@@ -32,12 +32,12 @@
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="646.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="391.0" styleClass="commandButtons" text="Вывести все объекты">
+      <Button fx:id="showButton" layoutX="646.0" layoutY="226.0" mnemonicParsing="false" onAction="#show" prefHeight="60.0" prefWidth="391.0" styleClass="commandButtons" text="Вывести все объекты">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="126.0" layoutY="127.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Информация о коллекции">
+      <Button fx:id="infoButton" layoutX="126.0" layoutY="127.0" mnemonicParsing="false" onAction="#info" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Информация о коллекции">
          <font>
             <Font size="28.0" />
          </font>
@@ -52,20 +52,20 @@
             <Font size="28.0" />
          </font>
       </Button>
-      <Button id="clearButton" layoutX="58.0" layoutY="576.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" text="Очистить консоль">
+      <Button id="clearButton" fx:id="clearConsoleButton" layoutX="58.0" layoutY="576.0" mnemonicParsing="false" onAction="#clearConsole" prefHeight="60.0" prefWidth="464.0" text="Очистить консоль">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
       <VBox id="vbox" layoutX="616.0" layoutY="426.0" prefHeight="300.0" prefWidth="500.0">
          <children>
-            <Label alignment="CENTER" prefHeight="54.0" prefWidth="430.0" text="Консоль">
+            <Label alignment="CENTER" prefHeight="54.0" prefWidth="402.0" text="Консоль">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
             <Line endX="398.0" startX="-100.0" strokeWidth="2.0" />
-            <TextArea cache="true" depthTest="DISABLE" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="184.0" prefWidth="462.0" text="asd&#10;asad&#10;asd&#10;asdasdsadasd&#10;asd&#10;as&#10;d&#10;">
+            <TextArea fx:id="textArea" cacheShape="false" depthTest="DISABLE" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="184.0" prefWidth="462.0" scaleShape="false">
                <VBox.margin>
                   <Insets left="15.0" top="5.0" />
                </VBox.margin>

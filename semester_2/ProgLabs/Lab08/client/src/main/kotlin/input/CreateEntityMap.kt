@@ -2,7 +2,9 @@ package input
 
 import entities.validators.FieldValidator
 import entities.validators.annotations.*
+import entities.validators.exceptions.IncorrectFieldDataException
 import utils.logger
+import java.io.ByteArrayInputStream
 
 import java.util.*
 import java.io.FileReader
@@ -21,7 +23,7 @@ import kotlin.collections.HashMap
  * @author Matthew I.
  */
 class CreateEntityMap(private val input: InputStreamReader) {
-    private val inputFromFile = input.javaClass == FileReader::class.java
+    private val inputFromFile = true
 
     /**
      * Method to create an object of given target class using Reflection API.
@@ -53,7 +55,8 @@ class CreateEntityMap(private val input: InputStreamReader) {
         // Get input fields values
         target_class.declaredFields.forEach { field ->
             if (field.isAnnotationPresent(InputField::class.java))
-                fieldsValues[field.name] = getUserInputField(field, previousObject) ?: return null
+                fieldsValues[field.name] = getUserInputField(field, previousObject) ?:
+                throw IncorrectFieldDataException("Incorrect value! Check $target_class ${field.name} restrictions!")
             else
                 generateFields.add(field)
         }

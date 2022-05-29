@@ -1,9 +1,6 @@
 package input
 
-import java.io.BufferedReader
-import java.io.FileReader
-import java.io.IOException
-import java.io.InputStreamReader
+import java.io.*
 import kotlin.jvm.Throws
 
 
@@ -37,8 +34,6 @@ fun getInput(input: InputStreamReader, prefixText: String = "", split: Boolean =
         buffersByReaders[input] = BufferedReader(input)
 
     val bufferedReader = buffersByReaders[input]
-
-    if (input.javaClass != FileReader::class.java) print(prefixText)
 
     val line = bufferedReader?.readLine() ?: throw IOException("End of file!")
 

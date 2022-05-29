@@ -2,34 +2,52 @@ package menu
 
 import client.ClientSession
 import entities.Route
+import entities.validators.exceptions.IncorrectFieldDataException
+import input.CreateEntityMap
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
-import javafx.util.Callback
+import javafx.stage.Stage
 import network.Request
+import java.io.InputStreamReader
 import java.net.URL
 import java.util.*
-import kotlin.collections.ArrayList
 
 class DialogueWindowController(private val session: ClientSession, private val route: Route) : Initializable {
 
-    @FXML lateinit var titleLabel: Label
-    @FXML lateinit var deleteButton: Button
-    @FXML lateinit var editButton: Button
-    @FXML lateinit var authorField: TextField
-    @FXML lateinit var nameField: TextField
-    @FXML lateinit var coordinateXField: TextField
-    @FXML lateinit var coordinateYField: TextField
-    @FXML lateinit var fromNameField: TextField
-    @FXML lateinit var fromXField: TextField
-    @FXML lateinit var fromYField: TextField
-    @FXML lateinit var toNameField: TextField
-    @FXML lateinit var toXField: TextField
-    @FXML lateinit var toYField: TextField
-    @FXML lateinit var distanceField: TextField
+    @FXML
+    lateinit var titleLabel: Label
+    @FXML
+    lateinit var deleteButton: Button
+    @FXML
+    lateinit var editButton: Button
+    @FXML
+    lateinit var authorField: TextField
+    @FXML
+    lateinit var nameField: TextField
+    @FXML
+    lateinit var coordinateXField: TextField
+    @FXML
+    lateinit var coordinateYField: TextField
+    @FXML
+    lateinit var fromNameField: TextField
+    @FXML
+    lateinit var fromXField: TextField
+    @FXML
+    lateinit var fromYField: TextField
+    @FXML
+    lateinit var toNameField: TextField
+    @FXML
+    lateinit var toXField: TextField
+    @FXML
+    lateinit var toYField: TextField
+    @FXML
+    lateinit var distanceField: TextField
+    @FXML
+    lateinit var errorLabel: Label
 
     private var informationState = true
 
@@ -42,6 +60,32 @@ class DialogueWindowController(private val session: ClientSession, private val r
             informationState = false
         } else {
             //TODO: SEND UPDATE COMMAND
+            val data = getNewFields()
+
+            val inp = InputStreamReader(data.byteInputStream())
+            try {
+                val updatedEntityMap = CreateEntityMap(inp).getObjectMapFromInput(Route::class.java)
+
+                val response = session.socketWorker.makeRequest(
+                    Request(
+                        token = session.userToken,
+                        command = "update",
+                        commandArgs = arrayListOf(route.id.toString()),
+                        entityObjectMap = updatedEntityMap)
+                    )
+                if (response.success) {
+                    //TODO: если ок все что делается
+                    val stage: Stage = deleteButton.scene.window as Stage
+                    stage.close()
+                } else {
+                    showErrorMessage("can't update. Server is not ok now.")
+                }
+
+            } catch (e: IncorrectFieldDataException) {
+                fillFields()
+                showErrorMessage(e.message)
+            }
+
 
         }
     }
@@ -51,12 +95,22 @@ class DialogueWindowController(private val session: ClientSession, private val r
         if (informationState) {
             //TODO: DELETE COMMAND
             val response = session.socketWorker.makeRequest(
-                Request(token = session.userToken,
+                Request(
+                    token = session.userToken,
                     command = "remove_by_id",
-                commandArgs = arrayListOf(route.id.toString())))
+                    commandArgs = arrayListOf(route.id.toString())
+                )
+            )
+
             if (response.success) {
-                session.entitiesCollection
+                session.entitiesCollection.remove(route)
+                val stage: Stage = deleteButton.scene.window as Stage
+                //TODO: NOT SURE ABOUT UPDATING
+                stage.close()
+            } else {
+                showErrorMessage("can't delete. Server is not ok now!")
             }
+
         } else {
             editButton.text = "Редактировать"
             deleteButton.text = "Удалить"
@@ -68,9 +122,9 @@ class DialogueWindowController(private val session: ClientSession, private val r
 
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        if (route != null) {
-            fillFields()
-        }
+
+        fillFields()
+
         if (session.username != route.author) disableButtons()
     }
 
@@ -105,6 +159,24 @@ class DialogueWindowController(private val session: ClientSession, private val r
         toXField.text = route.to.x.toString()
         toYField.text = route.to.y.toString()
         distanceField.text = route.distance.toString()
+    }
+
+    private fun getNewFields() : String {
+        return "${nameField.text}\n" +
+                "${coordinateXField.text}\n" +
+                "${coordinateYField.text}\n" +
+                "${fromNameField.text}\n" +
+                "${fromXField.text}\n" +
+                "${fromYField.text}\n" +
+                "${toNameField.text}\n" +
+                "${toXField.text}\n" +
+                "${toYField.text}\n" +
+                distanceField.text
+
+    }
+
+    private fun showErrorMessage(message: String?) {
+        errorLabel.text = message
     }
 
 }

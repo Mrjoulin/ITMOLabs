@@ -39,11 +39,6 @@ class MenuController(private val session: ClientSession) : Initializable {
     @FXML
     fun commands(event: ActionEvent) {
         loadUI(APPLICATION_COMMANDS_SECTION, CommandsController(session))
-        val popup = Popup()
-        popup.content.add(Label("This is a popup"))
-        println(mainpane)
-        println(mainpane.scene)
-        popup.show(mainpane.scene.window)
     }
 
     private fun loadUI(ui: String, controller: Any) {

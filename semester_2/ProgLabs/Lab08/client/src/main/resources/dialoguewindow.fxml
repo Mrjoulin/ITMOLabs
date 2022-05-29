@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="477.0" prefWidth="604.0" stylesheets="@dialoguewindowstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.DialogueWindowController">
+<AnchorPane fx:id="mainPane" prefHeight="530.0" prefWidth="604.0" stylesheets="@dialoguewindowstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.DialogueWindowController">
    <children>
-      <Button fx:id="deleteButton" layoutX="66.0" layoutY="395.0" mnemonicParsing="false" onAction="#leftButtonAction" prefHeight="46.0" prefWidth="202.0" text="Удалить">
+      <Button fx:id="deleteButton" layoutX="66.0" layoutY="447.0" mnemonicParsing="false" onAction="#leftButtonAction" prefHeight="46.0" prefWidth="202.0" text="Удалить">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="editButton" layoutX="335.0" layoutY="395.0" mnemonicParsing="false" onAction="#rightButtonAction" prefHeight="46.0" prefWidth="202.0" text="Редактировать">
+      <Button fx:id="editButton" layoutX="335.0" layoutY="447.0" mnemonicParsing="false" onAction="#rightButtonAction" prefHeight="46.0" prefWidth="202.0" text="Редактировать">
          <font>
             <Font size="18.0" />
          </font>
@@ -175,6 +175,7 @@
             <Insets bottom="1.0" left="5.0" />
          </padding>
       </TextField>
+      <Label fx:id="errorLabel" layoutX="67.0" layoutY="396.0" prefHeight="30.0" prefWidth="469.0" textFill="RED" />
    </children>
    <padding>
       <Insets left="12.0" />

@@ -14,7 +14,7 @@ import javafx.scene.control.TextField
 import javafx.stage.Stage
 import network.*
 import utils.*
-import utils.exceptions.IncorrectFieldDataException
+import entities.validators.exceptions.IncorrectFieldDataException
 import java.io.FileReader
 import java.io.IOException
 import java.security.MessageDigest

@@ -33,3 +33,11 @@
 #smallTextFields {
     -fx-font-size: 16;
 }
+
+.choice-box {
+    -fx-background-radius: 25;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 25;
+    -fx-font-size: 16;
+}

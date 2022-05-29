@@ -66,3 +66,11 @@
     -fx-background-insets: 1;
     -fx-faint-focus-color: transparent;
 }
+
+.text-area {
+    -fx-font-family: 'monospace';
+}
+
+.text-area:focused {
+    -fx-font-size: 18;
+}

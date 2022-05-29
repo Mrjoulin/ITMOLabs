@@ -5,6 +5,8 @@ import entities.Coordinates
 import entities.Location
 import entities.Route
 import javafx.collections.FXCollections
+import javafx.collections.ObservableList
+import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
@@ -16,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.input.MouseButton
 import javafx.stage.Modality
 import javafx.stage.Stage
+import javafx.stage.WindowEvent
 import network.Request
 import utils.*
 import utils.exceptions.UnsuccessfulRequestException
@@ -24,6 +27,8 @@ import java.util.*
 
 class TableViewController(private val session: ClientSession) : Initializable{
     @FXML lateinit var table: TableView<Route>
+
+    private val items: ObservableList<Route> = FXCollections.observableArrayList()
 
     @FXML lateinit var idColumn: TableColumn<Route, Int>
     @FXML lateinit var authorColumn: TableColumn<Route, String>
@@ -52,6 +57,10 @@ class TableViewController(private val session: ClientSession) : Initializable{
                     }
                     dialog.initOwner(table.scene.window)
                     dialog.initModality(Modality.WINDOW_MODAL)
+                    dialog.setOnHidden {
+                        updateRoutes()
+                    }
+
                     dialog.show()
                 }
             }
@@ -71,8 +80,12 @@ class TableViewController(private val session: ClientSession) : Initializable{
             columns[columnNumber].cellValueFactory = PropertyValueFactory(columnsNames[columnNumber])
         }
 
-        val items = FXCollections.observableArrayList<Route>()
-        table.items = items
+        updateRoutes()
+
+    }
+
+    private fun updateRoutes() {
+        table.items.clear()
 
         try {
             val routes = session.socketWorker.makeRequest(
@@ -92,12 +105,6 @@ class TableViewController(private val session: ClientSession) : Initializable{
         } catch (e: UnsuccessfulRequestException) {
             // TODO write exception message
             println(e.message)
-        }
-    }
-
-    private fun updateRoutes() {
-        for (route in session.entitiesCollection) {
-
         }
     }
 }
