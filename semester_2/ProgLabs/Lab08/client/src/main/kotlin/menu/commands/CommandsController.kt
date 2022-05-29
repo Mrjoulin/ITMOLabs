@@ -1,4 +1,4 @@
-package menu
+package menu.commands
 
 import client.ClientSession
 import javafx.event.ActionEvent
@@ -13,6 +13,7 @@ import javafx.scene.control.ButtonType
 import javafx.scene.control.TextArea
 import javafx.stage.Modality
 import javafx.stage.Stage
+import menu.dialogs.AddWindowController
 import network.Request
 import utils.APPLICATION_NAME
 import java.net.URL
@@ -23,9 +24,7 @@ class CommandsController(private val session: ClientSession) : Initializable{
 
     @FXML lateinit var textArea: TextArea
 
-    override fun initialize(location: URL?, resources: ResourceBundle?) {
-
-    }
+    override fun initialize(location: URL?, resources: ResourceBundle?) {}
 
     @FXML
     fun add(event: ActionEvent) {

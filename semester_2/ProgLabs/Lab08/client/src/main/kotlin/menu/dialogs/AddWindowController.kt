@@ -1,4 +1,4 @@
-package menu
+package menu.dialogs
 
 import client.ClientSession
 import entities.Route
@@ -12,7 +12,6 @@ import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.stage.Stage
 import network.Request
-import utils.objectMap
 import java.io.InputStreamReader
 import java.net.URL
 import java.util.*

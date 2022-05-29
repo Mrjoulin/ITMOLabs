@@ -1,4 +1,4 @@
-package menu
+package menu.dialogs
 
 import client.ClientSession
 import entities.Route
@@ -122,7 +122,6 @@ class DialogueWindowController(private val session: ClientSession, private val r
 
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-
         fillFields()
 
         if (session.username != route.author) disableButtons()
@@ -172,7 +171,6 @@ class DialogueWindowController(private val session: ClientSession, private val r
                 "${toXField.text}\n" +
                 "${toYField.text}\n" +
                 distanceField.text
-
     }
 
     private fun showErrorMessage(message: String?) {

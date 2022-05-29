@@ -11,5 +11,6 @@ data class ClientSession(
     var username: String = "",
     var currentInput: InputStreamReader = InputStreamReader(System.`in`),
     var socketWorker: SocketWorkerInterface = SocketWorker(),
+    var collectionInitialized: Boolean = false,
     var entitiesCollection: HashSet<Route> = HashSet()
 )

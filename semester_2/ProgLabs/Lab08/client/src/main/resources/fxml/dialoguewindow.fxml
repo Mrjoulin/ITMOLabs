@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="530.0" prefWidth="604.0" stylesheets="@dialoguewindowstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.DialogueWindowController">
+<AnchorPane fx:id="mainPane" prefHeight="530.0" prefWidth="604.0" stylesheets="@../styles/dialoguewindowstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.dialogs.DialogueWindowController">
    <children>
       <Button fx:id="deleteButton" layoutX="66.0" layoutY="447.0" mnemonicParsing="false" onAction="#leftButtonAction" prefHeight="46.0" prefWidth="202.0" text="Удалить">
          <font>

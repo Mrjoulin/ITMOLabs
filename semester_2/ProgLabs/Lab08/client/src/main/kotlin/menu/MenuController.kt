@@ -6,11 +6,13 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
-import javafx.scene.control.Label
 import javafx.scene.layout.AnchorPane
-import javafx.stage.Popup
+import menu.commands.CommandsController
+import menu.table.TableViewController
+import menu.visualization.VisualizationController
 import utils.APPLICATION_COMMANDS_SECTION
 import utils.APPLICATION_TABLE_SECTION
+import utils.APPLICATION_VISUALIZATION_SECTION
 import java.io.IOException
 import java.net.URL
 import java.util.*
@@ -23,7 +25,6 @@ class MenuController(private val session: ClientSession) : Initializable {
     @FXML
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         loadUI(APPLICATION_TABLE_SECTION, TableViewController(session))
-
     }
 
     @FXML
@@ -33,7 +34,7 @@ class MenuController(private val session: ClientSession) : Initializable {
 
     @FXML
     fun visualization(event: ActionEvent) {
-        loadUI(APPLICATION_TABLE_SECTION, TableViewController(session))
+        loadUI(APPLICATION_VISUALIZATION_SECTION, VisualizationController(session))
     }
 
     @FXML
@@ -47,10 +48,13 @@ class MenuController(private val session: ClientSession) : Initializable {
             loader.setControllerFactory { controller }
 
             val root: Parent = loader.load()
-            mainpane.children.removeAll()
-            mainpane.children.add(root)
+
+            if (mainpane.children.isNotEmpty())
+                mainpane.children[0] = root
+            else
+                mainpane.children.add(root)
         } catch (e: IOException) {
             e.printStackTrace()
-        }   
+        }
     }
 }

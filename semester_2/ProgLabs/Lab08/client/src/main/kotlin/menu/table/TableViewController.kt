@@ -1,12 +1,10 @@
-package menu
+package menu.table
 
 import client.ClientSession
 import entities.Coordinates
 import entities.Location
 import entities.Route
 import javafx.collections.FXCollections
-import javafx.collections.ObservableList
-import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
@@ -18,17 +16,16 @@ import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.input.MouseButton
 import javafx.stage.Modality
 import javafx.stage.Stage
-import javafx.stage.WindowEvent
+import menu.dialogs.DialogueWindowController
 import network.Request
 import utils.*
 import utils.exceptions.UnsuccessfulRequestException
 import java.net.URL
 import java.util.*
+import kotlin.collections.HashSet
 
 class TableViewController(private val session: ClientSession) : Initializable{
     @FXML lateinit var table: TableView<Route>
-
-    private val items: ObservableList<Route> = FXCollections.observableArrayList()
 
     @FXML lateinit var idColumn: TableColumn<Route, Int>
     @FXML lateinit var authorColumn: TableColumn<Route, String>
@@ -45,16 +42,13 @@ class TableViewController(private val session: ClientSession) : Initializable{
 
             row.setOnMouseClicked { me ->
                 if (me.button == MouseButton.PRIMARY && me.clickCount == 2) { // Left double click
-                    val loader = FXMLLoader(javaClass.classLoader.getResource("dialoguewindow.fxml"))
+                    val loader = FXMLLoader(javaClass.classLoader.getResource(APPLICATION_DIALOG_WINDOW))
                     loader.setControllerFactory { DialogueWindowController(session, row.item) }
 
                     val scene = Scene(loader.load())
                     val dialog = Stage()
                     dialog.title = APPLICATION_NAME
                     dialog.scene = scene
-                    dialog.setOnCloseRequest {
-                        updateRoutes()
-                    }
                     dialog.initOwner(table.scene.window)
                     dialog.initModality(Modality.WINDOW_MODAL)
                     dialog.setOnHidden {
@@ -80,12 +74,20 @@ class TableViewController(private val session: ClientSession) : Initializable{
             columns[columnNumber].cellValueFactory = PropertyValueFactory(columnsNames[columnNumber])
         }
 
-        updateRoutes()
+        val items = FXCollections.observableArrayList<Route>()
+        table.items = items
 
+        val routes = getCollection()
+
+        table.items.addAll(routes)
+
+        if (routes.size <= TABLE_MAX_NUM_OBJECTS_WITHOUT_SCROLL)
+            distanceColumn.prefWidth += TABLE_NUM_PIXELS_TO_HIDE_SCROLL
     }
 
-    private fun updateRoutes() {
-        table.items.clear()
+    private fun getCollection() : HashSet<Route> {
+        if (session.collectionInitialized)
+            return session.entitiesCollection
 
         try {
             val routes = session.socketWorker.makeRequest(
@@ -93,18 +95,21 @@ class TableViewController(private val session: ClientSession) : Initializable{
             ).routesCollection
 
             if (routes != null && routes.isNotEmpty()) {
+                session.collectionInitialized = true
                 session.entitiesCollection.addAll(routes)
-                table.items.addAll(routes)
 
-                if (routes.size <= TABLE_MAX_NUM_OBJECTS_WITHOUT_SCROLL)
-                    distanceColumn.prefWidth += TABLE_NUM_PIXELS_TO_HIDE_SCROLL
+                return session.entitiesCollection
             } else {
-                // TODO write message than No objects in collection
                 println("No objects in collection")
             }
         } catch (e: UnsuccessfulRequestException) {
-            // TODO write exception message
-            println(e.message)
+            println("Error while getting objects from server: ${e.message}")
         }
+
+        return HashSet()
+    }
+
+    private fun updateRoutes() {
+        for (route in session.entitiesCollection) { }
     }
 }

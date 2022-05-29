@@ -6,9 +6,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1180.0" stylesheets="@tableviewstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.TableViewController">
+<AnchorPane fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1180.0" stylesheets="@../styles/tableviewstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.table.TableViewController">
    <children>
-      <TableView fx:id="table" fixedCellSize="0.0" layoutX="10.0" layoutY="100.0" maxWidth="1000.0" minHeight="0.0" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" stylesheets="@tableviewstyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
+      <TableView fx:id="table" fixedCellSize="0.0" layoutX="10.0" layoutY="100.0" maxWidth="1000.0" minHeight="0.0" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" stylesheets="@../styles/tableviewstyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
          <columns>
             <TableColumn fx:id="idColumn" prefWidth="70.0" resizable="false" styleClass="columns" text="Id" />
             <TableColumn fx:id="authorColumn" prefWidth="102.0" resizable="false" styleClass="columns" text="Автор" />

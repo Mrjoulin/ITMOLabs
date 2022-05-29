@@ -12,20 +12,20 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
    <children>
-      <VBox fx:id="menupane" prefHeight="750.0" prefWidth="260.0" stylesheets="@menustyle.css">
+      <VBox fx:id="menupane" prefHeight="750.0" prefWidth="260.0" stylesheets="@../styles/menustyle.css">
          <children>
             <AnchorPane prefHeight="143.0" prefWidth="304.0">
                <children>
                   <ImageView fx:id="loginlogo" fitHeight="96.0" fitWidth="150.0" layoutX="84.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@logo.png" />
+                        <Image url="@../images/logo.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="58.0" prefWidth="304.0" stylesheets="@menustyle.css">
+            <AnchorPane prefHeight="58.0" prefWidth="304.0" stylesheets="@../styles/menustyle.css">
                <children>
-                  <Button fx:id="tablebutton" alignment="TOP_CENTER" layoutX="8.0" layoutY="7.0" mnemonicParsing="false" onAction="#table" prefHeight="57.0" prefWidth="243.0" stylesheets="@menustyle.css" text="Таблица" textFill="WHITE">
+                  <Button fx:id="tablebutton" alignment="TOP_CENTER" layoutX="8.0" layoutY="7.0" mnemonicParsing="false" onAction="#table" prefHeight="57.0" prefWidth="243.0" stylesheets="@../styles/menustyle.css" text="Таблица" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -34,7 +34,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="61.0" prefWidth="304.0">
                <children>
-                  <Button fx:id="visualizationbutton" alignment="TOP_CENTER" layoutX="8.0" layoutY="10.0" mnemonicParsing="false" onAction="#visualization" prefHeight="57.0" prefWidth="243.0" stylesheets="@menustyle.css" text="Визуализация" textFill="WHITE">
+                  <Button fx:id="visualizationbutton" alignment="TOP_CENTER" layoutX="8.0" layoutY="10.0" mnemonicParsing="false" onAction="#visualization" prefHeight="57.0" prefWidth="243.0" stylesheets="@../styles/menustyle.css" text="Визуализация" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -43,7 +43,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="134.0" prefWidth="304.0">
                <children>
-                  <Button fx:id="commandsbutton" alignment="TOP_CENTER" layoutX="8.0" layoutY="10.0" mnemonicParsing="false" onAction="#commands" prefHeight="57.0" prefWidth="243.0" stylesheets="@menustyle.css" text="Команды" textFill="WHITE">
+                  <Button fx:id="commandsbutton" alignment="TOP_CENTER" layoutX="8.0" layoutY="10.0" mnemonicParsing="false" onAction="#commands" prefHeight="57.0" prefWidth="243.0" stylesheets="@../styles/menustyle.css" text="Команды" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>

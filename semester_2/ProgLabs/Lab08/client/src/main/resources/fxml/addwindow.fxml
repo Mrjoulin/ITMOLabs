@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="530.0" prefWidth="604.0" stylesheets="@dialoguewindowstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.AddWindowController">
+<AnchorPane fx:id="mainPane" prefHeight="530.0" prefWidth="604.0" stylesheets="@../styles/dialoguewindowstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.dialogs.AddWindowController">
     <children>
-        <Button id="editButton" fx:id="addButton" layoutX="335.0" layoutY="447.0" mnemonicParsing="false" onAction="#addRoute" prefHeight="46.0" prefWidth="202.0" stylesheets="@dialoguewindowstyle.css" text="Добавить">
+        <Button id="editButton" fx:id="addButton" layoutX="335.0" layoutY="447.0" mnemonicParsing="false" onAction="#addRoute" prefHeight="46.0" prefWidth="202.0" stylesheets="@../styles/dialoguewindowstyle.css" text="Добавить">
             <font>
                 <Font size="18.0" />
             </font>
