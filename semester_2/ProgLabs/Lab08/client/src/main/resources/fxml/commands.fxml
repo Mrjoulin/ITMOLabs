@@ -76,7 +76,7 @@
                   <Font size="18.0" />
                </font>
             </TextArea>
-            <TextField id="consoleTextField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="428.0" promptText="Введите команду">
+            <TextField id="consoleTextField" fx:id="consoleTextField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="428.0" promptText="Введите команду">
                <VBox.margin>
                   <Insets bottom="10.0" left="14.0" top="10.0" />
                </VBox.margin>

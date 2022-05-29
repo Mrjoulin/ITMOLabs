@@ -1,0 +1,41 @@
+.text-field:readonly {
+    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-border: gone;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
+.text-field {
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-font-size: 16;
+    -fx-background-radius: 10;
+}
+
+#mainPane {
+    -fx-background-color: white;
+}
+
+#exitButton {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-font-size: 24;
+    -fx-background-radius: 10;
+}
+
+#saveButton {
+    -fx-background-color: #6540FB;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-size: 14;
+}
+
+.choice-box {
+    -fx-background-radius: 25;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 25;
+    -fx-font-size: 16;
+}

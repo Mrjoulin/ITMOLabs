@@ -89,13 +89,13 @@ class AddWindowController(private val session: ClientSession) : Initializable {
     }
 
     private fun getNewFields() : String {
-        return "${nameField.text}\n" +
+        return "\"${nameField.text}\"\n" +
                 "${coordinateXField.text}\n" +
                 "${coordinateYField.text}\n" +
-                "${fromNameField.text}\n" +
+                "\"${fromNameField.text}\"\n" +
                 "${fromXField.text}\n" +
                 "${fromYField.text}\n" +
-                "${toNameField.text}\n" +
+                "\"${toNameField.text}\"\n" +
                 "${toXField.text}\n" +
                 "${toYField.text}\n" +
                 distanceField.text

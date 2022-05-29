@@ -12,12 +12,15 @@ const val APPLICATION_SIGNUP_WINDOW = "fxml/sign_up.fxml"
 // Menu
 const val MENU_WINDOW_WIDTH = 1440.0
 const val MENU_WINDOW_HEIGHT = 750.0
+const val PROFILE_WINDOW_WIDTH = 414.0
+const val PROFILE_WINDOW_HEIGHT = 463.0
 const val APPLICATION_MENU_WINDOW = "fxml/menu.fxml"
 const val APPLICATION_TABLE_SECTION = "/fxml/tableview.fxml"
 const val APPLICATION_VISUALIZATION_SECTION = "/fxml/visualization.fxml"
 const val APPLICATION_COMMANDS_SECTION = "/fxml/commands.fxml"
 const val APPLICATION_DIALOG_WINDOW = "fxml/dialoguewindow.fxml"
 const val APPLICATION_ADD_WINDOW = "fxml/addwindow.fxml"
+const val APPLICATION_PROFILE_WINDOW = "/fxml/profile.fxml"
 
 // Visualization
 const val PERSON_IMAGE_PATH = "images/person.png"

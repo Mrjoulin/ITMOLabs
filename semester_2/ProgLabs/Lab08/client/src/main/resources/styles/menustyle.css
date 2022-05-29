@@ -24,3 +24,7 @@
 #accountbutton:focused{
     -fx-border-width: 0;
 }
+
+.hyperlink:focused {
+    -fx-border-color: transparent;
+}

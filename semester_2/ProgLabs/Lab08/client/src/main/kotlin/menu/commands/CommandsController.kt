@@ -11,10 +11,12 @@ import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.scene.control.TextArea
+import javafx.scene.control.TextField
 import javafx.stage.Modality
 import javafx.stage.Stage
 import menu.dialogs.AddWindowController
 import network.Request
+import utils.APPLICATION_ADD_WINDOW
 import utils.APPLICATION_NAME
 import java.net.URL
 import java.util.*
@@ -23,12 +25,18 @@ class CommandsController(private val session: ClientSession) : Initializable{
 
 
     @FXML lateinit var textArea: TextArea
+    @FXML lateinit var consoleTextField: TextField
 
-    override fun initialize(location: URL?, resources: ResourceBundle?) {}
+    override fun initialize(location: URL?, resources: ResourceBundle?) {
+        consoleTextField.setOnAction {
+            textArea.appendText("$" + consoleTextField.text + "\n")
+            consoleTextField.clear()
+        }
+    }
 
     @FXML
     fun add(event: ActionEvent) {
-        val loader = FXMLLoader(javaClass.classLoader.getResource("addwindow.fxml"))
+        val loader = FXMLLoader(javaClass.classLoader.getResource(APPLICATION_ADD_WINDOW))
         loader.setControllerFactory { AddWindowController(session) }
         val root: Parent = loader.load()
         val scene = Scene(root)
