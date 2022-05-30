@@ -5,6 +5,7 @@ import java.io.IOException
 import kotlin.system.exitProcess
 
 import entities.Route
+import entities.validators.exceptions.IncorrectFieldDataException
 import input.getInput
 import input.processScriptFile
 import input.CreateEntityMap
@@ -34,7 +35,7 @@ class Client(private val session: ClientSession) {
         while (true) {
             try {
                 // Get command with args from input
-                val commandWithArgs = getInput(session.currentInput, "${session.username} $ ") ?: continue
+                val commandWithArgs = getInput(session.currentInput) ?: continue
 
                 // Set current command and command args
                 currentCommand = commandWithArgs.removeAt(0)
@@ -53,7 +54,7 @@ class Client(private val session: ClientSession) {
                 return true
             }
             catch (e: IllegalStateException) {
-                println(e.message)
+                session.currentOutput.println(e.message)
                 return false
             }
         }
@@ -62,12 +63,13 @@ class Client(private val session: ClientSession) {
     private fun processResponse(response: Response) : Boolean {
         if (!response.success) {
             if (response == USER_NOT_FOUND_RESPONSE) {
-                println("You token has expired, please re-login")
+                session.currentOutput.println("You token has expired, please re-login")
+                session.userToken = ""
 
                 return false // TODO re-login
             }
 
-            println(response.message.ifEmpty { "Unsuccessful request to the server!" })
+            session.currentOutput.println(response.message.ifEmpty { "Unsuccessful request to the server!" })
 
             return false
         }
@@ -82,7 +84,7 @@ class Client(private val session: ClientSession) {
             return processScriptFile(session, filename = response.scriptFileToProcess!!)
 
         if (response.message.isNotEmpty())
-            println(response.message)
+            session.currentOutput.println(response.message)
 
         return true
     }
@@ -93,7 +95,8 @@ class Client(private val session: ClientSession) {
 
     private fun checkCommandRequest(): Response? {
         if (currentCommand == "exit")
-            exitClient()
+            // Pass command
+            return null
         if (currentCommand in AUTHORIZATION_COMMANDS) {
             Authorization(session).authorizeByType(currentCommand.replace("_", " "))
             return null
@@ -112,19 +115,24 @@ class Client(private val session: ClientSession) {
         val routeToUpdateMap = objectMap(commandResponse.routeToUpdate)
 
         // Get all info from user
-        val entityMap = CreateEntityMap(input = session.currentInput).getObjectMapFromInput(
-            Route::class.java, routeToUpdateMap
-        ) ?: return null
+        try {
+            val entityMap = CreateEntityMap(input = session.currentInput).getObjectMapFromInput(
+                Route::class.java, routeToUpdateMap
+            ) ?: return null
 
-        // Sent object for these command to server
-        val request = Request(
-            token = session.userToken,
-            command = currentCommand,
-            commandArgs = currentCommandArgs,
-            entityObjectMap = entityMap
-        )
+            // Sent object for these command to server
+            val request = Request(
+                token = session.userToken,
+                command = currentCommand,
+                commandArgs = currentCommandArgs,
+                entityObjectMap = entityMap
+            )
 
-        return session.socketWorker.makeRequest(request)
+            return session.socketWorker.makeRequest(request)
+        } catch (e: IncorrectFieldDataException) {
+            session.currentOutput.println(e.message)
+            return null
+        }
     }
 
     /**
@@ -133,7 +141,7 @@ class Client(private val session: ClientSession) {
     private fun exitClient() {
         session.socketWorker.closeConnection()
 
-        println("Exit program, come again!")
+        session.currentOutput.println("Exit program, come again!")
 
         exitProcess(0)
     }

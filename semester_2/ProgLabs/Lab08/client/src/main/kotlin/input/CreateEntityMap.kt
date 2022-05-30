@@ -23,8 +23,6 @@ import kotlin.collections.HashMap
  * @author Matthew I.
  */
 class CreateEntityMap(private val input: InputStreamReader) {
-    private val inputFromFile = true
-
     /**
      * Method to create an object of given target class using Reflection API.
      *
@@ -95,8 +93,6 @@ class CreateEntityMap(private val input: InputStreamReader) {
 
         // If field type is not primitive (Number, String, Date)
         if (!ann.isPrimitiveType) {
-            if (!inputFromFile) println("Input object of ${ann.description} ($restrictions)")
-
             val previousObjectVal = previousObject?.get(field.name) as? Map<String, Any?>
 
             // Recursive get object of this field type
@@ -107,33 +103,27 @@ class CreateEntityMap(private val input: InputStreamReader) {
         while (true) {
             // Get string of previous object field value
             val quota = if (field.type == String::class.java) "\"" else ""
-            val oldValue = if (previousObject != null) ", old value $quota${previousObject[field.name]}$quota" else ""
 
             // Get user input
             val userInput: ArrayList<String>?
             try {
-                userInput = getInput(input, "Input ${ann.description} ($restrictions$oldValue): ")
+                userInput = getInput(input)
             } catch (e: IOException) {
                 return null
             }
 
             if (userInput != null && userInput.size > 1) {
-                println(
+                throw IncorrectFieldDataException(
                     "Too many values for ${ann.description}! " +
                     if (quota.isNotEmpty()) "If you want to type several words use \"\"" else ""
                 )
-                if (!inputFromFile) continue else return null
             }
 
             // Validate input value for this field
             val value = if (userInput != null) userInput[0] else null
             val typedValue = fieldValidator.checkRestrictionsFromString(value)
 
-            if (typedValue.first)
-                return typedValue.second
-            else if (inputFromFile)
-                // Interrupt processing if field value received from file and not correct
-                return null
+            return if (typedValue.first) typedValue.second else null
         }
     }
 }

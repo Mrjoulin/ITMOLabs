@@ -1,5 +1,6 @@
 package db
 
+import commands.names.ChangePassword
 import entities.Route
 import entities.User
 import utils.DATABASE_USERS_TABLE
@@ -224,6 +225,23 @@ class DataBaseWorker {
             true
         } catch (e: SQLException) {
             logger.error("Error while updating user ${userWithNewToken.username} token and tokenExpires!", e)
+            false
+        }
+    }
+
+    fun updateUserPassword(userToken: String, newPassword: String) : Boolean {
+        val statement = arrayOf(UPDATE, DATABASE_USERS_TABLE, SET_PASSWORD, BY_TOKEN).joinToString(" ")
+
+        return try {
+            val preparedStatement: PreparedStatement = db.prepareStatement(statement)
+
+            preparedStatement.setString(1, newPassword)
+            preparedStatement.setString(2, userToken)
+
+            preparedStatement.executeUpdate()
+            true
+        } catch (e: SQLException) {
+            logger.error("Error while updating user password! User token: ${getHiddenToken(userToken)}", e)
             false
         }
     }

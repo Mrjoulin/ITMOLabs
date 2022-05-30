@@ -44,5 +44,6 @@ const val BY_USERNAME = "WHERE username = ?"
 const val BY_USERNAME_AND_PASSWORD = "$BY_USERNAME AND password = ?"
 
 const val SET_TOKEN_AND_EXPIRES = "SET token=?, tokenExpires=?"
+const val SET_PASSWORD = "SET password=?"
 
 const val NEXT_ID = "nextval('$DATABASE_IDS_SEQUENCE')"

@@ -14,7 +14,7 @@ fun getUserColor(username: String) : Color {
 
     USERS_COLORS[username] = userColor.color
 
-    println("Set user $username color: ${userColor.name}")
+    logger.debug("Set user $username color: ${userColor.name}")
 
     return userColor.color
 }

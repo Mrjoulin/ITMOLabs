@@ -12,6 +12,7 @@ import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.stage.Stage
 import network.Request
+import utils.exceptions.UnsuccessfulRequestException
 import java.io.InputStreamReader
 import java.net.URL
 import java.util.*
@@ -84,6 +85,8 @@ class AddWindowController(private val session: ClientSession) : Initializable {
             }
 
         } catch (e: IncorrectFieldDataException) {
+            showErrorMessage(e.message)
+        } catch (e: UnsuccessfulRequestException) {
             showErrorMessage(e.message)
         }
     }

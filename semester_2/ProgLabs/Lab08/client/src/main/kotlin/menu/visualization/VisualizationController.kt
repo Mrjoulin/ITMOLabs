@@ -58,7 +58,7 @@ class VisualizationController (private val session: ClientSession) : Initializab
         coordinatePlaneOffsetX = canvas.width / 2
         coordinatePlaneOffsetY = canvas.height / 2
 
-        println("Coordinate pane center: $coordinatePlaneOffsetX, $coordinatePlaneOffsetY")
+        logger.debug("Coordinate pane center: $coordinatePlaneOffsetX, $coordinatePlaneOffsetY")
 
         // Start drawing routes
         drawCollectionRoutes()
@@ -82,7 +82,7 @@ class VisualizationController (private val session: ClientSession) : Initializab
     }
 
     private fun drawCollectionRoutes() {
-        println("Collection size: ${session.entitiesCollection.size}")
+        logger.debug("Collection size: ${session.entitiesCollection.size}")
 
         session.entitiesCollection.forEach {
             val routeThread = Thread {
@@ -98,7 +98,7 @@ class VisualizationController (private val session: ClientSession) : Initializab
     @Synchronized private fun drawRoute(route: Route) {
         val authorColor = getUserColor(route.author)
 
-        println("Start drawing object: ${route.id}")
+        logger.debug("Start drawing object #${route.id}: ${route.from} -> ${route.coordinates} -> ${route.to}")
 
         try {
             // Dots on start and end
@@ -108,7 +108,6 @@ class VisualizationController (private val session: ClientSession) : Initializab
             drawLocationsNames(route.from, route.coordinates, route.to)
             // Person
             val person: Node = drawPerson(route.coordinates)
-
 
             // Create group
             val group = Group(dot1, dot2, person)
@@ -161,8 +160,8 @@ class VisualizationController (private val session: ClientSession) : Initializab
         val controlX2 = if (cond2) middleX else toX
         val controlY2 = if (cond2) toY else middleY
 
-        gc.lineWidth = 2.0
-        gc.setLineDashes(8.0)
+        gc.lineWidth = VISUALIZATION_LINE_WIDTH
+        gc.setLineDashes(VISUALIZATION_LINE_DASH)
 
         // Create animation timer to animate line drawing
 
@@ -205,10 +204,7 @@ class VisualizationController (private val session: ClientSession) : Initializab
                     gc.quadraticCurveTo(controlX2, controlY2, toX, toY)
 
                     // Draw arrow on the end of path
-                    if (curMiddle >= 1.0) {
-                        // TODO arrow return shape too
-                        drawArrow(color, toX, toY)
-                    }
+                    if (curMiddle >= 1.0) drawArrow(color, fromX, fromY, toX, toY)
 
                     gc.stroke()
 
@@ -217,7 +213,7 @@ class VisualizationController (private val session: ClientSession) : Initializab
             }
 
             fun stopDrawing() {
-                println("Stop drawing object: $threadName")
+                logger.debug("Stop drawing object: $threadName")
 
                 // Create transparent line
                 val moveTo = MoveTo(fromX, fromY)
@@ -226,7 +222,7 @@ class VisualizationController (private val session: ClientSession) : Initializab
 
                 val path = Path(moveTo, quadToMiddle, quadFromMiddle).apply {
                     stroke = transparentColor
-                    strokeWidth = 3.0
+                    strokeWidth = VISUALIZATION_LINE_WIDTH * 2
                 }
 
                 // Add path to group and set on mouse click event to all objects
@@ -271,26 +267,38 @@ class VisualizationController (private val session: ClientSession) : Initializab
         }
     }
 
-    private fun drawArrow(color: Color, x2: Double, y2: Double) {
-        val circleRadius = 30.0
-        val arrowXPoint = { t: Double -> x2 + circleRadius * cos(t) }
-        val arrowYPoint = { t: Double -> y2 + circleRadius * sin(t) }
+    private fun drawArrow(color: Color, startX: Double, startY: Double, x2: Double, y2: Double) {
+        val circleRadius = 15.0
+        val coefficient = (y2 - startY) / (x2 - startX)
 
-        var x1 = 0.0; var y1 = 0.0
-        var t = 0.0
+        fun getNearLineCoordinates(reverse: Boolean): Pair<Double, Double> {
+            val arrowXPoint = { t: Double -> x2 + circleRadius * cos(t) }
+            val arrowYPoint = { t: Double -> y2 + circleRadius * sin(if (reverse) -t else t) }
 
-        synchronized(gc) {
+            var x1 = 0.0; var y1 = 0.0
+            var t = 0.0
+
             while (t < 2 * PI) {
-                x1 = arrowXPoint(t); y1 = arrowYPoint(t)
-
-                if (gc.isPointInPath(x1, y1)) {
-                    println("Find path for arrow: ($x1, $y1) for ($x2, $y2)")
+                if (gc.isPointInPath(arrowXPoint(t), arrowYPoint(t))) {
+                    x1 = arrowXPoint(t)
+                    y1 = arrowYPoint(t)
                     break
                 }
-
                 t += 2 * PI / 1000
             }
+
+            return Pair(x1, y1)
         }
+
+        // Get couple of coordinates (with different types of circular motion)
+        val firstCoordinatesPair = getNearLineCoordinates(false)
+        val secondCoordinatesPair = getNearLineCoordinates(true)
+        // Get their line slope coefficients to (x2, y2)
+        val firstCoefficient = abs((y2 - firstCoordinatesPair.second) / (x2 - firstCoordinatesPair.first) - coefficient)
+        val secondCoefficient = abs((y2 - secondCoordinatesPair.second) / (x2 - secondCoordinatesPair.first) - coefficient)
+        // Take as (x1, y1) coordinates with greater line slope coefficient
+        val x1 = if (firstCoefficient > secondCoefficient) firstCoordinatesPair.first else secondCoordinatesPair.first
+        val y1 = if (firstCoefficient > secondCoefficient) firstCoordinatesPair.second else secondCoordinatesPair.second
 
         val arrowSize = 12.0
         val dx = x2 - x1
@@ -299,6 +307,7 @@ class VisualizationController (private val session: ClientSession) : Initializab
         val angle = atan2(dy, dx)
         val len = sqrt(dx * dx + dy * dy).toInt() - VISUALIZATION_DOT_SIZE / 2
 
+        // Draw a triangle (arrow) with needed rotation angle
         synchronized(gc) {
             val previousTransform = gc.transform
 

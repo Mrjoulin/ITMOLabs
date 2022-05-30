@@ -42,6 +42,7 @@ open class Authorization (private val session: ClientSession) {
         currentStage.scene = scene
 
         currentStage.sizeToScene()
+        currentStage.centerOnScreen()
     }
 
     fun processAuth(authType: String) {
@@ -62,8 +63,8 @@ open class Authorization (private val session: ClientSession) {
 
     @Throws(UnsuccessfulRequestException::class, IOException::class)
     fun authorizeByType(authType: String, username: String? = null, password: String? = null) {
-        val correctUsername: String = username ?: (getUsername(authType) ?: throw IOException())
-        val correctPassword: String = password ?: (getPassword(authType) ?: throw IOException())
+        val correctUsername: String = username ?: (getUsername() ?: throw IOException())
+        val correctPassword: String = password ?: (getPassword() ?: throw IOException())
 
         checkUsername(correctUsername)
         checkPassword(correctPassword)
@@ -110,12 +111,10 @@ open class Authorization (private val session: ClientSession) {
         }
     }
 
-    private fun getUsername(authType: String) : String? {
-        val prefixText = "Input username to $authType: "
-
+    private fun getUsername() : String? {
         while (true) {
             val username = try {
-                getInput(session.currentInput, prefixText, split = false)?.get(0) ?: continue
+                getInput(session.currentInput, split = false)?.get(0) ?: continue
             } catch (e: IOException) {
                 if (session.currentInput != FileReader::javaClass) continue
                 return null
@@ -131,6 +130,7 @@ open class Authorization (private val session: ClientSession) {
         }
     }
 
+    @Throws(IncorrectFieldDataException::class)
     private fun checkUsername(username: String) {
         if (username.length < MIN_USERNAME_LENGTH)
             throw IncorrectFieldDataException("Login is too short, min length $MIN_USERNAME_LENGTH symbols! Type again")
@@ -140,18 +140,16 @@ open class Authorization (private val session: ClientSession) {
             throw IncorrectFieldDataException("Login in incorrect format! Use only English letters and digits (also available _.)")
     }
 
-    private fun getPassword(authType: String) : String? {
-        val prefixText = "Input password to $authType: "
-
+    private fun getPassword() : String? {
         while (true) {
             var password: String? = null
 
             if (session.currentInput.javaClass != FileReader::class.java)
-                password = System.console()?.readPassword(prefixText)?.joinToString("")
+                password = System.console()?.readPassword()?.joinToString("")
 
             if (password == null) {
                 password = try {
-                    getInput(session.currentInput, prefixText, split = false)?.get(0) ?: continue
+                    getInput(session.currentInput, split = false)?.get(0) ?: continue
                 } catch (e: IOException) {
                     if (session.currentInput != FileReader::javaClass) continue
                     return null
@@ -159,7 +157,7 @@ open class Authorization (private val session: ClientSession) {
             }
 
             try {
-                checkUsername(password!!)
+                checkPassword(password!!)
 
                 return password
             } catch (e: IncorrectFieldDataException) {
@@ -168,7 +166,8 @@ open class Authorization (private val session: ClientSession) {
         }
     }
 
-    private fun checkPassword(password: String) {
+    @Throws(IncorrectFieldDataException::class)
+    fun checkPassword(password: String) {
         if (password.length < MIN_PASSWORD_LENGTH)
             throw IncorrectFieldDataException("Password is too short, min length $MIN_PASSWORD_LENGTH symbols! Type again")
         if (password.length > MAX_PASSWORD_LENGTH)
@@ -188,7 +187,7 @@ open class Authorization (private val session: ClientSession) {
         session.userToken = response.message
     }
 
-    private fun hashStringToSHA1(str: String): String {
+    fun hashStringToSHA1(str: String): String {
         return MessageDigest
             .getInstance("SHA-1")
             .digest(str.toByteArray())

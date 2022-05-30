@@ -12,10 +12,10 @@ import java.lang.Exception
 
 fun processScriptFile(session: ClientSession, filename: String) : Boolean {
     if (!File(filename).exists()) {
-        println("Input file $filename for executing script not found!")
+        session.currentOutput.println("Input file $filename for executing script not found!")
         return false
     } else if (!ExecuteScriptPath.addToExecuteScriptPath(filename)) {
-        println("Recursive execute script call! File $filename already has been called!")
+        session.currentOutput.println("Recursive execute script call! File $filename already has been called!")
         return false
     }
 
@@ -31,7 +31,7 @@ fun processScriptFile(session: ClientSession, filename: String) : Boolean {
         fileClient.processCommands()
     } catch (e: Exception) {
         logger.error(e.stackTraceToString())
-        println("Error while executing script $filename: ${e.message}")
+        session.currentOutput.println("Error while executing script $filename: ${e.message}")
         false
     }
 
@@ -45,8 +45,8 @@ fun processScriptFile(session: ClientSession, filename: String) : Boolean {
     if (!ExecuteScriptPath.removeFromExecuteScriptPath(filename))
         logger.error("Can't remove file $filename from execute script path!")
 
-    if (!success) println("Execution of script $filename failed!")
-    else println("Script $filename successfully executed!")
+    if (!success) session.currentOutput.println("Execution of script $filename failed!")
+    else session.currentOutput.println("Script $filename successfully executed!")
 
     return success
 }

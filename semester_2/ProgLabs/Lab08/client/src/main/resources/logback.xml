@@ -1,6 +1,6 @@
 <configuration>
     <property name="LOG_DIR" value="build/logs/" />
-    <property name="MODE" value="INFO" />
+    <property name="MODE" value="DEBUG" />
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>${LOG_DIR}/app.log</file>

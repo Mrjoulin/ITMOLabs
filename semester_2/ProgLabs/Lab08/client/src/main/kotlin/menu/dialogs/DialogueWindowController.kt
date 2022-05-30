@@ -12,6 +12,7 @@ import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.stage.Stage
 import network.Request
+import utils.exceptions.UnsuccessfulRequestException
 import java.io.InputStreamReader
 import java.net.URL
 import java.util.*
@@ -57,43 +58,56 @@ class DialogueWindowController(private val session: ClientSession, private val r
             editButton.text = "Сохранить"
             deleteButton.text = "Отмена"
             switchEditableMode()
+
             informationState = false
-        } else {
-            //TODO: SEND UPDATE COMMAND
-            val data = getNewFields()
+            return
+        }
 
-            val inp = InputStreamReader(data.byteInputStream())
-            try {
-                val updatedEntityMap = CreateEntityMap(inp).getObjectMapFromInput(Route::class.java)
+        // Update route
 
-                val response = session.socketWorker.makeRequest(
-                    Request(
-                        token = session.userToken,
-                        command = "update",
-                        commandArgs = arrayListOf(route.id.toString()),
-                        entityObjectMap = updatedEntityMap)
-                    )
-                if (response.success) {
-                    //TODO: если ок все что делается
-                    val stage: Stage = deleteButton.scene.window as Stage
-                    stage.close()
-                } else {
-                    showErrorMessage("can't update. Server is not ok now.")
-                }
+        val data = getNewFields()
+        val inp = InputStreamReader(data.byteInputStream())
 
-            } catch (e: IncorrectFieldDataException) {
-                fillFields()
-                showErrorMessage(e.message)
+        try {
+            val updatedEntityMap = CreateEntityMap(inp).getObjectMapFromInput(Route::class.java)
+
+            val response = session.socketWorker.makeRequest(
+                Request(
+                    token = session.userToken,
+                    command = "update",
+                    commandArgs = arrayListOf(route.id.toString()),
+                    entityObjectMap = updatedEntityMap
+                )
+            )
+            if (response.success) {
+                //TODO: если ок все что делается
+                val stage: Stage = deleteButton.scene.window as Stage
+                stage.close()
+            } else {
+                showErrorMessage(response.message)
             }
 
-
+        } catch (e: IncorrectFieldDataException) {
+            fillFields()
+            showErrorMessage(e.message)
+        } catch (e: UnsuccessfulRequestException) {
+            showErrorMessage(e.message)
         }
     }
 
     @FXML
     fun leftButtonAction(event: ActionEvent) {
-        if (informationState) {
-            //TODO: DELETE COMMAND
+        if (!informationState) {
+            editButton.text = "Редактировать"
+            deleteButton.text = "Удалить"
+            fillFields()
+            switchEditableMode()
+            informationState = true
+        }
+
+        // Remove route
+
+        try {
             val response = session.socketWorker.makeRequest(
                 Request(
                     token = session.userToken,
@@ -103,23 +117,18 @@ class DialogueWindowController(private val session: ClientSession, private val r
             )
 
             if (response.success) {
-                session.entitiesCollection.remove(route)
-                val stage: Stage = deleteButton.scene.window as Stage
                 //TODO: NOT SURE ABOUT UPDATING
+                session.entitiesCollection.remove(route)
+
+                val stage: Stage = deleteButton.scene.window as Stage
                 stage.close()
             } else {
-                showErrorMessage("can't delete. Server is not ok now!")
+                showErrorMessage(response.message)
             }
-
-        } else {
-            editButton.text = "Редактировать"
-            deleteButton.text = "Удалить"
-            fillFields()
-            switchEditableMode()
-            informationState = true
+        } catch (e: UnsuccessfulRequestException) {
+            showErrorMessage(e.message)
         }
     }
-
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         fillFields()
@@ -128,12 +137,13 @@ class DialogueWindowController(private val session: ClientSession, private val r
     }
 
     private fun switchEditableMode() {
-        val textFields = arrayListOf<TextField>(
+        val textFields = arrayListOf(
             nameField, coordinateXField, coordinateYField,
             fromNameField, fromXField, fromYField,
             toNameField, toXField, toYField,
             distanceField
         )
+
         for (field in textFields) {
             field.isEditable = informationState
         }
@@ -176,5 +186,4 @@ class DialogueWindowController(private val session: ClientSession, private val r
     private fun showErrorMessage(message: String?) {
         errorLabel.text = message
     }
-
 }

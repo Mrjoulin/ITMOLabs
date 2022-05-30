@@ -27,7 +27,7 @@
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="58.0" layoutY="426.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Найти маршруты по имени">
+      <Button layoutX="58.0" layoutY="426.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" onAction="#findByName" styleClass="commandButtons" text="Найти маршруты по имени">
          <font>
             <Font size="28.0" />
          </font>
@@ -47,7 +47,7 @@
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="616.0" layoutY="326.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="501.0" styleClass="commandButtons" text="Выполнить скрипт из файла">
+      <Button layoutX="616.0" layoutY="326.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="501.0" styleClass="commandButtons" onAction="#executeScript" text="Выполнить скрипт из файла">
          <font>
             <Font size="28.0" />
          </font>

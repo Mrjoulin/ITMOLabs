@@ -3,6 +3,10 @@ package utils
 const val APPLICATION_NAME = "Routes Application"
 const val APPLICATION_ICON_PATH = "images/icon.png"
 
+// Languages
+const val DEFAULT_APPLICATION_LANGUAGE = "Русский"
+val APPLICATION_LANGUAGES = arrayOf("Русский", "Норвежский", "Венгерский", "Английский (Индия)")
+
 // Authorization
 const val AUTHORIZATION_WINDOW_WIDTH = 500.0
 const val AUTHORIZATION_WINDOW_HEIGHT = 600.0
@@ -24,10 +28,15 @@ const val APPLICATION_PROFILE_WINDOW = "/fxml/profile.fxml"
 
 // Visualization
 const val PERSON_IMAGE_PATH = "images/person.png"
+const val VISUALIZATION_LINE_WIDTH = 2.0
+const val VISUALIZATION_LINE_DASH = 8.0
 const val VISUALIZATION_DOT_SIZE = 20.0
 const val PERSON_WIDTH = 14.0
 const val PERSON_HEIGHT = 28.0
 const val NUM_OBJECTS_TO_DRAW_SYNC = 2
+
+// Profile
+const val SUCCESSFUL_PASSWORD_CHANGED_MESSAGE = "Пароль успешно обновён!"
 
 // Const
 const val TABLE_MAX_NUM_OBJECTS_WITHOUT_SCROLL = 16

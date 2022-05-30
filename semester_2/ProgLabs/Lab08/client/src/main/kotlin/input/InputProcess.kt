@@ -23,13 +23,12 @@ fun removeBufferByReader(input: InputStreamReader) {
  * Method to get split input of new line from given input stream
  *
  * @param input Input stream reader, which from we reads new line
- * @param prefixText Message, to show for user to get need input (if input not from file)
  * @return Split line witch received from method splitInput
  *
  * @author Matthew I.
  */
 @Throws(IOException::class)
-fun getInput(input: InputStreamReader, prefixText: String = "", split: Boolean = true) : ArrayList<String>? {
+fun getInput(input: InputStreamReader, split: Boolean = true) : ArrayList<String>? {
     if (!buffersByReaders.containsKey(input))
         buffersByReaders[input] = BufferedReader(input)
 
