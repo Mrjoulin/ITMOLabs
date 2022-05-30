@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.stage.Stage
 import utils.*
+import java.util.*
 
 
 /**
@@ -53,6 +54,8 @@ class Main : Application() {
         logger.debug("Start processing menu")
 
         val loader = FXMLLoader(javaClass.classLoader.getResource(APPLICATION_MENU_WINDOW))
+        val bundle = ResourceBundle.getBundle("locales.Resource_ru")
+        loader.resources = bundle
         loader.setControllerFactory { MenuController(session) }
 
         val scene = Scene(loader.load(), MENU_WINDOW_WIDTH, MENU_WINDOW_HEIGHT)

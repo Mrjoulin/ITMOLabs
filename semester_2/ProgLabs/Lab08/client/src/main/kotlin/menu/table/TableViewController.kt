@@ -9,11 +9,13 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Scene
+import javafx.scene.control.Label
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableRow
 import javafx.scene.control.TableView
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.input.MouseButton
+import javafx.scene.text.Text
 import javafx.stage.Modality
 import javafx.stage.Stage
 import menu.dialogs.DialogueWindowController
@@ -26,6 +28,7 @@ import kotlin.collections.HashSet
 
 class TableViewController(private val session: ClientSession) : Initializable{
     @FXML lateinit var table: TableView<Route>
+    @FXML lateinit var tableText: Text
 
     @FXML lateinit var idColumn: TableColumn<Route, Int>
     @FXML lateinit var authorColumn: TableColumn<Route, String>
@@ -36,7 +39,19 @@ class TableViewController(private val session: ClientSession) : Initializable{
     @FXML lateinit var toColumn: TableColumn<Route, Location>
     @FXML lateinit var distanceColumn: TableColumn<Route, Double>
 
+    private var bundle: ResourceBundle = session.currentLanguage
+
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        bundle = session.currentLanguage
+        tableText.text = bundle.getString("tableViewHeaderMessage")
+        idColumn.text = bundle.getString("idColumnMessage")
+        authorColumn.text = bundle.getString("authorColumnMessage")
+        dateColumn.text = bundle.getString("dateColumnMessage")
+        nameColumn.text = bundle.getString("nameColumnMessage")
+        coordinatesColumn.text = bundle.getString("coordinatesColumnMessage")
+        fromColumn.text = bundle.getString("fromColumnMessage")
+        toColumn.text = bundle.getString("toColumnMessage")
+        distanceColumn.text = bundle.getString("distanceColumnMessage")
         table.setRowFactory {
             val row: TableRow<Route> = TableRow<Route>()
 

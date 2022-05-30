@@ -14,17 +14,17 @@
             <padding>
                 <Insets bottom="1.0" />
             </padding></Button>
-        <Label layoutX="84.0" layoutY="53.0" text="Личный кабинет">
+        <Label fx:id="profileLabel" alignment="CENTER" layoutX="6.0" layoutY="53.0" prefHeight="47.0" prefWidth="405.0">
             <font>
                 <Font size="32.0" />
             </font>
         </Label>
-        <Label layoutX="44.0" layoutY="143.0" text="Язык">
+        <Label fx:id="languageLabel" layoutX="44.0" layoutY="143.0" text="Язык">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label layoutX="44.0" layoutY="237.0" text="Сменить пароль">
+        <Label fx:id="changePasswordLabel" layoutX="44.0" layoutY="237.0" text="Сменить пароль">
             <font>
                 <Font size="24.0" />
             </font>

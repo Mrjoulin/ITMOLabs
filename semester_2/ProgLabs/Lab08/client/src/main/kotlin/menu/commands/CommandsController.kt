@@ -10,10 +10,7 @@ import javafx.fxml.Initializable
 import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.scene.control.Alert
-import javafx.scene.control.ButtonType
-import javafx.scene.control.TextArea
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.stage.FileChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
@@ -32,6 +29,17 @@ import java.util.*
 class CommandsController(private val session: ClientSession) : Initializable{
     @FXML lateinit var textArea: TextArea
     @FXML lateinit var consoleTextField: TextField
+    @FXML lateinit var commandsLabel: Label
+    @FXML lateinit var infoButton: Button
+    @FXML lateinit var addButton: Button
+    @FXML lateinit var deleteButton: Button
+    @FXML lateinit var showButton: Button
+    @FXML lateinit var helpButton: Button
+    @FXML lateinit var executeScriptButton: Button
+    @FXML lateinit var findByNamesButton: Button
+    @FXML lateinit var clearConsoleButton: Button
+    @FXML lateinit var consoleLabel: Label
+    private lateinit var bundle: ResourceBundle
 
     private var findByNameProcessing = false
     private val client = Client(session)
@@ -39,6 +47,19 @@ class CommandsController(private val session: ClientSession) : Initializable{
     private val curByteArrayOutputStream = ByteArrayOutputStream()
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        bundle = session.currentLanguage
+        commandsLabel.text = bundle.getString("commands.commandsLabel")
+        infoButton.text = bundle.getString("commands.infoButton")
+        addButton.text = bundle.getString("commands.addButton")
+        deleteButton.text = bundle.getString("commands.deleteButton")
+        showButton.text = bundle.getString("commands.showButton")
+        helpButton.text = bundle.getString("commands.helpButton")
+        executeScriptButton.text = bundle.getString("commands.executeScriptButton")
+        findByNamesButton.text = bundle.getString("commands.findByNamesButton")
+        clearConsoleButton.text = bundle.getString("commands.clearConsoleButton")
+        consoleTextField.promptText = bundle.getString("commands.consoleTextField")
+        consoleLabel.text = bundle.getString("commands.consoleLabel")
+
         session.currentOutput = PrintStream(curByteArrayOutputStream)
 
         consoleTextField.setOnAction {
@@ -48,8 +69,10 @@ class CommandsController(private val session: ClientSession) : Initializable{
 
             consoleTextField.clear()
 
-            if (findByNameProcessing)
-                processFindByName(command)
+            if (findByNameProcessing) processFindByName(command)
+            else if (command.split(" ")[0] == "add") add(it)
+            else if (command.split(" ")[0] == "update")
+                printToConsole(bundle.getString("commands.updateMessage"), false)
             else {
                 session.currentInput = getInput(command)
                 curByteArrayOutputStream.reset()
@@ -149,7 +172,7 @@ class CommandsController(private val session: ClientSession) : Initializable{
         val yes = ButtonType("Yes")
         val no = ButtonType("No")
 
-        val alert = Alert(Alert.AlertType.NONE,"Вы действительно хотите удалить все объекты?", yes, no)
+        val alert = Alert(Alert.AlertType.NONE,bundle.getString("commands.deleteConfirmMessage"), yes, no)
         alert.showAndWait().ifPresent {
             if (it == yes) {
                 printToConsole("clear", true)
@@ -173,7 +196,7 @@ class CommandsController(private val session: ClientSession) : Initializable{
     fun findByName() {
         printToConsole("filter_starts_with_name", true)
 
-        textArea.appendText("Введите строку, с которой должны начинаться названия маршрутов:\n")
+        textArea.appendText(bundle.getString("commands.findByNameMessage"))
 
         findByNameProcessing = true
     }
@@ -185,7 +208,7 @@ class CommandsController(private val session: ClientSession) : Initializable{
         printToConsole("execute_script", true)
 
         val fileChooser = FileChooser()
-        fileChooser.title = "Выберите файл с скриптом"
+        fileChooser.title = bundle.getString("commands.fileChooserTitle")
         fileChooser.extensionFilters.add(
             FileChooser.ExtensionFilter("Text files", "*.txt")
         )

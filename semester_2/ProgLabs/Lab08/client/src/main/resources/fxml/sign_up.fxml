@@ -36,7 +36,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="81.0" prefWidth="500.0">
          <children>
-            <Label fx:id="authorizationLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="1.0" prefHeight="103.0" prefWidth="320.0" stylesheets="@../styles/loginstyle.css" text="Регистрация" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="authorizationLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="1.0" prefHeight="103.0" prefWidth="320.0" stylesheets="@../styles/loginstyle.css" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="32.0" />
                </font>

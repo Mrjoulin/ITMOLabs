@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="750.0" prefWidth="1180.0" stylesheets="@../styles/commandsstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.commands.CommandsController">
    <children>
-      <Label layoutX="56.0" prefHeight="122.0" prefWidth="776.0" text="Команды для работы с маршрутами">
+      <Label fx:id="commandsLabel" layoutX="56.0" prefHeight="122.0" prefWidth="776.0" text="Команды для работы с маршрутами">
          <font>
             <Font size="32.0" />
          </font>
@@ -22,12 +22,12 @@
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="96.0" layoutY="226.0" mnemonicParsing="false" onAction="#delete" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Удалить все маршруты">
+      <Button fx:id="deleteButton" layoutX="96.0" layoutY="226.0" mnemonicParsing="false" onAction="#delete" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Удалить все маршруты">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="58.0" layoutY="426.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="464.0" onAction="#findByName" styleClass="commandButtons" text="Найти маршруты по имени">
+      <Button fx:id="findByNamesButton" layoutX="58.0" layoutY="426.0" mnemonicParsing="false" onAction="#findByName" prefHeight="60.0" prefWidth="464.0" styleClass="commandButtons" text="Найти маршруты по имени">
          <font>
             <Font size="28.0" />
          </font>
@@ -42,12 +42,12 @@
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="698.0" layoutY="127.0" mnemonicParsing="false" onAction="#add" prefHeight="60.0" prefWidth="335.0" styleClass="commandButtons" text="Добавить маршрут">
+      <Button fx:id="addButton" layoutX="698.0" layoutY="127.0" mnemonicParsing="false" onAction="#add" prefHeight="60.0" prefWidth="335.0" styleClass="commandButtons" text="Добавить маршрут">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="616.0" layoutY="326.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="501.0" styleClass="commandButtons" onAction="#executeScript" text="Выполнить скрипт из файла">
+      <Button fx:id="executeScriptButton" layoutX="616.0" layoutY="326.0" mnemonicParsing="false" onAction="#executeScript" prefHeight="60.0" prefWidth="501.0" styleClass="commandButtons" text="Выполнить скрипт из файла">
          <font>
             <Font size="28.0" />
          </font>
@@ -59,7 +59,7 @@
       </Button>
       <VBox id="vbox" layoutX="616.0" layoutY="426.0" prefHeight="300.0" prefWidth="500.0">
          <children>
-            <Label alignment="CENTER" prefHeight="54.0" prefWidth="402.0" text="Консоль">
+            <Label fx:id="consoleLabel" alignment="CENTER" prefHeight="54.0" prefWidth="402.0" text="Консоль">
                <font>
                   <Font size="28.0" />
                </font>

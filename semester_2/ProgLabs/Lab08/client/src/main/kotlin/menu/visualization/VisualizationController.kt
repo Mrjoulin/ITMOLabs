@@ -14,6 +14,7 @@ import javafx.scene.Node
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.canvas.GraphicsContext
+import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
@@ -23,6 +24,7 @@ import javafx.scene.paint.CycleMethod
 import javafx.scene.paint.LinearGradient
 import javafx.scene.paint.Stop
 import javafx.scene.shape.*
+import javafx.scene.text.Text
 import javafx.scene.text.TextAlignment
 import javafx.scene.transform.Affine
 import javafx.scene.transform.Transform
@@ -42,6 +44,10 @@ class VisualizationController (private val session: ClientSession) : Initializab
     lateinit var canvas: Canvas
     @FXML
     lateinit var routesPane: AnchorPane
+    @FXML
+    lateinit var visualizationLabel: Text
+
+    private lateinit var bundle: ResourceBundle
 
     private lateinit var gc: GraphicsContext
 
@@ -53,6 +59,8 @@ class VisualizationController (private val session: ClientSession) : Initializab
     private val semaphore = Semaphore(NUM_OBJECTS_TO_DRAW_SYNC)
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        bundle = session.currentLanguage
+        visualizationLabel.text = bundle.getString("visualizationLabel")
         gc = canvas.graphicsContext2D
 
         coordinatePlaneOffsetX = canvas.width / 2

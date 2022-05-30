@@ -20,7 +20,7 @@
             <TableColumn fx:id="distanceColumn" minWidth="0.0" prefWidth="157.5999755859375" resizable="false" styleClass="columns" text="Длина" />
          </columns>
       </TableView>
-      <Text fx:id="tableLabel" layoutX="367.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Таблица маршрутов в коллекции">
+      <Text fx:id="tableText" layoutX="367.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Таблица маршрутов в коллекции">
          <font>
             <Font size="28.0" />
          </font>

@@ -26,9 +26,32 @@ class ProfileController(private val session: ClientSession) : Initializable {
     private lateinit var languageBox: ChoiceBox<String>
     @FXML
     private lateinit var messageLabel: Label
+    @FXML
+    private lateinit var profileLabel: Label
+    @FXML
+    private lateinit var languageLabel: Label
+    @FXML
+    private lateinit var changePasswordLabel: Label
+    @FXML
+    private lateinit var saveLanguageButton: Button
+    @FXML
+    private lateinit var savePasswordButton: Button
+    @FXML
+    private lateinit var exitButton: Button
+
+    private lateinit var bundle: ResourceBundle
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        languageBox.items.addAll(APPLICATION_LANGUAGES)
+        bundle = session.currentLanguage
+        profileLabel.text = bundle.getString("profile.profileLabel")
+        languageLabel.text = bundle.getString("profile.languageLabel")
+        changePasswordLabel.text = bundle.getString("profile.changePasswordLabel")
+        saveLanguageButton.text = bundle.getString("profile.saveLanguageButton")
+        savePasswordButton.text = bundle.getString("profile.savePasswordButton")
+        exitButton.text = bundle.getString("profile.exitButton")
+        changePassword.promptText = bundle.getString("profile.changePassword")
+
+        languageBox.items.addAll(APPLICATION_LANGUAGES.keys)
         languageBox.value = DEFAULT_APPLICATION_LANGUAGE
     }
 
@@ -67,7 +90,19 @@ class ProfileController(private val session: ClientSession) : Initializable {
     }
 
     @FXML
-    fun saveLanguage(event: ActionEvent) {}
+    fun saveLanguage(event: ActionEvent) {
+        val newBundle = ResourceBundle.getBundle(
+            LANGUAGES_BASE_NAME_PREFIX + APPLICATION_LANGUAGES[languageBox.value]
+        )
+
+        if (session.currentLanguage != newBundle) {
+            session.languageChanged = true
+            session.currentLanguage = newBundle
+
+            val stage = languageBox.scene.window as Stage
+            stage.close()
+        }
+    }
 
     @FXML
     fun logOut(event: ActionEvent) {

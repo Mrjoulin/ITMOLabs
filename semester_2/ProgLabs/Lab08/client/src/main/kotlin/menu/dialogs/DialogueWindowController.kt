@@ -49,14 +49,28 @@ class DialogueWindowController(private val session: ClientSession, private val r
     lateinit var distanceField: TextField
     @FXML
     lateinit var errorLabel: Label
+    @FXML
+    lateinit var authorLabel: Label
+    @FXML
+    lateinit var nameLabel: Label
+    @FXML
+    lateinit var coordinatesLabel: Label
+    @FXML
+    lateinit var fromLabel: Label
+    @FXML
+    lateinit var toLabel: Label
+    @FXML
+    lateinit var distanceLabel: Label
 
     private var informationState = true
+
+    private lateinit var bundle: ResourceBundle
 
     @FXML
     fun rightButtonAction(event: ActionEvent) {
         if (informationState) {
-            editButton.text = "Сохранить"
-            deleteButton.text = "Отмена"
+            editButton.text = bundle.getString("dialogueWindow.saveButtonMessage")
+            deleteButton.text = bundle.getString("dialogueWindow.cancelButtonMessage")
             switchEditableMode()
 
             informationState = false
@@ -98,11 +112,12 @@ class DialogueWindowController(private val session: ClientSession, private val r
     @FXML
     fun leftButtonAction(event: ActionEvent) {
         if (!informationState) {
-            editButton.text = "Редактировать"
-            deleteButton.text = "Удалить"
+            editButton.text = bundle.getString("dialogueWindow.editButtonMessage")
+            deleteButton.text = bundle.getString("dialogueWindow.deleteButtonMessage")
             fillFields()
             switchEditableMode()
             informationState = true
+            return
         }
 
         // Remove route
@@ -131,6 +146,16 @@ class DialogueWindowController(private val session: ClientSession, private val r
     }
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        bundle = session.currentLanguage
+        titleLabel.text = bundle.getString("dialogueWindow.HeaderMessage")
+        authorLabel.text = bundle.getString("dialogueWindow.authorLabelMessage") + ":"
+        nameLabel.text = bundle.getString("dialogueWindow.nameLabelMessage") + ":"
+        coordinatesLabel.text = bundle.getString("dialogueWindow.coordinatesLabelMessage") + ":"
+        fromLabel.text = bundle.getString("dialogueWindow.fromLabelMessage") + ":"
+        toLabel.text = bundle.getString("dialogueWindow.toLabelMessage") + ":"
+        distanceLabel.text = bundle.getString("dialogueWindow.distanceLabelMessage") + ":"
+        deleteButton.text = bundle.getString("dialogueWindow.deleteButtonMessage")
+        editButton.text = bundle.getString("dialogueWindow.editButtonMessage")
         fillFields()
 
         if (session.username != route.author) disableButtons()

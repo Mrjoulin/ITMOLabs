@@ -20,12 +20,12 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Label fx:id="titleLabel" layoutX="164.0" layoutY="23.0" prefHeight="34.0" prefWidth="304.0" text="Информация по маршруту">
+      <Label fx:id="titleLabel" alignment="CENTER" layoutY="23.0" prefHeight="34.0" prefWidth="590.0" text="Информация по маршруту" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="66.0" text="Автор:">
+      <Label fx:id="authorLabel" layoutX="26.0" layoutY="66.0" text="Автор:">
          <font>
             <Font size="20.0" />
          </font>
@@ -33,32 +33,32 @@
             <Point3D z="4.0" />
          </rotationAxis>
       </Label>
-      <Label layoutX="26.0" layoutY="100.0" text="Название:">
+      <Label fx:id="nameLabel" layoutX="26.0" layoutY="100.0" text="Название:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="133.0" text="Координаты:">
+      <Label fx:id="coordinatesLabel" layoutX="26.0" layoutY="133.0" text="Координаты:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="187.0" text="Откуда:">
+      <Label fx:id="fromLabel" layoutX="26.0" layoutY="187.0" text="Откуда:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="266.0" text="Куда:">
+      <Label fx:id="toLabel" layoutX="26.0" layoutY="266.0" text="Куда:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="344.0" text="Длина:">
+      <Label fx:id="distanceLabel" layoutX="26.0" layoutY="344.0" text="Длина:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="authorField" editable="false" focusTraversable="false" layoutX="175.0" layoutY="66.0" minHeight="27.0" minWidth="376.0" prefHeight="27.0" prefWidth="376.0" snapToPixel="false" text="dfgdfg">
+      <TextField fx:id="authorField" editable="false" focusTraversable="false" layoutX="175.0" layoutY="66.0" minHeight="27.0" minWidth="376.0" prefHeight="27.0" prefWidth="376.0" snapToPixel="false">
          <font>
             <Font size="5.0" />
          </font>

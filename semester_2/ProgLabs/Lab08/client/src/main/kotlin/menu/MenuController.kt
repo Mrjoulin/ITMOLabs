@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.control.Button
 import javafx.scene.control.Hyperlink
 import javafx.scene.layout.AnchorPane
 import javafx.stage.Stage
@@ -28,30 +29,53 @@ class MenuController(private val session: ClientSession) : Initializable {
     lateinit var profileButton: Hyperlink
 
     @FXML
+    lateinit var tablebutton: Button
+
+    @FXML
+    lateinit var visualizationbutton: Button
+
+    @FXML
+    lateinit var commandsbutton: Button
+
+    private var currentUI = APPLICATION_TABLE_SECTION
+
+    private lateinit var bundle: ResourceBundle
+
+    @FXML
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        bundle = session.currentLanguage
+        tablebutton.text = bundle.getString("tablebuttonMessage")
+        visualizationbutton.text = bundle.getString("visualizationbuttonMessage")
+        commandsbutton.text = bundle.getString("commandsbuttonMessage")
         profileButton.text = "@" + session.username
-        loadUI(APPLICATION_TABLE_SECTION, TableViewController(session))
+        // Load table by default
+        table()
     }
 
     @FXML
-    fun table(event: ActionEvent) {
-        loadUI(APPLICATION_TABLE_SECTION, TableViewController(session))
+    fun table() {
+        currentUI = APPLICATION_TABLE_SECTION
+        loadUI()
     }
 
     @FXML
-    fun visualization(event: ActionEvent) {
-        loadUI(APPLICATION_VISUALIZATION_SECTION, VisualizationController(session))
+    fun visualization() {
+        currentUI = APPLICATION_VISUALIZATION_SECTION
+        loadUI()
     }
 
     @FXML
-    fun commands(event: ActionEvent) {
-        loadUI(APPLICATION_COMMANDS_SECTION, CommandsController(session))
+    fun commands() {
+        currentUI = APPLICATION_COMMANDS_SECTION
+        loadUI()
     }
 
-    private fun loadUI(ui: String, controller: Any) {
+    private fun loadUI() {
         try {
-            val loader = FXMLLoader(javaClass.getResource(ui))
-            loader.setControllerFactory { controller }
+            val loader = FXMLLoader(javaClass.getResource(currentUI))
+
+            val controller = getController()
+            if (controller != null) loader.setControllerFactory { controller }
 
             val root: Parent = loader.load()
 
@@ -61,6 +85,15 @@ class MenuController(private val session: ClientSession) : Initializable {
                 mainpane.children.add(root)
         } catch (e: IOException) {
             e.printStackTrace()
+        }
+    }
+
+    private fun getController() : Any? {
+        return when(currentUI) {
+            APPLICATION_TABLE_SECTION -> TableViewController(session)
+            APPLICATION_VISUALIZATION_SECTION -> VisualizationController(session)
+            APPLICATION_COMMANDS_SECTION -> CommandsController(session)
+            else -> null
         }
     }
 
@@ -74,6 +107,7 @@ class MenuController(private val session: ClientSession) : Initializable {
 
         profileStage.setOnHidden {
             if (session.userToken.isEmpty()) goToLogin()
+            else if (session.languageChanged) changeLanguage()
         }
 
         profileStage.scene = profileScene
@@ -95,5 +129,10 @@ class MenuController(private val session: ClientSession) : Initializable {
 
         currentStage.sizeToScene()
         currentStage.centerOnScreen()
+    }
+
+    private fun changeLanguage() {
+        // TODO change buttons text
+        loadUI()
     }
 }

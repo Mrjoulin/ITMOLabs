@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1180.0" stylesheets="@../styles/visualization.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.visualization.VisualizationController">
    <children>
-      <Text fx:id="visualLabel" layoutX="836.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Карта маршрутов" textAlignment="CENTER" wrappingWidth="344.28009033203125">
+      <Text fx:id="visualizationLabel" layoutX="836.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Карта маршрутов" textAlignment="CENTER" wrappingWidth="344.28009033203125">
          <font>
             <Font size="40.0" />
          </font>
