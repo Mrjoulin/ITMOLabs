@@ -21,5 +21,5 @@ data class ClientSession(
     var entitiesCollection: HashSet<Route> = HashSet(),
     var languageChanged: Boolean = false,
     var
-    currentLanguage: ResourceBundle = ResourceBundle.getBundle(LANGUAGES_BASE_NAME_PREFIX + "en")
+    currentLanguage: ResourceBundle = ResourceBundle.getBundle(LANGUAGES_BASE_NAME_PREFIX + "ru")
 )
