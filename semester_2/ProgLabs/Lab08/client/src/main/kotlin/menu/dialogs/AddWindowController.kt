@@ -100,24 +100,21 @@ class AddWindowController(private val session: ClientSession) : Initializable {
                 else -> "add"
             }
 
-            val response = session.socketWorker.makeRequest(
-                Request(
-                    token = session.userToken,
-                    command = commandType,
-                    entityObjectMap = updatedEntityMap
-                )
+            val request = Request(
+                token = session.userToken,
+                command = commandType,
+                entityObjectMap = updatedEntityMap
             )
-            if (response.success) {
-                //TODO: если ок все что делается
-                val stage: Stage = addButton.scene.window as Stage
-                stage.close()
-            } else {
-                showErrorMessage("can't update. Server is not ok now.")
-            }
 
+            session.socketWorker.makeAsyncRequest(request, { showErrorMessage(it.message) }) {
+                if (it.success) {
+                    val stage: Stage = addButton.scene.window as Stage
+                    stage.close()
+                } else {
+                    showErrorMessage("can't update. Server is not ok now.")
+                }
+            }
         } catch (e: IncorrectFieldDataException) {
-            showErrorMessage(e.message)
-        } catch (e: UnsuccessfulRequestException) {
             showErrorMessage(e.message)
         }
     }

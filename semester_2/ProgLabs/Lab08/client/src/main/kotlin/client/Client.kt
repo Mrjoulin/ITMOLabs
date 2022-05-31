@@ -15,6 +15,7 @@ import network.Response
 import network.USER_NOT_FOUND_RESPONSE
 import socket.SocketWorker
 import utils.*
+import java.lang.Exception
 
 /**
  * Client process. Get input from user and send it to the server to process
@@ -30,10 +31,15 @@ import utils.*
 class Client(private val session: ClientSession) {
     private lateinit var currentCommand: String
     private lateinit var currentCommandArgs: ArrayList<String>
+    private var successChanged = true
+    private var currentSuccess = true
 
     fun processCommands(): Boolean {
         while (true) {
             try {
+                while (!successChanged) { Thread.sleep(10) }
+                if (!currentSuccess) return false
+
                 // Get command with args from input
                 val commandWithArgs = getInput(session.currentInput) ?: continue
 
@@ -42,12 +48,7 @@ class Client(private val session: ClientSession) {
                 currentCommandArgs = commandWithArgs
 
                 // Check that input command exist
-                val checkResponse = checkCommandRequest() ?: continue
-
-                // Process check command response
-                val success = processResponse(checkResponse)
-
-                if (!success) return false
+                checkCommandRequest()
             }
             catch (e: IOException) {
                 logger.debug("End of file received, go back")
@@ -55,6 +56,8 @@ class Client(private val session: ClientSession) {
             }
             catch (e: IllegalStateException) {
                 session.currentOutput.println(e.message)
+                return false
+            } catch (e: Exception) {
                 return false
             }
         }
@@ -75,9 +78,13 @@ class Client(private val session: ClientSession) {
         }
 
         if (response.isObjectNeeded) {
-            val newResponse = sendObjectForCommand(response) ?: return false
+            val request = getRequestWithObjectForCommand(response) ?: return false
 
-            return processResponse(newResponse)
+            session.socketWorker.makeAsyncRequest(request, { session.currentOutput.println(it.message) }) {
+                processResponse(it)
+            }
+
+            return currentSuccess
         }
 
         if (response.scriptFileToProcess != null)
@@ -93,13 +100,13 @@ class Client(private val session: ClientSession) {
      * Requests to the server process
      * */
 
-    private fun checkCommandRequest(): Response? {
+    private fun checkCommandRequest() {
         if (currentCommand == "exit")
             // Pass command
-            return null
+            return
         if (currentCommand in AUTHORIZATION_COMMANDS) {
             Authorization(session).authorizeByType(currentCommand.replace("_", " "))
-            return null
+            return
         }
 
         val request = Request(
@@ -108,10 +115,15 @@ class Client(private val session: ClientSession) {
             commandArgs = currentCommandArgs
         )
 
-        return session.socketWorker.makeRequest(request)
+        session.socketWorker.makeAsyncRequest(request, {}) {
+            // Process check command response
+            val success = processResponse(it)
+
+            currentSuccess = success
+        }
     }
 
-    private fun sendObjectForCommand(commandResponse: Response): Response? {
+    private fun getRequestWithObjectForCommand(commandResponse: Response): Request? {
         val routeToUpdateMap = objectMap(commandResponse.routeToUpdate)
 
         // Get all info from user
@@ -121,14 +133,13 @@ class Client(private val session: ClientSession) {
             )
 
             // Sent object for these command to server
-            val request = Request(
+
+            return Request(
                 token = session.userToken,
                 command = currentCommand,
                 commandArgs = currentCommandArgs,
                 entityObjectMap = entityMap
             )
-
-            return session.socketWorker.makeRequest(request)
         } catch (e: IncorrectFieldDataException) {
             session.currentOutput.println(e.message)
             return null

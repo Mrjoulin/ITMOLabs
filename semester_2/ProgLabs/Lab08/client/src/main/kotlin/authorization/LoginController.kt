@@ -11,7 +11,10 @@ import java.net.URL
 import java.nio.BufferUnderflowException
 import java.util.*
 
-class LoginController(private val session: ClientSession) : Authorization(session), Initializable {
+class LoginController(
+    private val session: ClientSession,
+    private val checkToken: Boolean = false
+) : Authorization(session), Initializable {
     @FXML
     private lateinit var startRegisteringButton: Hyperlink
 
@@ -23,6 +26,9 @@ class LoginController(private val session: ClientSession) : Authorization(sessio
 
     @FXML
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        if (checkToken) {
+            checkAuthToken()
+        }
         bundle = session.currentLanguage
         authorizationLabel.text = bundle.getString("authorizationLabelMessage")
         startRegisteringButton.text = bundle.getString("startRegisteringButtonMessage")

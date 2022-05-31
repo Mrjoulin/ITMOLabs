@@ -51,8 +51,12 @@ class MenuController(private val session: ClientSession) : Initializable {
 
         profileButton.text = "@" + session.username
         // Load table by default
+
+        logger.debug("Load table")
         table()
 
+        Thread.sleep(1000)
+        logger.debug("Start updates listener")
         session.socketWorker.startUpdatesListener()
 
         // Start processing of collection updates

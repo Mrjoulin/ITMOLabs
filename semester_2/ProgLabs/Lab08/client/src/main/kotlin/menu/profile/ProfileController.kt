@@ -71,26 +71,22 @@ class ProfileController(private val session: ClientSession) : Initializable {
             return printErrorMessage(e.message)
         }
 
-        try {
-            val response = session.socketWorker.makeRequest(
-                Request(
-                    token = session.userToken,
-                    command = "change_password",
-                    commandArgs = arrayListOf(auth.hashStringToSHA1(password))
-                )
-            )
+        val request = Request(
+            token = session.userToken,
+            command = "change_password",
+            commandArgs = arrayListOf(auth.hashStringToSHA1(password))
+        )
 
-            if (response.success) {
+        session.socketWorker.makeAsyncRequest(request, { printErrorMessage(it.message) }) {
+            if (it.success) {
                 // Update token
-                session.userToken = response.message
+                session.userToken = it.message
 
                 messageLabel.textFill = Color.GREEN
                 messageLabel.text = SUCCESSFUL_PASSWORD_CHANGED_MESSAGE
             } else {
-                printErrorMessage(response.message)
+                printErrorMessage(it.message)
             }
-        } catch (e: UnsuccessfulRequestException) {
-            printErrorMessage(e.message)
         }
     }
 

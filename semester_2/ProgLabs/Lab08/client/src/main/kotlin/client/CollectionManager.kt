@@ -33,6 +33,7 @@ class CollectionManager {
 
         val success = entitiesCollection.addAll(entities)
         collectionInitialized = true
+        collectionChanged = true
 
         lock.writeLock().unlock()
 

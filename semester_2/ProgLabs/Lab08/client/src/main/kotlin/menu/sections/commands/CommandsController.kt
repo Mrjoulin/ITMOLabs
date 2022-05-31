@@ -119,16 +119,10 @@ class CommandsController(private val session: ClientSession) : UpdatableControll
         findByNameProcessing = false
         printToConsole("info", true)
 
-        try {
-            val response = session.socketWorker.makeRequest(
-                Request(
-                    token = session.userToken,
-                    command = "info")
-            )
+        val request = Request(token = session.userToken, command = "info")
 
-            printToConsole(response.message, false)
-        } catch (e: UnsuccessfulRequestException) {
-            printToConsole(e.message, false)
+        session.socketWorker.makeAsyncRequest(request, { printToConsole(it.message, false) }) {
+            printToConsole(it.message, false)
         }
     }
 
@@ -137,16 +131,10 @@ class CommandsController(private val session: ClientSession) : UpdatableControll
         findByNameProcessing = false
         printToConsole("help", true)
 
-        try {
-            val response = session.socketWorker.makeRequest(
-                Request(
-                    token = session.userToken,
-                    command = "help")
-            )
+        val request = Request(token = session.userToken, command = "help")
 
-            printToConsole(response.message, false)
-        } catch (e: UnsuccessfulRequestException) {
-            printToConsole(e.message, false)
+        session.socketWorker.makeAsyncRequest(request, { printToConsole(it.message, false) }) {
+            printToConsole(it.message, false)
         }
     }
 
@@ -162,16 +150,10 @@ class CommandsController(private val session: ClientSession) : UpdatableControll
 
         printToConsole("show", true)
 
-        try {
-            val response = session.socketWorker.makeRequest(
-                Request(
-                    token = session.userToken,
-                    command = "show")
-            )
+        val request = Request(token = session.userToken, command = "show")
 
-            printToConsole(response.message, false)
-        } catch (e: UnsuccessfulRequestException) {
-            printToConsole(e.message, false)
+        session.socketWorker.makeAsyncRequest(request, { printToConsole(it.message, false) }) {
+            printToConsole(it.message, false)
         }
     }
 
@@ -187,16 +169,10 @@ class CommandsController(private val session: ClientSession) : UpdatableControll
             if (it == yes) {
                 printToConsole("clear", true)
 
-                try {
-                    val response = session.socketWorker.makeRequest(
-                        Request(
-                            token = session.userToken,
-                            command = "clear")
-                    )
+                val request = Request(token = session.userToken, command = "clear")
 
+                session.socketWorker.makeAsyncRequest(request, { e -> printToConsole(e.message, false) }) { response ->
                     printToConsole(response.message, false)
-                } catch (e: UnsuccessfulRequestException) {
-                    printToConsole(e.message, false)
                 }
             }
         }
@@ -235,20 +211,11 @@ class CommandsController(private val session: ClientSession) : UpdatableControll
     }
 
     private fun processFindByName(name: String) {
-        try {
-            val response = session.socketWorker.makeRequest(
-                Request(
-                    token = session.userToken,
-                    command = "filter_starts_with_name",
-                    commandArgs = arrayListOf(name)
-                )
-            )
+        val request = Request(token = session.userToken, command = "filter_starts_with_name", commandArgs = arrayListOf(name))
 
+        session.socketWorker.makeAsyncRequest(request, { e -> printToConsole(e.message, false) }) { response ->
             printToConsole(response.message, false)
-
             findByNameProcessing = false
-        } catch (e: UnsuccessfulRequestException) {
-            printToConsole(e.message, false)
         }
     }
 

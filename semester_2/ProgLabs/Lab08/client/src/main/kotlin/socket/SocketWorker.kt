@@ -1,6 +1,8 @@
 package socket
 
 import client.CollectionManager
+import javafx.application.Platform
+import javafx.util.Callback
 import network.*
 import network.enums.UpdateListenerRequestType
 import network.enums.UpdateType
@@ -11,11 +13,15 @@ import utils.SERVER_PORT
 import utils.logger
 import java.io.IOException
 import java.io.Serializable
+import java.lang.ClassCastException
+import java.lang.Exception
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.DatagramChannel
+import java.util.function.Consumer
 import kotlin.jvm.Throws
+import kotlin.math.log
 
 
 class SocketWorker(private val entitiesCollection: CollectionManager) : SocketWorkerInterface {
@@ -56,56 +62,87 @@ class SocketWorker(private val entitiesCollection: CollectionManager) : SocketWo
         }
     }
 
+    @Synchronized override fun makeAsyncRequest(request: Serializable, errorHandler: Consumer<Exception>, callback: Consumer<Response>) {
+        val thread = Thread { makeRequest(request, errorHandler, callback) }
+        thread.isDaemon = true
+        thread.start()
+    }
+
     @Throws(UnsuccessfulRequestException::class)
-    @Synchronized override fun makeRequest(request: Serializable): Response {
+    @Synchronized private fun makeRequest(request: Serializable, errorHandler: Consumer<Exception>, callback: Consumer<Response>) {
         val dataToSend = ObjectSerializer().toByteArray(request)
 
         if (!currentChannel.isConnected)
             connectToServer()
 
-        try {
-            logger.debug("Send request to the server, request size: ${dataToSend.size}")
+        // Clear data from channel if exist
+        synchronized(currentChannel) {
+            try {
+                val clearBuffer = ByteBuffer.allocate(DEFAULT_PACKAGE_SIZE)
+                while (currentChannel.read(clearBuffer) != 0) {
+                    logger.info("Cleared ${clearBuffer.position()} bytes from channel")
+                    clearBuffer.clear()
+                }
+            } catch (ignored: IOException) { }
 
-            val buf: ByteBuffer = ByteBuffer.wrap(dataToSend)
+            try {
+                logger.debug("Send request to the server, request size: ${dataToSend.size}")
 
-            do {
-                currentChannel.write(buf)
-            } while (buf.hasRemaining())
+                val buf: ByteBuffer = ByteBuffer.wrap(dataToSend)
 
-            return receiveAnswer()
-                ?: throw UnsuccessfulRequestException("Server isn't available at the moment! Try again a bit later!")
-        } catch (exception: IOException) {
-            throw UnsuccessfulRequestException("Command didn't send, try again!")
+                do {
+                    currentChannel.write(buf)
+                } while (buf.hasRemaining())
+
+                receiveAnswer(errorHandler, callback)
+            } catch (exception: IOException) {
+                Platform.runLater {
+                    errorHandler.accept(UnsuccessfulRequestException("Command didn't send, try again!"))
+                }
+            }
         }
     }
 
-    private fun receiveAnswer(): Response? {
-        val timeStart = System.currentTimeMillis()
+    @Synchronized private fun receiveAnswer(errorHandler: Consumer<Exception>, callback: Consumer<Response>) {
+        synchronized(currentChannel) {
+            val timeStart = System.currentTimeMillis()
 
-        val buffer = ByteBuffer.allocate(DEFAULT_PACKAGE_SIZE)
-        var byteArray = ByteArray(0)
+            val buffer = ByteBuffer.allocate(DEFAULT_PACKAGE_SIZE)
+            var byteArray = ByteArray(0)
 
-        var numBytesReceived = 0
+            var numBytesReceived = 0
 
-        while (System.currentTimeMillis() - timeStart < SERVER_TIMEOUT_SEC * 1000) {
-            try {
-                currentChannel.receive(buffer)
+            while (System.currentTimeMillis() - timeStart < SERVER_TIMEOUT_SEC * 1000) {
+                try {
+                    currentChannel.receive(buffer)
 
-                if (buffer.position() != 0){
-                    numBytesReceived += buffer.position()
+                    if (buffer.position() != 0) {
+                        numBytesReceived += buffer.position()
 
-                    byteArray += buffer.array()
-                    buffer.clear()
-                } else if (byteArray.isNotEmpty()) {
-                    logger.debug("Receive answer from server, answer size: $numBytesReceived")
+                        byteArray += buffer.array()
+                        buffer.clear()
+                    } else if (byteArray.isNotEmpty()) {
+                        logger.debug("Receive answer from server, answer size: $numBytesReceived")
 
-                    return ObjectSerializer().fromByteArray(byteArray)
-                }
-
-            } catch (ignored: IOException) { }
+                        try {
+                            Platform.runLater {
+                                callback.accept(ObjectSerializer().fromByteArray(byteArray))
+                            }
+                            return
+                        } catch (e: ClassCastException) {
+                            Platform.runLater {
+                                errorHandler.accept(e)
+                            }
+                            return
+                        }
+                    }
+                } catch (ignored: IOException) { }
+            }
         }
 
-        return null
+        Platform.runLater {
+            errorHandler.accept(UnsuccessfulRequestException("Server isn't available at the moment! Try again a bit later!"))
+        }
     }
 
     override fun startUpdatesListener(): Boolean {
@@ -113,20 +150,19 @@ class SocketWorker(private val entitiesCollection: CollectionManager) : SocketWo
             val request = UpdateListenerRequest(UpdateListenerRequestType.REGISTER)
 
             currentChannel = datagramListenerChannel
-            val response = makeRequest(request)
-            currentChannel = datagramChannel
+            makeAsyncRequest(request, { logger.error("Can't initialize updates listener: ${it.message}") }) { response ->
+                currentChannel = datagramChannel
 
-            if (response.success) {
-                logger.info(response.message)
+                if (response.success) {
+                    logger.info(response.message)
 
-                val listenerThread = Thread(this::updatesListener)
-                listenerThread.isDaemon = true
+                    val listenerThread = Thread(this::updatesListener)
 
-                listenerThread.start()
-
-                return true
-            } else {
-                logger.error(response.message)
+                    listenerThread.isDaemon = true
+                    listenerThread.start()
+                } else {
+                    logger.error(response.message)
+                }
             }
         } catch (e: UnsuccessfulRequestException) {
             logger.error("Can't initialize updates listener")
@@ -153,10 +189,14 @@ class SocketWorker(private val entitiesCollection: CollectionManager) : SocketWo
                 } else if (byteArray.isNotEmpty()) {
                     logger.debug("New update from server, update size: $numBytesReceived")
 
-                    val updateNotification: UpdateNotification? = ObjectSerializer().fromByteArray(byteArray)
-                    byteArray = ByteArray(0)
-                    // Process notification
-                    processUpdateNotification(updateNotification)
+                    try {
+                        val updateNotification: UpdateNotification = ObjectSerializer().fromByteArray(byteArray)
+                        byteArray = ByteArray(0)
+                        // Process notification
+                        processUpdateNotification(updateNotification)
+                    } catch (e: ClassCastException) {
+                        logger.error("Can't deserialize update notification: ${e.message}")
+                    }
                 }
             } catch (ignored: IOException) { }
         }
@@ -172,9 +212,9 @@ class SocketWorker(private val entitiesCollection: CollectionManager) : SocketWo
 
             currentChannel = datagramListenerChannel
 
-            makeRequest(request)
-
-            currentChannel = datagramChannel
+            makeRequest(request, {logger.error("Can't close updates listener: ${it.message}") }) {
+                currentChannel = datagramChannel
+            }
         } catch (e: UnsuccessfulRequestException) {
             logger.error("Can't close updates listener")
         }

@@ -30,6 +30,8 @@ open class Authorization (private val session: ClientSession) {
     @FXML
     lateinit var errorMessage: Label
 
+    private val applicationThread: Thread = Thread.currentThread()
+
     fun moveToWindow(windowTitle: String, windowFXMLFilename: String, controller: Any) {
         val loader = FXMLLoader(javaClass.classLoader.getResource(windowFXMLFilename))
         loader.setControllerFactory { controller }
@@ -52,10 +54,6 @@ open class Authorization (private val session: ClientSession) {
                 username = loginTextField.text,
                 password = passwordTextField.text
             )
-
-            println("User token: ${session.userToken}") // TODO remove
-
-            moveToWindow(APPLICATION_NAME, APPLICATION_MENU_WINDOW, MenuController(session))
         }
         catch (e: UnsuccessfulRequestException) { errorMessage.text = e.message }
         catch (e: IncorrectFieldDataException) { errorMessage.text = "Неверный ввод: ${e.message}" }
@@ -77,16 +75,22 @@ open class Authorization (private val session: ClientSession) {
             commandArgs = userCredentials
         )
 
-        val response: Response = session.socketWorker.makeRequest(request)
+        session.socketWorker.makeAsyncRequest(request, { errorMessage.text = it.message }) {
+            // Process response
+            try {
+                processAuthResponse(it)
 
-        // Process response
-        processAuthResponse(response)
+                session.username = correctUsername
 
-        session.username = correctUsername
+                moveToWindow(APPLICATION_NAME, APPLICATION_MENU_WINDOW, MenuController(session))
+            } catch (e: UnsuccessfulRequestException) {
+                errorMessage.text = e.message
+            }
+        }
     }
 
-    fun checkAuthToken() : Boolean {
-        if (session.userToken.isEmpty()) return false
+    fun checkAuthToken() {
+        if (session.userToken.isEmpty()) return
 
         // If token exist (may be from environment)
         val request = Request(
@@ -94,20 +98,16 @@ open class Authorization (private val session: ClientSession) {
             command = "check_token" // Default command that need to be exist
         )
 
-        return try {
-            val response = session.socketWorker.makeRequest(request)
-
-            if (response.success)
+        session.socketWorker.makeAsyncRequest(request, {}) { response ->
+            if (response.success) {
                 session.username = response.message
                     .split("\n")[0]
                     .replaceBefore("user ", "")
                     .replaceFirst("user ", "")
                     .replace(":", "")
 
-
-            response.success
-        } catch (e: UnsuccessfulRequestException) {
-            false
+                moveToWindow(APPLICATION_NAME, APPLICATION_MENU_WINDOW, MenuController(session))
+            }
         }
     }
 

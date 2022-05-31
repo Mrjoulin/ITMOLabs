@@ -41,8 +41,6 @@ class TableViewController(private val session: ClientSession) : UpdatableControl
 
     private var bundle: ResourceBundle = session.currentLanguage
 
-    private lateinit var updatesThread: Thread
-
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         bundle = session.currentLanguage
         tableText.text = bundle.getString("tableViewHeaderMessage")
@@ -97,30 +95,22 @@ class TableViewController(private val session: ClientSession) : UpdatableControl
 
         if (routes.size <= TABLE_MAX_NUM_OBJECTS_WITHOUT_SCROLL)
             distanceColumn.prefWidth += TABLE_NUM_PIXELS_TO_HIDE_SCROLL
-
-        updatesThread = Thread(this::receiveUpdates)
-        updatesThread.isDaemon = true
-        updatesThread.start()
     }
 
     private fun getCollection() : HashSet<Route> {
         if (session.collectionManager.isCollectionInitialized())
             return session.collectionManager.getEntitiesSet()
 
-        try {
-            val routes = session.socketWorker.makeRequest(
-                Request(token = session.userToken, command = "show")
-            ).routesCollection
+        val request = Request(token = session.userToken, command = "show")
+
+        session.socketWorker.makeAsyncRequest(request, { logger.error("Error while getting objects from server: ${it.message}") }) {
+            val routes = it.routesCollection
 
             if (routes != null && routes.isNotEmpty()) {
                 session.collectionManager.initializeCollection(routes)
-
-                return session.collectionManager.getEntitiesSet()
             } else {
-                println("No objects in collection")
+                logger.info("No objects in collection")
             }
-        } catch (e: UnsuccessfulRequestException) {
-            println("Error while getting objects from server: ${e.message}")
         }
 
         return HashSet()

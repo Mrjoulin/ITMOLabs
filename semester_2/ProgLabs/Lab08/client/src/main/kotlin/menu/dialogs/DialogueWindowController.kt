@@ -88,26 +88,23 @@ class DialogueWindowController(private val session: ClientSession, private val r
             updatedEntityMap["creationDate"] = route.creationDate
             updatedEntityMap["author"] = route.author
 
-            val response = session.socketWorker.makeRequest(
-                Request(
-                    token = session.userToken,
-                    command = "update",
-                    commandArgs = arrayListOf(route.id.toString()),
-                    entityObjectMap = updatedEntityMap.toMap()
-                )
+            val request = Request(
+                token = session.userToken,
+                command = "update",
+                commandArgs = arrayListOf(route.id.toString()),
+                entityObjectMap = updatedEntityMap.toMap()
             )
-            if (response.success) {
-                //TODO: если ок все что делается
-                val stage: Stage = deleteButton.scene.window as Stage
-                stage.close()
-            } else {
-                showErrorMessage(response.message)
-            }
 
+            session.socketWorker.makeAsyncRequest(request, { showErrorMessage(it.message) }) {
+                if (it.success) {
+                    val stage: Stage = deleteButton.scene.window as Stage
+                    stage.close()
+                } else {
+                    showErrorMessage(it.message)
+                }
+            }
         } catch (e: IncorrectFieldDataException) {
             fillFields()
-            showErrorMessage(e.message)
-        } catch (e: UnsuccessfulRequestException) {
             showErrorMessage(e.message)
         }
     }
@@ -125,24 +122,19 @@ class DialogueWindowController(private val session: ClientSession, private val r
 
         // Remove route
 
-        try {
-            val response = session.socketWorker.makeRequest(
-                Request(
-                    token = session.userToken,
-                    command = "remove_by_id",
-                    commandArgs = arrayListOf(route.id.toString())
-                )
-            )
+        val request = Request(
+            token = session.userToken,
+            command = "remove_by_id",
+            commandArgs = arrayListOf(route.id.toString())
+        )
 
-            if (response.success) {
-                //TODO: NOT SURE ABOUT UPDATING
+        session.socketWorker.makeAsyncRequest(request, { showErrorMessage(it.message) }) {
+            if (it.success) {
                 val stage: Stage = deleteButton.scene.window as Stage
                 stage.close()
             } else {
-                showErrorMessage(response.message)
+                showErrorMessage(it.message)
             }
-        } catch (e: UnsuccessfulRequestException) {
-            showErrorMessage(e.message)
         }
     }
 

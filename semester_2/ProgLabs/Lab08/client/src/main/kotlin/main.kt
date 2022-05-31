@@ -34,13 +34,9 @@ class Main : Application() {
     private fun authorize(primaryStage: Stage) : Boolean {
         logger.debug("Start authorization")
 
-        val controller = LoginController(session)
-
         // If token given from evn and correct
-        if (controller.checkAuthToken()) return true
-
         val loader = FXMLLoader(javaClass.classLoader.getResource(APPLICATION_LOGIN_WINDOW))
-        loader.setControllerFactory { controller }
+        loader.setControllerFactory { LoginController(session, true) }
 
         val scene = Scene(loader.load(), AUTHORIZATION_WINDOW_WIDTH, AUTHORIZATION_WINDOW_HEIGHT)
 
