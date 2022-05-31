@@ -2,7 +2,6 @@ package menu
 
 import authorization.LoginController
 import client.ClientSession
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
@@ -12,10 +11,11 @@ import javafx.scene.control.Button
 import javafx.scene.control.Hyperlink
 import javafx.scene.layout.AnchorPane
 import javafx.stage.Stage
-import menu.commands.CommandsController
+import menu.sections.commands.CommandsController
 import menu.profile.ProfileController
-import menu.table.TableViewController
-import menu.visualization.VisualizationController
+import menu.sections.interfaces.UpdatableController
+import menu.sections.table.TableViewController
+import menu.sections.visualization.VisualizationController
 import utils.*
 import java.io.IOException
 import java.net.URL
@@ -37,7 +37,9 @@ class MenuController(private val session: ClientSession) : Initializable {
     @FXML
     lateinit var commandsbutton: Button
 
-    private var currentUI = APPLICATION_TABLE_SECTION
+    private lateinit var currentUI: String
+    private var currentController: UpdatableController? = null
+    private lateinit var updatesThread: Thread
 
     private var bundle: ResourceBundle = session.currentLanguage
 
@@ -46,9 +48,17 @@ class MenuController(private val session: ClientSession) : Initializable {
         tablebutton.text = bundle.getString("tablebuttonMessage")
         visualizationbutton.text = bundle.getString("visualizationbuttonMessage")
         commandsbutton.text = bundle.getString("commandsbuttonMessage")
+
         profileButton.text = "@" + session.username
         // Load table by default
         table()
+
+        session.socketWorker.startUpdatesListener()
+
+        // Start processing of collection updates
+        updatesThread = Thread(this::processCollectionUpdates)
+        updatesThread.isDaemon = true
+        updatesThread.start()
     }
 
     @FXML
@@ -73,8 +83,9 @@ class MenuController(private val session: ClientSession) : Initializable {
         try {
             val loader = FXMLLoader(javaClass.getResource(currentUI))
 
-            val controller = getController()
-            if (controller != null) loader.setControllerFactory { controller }
+            setController()
+
+            if (currentController != null) loader.setControllerFactory { currentController }
 
             val root: Parent = loader.load()
 
@@ -87,8 +98,8 @@ class MenuController(private val session: ClientSession) : Initializable {
         }
     }
 
-    private fun getController() : Any? {
-        return when(currentUI) {
+    private fun setController(){
+        currentController = when(currentUI) {
             APPLICATION_TABLE_SECTION -> TableViewController(session)
             APPLICATION_VISUALIZATION_SECTION -> VisualizationController(session)
             APPLICATION_COMMANDS_SECTION -> CommandsController(session)
@@ -115,7 +126,11 @@ class MenuController(private val session: ClientSession) : Initializable {
 
     private fun goToLogin() {
         logger.debug("Move to login window")
+        // Stop updates processing thread
+        session.socketWorker.stopUpdatesListenerProcess()
+        updatesThread.interrupt()
 
+        // Load login window
         val loader = FXMLLoader(javaClass.classLoader.getResource(APPLICATION_LOGIN_WINDOW))
         loader.setControllerFactory { LoginController(session) }
 
@@ -139,5 +154,20 @@ class MenuController(private val session: ClientSession) : Initializable {
         commandsbutton.text = bundle.getString("commandsbuttonMessage")
 
         loadUI()
+    }
+
+    private fun processCollectionUpdates() {
+        logger.debug("Start waiting for new collection updates")
+
+        while (true) {
+            while (!session.collectionManager.isCollectionChanged()) {
+                Thread.sleep(10) // Wait for updates
+            }
+            // When update received
+            logger.debug("Invoke receive updates methods of controller: ${currentController?.javaClass?.simpleName}")
+            currentController?.receiveUpdates()
+
+            session.collectionManager.collectionChangedProcessed()
+        }
     }
 }

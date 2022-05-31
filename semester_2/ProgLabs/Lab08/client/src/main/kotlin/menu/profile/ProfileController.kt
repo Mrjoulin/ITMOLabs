@@ -110,8 +110,7 @@ class ProfileController(private val session: ClientSession) : Initializable {
     fun logOut(event: ActionEvent) {
         session.userToken = ""
         session.username = ""
-        session.collectionInitialized = false
-        session.entitiesCollection = HashSet()
+        session.collectionManager.clearCollection()
 
         val currentStage = messageLabel.scene.window as Stage
         currentStage.close()

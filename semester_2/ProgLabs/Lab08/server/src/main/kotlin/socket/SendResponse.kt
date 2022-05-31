@@ -40,7 +40,7 @@ class SendResponse(
 
         val packetSize = DEFAULT_PACKAGE_SIZE
         val dataToSend = try {
-            ObjectSerializer.toByteArray(response)
+            ObjectSerializer().toByteArray(response)
         } catch (e: Exception) {
             logger.error("Get exception while serializing response: $response", e)
             return

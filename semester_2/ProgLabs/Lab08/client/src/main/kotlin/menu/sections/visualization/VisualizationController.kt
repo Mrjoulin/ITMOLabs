@@ -1,4 +1,4 @@
-package menu.visualization
+package menu.sections.visualization
 
 import client.ClientSession
 import entities.Coordinates
@@ -14,7 +14,6 @@ import javafx.scene.Node
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.canvas.GraphicsContext
-import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
@@ -31,6 +30,7 @@ import javafx.scene.transform.Transform
 import javafx.stage.Modality
 import javafx.stage.Stage
 import menu.dialogs.DialogueWindowController
+import menu.sections.interfaces.UpdatableController
 import utils.*
 import java.net.URL
 import java.util.*
@@ -39,7 +39,7 @@ import kotlin.math.*
 import kotlin.properties.Delegates
 
 
-class VisualizationController (private val session: ClientSession) : Initializable {
+class VisualizationController (private val session: ClientSession) : UpdatableController, Initializable {
     @FXML
     lateinit var canvas: Canvas
     @FXML
@@ -56,11 +56,16 @@ class VisualizationController (private val session: ClientSession) : Initializab
 
     private val personImage = Image(PERSON_IMAGE_PATH)
     private val transparentColor = Color.rgb(0, 0, 0,0.0)
+
+    private val paintedRoutesIds = arrayListOf<Int>()
+    private val currentPaintingTimers = arrayListOf<AnimationTimer>()
+
     private val semaphore = Semaphore(NUM_OBJECTS_TO_DRAW_SYNC)
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         bundle = session.currentLanguage
         visualizationLabel.text = bundle.getString("visualizationLabel")
+
         gc = canvas.graphicsContext2D
 
         coordinatePlaneOffsetX = canvas.width / 2
@@ -90,9 +95,11 @@ class VisualizationController (private val session: ClientSession) : Initializab
     }
 
     private fun drawCollectionRoutes() {
-        logger.debug("Collection size: ${session.entitiesCollection.size}")
+        val entitiesSet = session.collectionManager.getEntitiesSet()
 
-        session.entitiesCollection.forEach {
+        logger.debug("Collection size: ${entitiesSet.size}")
+
+        entitiesSet.forEach {
             val routeThread = Thread {
                 semaphore.acquire()
                 drawRoute(it)
@@ -177,7 +184,7 @@ class VisualizationController (private val session: ClientSession) : Initializab
             private val threadName = Thread.currentThread().name
             private val distanceDivideBy = 10.0
             private val gradientScale = (distToMiddle(fromX, fromY) + distToMiddle(toX, toY)) / distanceDivideBy
-            private var curMiddle = 0.0
+            private var curMiddle = if (!paintedRoutesIds.contains(route.id)) 0.0 else 1.0 - 1.0 / gradientScale
             private val stops = arrayListOf(
                 Stop(0.0, color), Stop(curMiddle, color),
                 Stop(curMiddle, transparentColor), Stop(1.0, transparentColor)
@@ -245,12 +252,17 @@ class VisualizationController (private val session: ClientSession) : Initializab
                 // Release semaphore to allow other threads start drawing
                 semaphore.release()
 
+                paintedRoutesIds.add(route.id)
+                currentPaintingTimers.remove(this)
+
                 // Stop timer
                 return stop()
             }
         }
 
         timer.start()
+
+        currentPaintingTimers.add(timer)
     }
 
     private fun drawLocationsNames(from: Location, middle: Coordinates, to: Location) {
@@ -361,5 +373,17 @@ class VisualizationController (private val session: ClientSession) : Initializab
         if (person) y -= PERSON_HEIGHT
 
         return canvas.height - y
+    }
+
+
+    override fun receiveUpdates() {
+        synchronized(gc) {
+            // Stop current timers
+            currentPaintingTimers.forEach { it.stop() }
+            // Clear rectangle
+            gc.clearRect(0.0, 0.0, canvas.width, canvas.height)
+            // Re-draw routes
+            drawCollectionRoutes()
+        }
     }
 }

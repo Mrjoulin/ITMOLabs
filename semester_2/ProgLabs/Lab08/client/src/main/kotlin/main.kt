@@ -8,6 +8,7 @@ import javafx.scene.Scene
 import javafx.stage.Stage
 import utils.*
 import java.util.*
+import kotlin.system.exitProcess
 
 
 /**
@@ -43,6 +44,11 @@ class Main : Application() {
 
         val scene = Scene(loader.load(), AUTHORIZATION_WINDOW_WIDTH, AUTHORIZATION_WINDOW_HEIGHT)
 
+        primaryStage.setOnCloseRequest {
+            session.socketWorker.closeConnection()
+            logger.info("Exit client, come again!")
+        }
+
         primaryStage.title = "Login to $APPLICATION_NAME"
         primaryStage.scene = scene
         primaryStage.show()
@@ -59,6 +65,12 @@ class Main : Application() {
         loader.setControllerFactory { MenuController(session) }
 
         val scene = Scene(loader.load(), MENU_WINDOW_WIDTH, MENU_WINDOW_HEIGHT)
+
+        primaryStage.setOnCloseRequest {
+            session.socketWorker.closeConnection()
+            logger.info("Exit client, come again!")
+        }
+
         primaryStage.title = APPLICATION_NAME
         primaryStage.scene = scene
         primaryStage.show()

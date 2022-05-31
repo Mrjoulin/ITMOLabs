@@ -1,4 +1,4 @@
-package menu.table
+package menu.sections.table
 
 import client.ClientSession
 import entities.Coordinates
@@ -9,7 +9,6 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Scene
-import javafx.scene.control.Label
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableRow
 import javafx.scene.control.TableView
@@ -19,6 +18,7 @@ import javafx.scene.text.Text
 import javafx.stage.Modality
 import javafx.stage.Stage
 import menu.dialogs.DialogueWindowController
+import menu.sections.interfaces.UpdatableController
 import network.Request
 import utils.*
 import utils.exceptions.UnsuccessfulRequestException
@@ -26,7 +26,7 @@ import java.net.URL
 import java.util.*
 import kotlin.collections.HashSet
 
-class TableViewController(private val session: ClientSession) : Initializable{
+class TableViewController(private val session: ClientSession) : UpdatableController, Initializable{
     @FXML lateinit var table: TableView<Route>
     @FXML lateinit var tableText: Text
 
@@ -40,6 +40,8 @@ class TableViewController(private val session: ClientSession) : Initializable{
     @FXML lateinit var distanceColumn: TableColumn<Route, Double>
 
     private var bundle: ResourceBundle = session.currentLanguage
+
+    private lateinit var updatesThread: Thread
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         bundle = session.currentLanguage
@@ -66,9 +68,6 @@ class TableViewController(private val session: ClientSession) : Initializable{
                     dialog.scene = scene
                     dialog.initOwner(table.scene.window)
                     dialog.initModality(Modality.WINDOW_MODAL)
-                    dialog.setOnHidden {
-                        updateRoutes()
-                    }
 
                     dialog.show()
                 }
@@ -98,11 +97,15 @@ class TableViewController(private val session: ClientSession) : Initializable{
 
         if (routes.size <= TABLE_MAX_NUM_OBJECTS_WITHOUT_SCROLL)
             distanceColumn.prefWidth += TABLE_NUM_PIXELS_TO_HIDE_SCROLL
+
+        updatesThread = Thread(this::receiveUpdates)
+        updatesThread.isDaemon = true
+        updatesThread.start()
     }
 
     private fun getCollection() : HashSet<Route> {
-        if (session.collectionInitialized)
-            return session.entitiesCollection
+        if (session.collectionManager.isCollectionInitialized())
+            return session.collectionManager.getEntitiesSet()
 
         try {
             val routes = session.socketWorker.makeRequest(
@@ -110,10 +113,9 @@ class TableViewController(private val session: ClientSession) : Initializable{
             ).routesCollection
 
             if (routes != null && routes.isNotEmpty()) {
-                session.collectionInitialized = true
-                session.entitiesCollection.addAll(routes)
+                session.collectionManager.initializeCollection(routes)
 
-                return session.entitiesCollection
+                return session.collectionManager.getEntitiesSet()
             } else {
                 println("No objects in collection")
             }
@@ -124,7 +126,13 @@ class TableViewController(private val session: ClientSession) : Initializable{
         return HashSet()
     }
 
-    private fun updateRoutes() {
-        for (route in session.entitiesCollection) { }
+    override fun receiveUpdates() {
+        val entitiesSet = session.collectionManager.getEntitiesSet()
+
+        for (route in entitiesSet)
+            if (route !in table.items) table.items.add(route)
+
+        for (route in table.items)
+            if (route !in entitiesSet) table.items.remove(route)
     }
 }

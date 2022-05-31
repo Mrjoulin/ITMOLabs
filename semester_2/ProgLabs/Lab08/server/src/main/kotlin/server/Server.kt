@@ -36,7 +36,7 @@ class Server {
     private val collectionManager: CollectionManagerInterface<Route> = CollectionManager()
     private val userInvoker: InvokerInterface = Invoker()
     private val specialInvoker: InvokerInterface = Invoker()
-    private val socketWorker: SocketWorkerInterface = SocketWorker()
+    private val socketWorker: SocketWorkerInterface = SocketWorker(collectionManager)
     private val threadPoolExecutor = Executors.newFixedThreadPool(NUM_THREADS_FOR_POOL) as ThreadPoolExecutor
 
     init {

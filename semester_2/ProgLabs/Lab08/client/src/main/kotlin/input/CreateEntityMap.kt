@@ -43,7 +43,7 @@ class CreateEntityMap(private val input: InputStreamReader) {
      */
     fun <T> getObjectMapFromInput(
         target_class: Class<T>, previousObject: Map<String, Any?>? = null
-    ) : Map<String, Any?>? {
+    ) : Map<String, Any?> {
 
         val fieldsValues = HashMap<String, Any?>()
         val generateFields = ArrayList<Field>()

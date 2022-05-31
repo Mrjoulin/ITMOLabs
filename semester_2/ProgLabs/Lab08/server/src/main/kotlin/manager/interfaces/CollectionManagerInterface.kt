@@ -1,6 +1,7 @@
 package manager.interfaces
 
 import db.DataBaseWorker
+import network.UpdateNotification
 
 /**
  * Interface of Any object Collection Manager which describes the behavior of a collectionManager that manages a collection of objects.
@@ -13,6 +14,10 @@ interface CollectionManagerInterface<T: Any> {
     fun getCreationDate(): String
 
     fun getDBWorker(): DataBaseWorker
+
+    fun getCollectionUpdate(): UpdateNotification?
+
+    fun resetCollectionUpdate()
 
     fun getEntitiesSet(): HashSet<T>
 

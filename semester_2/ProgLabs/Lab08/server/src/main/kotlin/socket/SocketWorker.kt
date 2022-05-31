@@ -1,5 +1,8 @@
 package socket
 
+import entities.Route
+import manager.CollectionManager
+import manager.interfaces.CollectionManagerInterface
 import socket.interfaces.SocketWorkerInterface
 import network.Response
 import network.Request
@@ -24,9 +27,11 @@ import java.util.concurrent.ForkJoinPool
  *
  * @author Matthew I.
  */
-class SocketWorker : SocketWorkerInterface {
+class SocketWorker(private val collectionManager: CollectionManagerInterface<Route>) : SocketWorkerInterface {
     private val datagramSocket: DatagramSocket = DatagramSocket(SERVER_PORT)
     private val requestsSocketAddresses = HashMap<Request, SocketAddress>()
+    private val updateListenersAddresses = ArrayList<SocketAddress>()
+
     private val forkJoinPool = ForkJoinPool(NUM_THREADS_FOR_POOL)
     private val cachedThreadPool = Executors.newCachedThreadPool()
 
@@ -36,13 +41,16 @@ class SocketWorker : SocketWorkerInterface {
 
     override fun getUpdates() : Request {
         return forkJoinPool.invoke(
-            ReceiveRequest(datagramSocket, requestsSocketAddresses)
+            ReceiveRequest(datagramSocket, requestsSocketAddresses, updateListenersAddresses)
         )
     }
 
     override fun sendResponse(request: Request, response: Response) {
         cachedThreadPool.submit(
             SendResponse(datagramSocket, requestsSocketAddresses, request, response)
+        )
+        cachedThreadPool.submit(
+            UpdatesDistribution(datagramSocket, updateListenersAddresses, collectionManager)
         )
     }
 

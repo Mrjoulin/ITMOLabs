@@ -1,6 +1,7 @@
 package network
 
 import java.io.*
+import java.lang.ClassCastException
 import java.lang.Exception
 
 /**
@@ -12,37 +13,31 @@ import java.lang.Exception
  * @author Matthew I.
  */
 class ObjectSerializer {
-    companion object {
-        fun toByteArray(obj: Serializable): ByteArray {
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            val objectOutputStream = ObjectOutputStream(byteArrayOutputStream)
+    fun toByteArray(obj: Serializable): ByteArray {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        val objectOutputStream = ObjectOutputStream(byteArrayOutputStream)
 
-            objectOutputStream.writeObject(obj)
-            objectOutputStream.flush()
+        objectOutputStream.writeObject(obj)
+        objectOutputStream.flush()
 
-            val result = byteArrayOutputStream.toByteArray()
+        val result = byteArrayOutputStream.toByteArray()
 
-            byteArrayOutputStream.close()
-            objectOutputStream.close()
+        byteArrayOutputStream.close()
+        objectOutputStream.close()
 
-            return result
-        }
+        return result
+    }
 
-        @Suppress("UNCHECKED_CAST")
-        fun <T : Serializable> fromByteArray(byteArray: ByteArray): T? {
-            try {
-                val byteArrayInputStream = ByteArrayInputStream(byteArray)
-                val objectInput = ObjectInputStream(byteArrayInputStream)
+    @Suppress("UNCHECKED_CAST")
+    fun <T : Serializable> fromByteArray(byteArray: ByteArray): T {
+        val byteArrayInputStream = ByteArrayInputStream(byteArray)
+        val objectInput = ObjectInputStream(byteArrayInputStream)
 
-                val result = objectInput.readObject() as T
+        val result = objectInput.readObject() as T
 
-                objectInput.close()
-                byteArrayInputStream.close()
+        objectInput.close()
+        byteArrayInputStream.close()
 
-                return result
-            } catch (e: Exception) {
-                return null
-            }
-        }
+        return result
     }
 }

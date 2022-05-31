@@ -83,14 +83,17 @@ class DialogueWindowController(private val session: ClientSession, private val r
         val inp = InputStreamReader(data.byteInputStream())
 
         try {
-            val updatedEntityMap = CreateEntityMap(inp).getObjectMapFromInput(Route::class.java)
+            val updatedEntityMap = CreateEntityMap(inp).getObjectMapFromInput(Route::class.java).toMutableMap()
+            updatedEntityMap["id"] = route.id
+            updatedEntityMap["creationDate"] = route.creationDate
+            updatedEntityMap["author"] = route.author
 
             val response = session.socketWorker.makeRequest(
                 Request(
                     token = session.userToken,
                     command = "update",
                     commandArgs = arrayListOf(route.id.toString()),
-                    entityObjectMap = updatedEntityMap
+                    entityObjectMap = updatedEntityMap.toMap()
                 )
             )
             if (response.success) {
@@ -133,8 +136,6 @@ class DialogueWindowController(private val session: ClientSession, private val r
 
             if (response.success) {
                 //TODO: NOT SURE ABOUT UPDATING
-                session.entitiesCollection.remove(route)
-
                 val stage: Stage = deleteButton.scene.window as Stage
                 stage.close()
             } else {

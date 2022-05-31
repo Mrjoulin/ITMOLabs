@@ -1,4 +1,4 @@
-package menu.commands
+package menu.sections.commands
 
 import client.Client
 import client.ClientSession
@@ -15,6 +15,7 @@ import javafx.stage.FileChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
 import menu.dialogs.AddWindowController
+import menu.sections.interfaces.UpdatableController
 import network.Request
 import utils.APPLICATION_ADD_WINDOW
 import utils.APPLICATION_NAME
@@ -24,9 +25,10 @@ import java.io.InputStreamReader
 import java.io.PrintStream
 import java.net.URL
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class CommandsController(private val session: ClientSession) : Initializable{
+class CommandsController(private val session: ClientSession) : UpdatableController, Initializable{
     @FXML lateinit var textArea: TextArea
     @FXML lateinit var consoleTextField: TextField
     @FXML lateinit var commandsLabel: Label
@@ -45,6 +47,8 @@ class CommandsController(private val session: ClientSession) : Initializable{
     private val client = Client(session)
     private val getInput = { s: String -> InputStreamReader(s.byteInputStream()) }
     private val curByteArrayOutputStream = ByteArrayOutputStream()
+
+    private var currentUserRoutesIds = getCurrentUserRoutesIds()
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         bundle = session.currentLanguage
@@ -82,6 +86,12 @@ class CommandsController(private val session: ClientSession) : Initializable{
                 printToConsole(curByteArrayOutputStream.toString(), command = false, newLine = false)
             }
         }
+    }
+
+    private fun getCurrentUserRoutesIds() : List<Int> {
+        return session.collectionManager.getEntitiesSet()
+                .filter { it.author == session.username }
+                .map { it.id }
     }
 
     @FXML
@@ -248,5 +258,17 @@ class CommandsController(private val session: ClientSession) : Initializable{
         textArea.appendText(message)
 
         if (newLine) textArea.appendText("\n")
+    }
+
+
+    override fun receiveUpdates() {
+        val newUserRoutesIds = getCurrentUserRoutesIds()
+
+        newUserRoutesIds.forEach { id ->
+            if (!currentUserRoutesIds.contains(id))
+                printToConsole("New route ID #${id} successfully added", false)
+        }
+
+        currentUserRoutesIds = newUserRoutesIds
     }
 }

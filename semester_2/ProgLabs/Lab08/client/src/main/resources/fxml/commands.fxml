@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="750.0" prefWidth="1180.0" stylesheets="@../styles/commandsstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.commands.CommandsController">
+<AnchorPane fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="750.0" prefWidth="1180.0" stylesheets="@../styles/commandsstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.sections.commands.CommandsController">
    <children>
       <Label fx:id="commandsLabel" layoutX="56.0" prefHeight="122.0" prefWidth="776.0" text="Команды для работы с маршрутами">
          <font>
@@ -73,7 +73,7 @@
                   <Insets />
                </opaqueInsets>
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
             </TextArea>
             <TextField id="consoleTextField" fx:id="consoleTextField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="428.0" promptText="Введите команду">

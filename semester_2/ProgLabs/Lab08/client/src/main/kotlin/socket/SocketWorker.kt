@@ -1,16 +1,16 @@
 package socket
 
+import client.CollectionManager
+import network.*
+import network.enums.UpdateListenerRequestType
+import network.enums.UpdateType
 import utils.exceptions.UnsuccessfulRequestException
-import network.DEFAULT_PACKAGE_SIZE
-import network.SERVER_TIMEOUT_SEC
-import network.ObjectSerializer
-import network.Request
-import network.Response
 import socket.interfaces.SocketWorkerInterface
 import utils.SERVER_HOST
 import utils.SERVER_PORT
 import utils.logger
 import java.io.IOException
+import java.io.Serializable
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.ByteBuffer
@@ -18,9 +18,11 @@ import java.nio.channels.DatagramChannel
 import kotlin.jvm.Throws
 
 
-class SocketWorker: SocketWorkerInterface {
+class SocketWorker(private val entitiesCollection: CollectionManager) : SocketWorkerInterface {
     private val socketAddress: SocketAddress = InetSocketAddress(SERVER_HOST, SERVER_PORT)
     private val datagramChannel: DatagramChannel = DatagramChannel.open()
+    private val datagramListenerChannel: DatagramChannel = DatagramChannel.open()
+    private var currentChannel: DatagramChannel = datagramChannel
 
     init {
         connectToServer()
@@ -32,6 +34,9 @@ class SocketWorker: SocketWorkerInterface {
 
             datagramChannel.configureBlocking(false)
             datagramChannel.connect(socketAddress)
+
+            datagramListenerChannel.configureBlocking(false)
+            datagramListenerChannel.connect(socketAddress)
         } catch (e: IOException) {
             println("Some problems with network, can't connect to server!")
         }
@@ -43,13 +48,19 @@ class SocketWorker: SocketWorkerInterface {
 
             datagramChannel.disconnect()
         }
+
+        if (datagramListenerChannel.isConnected) {
+            logger.debug("Disconnect server updates listener")
+
+            datagramListenerChannel.disconnect()
+        }
     }
 
     @Throws(UnsuccessfulRequestException::class)
-    override fun makeRequest(request: Request): Response {
-        val dataToSend = ObjectSerializer.toByteArray(request)
+    @Synchronized override fun makeRequest(request: Serializable): Response {
+        val dataToSend = ObjectSerializer().toByteArray(request)
 
-        if (!datagramChannel.isConnected)
+        if (!currentChannel.isConnected)
             connectToServer()
 
         try {
@@ -58,7 +69,7 @@ class SocketWorker: SocketWorkerInterface {
             val buf: ByteBuffer = ByteBuffer.wrap(dataToSend)
 
             do {
-                datagramChannel.write(buf)
+                currentChannel.write(buf)
             } while (buf.hasRemaining())
 
             return receiveAnswer()
@@ -78,7 +89,7 @@ class SocketWorker: SocketWorkerInterface {
 
         while (System.currentTimeMillis() - timeStart < SERVER_TIMEOUT_SEC * 1000) {
             try {
-                datagramChannel.receive(buffer)
+                currentChannel.receive(buffer)
 
                 if (buffer.position() != 0){
                     numBytesReceived += buffer.position()
@@ -88,12 +99,117 @@ class SocketWorker: SocketWorkerInterface {
                 } else if (byteArray.isNotEmpty()) {
                     logger.debug("Receive answer from server, answer size: $numBytesReceived")
 
-                    return ObjectSerializer.fromByteArray(byteArray)
+                    return ObjectSerializer().fromByteArray(byteArray)
                 }
 
             } catch (ignored: IOException) { }
         }
 
         return null
+    }
+
+    override fun startUpdatesListener(): Boolean {
+        try {
+            val request = UpdateListenerRequest(UpdateListenerRequestType.REGISTER)
+
+            currentChannel = datagramListenerChannel
+            val response = makeRequest(request)
+            currentChannel = datagramChannel
+
+            if (response.success) {
+                logger.info(response.message)
+
+                val listenerThread = Thread(this::updatesListener)
+                listenerThread.isDaemon = true
+
+                listenerThread.start()
+
+                return true
+            } else {
+                logger.error(response.message)
+            }
+        } catch (e: UnsuccessfulRequestException) {
+            logger.error("Can't initialize updates listener")
+        }
+
+        return false
+    }
+
+    private fun updatesListener() {
+        val buffer = ByteBuffer.allocate(DEFAULT_PACKAGE_SIZE)
+        var byteArray = ByteArray(0)
+
+        var numBytesReceived = 0
+
+        while (datagramListenerChannel.isConnected) {
+            try {
+                datagramListenerChannel.receive(buffer)
+
+                if (buffer.position() != 0){
+                    numBytesReceived += buffer.position()
+
+                    byteArray += buffer.array()
+                    buffer.clear()
+                } else if (byteArray.isNotEmpty()) {
+                    logger.debug("New update from server, update size: $numBytesReceived")
+
+                    val updateNotification: UpdateNotification? = ObjectSerializer().fromByteArray(byteArray)
+                    byteArray = ByteArray(0)
+                    // Process notification
+                    processUpdateNotification(updateNotification)
+                }
+            } catch (ignored: IOException) { }
+        }
+
+        // On channel disconnect, close update listener
+        stopUpdatesListenerProcess()
+
+    }
+
+    override fun stopUpdatesListenerProcess() {
+        try {
+            val request = UpdateListenerRequest(UpdateListenerRequestType.CLOSE)
+
+            currentChannel = datagramListenerChannel
+
+            makeRequest(request)
+
+            currentChannel = datagramChannel
+        } catch (e: UnsuccessfulRequestException) {
+            logger.error("Can't close updates listener")
+        }
+    }
+
+    private fun processUpdateNotification(updateNotification: UpdateNotification?) {
+        if (updateNotification == null) {
+            logger.error("Update notification deserialized incorrectly!")
+            return
+        }
+
+        val route = updateNotification.entity
+        val updateValue = updateNotification.updateType.value
+        var success = true
+
+        synchronized(entitiesCollection) {
+            if (updateValue and UpdateType.REMOVE.value == UpdateType.REMOVE.value && success)
+                success = success && entitiesCollection.removeEntityById(route)
+            if (!success) print("not removed")
+            if (updateValue and UpdateType.ADD.value == UpdateType.ADD.value && success)
+                success = success && entitiesCollection.addNewEntity(route)
+            if (!success) print("not added")
+            if (updateValue and UpdateType.CLEAR.value == UpdateType.CLEAR.value && success)
+                success = success && entitiesCollection.removeEntitiesByAuthor(route)
+        }
+
+        if (success)
+            logger.info(
+                "New update notification with route #${route.id} processed. " +
+                "Update type: ${updateNotification.updateType.name}"
+            )
+        else
+            logger.error(
+                "Processing of update notification (route #${route.id}) failed!" +
+                "Update type: ${updateNotification.updateType.name}"
+            )
     }
 }

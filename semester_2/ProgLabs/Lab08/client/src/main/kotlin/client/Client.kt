@@ -118,7 +118,7 @@ class Client(private val session: ClientSession) {
         try {
             val entityMap = CreateEntityMap(input = session.currentInput).getObjectMapFromInput(
                 Route::class.java, routeToUpdateMap
-            ) ?: return null
+            )
 
             // Sent object for these command to server
             val request = Request(
