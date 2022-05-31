@@ -51,10 +51,13 @@ class ProfileController(private val session: ClientSession) : Initializable {
         exitButton.text = bundle.getString("profile.exitButton")
         changePassword.promptText = bundle.getString("profile.changePassword")
 
-        languageBox.items.addAll(APPLICATION_LANGUAGES.keys)
+        languageBox.items.addAll(APPLICATION_LANGUAGES_CODES_BY_NAMES.keys)
 
-        val curLanguageCode = session.currentLanguage.baseBundleName.removePrefix(LANGUAGES_BASE_NAME_PREFIX)
-        languageBox.value = APPLICATION_LANGUAGES.entries.associate{ it.value to it.key}[curLanguageCode]
+        val curLanguageCode = session.currentLanguage.locale.language
+
+        logger.debug("Current language code: $curLanguageCode")
+
+        languageBox.value = APPLICATION_LANGUAGES_NAMES_BY_CODES[curLanguageCode]
     }
 
     @FXML
@@ -94,7 +97,7 @@ class ProfileController(private val session: ClientSession) : Initializable {
     @FXML
     fun saveLanguage(event: ActionEvent) {
         val newBundle = ResourceBundle.getBundle(
-            LANGUAGES_BASE_NAME_PREFIX + APPLICATION_LANGUAGES[languageBox.value]
+            "${LANGUAGES_BASE_NAME_PREFIX}_${APPLICATION_LANGUAGES_CODES_BY_NAMES[languageBox.value]}"
         )
 
         if (session.currentLanguage != newBundle) {

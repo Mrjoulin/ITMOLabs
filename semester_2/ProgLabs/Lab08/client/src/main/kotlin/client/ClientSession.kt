@@ -17,5 +17,5 @@ data class ClientSession(
     var collectionManager: CollectionManager = CollectionManager(),
     var socketWorker: SocketWorkerInterface = SocketWorker(collectionManager),
     var languageChanged: Boolean = false,
-    var currentLanguage: ResourceBundle = ResourceBundle.getBundle(LANGUAGES_BASE_NAME_PREFIX + "ru")
+    var currentLanguage: ResourceBundle = ResourceBundle.getBundle(LANGUAGES_BASE_NAME_PREFIX)
 )

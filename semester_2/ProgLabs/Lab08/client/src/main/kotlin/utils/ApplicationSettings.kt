@@ -4,13 +4,14 @@ const val APPLICATION_NAME = "Routes Application"
 const val APPLICATION_ICON_PATH = "images/icon.png"
 
 // Languages
-const val LANGUAGES_BASE_NAME_PREFIX = "locales.Resource_"
-val APPLICATION_LANGUAGES = mapOf(
+const val LANGUAGES_BASE_NAME_PREFIX = "locales.Resource"
+val APPLICATION_LANGUAGES_CODES_BY_NAMES = mapOf(
     Pair("Русский", "ru"),
     Pair("English (Indian)", "en"),
     Pair("Norsk", "no"),
     Pair("Magyar", "hu")
 )
+val APPLICATION_LANGUAGES_NAMES_BY_CODES = APPLICATION_LANGUAGES_CODES_BY_NAMES.entries.associate{ it.value to it.key}
 
 // Authorization
 const val AUTHORIZATION_WINDOW_WIDTH = 500.0
