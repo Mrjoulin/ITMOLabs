@@ -26,7 +26,7 @@ class Resource_en : ListResourceBundle() {
             arrayOf("tableViewHeaderMessage", "Table of routes in collection"),
             arrayOf("idColumnMessage", "Id"),
             arrayOf("authorColumnMessage", "Author"),
-            arrayOf("dateColumnMessage", "Creation Date"),
+            arrayOf("dateColumnMessage", "Creation date"),
             arrayOf("nameColumnMessage", "Name"),
             arrayOf("coordinatesColumnMessage", "Coordinates"),
             arrayOf("fromColumnMessage", "From"),
@@ -45,6 +45,12 @@ class Resource_en : ListResourceBundle() {
             arrayOf("dialogueWindow.cancelButtonMessage", "Cancel"),
             arrayOf("dialogueWindow.saveButtonMessage", "Save"),
             arrayOf("dialogueWindow.deleteButtonMessage", "Delete"),
+            //add window
+            arrayOf("addWindow.titleLabel", "Add new route"),
+            arrayOf("addWindow.addButtonMessage", "Add"),
+            arrayOf("addWindow.withoutComparing", "Without comparing"),
+            arrayOf("addWindow.ifMax", "If max"),
+            arrayOf("addWindow.ifMin", "If min"),
             //visualization
             arrayOf("visualizationLabel", "Routes map"),
             //commands

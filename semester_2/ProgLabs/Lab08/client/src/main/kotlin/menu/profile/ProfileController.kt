@@ -52,7 +52,9 @@ class ProfileController(private val session: ClientSession) : Initializable {
         changePassword.promptText = bundle.getString("profile.changePassword")
 
         languageBox.items.addAll(APPLICATION_LANGUAGES.keys)
-        languageBox.value = DEFAULT_APPLICATION_LANGUAGE
+
+        val curLanguageCode = session.currentLanguage.baseBundleName.removePrefix(LANGUAGES_BASE_NAME_PREFIX)
+        languageBox.value = APPLICATION_LANGUAGES.entries.associate{ it.value to it.key}[curLanguageCode]
     }
 
     @FXML

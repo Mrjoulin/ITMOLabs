@@ -39,11 +39,10 @@ class MenuController(private val session: ClientSession) : Initializable {
 
     private var currentUI = APPLICATION_TABLE_SECTION
 
-    private lateinit var bundle: ResourceBundle
+    private var bundle: ResourceBundle = session.currentLanguage
 
     @FXML
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        bundle = session.currentLanguage
         tablebutton.text = bundle.getString("tablebuttonMessage")
         visualizationbutton.text = bundle.getString("visualizationbuttonMessage")
         commandsbutton.text = bundle.getString("commandsbuttonMessage")
@@ -132,7 +131,13 @@ class MenuController(private val session: ClientSession) : Initializable {
     }
 
     private fun changeLanguage() {
-        // TODO change buttons text
+        bundle = session.currentLanguage
+
+        tablebutton.text = bundle.getString("tablebuttonMessage")
+        println(bundle.getString("tablebuttonMessage"))
+        visualizationbutton.text = bundle.getString("visualizationbuttonMessage")
+        commandsbutton.text = bundle.getString("commandsbuttonMessage")
+
         loadUI()
     }
 }

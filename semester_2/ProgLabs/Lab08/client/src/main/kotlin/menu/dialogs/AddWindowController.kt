@@ -20,6 +20,7 @@ import java.util.*
 class AddWindowController(private val session: ClientSession) : Initializable {
 
     @FXML lateinit var authorField: TextField
+
     @FXML
     lateinit var titleLabel: Label
     @FXML
@@ -48,14 +49,44 @@ class AddWindowController(private val session: ClientSession) : Initializable {
     lateinit var errorLabel: Label
     @FXML
     lateinit var choiceBox: ChoiceBox<String>
+    @FXML
+    lateinit var authorLabel: Label
+    @FXML
+    lateinit var nameLabel: Label
+    @FXML
+    lateinit var coordinatesLabel: Label
+    @FXML
+    lateinit var fromLabel: Label
+    @FXML
+    lateinit var toLabel: Label
+    @FXML
+    lateinit var distanceLabel: Label
+
+    private lateinit var bundle: ResourceBundle
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        bundle = session.currentLanguage
+
+        titleLabel.text = bundle.getString("addWindow.titleLabel")
+        authorLabel.text = bundle.getString("dialogueWindow.authorLabelMessage") + ":"
+        nameLabel.text = bundle.getString("dialogueWindow.nameLabelMessage") + ":"
+        coordinatesLabel.text = bundle.getString("dialogueWindow.coordinatesLabelMessage") + ":"
+        fromLabel.text = bundle.getString("dialogueWindow.fromLabelMessage") + ":"
+        toLabel.text = bundle.getString("dialogueWindow.toLabelMessage") + ":"
+        distanceLabel.text = bundle.getString("dialogueWindow.distanceLabelMessage") + ":"
+        addButton.text = bundle.getString("addWindow.addButtonMessage")
+
         authorField.text = session.username
-        choiceBox.items.addAll("Без сравнения", "Если больше всех", "Если меньше всех")
-        choiceBox.value = "Без сравнения"
+        choiceBox.items.addAll(
+            bundle.getString("addWindow.withoutComparing"),
+            bundle.getString("addWindow.ifMax"),
+            bundle.getString("addWindow.ifMin")
+        )
+        choiceBox.value = bundle.getString("addWindow.withoutComparing")
     }
 
     fun addRoute() {
+
         val data = getNewFields()
 
         val inp = InputStreamReader(data.byteInputStream())
@@ -64,8 +95,8 @@ class AddWindowController(private val session: ClientSession) : Initializable {
             val updatedEntityMap = CreateEntityMap(inp).getObjectMapFromInput(Route::class.java)
 
             val commandType = when(choiceBox.value) {
-                "Если больше всех" -> "add_if_max"
-                "Если меньше всех" -> "add_if_min"
+                bundle.getString("addWindow.ifMax") -> "add_if_max"
+                bundle.getString("addWindow.ifMin") -> "add_if_min"
                 else -> "add"
             }
 

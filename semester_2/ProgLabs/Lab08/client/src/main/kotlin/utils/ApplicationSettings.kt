@@ -5,11 +5,12 @@ const val APPLICATION_ICON_PATH = "images/icon.png"
 
 // Languages
 const val LANGUAGES_BASE_NAME_PREFIX = "locales.Resource_"
-const val DEFAULT_APPLICATION_LANGUAGE = "Русский"
 val APPLICATION_LANGUAGES = mapOf(
-    Pair("Русский", "ru")
-    // TODO other langs
-) // arrayOf("Русский", "Норвежский", "Венгерский", "Английский (Индия)")
+    Pair("Русский", "ru"),
+    Pair("English (Indian)", "en"),
+    Pair("Norsk", "no"),
+    Pair("Magyar", "hu")
+)
 
 // Authorization
 const val AUTHORIZATION_WINDOW_WIDTH = 500.0
