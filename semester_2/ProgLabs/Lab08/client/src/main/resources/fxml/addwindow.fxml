@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" prefHeight="530.0" prefWidth="604.0" stylesheets="@../styles/dialoguewindowstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.dialogs.AddWindowController">
+    <children>
+        <Button id="editButton" fx:id="addButton" layoutX="335.0" layoutY="447.0" mnemonicParsing="false" onAction="#addRoute" prefHeight="46.0" prefWidth="202.0" stylesheets="@../styles/dialoguewindowstyle.css" text="Добавить">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Label fx:id="titleLabel" layoutX="164.0" layoutY="23.0" prefHeight="34.0" prefWidth="304.0" text="Добавление нового маршрута">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="authorLabel" layoutX="26.0" layoutY="66.0" text="Автор:">
+            <font>
+                <Font size="20.0" />
+            </font>
+            <rotationAxis>
+                <Point3D z="4.0" />
+            </rotationAxis>
+        </Label>
+        <Label fx:id="nameLabel" layoutX="26.0" layoutY="100.0" text="Название:">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="coordinatesLabel" layoutX="26.0" layoutY="133.0" text="Координаты:">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="fromLabel" layoutX="26.0" layoutY="187.0" text="Откуда:">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="toLabel" layoutX="26.0" layoutY="266.0" text="Куда:">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="distanceLabel" layoutX="26.0" layoutY="344.0" text="Длина:">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <TextField fx:id="authorField" editable="false" focusTraversable="false" layoutX="175.0" layoutY="66.0" minHeight="27.0" minWidth="376.0" prefHeight="27.0" prefWidth="376.0" snapToPixel="false">
+            <font>
+                <Font size="5.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding></TextField>
+        <TextField fx:id="nameField" focusTraversable="false" layoutX="175.0" layoutY="101.0" minHeight="27.0" minWidth="376.0" prefHeight="27.0" prefWidth="376.0">
+            <font>
+                <Font size="5.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <Label layoutX="181.0" layoutY="134.0" text="X =">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="181.0" layoutY="157.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="31.0" text="Y =">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="fromNameField" focusTraversable="false" layoutX="175.0" layoutY="188.0" minHeight="27.0" minWidth="376.0" prefHeight="27.0" prefWidth="376.0">
+            <font>
+                <Font size="5.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <TextField id="smallTextFields" fx:id="coordinateXField" focusTraversable="false" layoutX="218.0" layoutY="138.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="132.0">
+            <font>
+                <Font size="3.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <TextField id="smallTextFields" fx:id="coordinateYField" focusTraversable="false" layoutX="218.0" layoutY="161.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="132.0">
+            <font>
+                <Font size="3.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <Label layoutX="181.0" layoutY="215.0" text="X =">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="181.0" layoutY="238.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="31.0" text="Y =">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField id="smallTextFields" fx:id="fromXField" focusTraversable="false" layoutX="218.0" layoutY="219.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="132.0">
+            <font>
+                <Font size="3.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <TextField id="smallTextFields" fx:id="fromYField" focusTraversable="false" layoutX="218.0" layoutY="242.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="132.0">
+            <font>
+                <Font size="3.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <TextField fx:id="toNameField" focusTraversable="false" layoutX="177.0" layoutY="267.0" minHeight="27.0" minWidth="376.0" prefHeight="27.0" prefWidth="376.0">
+            <font>
+                <Font size="5.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <Label layoutX="183.0" layoutY="294.0" text="X =">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="183.0" layoutY="317.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="31.0" text="Y =">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField id="smallTextFields" fx:id="toXField" focusTraversable="false" layoutX="220.0" layoutY="298.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="132.0">
+            <font>
+                <Font size="3.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <TextField id="smallTextFields" fx:id="toYField" focusTraversable="false" layoutX="220.0" layoutY="321.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="132.0">
+            <font>
+                <Font size="3.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+        <TextField fx:id="distanceField" focusTraversable="false" layoutX="177.0" layoutY="345.0" minHeight="27.0" minWidth="376.0" prefHeight="27.0" prefWidth="376.0">
+            <font>
+                <Font size="5.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.0" left="5.0" />
+            </padding>
+        </TextField>
+      <Label fx:id="errorLabel" layoutX="77.0" layoutY="406.0" prefHeight="30.0" prefWidth="469.0" textFill="RED" />
+      <ChoiceBox fx:id="choiceBox" layoutX="54.0" layoutY="447.0" prefHeight="46.0" prefWidth="202.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+    </children>
+    <padding>
+        <Insets left="12.0" />
+    </padding>
+</AnchorPane>

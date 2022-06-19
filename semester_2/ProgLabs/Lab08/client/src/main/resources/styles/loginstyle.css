@@ -1,0 +1,34 @@
+/* Login and registration box*/
+
+#loginTextField{
+    -fx-border-radius: 25;
+    -fx-border-color: black;
+    -fx-background-radius: 25;
+
+}
+
+#passwordTextField{
+    -fx-border-radius: 25;
+    -fx-border-color: black;
+    -fx-background-radius: 25;
+
+}
+
+#loginButton{
+    -fx-background-color: #6C69F5;
+    -fx-background-radius: 25;
+    -fx-text-fill: white;
+
+}
+
+#startRegisteringButton:focused{
+    -fx-border-width: 0;
+}
+
+#startLoginButton:focused{
+    -fx-border-width: 0;
+}
+
+#authorizationLabel{
+    -fx-font-family: Montserrat, "Open Sans", Helvetica, Arial, sans-serif;
+}
