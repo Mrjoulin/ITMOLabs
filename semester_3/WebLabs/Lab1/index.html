@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Super Matthew's Lab</title>
+    <style>
+        body {
+            background-color: #202023;
+            color: white;
+            font-family: monospace;
+        }
+        ::selection {
+            background-color: #4b61cf;
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+            line-height: 90%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            font-style: italic;
+        }
+        button {
+            border: none;
+            border-radius: 3px;
+        }
+
+        .controller {
+            left: 0;
+            width: 30%;
+            height: 333px;
+            float:left;
+            border: 2px dashed green;
+            border-radius: 20px;
+            padding-bottom: 5%;
+            padding-top: 1%;
+        }
+        input[type="checkbox"] {
+            filter: invert(10%) hue-rotate(14deg) brightness(1.2);
+        }
+
+        .invisible {
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+            left: 15%;
+            top: 35%;
+			display: inline;
+		}
+
+        .x-buttons {
+            top: 20px;
+            width: fit-content;
+            font-size: 0px;
+            margin: auto;
+        }
+        .x { width: 30px; font-size: 14px; }
+        #x-3 { position: relative; top: 20px; left: 30px; }
+        #x-4 { position: relative; top: 100px; left: 60px; }
+        #x-2 { position: relative; top: 80px; left: 30px; }
+        #x-1 { position: relative; top: 40px; }
+        #x0 { position: relative; top: 60px; }
+        #x1 { position: relative; top: 80px; }
+        #x2 { position: relative; top: 40px; left: -30px; }
+        #x3 { position: relative; top: 100px; left: -30px; }
+        #x4 { position: relative; top: 20px; left: -60px; }
+    
+        .y-input {
+            position: relative;
+            top: 120px;
+            width: fit-content;
+            margin: auto;
+        }
+        #y-label, #r-label {
+            font-size: 24px;
+            margin-right: 30px;
+            float: left;
+        }
+        #y-label { margin-right: 70px; }
+        #y-value {
+            position: relative;
+            top: 5px;
+            width: 45px;
+            border: none;
+            border-radius: 5px;
+            color: #4b61cf;
+        }
+        
+        .r-checkbox {
+            position: relative;
+            top: 120px;
+            width: fit-content;
+            margin: auto;
+        }
+        #r-label {
+            position: relative;
+            top: 20px;
+        }
+        .r-chexbox-column-edge, .r-chexbox-column-center {
+            float: left;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            margin-left: 10px;
+        }
+        .r-chexbox-column-center { padding-top: 20px; }
+        
+        .submit-button-block {
+            position: relative;
+            top: 140px;
+            width: fit-content;
+            margin: auto;
+            display: flex;
+        }
+        #submit-button {
+            width: 150px;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            background: #4b61cf;
+            color: #fff;
+        }
+        #submit-button:disabled {
+            background: gray;
+        }
+
+        #controller-title {
+            font-size: 24px;
+            margin-left: 5%;
+        }
+
+        .choosen {
+            background-color: #4b61cf;
+            color: white;
+        }
+
+        .main {
+            width: 35%;
+            float:left;
+            text-align: center;
+        }
+
+        .results {
+            width: 34%;
+            float: left;
+            text-align: center;
+        }
+
+        table {
+            display: block; 
+            height: 400px; 
+            overflow: auto;
+            border: 2px dashed green;
+            border-spacing: 0;
+            border-collapse: collapse;    
+        }
+        th, td {
+            border-bottom: 2px dashed green;
+        }
+        tbody tr:hover {
+            transform: scale(1.01);
+            background-color: #373737;
+        }
+        #results-table tr th {
+            position: sticky; 
+            top: 0;
+            background-color: #1d1d1de0;
+        }
+
+        #disable-video {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+        /* other */
+        .overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 10000;
+			pointer-events: none;
+		}
+    </style>
+    </head>
+    <body>
+        <div>
+            <video style="display: none;" id="bomb-video" src="src/assets/bomb.mp4" controls="true" crossorigin="anonymous"></video>
+            <canvas id="tmp" style="display: none;" width="1280" height="720"></canvas>
+		    <canvas id="bomb" class="overlay" width="1280" height="720"></canvas>
+        </div>
+        <div class="header">
+            <h1>Matthew Ivanov</h1>
+            <h3>P32111 / 1508</h3>
+        </div>
+        <div class="controller">
+            <!--
+                Buttons: X, Y, R
+            -->
+            <label id="controller-title">Control pane</label>
+            <form id="user-request">
+                <div class="x-buttons">
+                    <input class="invisible" id="x-value" name="x" type="text" value="" required>
+                    <button class="x" id="x-4" type="button">-4</button>
+                    <button class="x" id="x-3" type="button">-3</button>
+                    <button class="x" id="x-2" type="button">-2</button>
+                    <button class="x" id="x-1" type="button">-1</button>
+                    <button class="x" id="x0" type="button">0</button>
+                    <button class="x" id="x1" type="button">1</button>
+                    <button class="x" id="x2" type="button">2</button>
+                    <button class="x" id="x3" type="button">3</button>
+                    <button class="x" id="x4" type="button">4</button>
+                </div>
+                <br>
+                <div class="y-input">
+                    <label id="y-label">Y: </label>
+                    <input id="y-value" name="y" type="text" pattern="[-+]?([0-4][\.,][0-9]+|[0-4])" required title="Y must be in range (-5, 5)">    
+                </div>
+                <br>
+                <div class="r-checkbox">
+                    <label id="r-label">R: </label>
+                    <input class="invisible" id="r-value" name="r" type="text" value="" 
+                        pattern="([1-3]|[1-2]\.5)" required title="Only one checkbox must be selected"
+                    >
+                    <div class="r-chexbox-column-edge">
+                        <input class="r" name="r" id="r1" type="checkbox" value="1">
+                        <label for="r1">1</label>
+                        <input class="r" name="r" id="r2" type="checkbox" value="1.5">
+                        <label for="r2">1.5</label>
+                    </div>
+                    <div class="r-chexbox-column-center">
+                        <input class="r" name="r" id="r3" type="checkbox" value="2">
+                        <label for="r3">2</label>
+                    </div>
+                    <div class="r-chexbox-column-edge">
+                        <input class="r" name="r" id="r4" type="checkbox" value="2.5">
+                        <label for="r4">2.5</label>
+                        <input class="r" name="r" id="r5" type="checkbox" value="3">
+                        <label for="r5">3</label>
+                    </div>
+                </div>
+                <br>
+                <div class="submit-button-block">
+                    <button type="submit" id="submit-button">Check</button>
+                </div>
+            </form>
+        </div>
+        <div class="main">
+            <!--
+                Main body of Lab: Map + shooter
+            -->
+            <img src="src/assets/area.svg" class="plot" width="350px"/>
+        </div>
+        <div class="results">
+            <!--
+                Table with previos shots
+            -->
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th width="5%">X</th>
+                        <th width="5%">Y</th>
+                        <th width="5%">R</th>
+                        <th width="40%">Current Time</th>
+                        <th width="25%">Script Time(ms)</th>
+                        <th width="20%">Result</th>
+                    </tr>
+                </thead>
+                <tbody id="results-content">
+                </tbody>
+            </table>
+        </div>
+        <input id="disable-video" type="checkbox" value="">
+        <script src="src/js/animation.js" type="text/javascript"></script>
+        <script src="src/js/main.js" type="text/javascript"></script>
+    </body>
+</html>
