@@ -24,6 +24,7 @@ import utils.*
 import utils.exceptions.UnsuccessfulRequestException
 import java.net.URL
 import java.util.*
+import java.util.function.Predicate
 import kotlin.collections.HashSet
 
 class TableViewController(private val session: ClientSession) : UpdatableController, Initializable{
@@ -103,14 +104,15 @@ class TableViewController(private val session: ClientSession) : UpdatableControl
 
         val request = Request(token = session.userToken, command = "show")
 
-        session.socketWorker.makeAsyncRequest(request, { logger.error("Error while getting objects from server: ${it.message}") }) {
-            val routes = it.routesCollection
+        session.socketWorker.makeAsyncRequest(
+            request, { logger.error("Error while getting objects from server: ${it.message}") }
+        ) { response ->
+            val routes = response.routesCollection
 
-            if (routes != null && routes.isNotEmpty()) {
+            if (routes != null && routes.isNotEmpty())
                 session.collectionManager.initializeCollection(routes)
-            } else {
+            else
                 logger.info("No objects in collection")
-            }
         }
 
         return HashSet()
