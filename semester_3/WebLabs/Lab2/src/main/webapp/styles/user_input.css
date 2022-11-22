@@ -1,0 +1,116 @@
+.controller {
+    left: 0;
+    width: 30%;
+    height: 333px;
+    float:left;
+    border: 2px dashed green;
+    border-radius: 20px;
+    padding-bottom: 5%;
+    padding-top: 1%;
+}
+
+#controller-title {
+    font-size: 24px;
+    margin-left: 5%;
+}
+
+input[type="checkbox"] {
+    filter: invert(10%) hue-rotate(14deg) brightness(1.2);
+}
+
+.invisible {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    left: 15%;
+    top: 35%;
+    display: inline;
+}
+
+/* X buttons */
+
+.x-buttons {
+    top: 20px;
+    width: fit-content;
+    font-size: 0px;
+    margin: auto;
+}
+
+.x { width: 30px; font-size: 14px; }
+#x5  { position: relative; top: 100px; left: 60px; }
+#x-3 { position: relative; top: 20px; left: 30px; }
+#x-2 { position: relative; top: 80px; left: 30px; }
+#x-1 { position: relative; top: 40px; }
+#x0 { position: relative; top: 60px; }
+#x1 { position: relative; top: 80px; }
+#x2 { position: relative; top: 40px; left: -30px; }
+#x3 { position: relative; top: 100px; left: -30px; }
+#x4 { position: relative; top: 20px; left: -60px; }
+
+.choosen {
+    background-color: #4b61cf;
+    color: white;
+}
+/* X input field */
+
+.y-input {
+    position: relative;
+    top: 120px;
+    width: fit-content;
+    margin: auto;
+}
+#y-label, #r-label {
+    font-size: 24px;
+    margin-right: 30px;
+    float: left;
+}
+#y-label { margin-right: 70px; }
+#y-value {
+    position: relative;
+    top: 5px;
+    width: 45px;
+    border: none;
+    border-radius: 5px;
+    color: #4b61cf;
+}
+
+/* R checkboxes */
+
+.r-checkbox {
+    position: relative;
+    top: 120px;
+    width: fit-content;
+    margin: auto;
+}
+#r-label {
+    position: relative;
+    top: 20px;
+}
+.r-chexbox-column-edge, .r-chexbox-column-center {
+    float: left;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 10px;
+}
+.r-chexbox-column-center { padding-top: 20px; }
+
+/* Submit button */
+
+.submit-button-block {
+    position: relative;
+    top: 140px;
+    width: fit-content;
+    margin: auto;
+    display: flex;
+}
+
+#submit-button {
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+#submit-button:disabled {
+    background: gray;
+}
