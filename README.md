@@ -1,5 +1,21 @@
 # ITMO
 
+# Semester 3
+
+## Web Labs:
+
+### Lab 1: `№1508`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_3/WebLabs/Lab1) to view code
+
+### Lab 2: `№11552`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_3/WebLabs/Lab2) to view code
+
+### Lab 3: `№13331`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_3/WebLabs/Lab3) to view code
+
+### Lab 4: `№1800`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_3/WebLabs/Lab4) to view code
+
 # Semester 2
 
 ## Programming Labs:
@@ -7,10 +23,32 @@
 ### Lab 5: `№41511`
 #### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_2/ProgLabs/Lab05) to view code
 
+### Lab 6:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_2/ProgLabs/Lab06) to view code
+
+### Lab 7: `№4529`
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_2/ProgLabs/Lab07) to view code
+
+### Lab 8:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_2/ProgLabs/Lab08) to view code
+
 ## OPD Labs
 
-### Lab 3: `№1577`
+### Lab 3:
 #### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_2/OPDLabs/Lab03/) to view programs and trace
+
+### Lab 4: 
+#### Missing
+
+### Lab 5:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_2/OPDLabs/Lab05/) to view programs and trace
+
+### Lab 6:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_2/OPDLabs/Lab06/) to view programs and trace
+
+### Lab 7:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_2/OPDLabs/Lab07/) to view programs and trace
+
 
 # Semester 1
 

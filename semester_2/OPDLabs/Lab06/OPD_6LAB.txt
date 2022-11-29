@@ -1,0 +1,86 @@
+			ORG 	0x0					; Initialize vectors of interruption
+V0:			WORD	$DEFAULT, 0x180
+V1:			WORD	$INT1, 0x180
+V2:			WORD	$DEFAULT, 0x180
+V3:			WORD	$INT3, 0x180	
+V4:			WORD	$DEFAULT, 0x180	
+V5:			WORD	$DEFAULT, 0x180
+V6:			WORD	$DEFAULT, 0x180	
+V7:			WORD	$DEFAULT, 0x180	
+
+			ORG		0x022
+X:			WORD	0x0000
+
+IN_DATA:	WORD	0x0000	; Variable for data recieved from Ex. Dev. 3
+TEMP:		WORD	0x0000	; Tepmrory result for XOR
+
+MIN:		WORD	0xFFE2  ; Min X value
+MAX:		WORD	0x21	; Max X value
+
+			ORG 	0x027
+START:		DI		
+			LD		#0x9	; Set interrupt control of external device 1: MR (1000 | 0001 = 1001)
+			OUT		3		
+			LD		#0xB	; Set interrupt control of external device 3: MR (1000 | 0011 = 1011)
+			OUT		7
+
+MAIN_TASK:	DI				; Execute main task of the program: Decrement X
+			LD		$X	    
+			DEC
+			CALL	CHECK	
+			EI
+			JUMP	MAIN_TASK
+
+
+INT1:		LD		$X	
+			HLT
+			ASL
+			ASL		
+			SUB		#0x6	; Function 4X - 6
+			OUT		2	
+			HLT
+			IRET	
+
+INT3:		LD		$X
+			HLT	
+			CLA	
+			IN		6
+			SXTB
+			ST 		$IN_DATA	; Put data from Ex. Dev. 3 to variable
+
+			AND		$X 		
+			NOT
+			ST 		$TEMP	; Put temprory result for XOR operation to variable
+
+			LD		$IN_DATA	; Load data from Ex. Dev. 3
+			OR		$X
+			AND		$TEMP	; Calculation of XOR by the formula: (NOT (A & B)) & (A | B) 
+
+			HLT
+			CALL	CHECK	
+			HLT	
+			IRET		
+
+	
+CHECK:		CMP		$MAX	; If X greater then MAX, set MAX value for X
+			BPL		SETMAX
+			CMP		$MIN	; If X lower then MIN, set MAX value for X
+			BMI		SETMAX
+			JUMP	SAVE	
+
+SETMAX:		LD		$MAX
+SAVE:		ST		$X		; Save value from AC to X
+			RET
+
+DEFAULT:	PUSH
+			CLA
+			OUT 	0x1
+			OUT 	0x5
+			OUT 	0xB
+			OUT 	0xD
+			OUT 	0x11
+			OUT 	0x15
+			OUT 	0x19
+			OUT 	0x1D
+			POP
+			IRET

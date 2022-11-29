@@ -1,0 +1,95 @@
+ORG 0x419
+
+AC_VAL: 	WORD 0x1111
+
+TEST1_C:	WORD 0x0
+TEST1_VAL: 	WORD 0x3333
+TEST1_ANS: 	WORD 0x4444
+
+TEST2_C:	WORD 0x1
+TEST2_VAL: 	WORD 0x3333
+TEST2_ANS: 	WORD 0x4445
+
+TEST3_C:	WORD 0x1
+TEST3_VAL: 	WORD 0x6EEE
+TEST3_ANS: 	WORD 0x8000
+
+
+START:	CLA
+
+TEST1:	CLC
+	   	LD $TEST1_C
+	   	BEQ PROCESS1 ; если регистр переноса должен быть не 0
+		CMC 		; инверитруем регистр переноса
+
+PROCESS1:	LD $AC_VAL	; загружаем значение AC
+
+		WORD 0x941B	; выполняем операцию
+
+		BVS TEST2
+		LD #0x1
+		ST $TEST1_VRES
+
+		LD $TEST1_VAL
+		CMP $TEST1_ANS
+
+		BNE TEST2
+		LD #0x1
+		ST $TEST1_RES
+
+TEST2:	CLC
+	   	LD $TEST2_C
+	   	BEQ PROCESS2	; если регистр переноса должен быть не 0
+		CMC 		; инверитруем регистр переноса
+
+PROCESS2:	LD $AC_VAL	; загружаем значение AC
+	
+		WORD 0x941E	; выполняем операцию
+
+		BVS TEST3
+		LD #0x1
+		ST $TEST2_VRES
+
+		LD $TEST2_VAL
+		CMP $TEST2_ANS
+
+		BNE TEST3
+		LD #0x1
+		ST $TEST2_RES
+
+TEST3:	CLC
+	   	LD $TEST3_C
+	   	BEQ PROCESS3	; если регистр переноса должен быть не 0
+		CMC 		; инверитруем регистр переноса
+
+PROCESS3:	LD $AC_VAL	; загружаем значение AC
+
+		WORD 0x9421	; выполняем операцию
+
+		BVC FINAL
+		LD #0x1
+		ST $TEST3_VRES
+
+		LD $TEST3_VAL
+		CMP $TEST3_ANS
+
+		BNE FINAL
+		LD #0x1
+		ST $TEST3_RES
+
+FINAL:	LD $TEST1_VRES
+		AND $TEST1_RES
+		AND $TEST2_VRES
+		AND $TEST2_RES
+		AND $TEST3_VRES
+		AND $TEST3_RES
+		ST $TOTAL_RES
+		HLT
+
+TEST1_VRES:	WORD 0x0
+TEST1_RES:	WORD 0x0	
+TEST2_VRES:	WORD 0x0
+TEST2_RES:	WORD 0x0
+TEST3_VRES:	WORD 0x0	
+TEST3_RES:	WORD 0x0
+TOTAL_RES:	WORD 0x0	
