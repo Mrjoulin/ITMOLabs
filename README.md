@@ -16,6 +16,14 @@
 ### Lab 4: `№1800`
 #### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_3/WebLabs/Lab4) to view code
 
+## Math Labs (advanced level):
+
+### Lab 1:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_3/Math/Lab1) to view code
+
+### Lab 2:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_3/Math/Lab2) to view code
+
 # Semester 2
 
 ## Programming Labs:
