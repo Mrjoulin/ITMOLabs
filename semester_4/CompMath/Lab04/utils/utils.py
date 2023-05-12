@@ -23,5 +23,5 @@ def print_table_of_results(dots, func):
 
     for dot in dots:
         print_line()
-        f_x = round(func(dot[0]))
-        print_values([dot[0], dot[1], f_x, f_x - dot[1]])
+        f_x = round(func(dot[0]), 3)
+        print_values([dot[0], dot[1], f_x, round(f_x - dot[1], 3)])

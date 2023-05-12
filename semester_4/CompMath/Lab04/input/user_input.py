@@ -2,12 +2,12 @@ from .validate_dots import *
 from utils import *
 
 
-def get_input():
+def get_input(in_line=False):
     while True:
         try:
-            usr_inp = input("$ ").replace(" ", "")
+            usr_inp = input("$ " if not in_line else "").replace(" ", "")
 
-            if not usr_inp:
+            if not usr_inp and not in_line:
                 continue
 
             return usr_inp
@@ -29,7 +29,7 @@ def read_dots_from_file():
     while filename is None:
         print("Enter filename to read function points (keep it empty to enter manually):", end=" ")
 
-        filename = input()
+        filename = get_input(in_line=True)
         if not filename:
             break
 

@@ -17,7 +17,8 @@ def show_functions_graph(functions, dots):
     ax.scatter(dots[:, 0], dots[:, 1], label='Points')
 
     for func_name, func in functions.items():
-        ax.plot(x, func(x), label=func_name)
+        if func is not None:
+            ax.plot(x, func(x), label=func_name)
 
     ax.legend()
     ax.spines['top'].set_visible(False)

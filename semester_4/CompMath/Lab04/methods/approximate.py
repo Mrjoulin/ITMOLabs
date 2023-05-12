@@ -10,6 +10,9 @@ def create_matrix(dots: list, num_coefficients: int, transform_x, transform_y):
     for i in range(len(dots)):
         dot_x, dot_y = transform_x(dots[i][0]), transform_y(dots[i][1])
 
+        if dot_x == np.NINF or dot_y == np.NINF:
+            raise ZeroDivisionError()
+
         cur_x = 1
         for j in range(2 * num_coefficients - 1):
             x[j] += cur_x
@@ -31,6 +34,7 @@ def find_coefficients(dots: list, num_coefficients: int, transform_x=None, trans
         transform_x=transform_x or linear,
         transform_y=transform_y or linear
     )
+
     coefficients = np.linalg.solve(x_matrix, xy_bias)
 
     return np.around(coefficients, 3)
@@ -54,7 +58,7 @@ def cube_approximate(dots):
 def exp_approximate(dots):
     a, b = find_coefficients(dots, 2, transform_y=np.log)
     func = lambda x: np.exp(a + b * x)
-    return " " * (len(str(a)) + 2) + "%s x\n%s e" % (b, a), func
+    return " " * (len(str(a)) + 2) + "%s x\n%s e" % (b, round(np.exp(a), 3)), func
 
 
 def log_approximate(dots):
@@ -66,10 +70,13 @@ def log_approximate(dots):
 def power_approximate(dots):
     a, b = find_coefficients(dots, 2, transform_x=np.log, transform_y=np.log)
     func = lambda x: np.exp(a) * x ** b
-    return " " * (len(str(a)) + 2) + "%s\n%s x" % (b, a), func
+    return " " * (len(str(a)) + 2) + "%s\n%s x" % (b, round(np.exp(a), 3)), func
 
 
 def get_std(dots, func):
+    if func is None:
+        return np.Inf
+
     return np.sqrt(np.sum((func(dots[:, 0]) - dots[:, 1]) ** 2) / len(dots))
 
 
@@ -83,11 +90,19 @@ def get_correlation_coefficient(dots):
 def approximate(dots):
     dots = np.array(dots)
 
+    approximate_func_names = ["linear", "square", "cube", "exponential", "logarithmic", "power"]
     approximate_func = [
         linear_approximate, square_approximate, cube_approximate,
         exp_approximate, log_approximate, power_approximate
     ]
-    approximate_res = [func(dots) for func in approximate_func]
+    approximate_res = []
+    for i, func in enumerate(approximate_func):
+        try:
+            approximate_res.append(func(dots))
+        except ZeroDivisionError:
+            print("Can't approximate by %s function" % approximate_func_names[i])
+            approximate_res.append((None, None))
+
     stds = [get_std(dots, func) for _, func in approximate_res]
 
     best_approx = int(np.argmin(stds))
@@ -97,18 +112,24 @@ def approximate(dots):
     cur_range = [best_approx] + cur_range
 
     for i in cur_range:
+        if None in approximate_res[i]:
+            continue
+
         if i != best_approx and approximate_res[i][0] == approximate_res[best_approx][0]:
             continue
 
-        print("%s point approximating function:" % ("Given" if i != cur_range[0] else "Best given"))
+        print("%s point approximating function (%s):" % (
+            "Given" if i != cur_range[0] else "Best given", approximate_func_names[i]
+        ))
         print(approximate_res[i][0])
         print("Function std:", stds[i])
 
-        if best_approx == 0:
+        if i == 0:
             print("Pearson's correlation coefficient:", get_correlation_coefficient(dots))
 
-        print_star_line("Table of results")
+        print_empty_lines(2)
+        print_star_line("Table of results", message_len=64)
         print_table_of_results(dots, approximate_res[i][1])
-        print("\n\n")
+        print_empty_lines(2)
 
     show_functions_graph(dict(approximate_res), dots)
