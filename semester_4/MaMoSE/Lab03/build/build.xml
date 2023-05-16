@@ -1,0 +1,204 @@
+<project name="WebLab3" default="build" xmlns:antcontrib="http://ant-contrib.sourceforge.net" xmlns:ant="http://www.w3.org/1999/XSL/Transform">
+    <property file="build.properties"/>
+    <property name="javav" value="${ant.java.version}"/>
+    <property name="jar.file" value="${jar_dir}/${ant.project.name}.jar"/>
+
+    <path id="classpath">
+        <fileset dir="lib" includes="*.jar"/>
+    </path>
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="lib/ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="lib/ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
+    <scriptdef name="propertyreset" language="javascript" description="Allows to assign @{property} new value">
+        <attribute name="name"/>
+        <attribute name="value"/>
+            project.setProperty(attributes.get("name"), attributes.get("value"));
+    </scriptdef>
+
+    <macrodef name="changeversion">
+        <attribute name="version"/>
+        <sequential>
+            <var name="javav" unset="true" />
+            <property name="javav" value="@{version}"/>
+            <echo>Set Java version to ${javav}</echo>
+        </sequential>
+    </macrodef>
+    
+    <!-- TARGETS -->
+
+    <target name="compile" description="компиляция исходных кодов проекта.">
+        <echo message="Compiling (JVM v.${javav})..." />
+        <mkdir dir="${class_dir}"/>
+        <javac includeantruntime="false" target="${javav}" source="${javav}" srcdir="${source_dir}" destdir="${class_dir}">
+            <classpath refid="classpath"/>
+        </javac>
+        <echo>Done!</echo>
+    </target>
+
+    <target name="build" depends="compile" description="упаковка скомпилированных файлов в исполняемый jar-архив">
+        <echo>Building...</echo>
+        <mkdir dir="${jar_dir}"/>
+        <jar basedir="${class_dir}" destfile="${jar.file}" manifest="${manifest_path}" />
+        <echo>Done!</echo>
+    </target>
+
+    <target name="scp" depends="build" description="перемещение собранного проекта по scp на выбранный сервер по завершению сборки. Предварительно необходимо выполнить сборку проекта (цель build)">
+        <echo>Copy to server...</echo>
+        <scp file="${jar.file}" todir="${scp_dest}:~/" port="${scp_port}" password="${scp_pass}"/>
+        <echo>Done!</echo>
+    </target>
+    
+    <target name="clean" description="удаление скомпилированных классов проекта и всех временных файлов">
+        <echo>Cleaning...</echo>
+        <delete dir="${class_dir}"/>
+        <delete dir="${copy_localization_dir}"/>
+        <delete file="${diff_file}"/>
+        <echo>Done!</echo>
+    </target>
+    
+    <target name="xml" description="валидация всех xml-файлов в проекте.">
+        <xmlvalidate failonerror="no" lenient="yes" warn="yes">
+            <fileset dir="${source_dir}">
+                <include name="**/*.xml"/>
+            </fileset>
+        </xmlvalidate>
+    </target>
+
+    <target name="history"
+            description="если проект не удаётся скомпилировать (цель compile), загружается предыдущая версия из репозитория git. Операция повторяется до тех пор, пока проект не удастся собрать, либо не будет получена самая первая ревизия из репозитория. Если такая ревизия найдена, то формируется файл, содержащий результат операции diff для всех файлов, измёненных в ревизии, следующей непосредственно за последней работающей.">
+        <echo>Checking current version...</echo>
+        <trycatch>
+            <try>
+                <antcall target="compile"/>
+            </try>
+            <catch>
+                <antcall target="load-previous-revision"/>
+                <exec executable="git" outputproperty="git.cur_commit">
+                    <arg value="rev-parse" />
+                    <arg value="HEAD" />
+                </exec>
+                <echo message="Checkout to commit: ${git.cur_commit}" />
+            </catch>
+        </trycatch>
+        <echo>Done!</echo>
+    </target>
+
+    <target name="load-previous-revision">
+        <exec executable="git" outputproperty="git.next_commit">
+            <arg value="rev-parse" />
+            <arg value="HEAD" />
+        </exec>
+        <exec executable="git" outputproperty="git.reverse_commits">
+            <arg value="log" />
+            <arg value=" --pretty=oneline" />
+            <arg value="--reverse"/>
+        </exec>
+        <propertyregex property="git.first_commit" input="${git.reverse_commits}" regexp="(\w+)" select="\1" />
+
+        <if>
+            <not>
+                <equals arg1="${git.first_commit}" arg2="${git.next_commit}" />
+            </not>
+            <then>
+                <echo>Checking previous version...</echo>
+                <exec executable="git">
+                    <arg value="checkout" />
+                    <arg value="HEAD^" />
+                </exec>
+
+                <trycatch>
+                    <try>
+                        <antcall target="compile"/>
+                        <exec executable="git">
+                            <arg value="diff"/>
+                            <arg value="${git.next_commit}"/>
+                            <redirector output="${diff_file}"/>
+                        </exec>
+                    </try>
+                    <catch>
+                        <antcall target="load-previous-revision"/>
+                    </catch>
+                </trycatch>
+            </then>
+        </if>
+    </target>
+
+    <target name="test" depends="build" description="запуск junit-тестов проекта. Перед запуском тестов необходимо осуществить сборку проекта (цель build)">
+        <echo>Testing...</echo>
+        <mkdir dir="${test_results_dir}" />
+        <junit haltonfailure="yes">
+            <classpath refid="classpath"/>
+            <classpath location="${class_dir}"/>
+
+            <formatter type="plain"/>
+            <batchtest fork="yes" todir="${test_results_dir}">
+                <fileset dir="${exec_dir}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+                <formatter type="xml"/>
+            </batchtest>
+        </junit>
+        <echo>Done!</echo>
+    </target>
+
+    <target name="report" depends="test" description="в случае успешного прохождения тестов сохраняет отчет junit в формате xml, добавляет его в репозиторий svn и выполняет commit.">
+        <junitreport tofile="${report_name}.xml" todir="${report_dir}">
+            <fileset dir="${test_results_dir}">
+                <include name="*.xml"/>
+            </fileset>
+            <report format="frames" todir="${report_dir}/html"/>
+        </junitreport>
+        <exec executable="svn">
+            <arg value="update" />
+            <arg value="${report_dir}"/>
+        </exec>
+        <exec executable="svn">
+            <arg value="commit" />
+            <arg value="${report_dir}"/>
+            <arg value="-m" />
+            <arg value="Update report" />
+        </exec>
+    </target>
+
+    <target name="native2ascii" description="преобразование native2ascii для копий файлов локализации (для тестирования сценария все строковые параметры необходимо вынести из классов в файлы локализации).">
+        <echo>Native2ASCII coding...</echo>
+        <mkdir dir="${copy_localization_dir}"/>
+        <native2ascii encoding="EUCJIS" src="${localization_dir}" dest="${copy_localization_dir}" includes="**/*.loc"/>
+        <echo>Done!</echo>
+    </target>
+
+    <target name="env" description="осуществляет сборку и запуск программы в альтернативных окружениях; окружение задается версией java и набором аргументов виртуальной машины в файле параметров">
+        <echo>Set up new environment...</echo>
+
+        <changeversion version="${env_javav}" />        
+        <antcall target="run"/>
+        <changeversion version="${ant.java.version}" />
+
+        <echo>Done!</echo>
+    </target>
+
+    <target name="run" depends="build" description="запуск приложения">
+        <echo message="Runing on JVM v.${javav}..." />
+
+        <exec executable="/usr/libexec/java_home" outputproperty="java_version.path">
+            <arg value="-v=${javav}" />
+        </exec>
+
+        <java jar="${jar.file}" fork="true" jvm="${java_version.path}/bin/java">
+            <classpath refid="classpath"/>
+            <classpath location="${class_dir}"/>
+            <jvmarg value="${java_args}"/>
+        </java>
+        <echo>Run compile!</echo>
+    </target>
+</project>

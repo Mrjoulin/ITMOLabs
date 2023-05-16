@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Created-By: Matthew Ivanov
+Main-Class: com.joulin.lab3.beans.ClientBean
