@@ -22,22 +22,22 @@ def process_function():
 
 def start():
     while True:
-        #try:
-        input_type = choose_function_or_input_manually()
+        try:
+            input_type = choose_function_or_input_manually()
 
-        if not input_type:
-            dots = get_dots()
-            target = get_target_point([dots[0][0], dots[-1][0]])
-            interpolate(dots, target)
-        else:
-            process_function()
+            if not input_type:
+                dots = get_dots()
+                target = get_target_point([dots[0][0], dots[-1][0]])
+                interpolate(dots, target)
+            else:
+                process_function()
 
-        if choose_continue_or_exit() == 1:
-            print("See you soon!")
-            return
-        #except Exception as e:
-        #    print("Some error happened: %s" % str(e))
-        #    print("Start again")
+            if choose_continue_or_exit() == 1:
+                print("See you soon!")
+                return
+        except Exception as e:
+            print("Some error happened: %s" % str(e))
+            print("Start again")
 
 
 if __name__ == '__main__':
