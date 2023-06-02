@@ -7,10 +7,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Vector;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CoordinatesValidationTest {
     private static final Vector<Coordinates> coordinatesVector = new Vector<>();
@@ -18,7 +18,7 @@ public class CoordinatesValidationTest {
     private static final String localisationFilePath = "src/main/java/com/joulin/lab3/tests/coordinatesValidation.loc";
     private static final int NUM_TESTS = 14;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() throws FileNotFoundException {
         File loc = new File(localisationFilePath);
         Scanner scanner = new Scanner(loc);

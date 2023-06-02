@@ -9,10 +9,10 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import com.joulin.lab3.utils.CoordinatesValidation;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AreaCheckTest {
     private static final AreaCheck areaCheck = new AreaCheck();
@@ -21,7 +21,7 @@ public class AreaCheckTest {
     private static final String localisationFilePath = "src/main/java/com/joulin/lab3/tests/areaCheck.loc";
     private static final int NUM_TESTS = 8;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() throws FileNotFoundException {
         File loc = new File(localisationFilePath);
         Scanner scanner = new Scanner(loc);

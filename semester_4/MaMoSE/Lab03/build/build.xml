@@ -33,7 +33,7 @@
             <echo>Set Java version to ${javav}</echo>
         </sequential>
     </macrodef>
-    
+
     <!-- TARGETS -->
 
     <target name="compile" description="компиляция исходных кодов проекта.">
@@ -136,18 +136,17 @@
     <target name="test" depends="build" description="запуск junit-тестов проекта. Перед запуском тестов необходимо осуществить сборку проекта (цель build)">
         <echo>Testing...</echo>
         <mkdir dir="${test_results_dir}" />
-        <junit haltonfailure="yes">
+        <junitlauncher haltOnFailure="yes">
             <classpath refid="classpath"/>
             <classpath location="${class_dir}"/>
 
-            <formatter type="plain"/>
-            <batchtest fork="yes" todir="${test_results_dir}">
-                <fileset dir="${exec_dir}">
-                    <include name="**/*Test.java"/>
+            <testclasses outputdir="${test_results_dir}">
+                <fileset dir="${class_dir}">
+                    <include name="**/*Test*"/>
                 </fileset>
-                <formatter type="xml"/>
-            </batchtest>
-        </junit>
+                <listener type="legacy-xml" sendSysErr="true" sendSysOut="true"/>
+            </testclasses>
+        </junitlauncher>
         <echo>Done!</echo>
     </target>
 
