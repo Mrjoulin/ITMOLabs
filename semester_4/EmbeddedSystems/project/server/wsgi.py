@@ -19,7 +19,7 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-from server.routes import run_app
+from src.routes import run_app
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('Server options')
