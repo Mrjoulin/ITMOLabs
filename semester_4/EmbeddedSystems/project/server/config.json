@@ -1,0 +1,14 @@
+{
+  "model_config": {
+    "model_name": "MobileNetSSD_deploy",
+    "input_dir": "model/"
+  },
+  "run_config": {
+    "detection_time": 20,
+    "frame_size": [300, 300],
+    "img_norm_ratio": 0.007843,
+    "percent_detection": 0.5,
+    "target_class_id": 15,
+    "seconds_to_find_mean": 5
+  }
+}

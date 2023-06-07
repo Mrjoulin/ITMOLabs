@@ -1,0 +1,6 @@
+opencv-python~=4.4.0.46
+aiohttp~=3.7.4.post0
+aiortc~=1.2.1
+numpy~=1.19.5
+requests~=2.25.0
+av~=8.0.3
