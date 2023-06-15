@@ -5,6 +5,7 @@ import os
 import platform
 import argparse
 
+import aiohttp_cors
 from aiohttp import web
 from aiortc import RTCPeerConnection, RTCSessionDescription
 from aiortc.contrib.media import MediaPlayer, MediaRelay
@@ -12,6 +13,11 @@ from aiortc.rtcrtpsender import RTCRtpSender
 
 
 ROOT = os.path.dirname(__file__)
+
+CONFIG_PATH = './config.json'
+with open(CONFIG_PATH, 'r') as f:
+    CONFIG = json.load(f)
+    logging.info('Configuration project:\n' + str(json.dumps(CONFIG, sort_keys=True, indent=4)))
 
 relay = None
 webcam = None
@@ -35,7 +41,12 @@ def create_local_tracks():
     options = {"framerate": "30", "video_size": "640x480"}
 
     if relay is None:
-        if platform.system() == "Darwin":
+        if CONFIG['run_config']['use_rtsp']:
+            webcam = MediaPlayer(
+                f"rtsp://{CONFIG['run_config']['rtsp_url']}:{CONFIG['run_config']['rtsp_port']}/live",
+                format='rtsp', options=options
+            )
+        elif platform.system() == "Darwin":
             webcam = MediaPlayer(
                 "default:none", format="avfoundation", options=options
             )
@@ -122,5 +133,16 @@ if __name__ == '__main__':
     app.router.add_get("/", index)
     app.router.add_get("/client.js", javascript)
     app.router.add_post("/offer", offer)
+
+    cors = aiohttp_cors.setup(app, defaults={
+        "*": aiohttp_cors.ResourceOptions(
+            allow_credentials=True,
+            expose_headers="*",
+            allow_headers="*"
+        )
+    })
+
+    for route in list(app.router.routes()):
+        cors.add(route)
 
     web.run_app(app, access_log=None, host=None, port=args.port, ssl_context=None)

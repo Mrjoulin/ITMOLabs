@@ -1,4 +1,6 @@
-aiohttp~=3.7.4.post0
-aiortc~=1.2.1
+aiohttp==3.8.4
+aiortc==1.5.0
+aiohttp_cors
 requests~=2.25.0
-av~=8.0.3
+av>=9.0.0
+absl-py

@@ -3,8 +3,12 @@
     "model_name": "MobileNetSSD_deploy",
     "input_dir": "model/"
   },
+  "connection_info": {
+    "webcam_url": "0.0.0.0",
+    "webcam_port": 6500
+  },
   "run_config": {
-    "detection_time": 20,
+    "detection_time": 10,
     "frame_size": [300, 300],
     "img_norm_ratio": 0.007843,
     "percent_detection": 0.5,

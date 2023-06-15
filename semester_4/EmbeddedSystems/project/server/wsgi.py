@@ -24,7 +24,7 @@ from src.routes import run_app
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('Server options')
     parser.add_argument("--host", default=None, help="Host server")
-    parser.add_argument("--port", "-p", type=int, default=5500, help="Port server (default: 5000)")
+    parser.add_argument("--port", "-p", type=int, default=5500, help="Port server (default: 5500)")
     parser.add_argument("--cert-file", help="SSL certificate file (for HTTPS)")
     parser.add_argument("--key-file", help="SSL key file (for HTTPS)")
     args = parser.parse_args()

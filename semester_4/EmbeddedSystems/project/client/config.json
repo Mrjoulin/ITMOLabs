@@ -1,0 +1,7 @@
+{
+  "run_config": {
+    "use_rtsp": false,
+    "rtsp_url": "172.28.21.191",
+    "rtsp_port": 8554
+  }
+}
