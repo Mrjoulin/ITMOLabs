@@ -125,7 +125,7 @@ async def create_new_connection():
     # Send remove offer to camera
 
     remote_offer = requests.post(
-        f"http:/{CONFIG['connection_info']['webcam_url']}:{CONFIG['connection_info']['webcam_port']}/offer",
+        f"http://{CONFIG['connection_info']['webcam_url']}:{CONFIG['connection_info']['webcam_port']}/offer",
         json={
             "sdp": rtc_offer.sdp,
             "type": rtc_offer.type
@@ -143,6 +143,7 @@ async def create_new_connection():
             await asyncio.sleep(1)
 
         logging.info("Close connection!")
+        CURRENT_PROCESS.is_working = False
         await pc.close()
 
     asyncio.ensure_future(detection_time_end())
