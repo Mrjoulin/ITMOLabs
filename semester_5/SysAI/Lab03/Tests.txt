@@ -1,0 +1,5 @@
+I have cards: 2 diamonds, 5 clov, king hearts, but they hit me with cards: 4 clover, 6 pikes
+I have cards: 2 diamonds, 5 clov, king hearts, but they hit me with cards: 4 clover, 4 pikes
+I have cards: ace clover, 2 diamonds, 5 clov, king hearts, 2 hearts. I have to beat cards: 4 clover, 4 pikes
+I have cards: ace clover, 2 diamonds, 5 clov, king hearts, 2 hearts, 4 hearts. I have to beat cards: 4 clover, 4 pikes
+I have cards: ace clover, 2 diamonds, 5 clov, king hearts, 2 hearts, 4 hearts. I have to beat cards: 4 clover, 4 pikes, 4 diam

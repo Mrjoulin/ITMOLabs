@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/joulin/ontologies/2023/8/untitled-ontology-3"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/joulin/ontologies/2023/8/untitled-ontology-3">
+    <Prefix name="" IRI="http://www.semanticweb.org/joulin/ontologies/2023/8/untitled-ontology-3/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#Card"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Suit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Value"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#greater"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#trump_suit"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Clover"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Diamonds"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Hearts"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Pikes"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ace"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#jack"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#king"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#queen"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#10"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#3"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#4"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#6"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#7"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#8"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#9"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Suit"/>
+        <Class IRI="#Card"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Value"/>
+        <Class IRI="#Card"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#Card"/>
+        <Class IRI="#Value"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#Suit"/>
+        <NamedIndividual IRI="#Clover"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Suit"/>
+        <NamedIndividual IRI="#Diamonds"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Suit"/>
+        <NamedIndividual IRI="#Hearts"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Suit"/>
+        <NamedIndividual IRI="#Pikes"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#ace"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#jack"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#king"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#queen"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#10"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#3"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#4"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#6"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#7"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#8"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#9"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#trump_suit"/>
+        <NamedIndividual IRI="#Hearts"/>
+        <NamedIndividual IRI="#Hearts"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#ace"/>
+        <NamedIndividual IRI="#king"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#jack"/>
+        <NamedIndividual IRI="#10"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#king"/>
+        <NamedIndividual IRI="#queen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#queen"/>
+        <NamedIndividual IRI="#jack"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#10"/>
+        <NamedIndividual IRI="#9"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#3"/>
+        <NamedIndividual IRI="#2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#4"/>
+        <NamedIndividual IRI="#3"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#5"/>
+        <NamedIndividual IRI="#4"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#6"/>
+        <NamedIndividual IRI="#5"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#7"/>
+        <NamedIndividual IRI="#6"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#8"/>
+        <NamedIndividual IRI="#7"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#greater"/>
+        <NamedIndividual IRI="#9"/>
+        <NamedIndividual IRI="#8"/>
+    </ObjectPropertyAssertion>
+    <AsymmetricObjectProperty>
+        <ObjectProperty IRI="#greater"/>
+    </AsymmetricObjectProperty>
+    <TransitiveObjectProperty>
+        <ObjectProperty IRI="#greater"/>
+    </TransitiveObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#greater"/>
+        <Class IRI="#Value"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#trump_suit"/>
+        <Class IRI="#Suit"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#greater"/>
+        <Class IRI="#Value"/>
+    </ObjectPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi -->
+

@@ -1,0 +1,11 @@
+value(10).
+suit(pikes).
+
+beats(card(X, pikes), card(10, pikes)) ; beats(card(X, diamonds), card(queen, diamonds)).
+beats(card(X, pikes), card(10, pikes)), beats(card(X, diamonds), card(queen, diamonds)).
+
+reverts(card(X, Y), card(4, pikes)).
+
+successful_move(card(10, pikes), card(5, pikes)).
+successful_move(card(2, hearts), card(ace, diamonds)).
+successful_move(card(2, pikes), card(2, diamonds)).
