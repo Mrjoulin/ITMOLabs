@@ -1,0 +1,139 @@
+Analize gcd
+
+start 1 worker(s)
+
+Linux 5.15.0-86-generic (matthewserver) 	11/08/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [2169] setting to a 15 second run per stressor
+stress-ng: info:  [2169] dispatching hogs: 1 cpu
+
+07:33:36 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+07:33:37 PM     all     24.88      0.00      0.50      0.00      0.00     74.63
+07:33:38 PM     all     24.94      0.00      0.25      0.00      0.00     74.81
+07:33:39 PM     all     24.94      0.00      0.25      0.00      0.00     74.81
+07:33:40 PM     all     25.19      0.00      0.00      0.00      0.00     74.81
+07:33:41 PM     all     24.88      0.00      0.50      0.00      0.00     74.63
+07:33:42 PM     all     23.93      0.00      1.26      0.00      0.00     74.81
+07:33:43 PM     all     25.06      0.00      0.00      0.00      0.00     74.94
+07:33:44 PM     all     25.00      0.00      0.00      0.00      0.00     75.00
+07:33:45 PM     all     25.19      0.00      0.00      0.00      0.00     74.81
+07:33:46 PM     all     24.88      0.00      0.00      0.00      0.00     75.12
+Average:        all     24.89      0.00      0.27      0.00      0.00     74.84
+stress-ng: info:  [2169] successful run completed in 15.00s
+stress-ng: info:  [2169] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2169]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2169] cpu               51094     15.00     15.00      0.00      3406.14        3406.27       100.00
+
+start 2 worker(s)
+
+Linux 5.15.0-86-generic (matthewserver) 	11/08/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [2173] setting to a 15 second run per stressor
+stress-ng: info:  [2173] dispatching hogs: 2 cpu
+
+07:33:51 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+07:33:52 PM     all     49.63      0.00      0.74      0.00      0.00     49.63
+07:33:53 PM     all     49.63      0.00      0.74      0.00      0.00     49.63
+07:33:54 PM     all     49.63      0.00      0.74      0.00      0.00     49.63
+07:33:55 PM     all     49.75      0.00      0.25      0.00      0.00     50.00
+07:33:56 PM     all     49.38      0.00      1.24      0.00      0.00     49.38
+07:33:57 PM     all     49.26      0.00      1.48      0.00      0.00     49.26
+07:33:58 PM     all     49.63      0.00      0.74      0.00      0.00     49.63
+07:33:59 PM     all     50.00      0.00      0.25      0.00      0.00     49.75
+07:34:00 PM     all     49.38      0.00      1.23      0.00      0.00     49.38
+07:34:01 PM     all     49.63      0.00      0.74      0.00      0.00     49.63
+Average:        all     49.59      0.00      0.82      0.00      0.00     49.59
+stress-ng: info:  [2173] successful run completed in 15.00s
+stress-ng: info:  [2173] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2173]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2173] cpu              105067     15.00     29.99      0.00      7004.25        3503.40        99.96
+
+start 3 worker(s)
+
+Linux 5.15.0-86-generic (matthewserver) 	11/08/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [2178] setting to a 15 second run per stressor
+stress-ng: info:  [2178] dispatching hogs: 3 cpu
+
+07:34:06 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+07:34:07 PM     all     73.70      0.00      1.24      0.00      0.00     25.06
+07:34:08 PM     all     75.00      0.00      0.00      0.00      0.00     25.00
+07:34:09 PM     all     74.63      0.00      0.50      0.00      0.00     24.88
+07:34:10 PM     all     74.44      0.00      0.74      0.00      0.00     24.81
+07:34:11 PM     all     75.00      0.00      0.25      0.00      0.00     24.75
+07:34:12 PM     all     74.26      0.00      0.99      0.00      0.00     24.75
+07:34:13 PM     all     74.63      0.00      0.50      0.00      0.00     24.88
+07:34:14 PM     all     74.13      0.00      1.24      0.00      0.00     24.63
+07:34:15 PM     all     74.81      0.00      0.25      0.00      0.00     24.94
+07:34:16 PM     all     75.00      0.00      0.25      0.00      0.00     24.75
+Average:        all     74.56      0.00      0.60      0.00      0.00     24.84
+stress-ng: info:  [2178] successful run completed in 15.00s
+stress-ng: info:  [2178] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2178]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2178] cpu              160745     15.00     44.97      0.00     10716.03        3574.49        99.93
+
+start 4 worker(s)
+
+stress-ng: info:  [2184] setting to a 15 second run per stressor
+stress-ng: info:  [2184] dispatching hogs: 4 cpu
+Linux 5.15.0-86-generic (matthewserver) 	11/08/2023 	_aarch64_	(4 CPU)
+
+07:34:21 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+07:34:22 PM     all     99.25      0.00      0.25      0.00      0.00      0.50
+07:34:23 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:24 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:25 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:26 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:27 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:28 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:29 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:30 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:31 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+Average:        all     99.92      0.00      0.03      0.00      0.00      0.05
+stress-ng: info:  [2184] successful run completed in 15.01s
+stress-ng: info:  [2184] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2184]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2184] cpu              210030     15.00     59.95      0.00     13999.92        3503.42        99.90
+
+start 5 worker(s)
+
+Linux 5.15.0-86-generic (matthewserver) 	11/08/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [2191] setting to a 15 second run per stressor
+stress-ng: info:  [2191] dispatching hogs: 5 cpu
+
+07:34:36 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+07:34:37 PM     all     99.75      0.00      0.25      0.00      0.00      0.00
+07:34:38 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:39 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:40 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:41 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:42 PM     all     99.20      0.00      0.80      0.00      0.00      0.00
+07:34:43 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:44 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:45 PM     all     99.75      0.00      0.25      0.00      0.00      0.00
+07:34:46 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+Average:        all     99.87      0.00      0.13      0.00      0.00      0.00
+stress-ng: info:  [2191] successful run completed in 15.00s
+stress-ng: info:  [2191] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2191]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2191] cpu              200999     15.00     59.88      0.00     13399.30        3356.70        79.84
+
+start 6 worker(s)
+
+Linux 5.15.0-86-generic (matthewserver) 	11/08/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [2199] setting to a 15 second run per stressor
+stress-ng: info:  [2199] dispatching hogs: 6 cpu
+
+07:34:51 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+07:34:52 PM     all     99.50      0.00      0.25      0.00      0.00      0.25
+07:34:53 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:54 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:55 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:56 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:57 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:58 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:34:59 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:35:00 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+07:35:01 PM     all    100.00      0.00      0.00      0.00      0.00      0.00
+Average:        all     99.95      0.00      0.03      0.00      0.00      0.03
+stress-ng: info:  [2199] successful run completed in 15.01s
+stress-ng: info:  [2199] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2199]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2199] cpu              193998     15.00     59.91      0.00     12932.69        3238.16        66.56

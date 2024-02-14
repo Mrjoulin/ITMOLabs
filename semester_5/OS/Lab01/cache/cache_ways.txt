@@ -1,0 +1,377 @@
+Analize l1cache-ways
+
+Process l1cache-ways 32
+
+Start 1 worker(s)
+
+stress-ng: info:  [2070] setting to a 10 second run per stressor
+stress-ng: info:  [2070] dispatching hogs: 1 cache
+stress-ng: info:  [2070] successful run completed in 10.01s
+stress-ng: info:  [2070] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2070]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2070] cache              1638     10.00      9.96      0.02       163.78         164.13        99.79
+
+Start 2 worker(s)
+
+stress-ng: info:  [2075] setting to a 10 second run per stressor
+stress-ng: info:  [2075] dispatching hogs: 2 cache
+stress-ng: info:  [2075] successful run completed in 10.01s
+stress-ng: info:  [2075] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2075]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2075] cache              3163     10.00     19.85      0.02       316.17         159.18        99.31
+
+Start 3 worker(s)
+
+stress-ng: info:  [2086] setting to a 10 second run per stressor
+stress-ng: info:  [2086] dispatching hogs: 3 cache
+stress-ng: info:  [2086] successful run completed in 10.00s
+stress-ng: info:  [2086] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2086]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2086] cache              3983     10.00     29.28      0.08       398.27         135.66        97.86
+
+Start 4 worker(s)
+
+stress-ng: info:  [2090] setting to a 10 second run per stressor
+stress-ng: info:  [2090] dispatching hogs: 4 cache
+stress-ng: info:  [2090] successful run completed in 10.01s
+stress-ng: info:  [2090] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2090]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2090] cache              3506     10.00     28.61      0.04       350.55         122.37        71.61
+
+Start 5 worker(s)
+
+stress-ng: info:  [2095] setting to a 10 second run per stressor
+stress-ng: info:  [2095] dispatching hogs: 5 cache
+stress-ng: info:  [2095] successful run completed in 10.04s
+stress-ng: info:  [2095] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2095]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2095] cache              3139     10.01     25.67      0.11       313.64         121.76        51.52
+
+Process l1cache-ways 64
+
+Start 1 worker(s)
+
+stress-ng: info:  [2102] setting to a 10 second run per stressor
+stress-ng: info:  [2102] dispatching hogs: 1 cache
+stress-ng: info:  [2102] successful run completed in 10.01s
+stress-ng: info:  [2102] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2102]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2102] cache              1566     10.00      9.93      0.05       156.59         156.91        99.80
+
+Start 2 worker(s)
+
+stress-ng: info:  [2104] setting to a 10 second run per stressor
+stress-ng: info:  [2104] dispatching hogs: 2 cache
+stress-ng: info:  [2104] successful run completed in 10.01s
+stress-ng: info:  [2104] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2104]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2104] cache              2504     10.00     19.42      0.03       250.38         128.74        97.24
+
+Start 3 worker(s)
+
+stress-ng: info:  [2107] setting to a 10 second run per stressor
+stress-ng: info:  [2107] dispatching hogs: 3 cache
+stress-ng: info:  [2107] successful run completed in 10.01s
+stress-ng: info:  [2107] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2107]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2107] cache              3440     10.00     27.87      0.06       343.96         123.17        93.09
+
+Start 4 worker(s)
+
+stress-ng: info:  [2111] setting to a 10 second run per stressor
+stress-ng: info:  [2111] dispatching hogs: 4 cache
+stress-ng: info:  [2111] successful run completed in 10.01s
+stress-ng: info:  [2111] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2111]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2111] cache              3469     10.00     27.85      0.07       346.85         124.25        69.79
+
+Start 5 worker(s)
+
+stress-ng: info:  [2116] setting to a 10 second run per stressor
+stress-ng: info:  [2116] dispatching hogs: 5 cache
+stress-ng: info:  [2116] successful run completed in 10.01s
+stress-ng: info:  [2116] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2116]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2116] cache              3408     10.00     25.18      0.03       340.76         135.18        50.41
+
+Process l1cache-ways 128
+
+Start 1 worker(s)
+
+stress-ng: info:  [2125] setting to a 10 second run per stressor
+stress-ng: info:  [2125] dispatching hogs: 1 cache
+stress-ng: info:  [2125] successful run completed in 10.01s
+stress-ng: info:  [2125] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2125]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2125] cache              1596     10.00      9.94      0.04       159.60         159.92        99.80
+
+Start 2 worker(s)
+
+stress-ng: info:  [2127] setting to a 10 second run per stressor
+stress-ng: info:  [2127] dispatching hogs: 2 cache
+stress-ng: info:  [2127] successful run completed in 10.01s
+stress-ng: info:  [2127] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2127]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2127] cache              2831     10.00     19.84      0.05       283.07         142.33        99.44
+
+Start 3 worker(s)
+
+stress-ng: info:  [2130] setting to a 10 second run per stressor
+stress-ng: info:  [2130] dispatching hogs: 3 cache
+stress-ng: info:  [2130] successful run completed in 10.01s
+stress-ng: info:  [2130] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2130]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2130] cache              3299     10.00     27.26      0.05       329.89         120.80        91.03
+
+Start 4 worker(s)
+
+stress-ng: info:  [2134] setting to a 10 second run per stressor
+stress-ng: info:  [2134] dispatching hogs: 4 cache
+stress-ng: info:  [2134] successful run completed in 10.08s
+stress-ng: info:  [2134] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2134]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2134] cache              2915     10.00     25.80      0.06       291.39         112.72        64.62
+
+Start 5 worker(s)
+
+stress-ng: info:  [2139] setting to a 10 second run per stressor
+stress-ng: info:  [2139] dispatching hogs: 5 cache
+stress-ng: info:  [2139] successful run completed in 10.01s
+stress-ng: info:  [2139] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2139]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2139] cache              2775     10.00     25.12      0.09       277.38         110.08        50.40
+
+Process l1cache-ways 256
+
+Start 1 worker(s)
+
+stress-ng: info:  [2146] setting to a 10 second run per stressor
+stress-ng: info:  [2146] dispatching hogs: 1 cache
+stress-ng: info:  [2146] successful run completed in 10.01s
+stress-ng: info:  [2146] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2146]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2146] cache              1515     10.00      9.89      0.07       151.49         152.11        99.59
+
+Start 2 worker(s)
+
+stress-ng: info:  [2148] setting to a 10 second run per stressor
+stress-ng: info:  [2148] dispatching hogs: 2 cache
+stress-ng: info:  [2148] successful run completed in 10.01s
+stress-ng: info:  [2148] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2148]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2148] cache              2401     10.00     19.33      0.05       240.07         123.89        96.89
+
+Start 3 worker(s)
+
+stress-ng: info:  [2151] setting to a 10 second run per stressor
+stress-ng: info:  [2151] dispatching hogs: 3 cache
+stress-ng: info:  [2151] successful run completed in 10.01s
+stress-ng: info:  [2151] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2151]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2151] cache              2676     10.00     26.12      0.12       267.52         101.98        87.44
+
+Start 4 worker(s)
+
+stress-ng: info:  [2155] setting to a 10 second run per stressor
+stress-ng: info:  [2155] dispatching hogs: 4 cache
+stress-ng: info:  [2155] successful run completed in 10.03s
+stress-ng: info:  [2155] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2155]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2155] cache              2662     10.01     24.95      0.12       266.01         106.18        62.63
+
+Start 5 worker(s)
+
+stress-ng: info:  [2160] setting to a 10 second run per stressor
+stress-ng: info:  [2160] dispatching hogs: 5 cache
+stress-ng: info:  [2160] successful run completed in 10.02s
+stress-ng: info:  [2160] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2160]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2160] cache              2023     10.01     24.50      0.16       202.13          82.04        49.28
+
+Process l1cache-ways 512
+
+Start 1 worker(s)
+
+stress-ng: info:  [2167] setting to a 10 second run per stressor
+stress-ng: info:  [2167] dispatching hogs: 1 cache
+stress-ng: info:  [2167] successful run completed in 10.02s
+stress-ng: info:  [2167] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2167]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2167] cache              1167     10.00      9.88      0.07       116.66         117.29        99.47
+
+Start 2 worker(s)
+
+stress-ng: info:  [2170] setting to a 10 second run per stressor
+stress-ng: info:  [2170] dispatching hogs: 2 cache
+stress-ng: info:  [2170] successful run completed in 10.03s
+stress-ng: info:  [2170] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2170]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2170] cache              1800     10.01     18.77      0.15       179.88          95.14        94.53
+
+Start 3 worker(s)
+
+stress-ng: info:  [2173] setting to a 10 second run per stressor
+stress-ng: info:  [2173] dispatching hogs: 3 cache
+stress-ng: info:  [2173] successful run completed in 10.01s
+stress-ng: info:  [2173] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2173]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2173] cache              1862     10.00     21.90      0.12       186.17          84.56        73.39
+
+Start 4 worker(s)
+
+stress-ng: info:  [2177] setting to a 10 second run per stressor
+stress-ng: info:  [2177] dispatching hogs: 4 cache
+stress-ng: info:  [2177] successful run completed in 10.01s
+stress-ng: info:  [2177] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2177]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2177] cache              3429     10.00     27.82      0.07       342.87         122.95        69.72
+
+Start 5 worker(s)
+
+stress-ng: info:  [2183] setting to a 10 second run per stressor
+stress-ng: info:  [2183] dispatching hogs: 5 cache
+stress-ng: info:  [2183] successful run completed in 10.01s
+stress-ng: info:  [2183] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2183]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2183] cache              3372     10.00     25.63      0.06       337.10         131.26        51.36
+
+Process l1cache-ways 1024
+
+Start 1 worker(s)
+
+stress-ng: info:  [2190] setting to a 10 second run per stressor
+stress-ng: info:  [2190] dispatching hogs: 1 cache
+stress-ng: info:  [2190] successful run completed in 10.00s
+stress-ng: info:  [2190] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2190]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2190] cache              1589     10.00      9.95      0.03       158.89         159.22        99.80
+
+Start 2 worker(s)
+
+stress-ng: info:  [2192] setting to a 10 second run per stressor
+stress-ng: info:  [2192] dispatching hogs: 2 cache
+stress-ng: info:  [2192] successful run completed in 10.01s
+stress-ng: info:  [2192] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2192]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2192] cache              2666     10.00     19.50      0.06       266.59         136.30        97.80
+
+Start 3 worker(s)
+
+stress-ng: info:  [2195] setting to a 10 second run per stressor
+stress-ng: info:  [2195] dispatching hogs: 3 cache
+stress-ng: info:  [2195] successful run completed in 10.01s
+stress-ng: info:  [2195] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2195]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2195] cache              3335     10.00     27.45      0.04       333.47         121.32        91.63
+
+Start 4 worker(s)
+
+stress-ng: info:  [2199] setting to a 10 second run per stressor
+stress-ng: info:  [2199] dispatching hogs: 4 cache
+stress-ng: info:  [2199] successful run completed in 10.01s
+stress-ng: info:  [2199] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2199]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2199] cache              2798     10.00     25.90      0.08       279.67         107.70        64.92
+
+Start 5 worker(s)
+
+stress-ng: info:  [2204] setting to a 10 second run per stressor
+stress-ng: info:  [2204] dispatching hogs: 5 cache
+stress-ng: info:  [2204] successful run completed in 10.00s
+stress-ng: info:  [2204] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2204]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2204] cache              3244     10.00     25.32      0.03       324.38         127.97        50.70
+
+Process l1cache-ways 2048
+
+Start 1 worker(s)
+
+stress-ng: info:  [2211] setting to a 10 second run per stressor
+stress-ng: info:  [2211] dispatching hogs: 1 cache
+stress-ng: info:  [2211] successful run completed in 10.01s
+stress-ng: info:  [2211] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2211]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2211] cache              1623     10.00      9.96      0.02       162.25         162.63        99.77
+
+Start 2 worker(s)
+
+stress-ng: info:  [2213] setting to a 10 second run per stressor
+stress-ng: info:  [2213] dispatching hogs: 2 cache
+stress-ng: info:  [2213] successful run completed in 10.01s
+stress-ng: info:  [2213] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2213]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2213] cache              2843     10.00     19.82      0.06       284.28         143.01        99.39
+
+Start 3 worker(s)
+
+stress-ng: info:  [2216] setting to a 10 second run per stressor
+stress-ng: info:  [2216] dispatching hogs: 3 cache
+stress-ng: info:  [2216] successful run completed in 10.01s
+stress-ng: info:  [2216] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2216]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2216] cache              3424     10.00     28.55      0.04       342.38         119.76        95.29
+
+Start 4 worker(s)
+
+stress-ng: info:  [2220] setting to a 10 second run per stressor
+stress-ng: info:  [2220] dispatching hogs: 4 cache
+stress-ng: info:  [2220] successful run completed in 10.01s
+stress-ng: info:  [2220] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2220]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2220] cache              3159     10.01     26.31      0.06       315.68         119.80        65.88
+
+Start 5 worker(s)
+
+stress-ng: info:  [2225] setting to a 10 second run per stressor
+stress-ng: info:  [2225] dispatching hogs: 5 cache
+stress-ng: info:  [2225] successful run completed in 10.01s
+stress-ng: info:  [2225] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2225]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2225] cache              3024     10.00     24.98      0.05       302.34         120.82        50.05
+
+Process l1cache-ways 3072
+
+Start 1 worker(s)
+
+stress-ng: info:  [2232] setting to a 10 second run per stressor
+stress-ng: info:  [2232] dispatching hogs: 1 cache
+stress-ng: info:  [2232] successful run completed in 10.01s
+stress-ng: info:  [2232] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2232]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2232] cache              1627     10.00      9.97      0.02       162.69         162.86        99.90
+
+Start 2 worker(s)
+
+stress-ng: info:  [2234] setting to a 10 second run per stressor
+stress-ng: info:  [2234] dispatching hogs: 2 cache
+stress-ng: info:  [2234] successful run completed in 10.01s
+stress-ng: info:  [2234] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2234]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2234] cache              3188     10.00     19.91      0.04       318.79         159.80        99.75
+
+Start 3 worker(s)
+
+stress-ng: info:  [2237] setting to a 10 second run per stressor
+stress-ng: info:  [2237] dispatching hogs: 3 cache
+stress-ng: info:  [2237] successful run completed in 10.01s
+stress-ng: info:  [2237] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2237]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2237] cache              3473     10.00     28.05      0.06       347.27         123.55        93.69
+
+Start 4 worker(s)
+
+stress-ng: info:  [2241] setting to a 10 second run per stressor
+stress-ng: info:  [2241] dispatching hogs: 4 cache
+stress-ng: info:  [2241] successful run completed in 10.00s
+stress-ng: info:  [2241] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2241]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2241] cache              3640     10.00     28.24      0.00       363.97         128.90        70.60
+
+Start 5 worker(s)
+
+stress-ng: info:  [2246] setting to a 10 second run per stressor
+stress-ng: info:  [2246] dispatching hogs: 5 cache
+stress-ng: info:  [2246] successful run completed in 10.00s
+stress-ng: info:  [2246] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2246]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2246] cache              3461     10.00     25.86      0.03       346.06         133.68        51.77

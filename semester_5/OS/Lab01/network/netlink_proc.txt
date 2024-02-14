@@ -1,0 +1,91 @@
+Analize netlink-proc
+
+start 1 worker(s)
+
+stress-ng: info:  [508549] setting to a 10 second run per stressor
+stress-ng: info:  [508549] dispatching hogs: 1 netlink-proc
+stress-ng: info:  [508549] successful run completed in 10.00s
+stress-ng: info:  [508549] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [508549]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [508549] netlink-proc       3140     10.00      8.52      1.89       313.99         301.63       104.10
+
+start 2 worker(s)
+
+stress-ng: info:  [527469] setting to a 10 second run per stressor
+stress-ng: info:  [527469] dispatching hogs: 2 netlink-proc
+stress-ng: info:  [527469] successful run completed in 10.00s
+stress-ng: info:  [527469] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [527469]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [527469] netlink-proc       6762     10.00     17.74      3.41       676.12         319.72       105.74
+
+start 3 worker(s)
+
+stress-ng: info:  [568218] setting to a 10 second run per stressor
+stress-ng: info:  [568218] dispatching hogs: 3 netlink-proc
+stress-ng: info:  [568218] successful run completed in 10.00s
+stress-ng: info:  [568218] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [568218]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [568218] netlink-proc       9550     10.00     24.96      5.51       954.91         313.42       101.56
+
+start 4 worker(s)
+
+stress-ng: info:  [625792] setting to a 10 second run per stressor
+stress-ng: info:  [625792] dispatching hogs: 4 netlink-proc
+stress-ng: info:  [625792] successful run completed in 10.00s
+stress-ng: info:  [625792] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [625792]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [625792] netlink-proc      11797     10.00     29.60      5.88      1179.51         332.50        88.69
+
+start 5 worker(s)
+
+stress-ng: info:  [696927] setting to a 10 second run per stressor
+stress-ng: info:  [696927] dispatching hogs: 5 netlink-proc
+stress-ng: info:  [696927] successful run completed in 10.01s
+stress-ng: info:  [696927] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [696927]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [696927] netlink-proc      10876     10.00     29.29      7.67      1087.27         294.26        73.90
+
+start 6 worker(s)
+
+stress-ng: info:  [762549] setting to a 10 second run per stressor
+stress-ng: info:  [762549] dispatching hogs: 6 netlink-proc
+stress-ng: info:  [762549] successful run completed in 10.01s
+stress-ng: info:  [762549] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [762549]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [762549] netlink-proc      11850     10.00     31.18      7.05      1184.79         309.97        63.71
+
+start 7 worker(s)
+
+stress-ng: info:  [834107] setting to a 10 second run per stressor
+stress-ng: info:  [834107] dispatching hogs: 7 netlink-proc
+stress-ng: info:  [834107] successful run completed in 10.01s
+stress-ng: info:  [834107] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [834107]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [834107] netlink-proc      12486     10.00     31.88      6.88      1248.17         322.14        55.35
+
+start 8 worker(s)
+
+stress-ng: info:  [909536] setting to a 10 second run per stressor
+stress-ng: info:  [909536] dispatching hogs: 8 netlink-proc
+stress-ng: info:  [909536] successful run completed in 10.01s
+stress-ng: info:  [909536] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [909536]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [909536] netlink-proc      11176     10.00     29.91      8.88      1117.24         288.12        48.47
+
+start 9 worker(s)
+
+stress-ng: info:  [977153] setting to a 10 second run per stressor
+stress-ng: info:  [977153] dispatching hogs: 9 netlink-proc
+stress-ng: info:  [977153] successful run completed in 10.01s
+stress-ng: info:  [977153] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [977153]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [977153] netlink-proc      10379     10.00     28.91     10.07      1037.50         266.26        43.29
+
+start 10 worker(s)
+
+stress-ng: info:  [1040031] setting to a 10 second run per stressor
+stress-ng: info:  [1040031] dispatching hogs: 10 netlink-proc
+stress-ng: info:  [1040031] successful run completed in 10.01s
+stress-ng: info:  [1040031] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [1040031]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [1040031] netlink-proc      11751     10.00     31.75      7.55      1174.66         299.01        39.29

@@ -1,0 +1,681 @@
+Analize sigpipe
+
+start 1 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [2335406] setting to a 15 second run per stressor
+stress-ng: info:  [2335406] dispatching hogs: 1 sigpipe
+
+09:03:06        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:03:07        all      1.02      0.00     20.10      0.00      0.00     78.88
+09:03:08        all      0.76      0.00     21.72      0.00      0.00     77.53
+09:03:09        all      0.78      0.00     19.90      0.00      0.00     79.33
+09:03:10        all      0.77      0.00     21.43      0.00      0.00     77.81
+09:03:11        all      0.51      0.00     20.66      0.00      0.00     78.83
+09:03:12        all      1.02      0.00     20.97      0.00      0.00     78.01
+09:03:13        all      1.00      0.00     21.80      0.25      0.00     76.94
+09:03:14        all      0.51      0.00     20.72      0.00      0.00     78.77
+09:03:15        all      0.78      0.00     19.64      0.00      0.00     79.59
+09:03:16        all      0.52      0.00     19.06      0.00      0.00     80.42
+Average:        all      0.77      0.00     20.61      0.03      0.00     78.60
+stress-ng: info:  [2335406] successful run completed in 15.00s
+stress-ng: info:  [2335406] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2335406]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2335406] sigpipe          307326     15.00      7.28      6.81     20488.29       21811.64        93.93
+
+ Performance counter stats for 'stress-ng --sigpipe 1 -t 15s --metrics':
+
+            154623      cs                                                          
+
+      15.028618776 seconds time elapsed
+
+       7.294529000 seconds user
+       6.847807000 seconds sys
+
+
+
+start 1 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [2489176] setting to a 15 second run per stressor
+stress-ng: info:  [2489176] dispatching hogs: 1 sigpipe
+
+09:03:21        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:03:22        all      1.03      0.00     20.36      0.00      0.00     78.61
+09:03:23        all      0.52      0.00     19.06      0.00      0.00     80.42
+09:03:24        all      0.26      0.00     20.05      0.00      0.00     79.69
+09:03:25        all      0.52      0.00     19.74      0.00      0.00     79.74
+09:03:26        all      0.52      0.00     20.21      0.00      0.00     79.27
+09:03:27        all      0.51      0.00     20.57      0.26      0.00     78.66
+09:03:28        all      0.52      0.00     19.06      0.00      0.00     80.42
+09:03:29        all      1.01      0.00     21.27      0.00      0.00     77.72
+09:03:30        all      0.26      0.00     22.22      0.00      0.00     77.52
+09:03:31        all      0.26      0.00     21.23      0.00      0.00     78.52
+Average:        all      0.54      0.00     20.38      0.03      0.00     79.05
+stress-ng: info:  [2489176] successful run completed in 15.00s
+stress-ng: info:  [2489176] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2489176]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2489176] sigpipe          305496     15.00      6.95      7.04     20366.15       21836.74        93.27
+
+ Performance counter stats for 'stress-ng --sigpipe 1 -t 15s --pipeherd-yield --metrics':
+
+            153641      cs                                                          
+
+      15.012433308 seconds time elapsed
+
+       6.970772000 seconds user
+       7.049438000 seconds sys
+
+
+
+start 2 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [2642033] setting to a 15 second run per stressor
+stress-ng: info:  [2642033] dispatching hogs: 2 sigpipe
+
+09:03:36        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:03:37        all      1.90      0.00     34.96      0.00      0.00     63.14
+09:03:38        all      1.07      0.00     37.00      0.00      0.00     61.93
+09:03:39        all      1.10      0.00     34.99      0.00      0.00     63.91
+09:03:40        all      1.08      0.00     36.56      0.00      0.00     62.37
+09:03:41        all      1.08      0.00     36.83      0.00      0.00     62.10
+09:03:42        all      1.36      0.00     35.60      0.27      0.00     62.77
+09:03:43        all      0.54      0.00     37.37      0.00      0.00     62.10
+09:03:44        all      1.89      0.00     35.85      0.00      0.00     62.26
+09:03:45        all      1.08      0.00     36.59      0.00      0.00     62.33
+09:03:46        all      2.47      0.00     34.62      0.00      0.00     62.91
+Average:        all      1.35      0.00     36.04      0.03      0.00     62.58
+stress-ng: info:  [2642033] successful run completed in 15.00s
+stress-ng: info:  [2642033] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2642033]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2642033] sigpipe          412464     15.00     14.96     12.48     27497.58       15031.49        91.47
+
+ Performance counter stats for 'stress-ng --sigpipe 2 -t 15s --metrics':
+
+            210779      cs                                                          
+
+      15.010877408 seconds time elapsed
+
+      14.983150000 seconds user
+      12.512161000 seconds sys
+
+
+
+start 2 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [2848358] setting to a 15 second run per stressor
+stress-ng: info:  [2848358] dispatching hogs: 2 sigpipe
+
+09:03:51        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:03:52        all      0.81      0.00     36.93      0.00      0.00     62.26
+09:03:53        all      1.37      0.00     35.34      0.00      0.00     63.29
+09:03:54        all      1.89      0.00     35.85      0.00      0.00     62.26
+09:03:55        all      1.33      0.00     37.23      0.00      0.00     61.44
+09:03:56        all      0.82      0.00     36.24      0.00      0.00     62.94
+09:03:57        all      1.07      0.00     37.60      0.00      0.00     61.33
+09:03:58        all      1.35      0.00     36.22      0.00      0.00     62.43
+09:03:59        all      1.60      0.00     36.36      0.00      0.00     62.03
+09:04:00        all      1.64      0.00     34.97      0.00      0.00     63.39
+09:04:01        all      1.38      0.00     35.08      0.00      0.00     63.54
+Average:        all      1.33      0.00     36.19      0.00      0.00     62.48
+stress-ng: info:  [2848358] successful run completed in 15.00s
+stress-ng: info:  [2848358] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2848358]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2848358] sigpipe          417997     15.00     14.98     12.54     27866.62       15188.84        91.73
+
+ Performance counter stats for 'stress-ng --sigpipe 2 -t 15s --pipeherd-yield --metrics':
+
+            213109      cs                                                          
+
+      15.006751278 seconds time elapsed
+
+      15.004950000 seconds user
+      12.563741000 seconds sys
+
+
+
+start 3 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [3057429] setting to a 15 second run per stressor
+stress-ng: info:  [3057429] dispatching hogs: 3 sigpipe
+
+09:04:06        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:04:07        all      1.61      0.00     50.67      0.00      0.00     47.72
+09:04:08        all      2.53      0.00     48.60      0.00      0.00     48.88
+09:04:09        all      1.99      0.00     48.86      0.00      0.00     49.15
+09:04:10        all      1.96      0.00     49.02      0.00      0.00     49.02
+09:04:11        all      1.66      0.00     50.14      0.00      0.00     48.20
+09:04:12        all      1.92      0.00     50.41      0.00      0.00     47.67
+09:04:13        all      1.65      0.00     50.14      0.00      0.00     48.21
+09:04:14        all      2.17      0.00     50.68      0.00      0.00     47.15
+09:04:15        all      1.11      0.00     50.00      0.00      0.00     48.89
+09:04:16        all      0.86      0.00     46.42      0.00      0.00     52.72
+Average:        all      1.75      0.00     49.51      0.00      0.00     48.74
+stress-ng: info:  [3057429] successful run completed in 15.00s
+stress-ng: info:  [3057429] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [3057429]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [3057429] sigpipe          598008     15.00     18.17     17.55     39866.76       16741.55        79.38
+
+ Performance counter stats for 'stress-ng --sigpipe 3 -t 15s --metrics':
+
+            431166      cs                                                          
+
+      15.010053644 seconds time elapsed
+
+      18.208366000 seconds user
+      17.595437000 seconds sys
+
+
+
+start 3 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [3356571] setting to a 15 second run per stressor
+stress-ng: info:  [3356571] dispatching hogs: 3 sigpipe
+
+09:04:21        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:04:22        all      2.18      0.00     48.50      0.00      0.00     49.32
+09:04:23        all      1.37      0.00     51.09      0.00      0.00     47.54
+09:04:24        all      1.35      0.00     50.94      0.00      0.00     47.71
+09:04:25        all      2.01      0.00     49.00      0.29      0.00     48.71
+09:04:26        all      1.07      0.00     43.16      0.00      0.00     55.76
+09:04:27        all      1.06      0.00     46.42      0.27      0.00     52.25
+09:04:28        all      2.22      0.00     44.72      0.00      0.00     53.06
+09:04:29        all      1.44      0.00     47.41      0.00      0.00     51.15
+09:04:30        all      1.10      0.00     49.72      0.00      0.00     49.17
+09:04:31        all      2.76      0.00     48.90      0.00      0.00     48.34
+Average:        all      1.65      0.00     47.98      0.06      0.00     50.32
+stress-ng: info:  [3356571] successful run completed in 15.03s
+stress-ng: info:  [3356571] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [3356571]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [3356571] sigpipe          484391     15.02     17.27     17.40     32250.15       13971.47        76.94
+
+ Performance counter stats for 'stress-ng --sigpipe 3 -t 15s --pipeherd-yield --metrics':
+
+            366303      cs                                                          
+
+      15.047039721 seconds time elapsed
+
+      17.297364000 seconds user
+      17.479270000 seconds sys
+
+
+
+start 4 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [3598947] setting to a 15 second run per stressor
+stress-ng: info:  [3598947] dispatching hogs: 4 sigpipe
+
+09:04:36        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:04:37        all      4.52      0.00     64.10      0.00      0.00     31.38
+09:04:38        all      2.70      0.00     73.78      0.00      0.00     23.51
+09:04:39        all      2.62      0.00     71.47      0.00      0.00     25.92
+09:04:40        all      2.84      0.00     70.80      0.00      0.00     26.36
+09:04:41        all      4.01      0.00     69.67      0.00      0.00     26.32
+09:04:42        all      2.60      0.00     69.87      0.00      0.00     27.53
+09:04:43        all      3.88      0.00     68.48      0.00      0.00     27.65
+09:04:44        all      3.64      0.00     70.65      0.00      0.00     25.71
+09:04:45        all      3.54      0.00     69.70      0.00      0.00     26.77
+09:04:46        all      4.83      0.00     68.45      0.00      0.00     26.72
+Average:        all      3.52      0.00     69.69      0.00      0.00     26.79
+stress-ng: info:  [3598947] successful run completed in 15.00s
+stress-ng: info:  [3598947] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [3598947]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [3598947] sigpipe         1516806     15.00     14.96     29.05    101119.35       34465.03        73.35
+
+ Performance counter stats for 'stress-ng --sigpipe 4 -t 15s --metrics':
+
+           1939270      cs                                                          
+
+      15.024721169 seconds time elapsed
+
+      15.014476000 seconds user
+      29.109870000 seconds sys
+
+
+
+start 4 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [163596] setting to a 15 second run per stressor
+stress-ng: info:  [163596] dispatching hogs: 4 sigpipe
+
+09:04:51        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:04:52        all      3.32      0.00     67.52      0.00      0.00     29.16
+09:04:53        all      3.08      0.00     71.54      0.00      0.00     25.38
+09:04:54        all      3.33      0.00     70.00      0.00      0.00     26.67
+09:04:55        all      2.56      0.00     70.08      0.00      0.00     27.37
+09:04:56        all      4.40      0.00     68.65      0.00      0.00     26.94
+09:04:57        all      2.04      0.00     70.92      0.00      0.00     27.04
+09:04:58        all      3.79      0.00     69.70      0.00      0.00     26.52
+09:04:59        all      2.53      0.00     71.39      0.00      0.00     26.08
+09:05:00        all      4.03      0.00     69.52      0.00      0.00     26.45
+09:05:01        all      3.80      0.00     68.10      0.00      0.00     28.10
+Average:        all      3.29      0.00     69.74      0.00      0.00     26.97
+stress-ng: info:  [163596] successful run completed in 15.00s
+stress-ng: info:  [163596] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [163596]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [163596] sigpipe         1657862     15.00     15.20     28.85    110522.79       37635.91        73.42
+
+ Performance counter stats for 'stress-ng --sigpipe 4 -t 15s --pipeherd-yield --metrics':
+
+           2111738      cs                                                          
+
+      15.011182710 seconds time elapsed
+
+      15.228439000 seconds user
+      28.918494000 seconds sys
+
+
+
+start 5 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [992673] setting to a 15 second run per stressor
+stress-ng: info:  [992673] dispatching hogs: 5 sigpipe
+
+09:05:06        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:05:07        all      2.49      0.00     69.25      0.00      0.00     28.25
+09:05:08        all      3.83      0.00     73.21      0.00      0.00     22.96
+09:05:09        all      4.11      0.00     73.01      0.00      0.00     22.88
+09:05:10        all      3.89      0.00     72.80      0.00      0.00     23.32
+09:05:11        all      4.34      0.00     72.96      0.00      0.00     22.70
+09:05:12        all      4.74      0.00     72.32      0.00      0.00     22.94
+09:05:13        all      3.33      0.00     72.82      0.00      0.00     23.85
+09:05:14        all      2.30      0.00     73.21      0.00      0.00     24.49
+09:05:15        all      3.29      0.00     73.67      0.00      0.00     23.04
+09:05:16        all      3.61      0.00     72.94      0.00      0.00     23.45
+Average:        all      3.60      0.00     72.65      0.00      0.00     23.75
+stress-ng: info:  [992673] successful run completed in 15.00s
+stress-ng: info:  [992673] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [992673]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [992673] sigpipe         1563218     15.00     16.14     28.79    104214.15       34792.30        59.91
+
+ Performance counter stats for 'stress-ng --sigpipe 5 -t 15s --metrics':
+
+           1719163      cs                                                          
+
+      15.011275857 seconds time elapsed
+
+      16.175112000 seconds user
+      28.840846000 seconds sys
+
+
+
+start 5 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [1774528] setting to a 15 second run per stressor
+stress-ng: info:  [1774528] dispatching hogs: 5 sigpipe
+
+09:05:21        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:05:22        all      2.86      0.00     72.47      0.00      0.00     24.68
+09:05:23        all      2.86      0.00     73.77      0.00      0.00     23.38
+09:05:24        all      3.00      0.00     73.75      0.00      0.00     23.25
+09:05:25        all      2.70      0.00     72.78      0.00      0.00     24.53
+09:05:26        all      2.04      0.00     72.96      0.00      0.00     25.00
+09:05:27        all      2.58      0.00     73.20      0.00      0.00     24.23
+09:05:28        all      3.88      0.00     72.35      0.26      0.00     23.51
+09:05:29        all      3.10      0.00     72.87      0.00      0.00     24.03
+09:05:30        all      2.58      0.00     73.39      0.00      0.00     24.03
+09:05:31        all      4.03      0.00     73.30      0.00      0.00     22.67
+Average:        all      2.96      0.00     73.09      0.03      0.00     23.92
+stress-ng: info:  [1774528] successful run completed in 15.00s
+stress-ng: info:  [1774528] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [1774528]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [1774528] sigpipe         1499006     15.00     15.86     28.99     99931.20       33422.65        59.80
+
+ Performance counter stats for 'stress-ng --sigpipe 5 -t 15s --pipeherd-yield --metrics':
+
+           1665552      cs                                                          
+
+      15.011218730 seconds time elapsed
+
+      15.932453000 seconds user
+      29.076038000 seconds sys
+
+
+
+start 6 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [2524308] setting to a 15 second run per stressor
+stress-ng: info:  [2524308] dispatching hogs: 6 sigpipe
+
+09:05:37        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:05:38        all      4.12      0.00     75.26      0.00      0.00     20.62
+09:05:39        all      2.30      0.00     78.26      0.00      0.00     19.44
+09:05:40        all      3.40      0.00     76.96      0.00      0.00     19.63
+09:05:41        all      3.34      0.00     77.89      0.00      0.00     18.77
+09:05:42        all      3.53      0.00     78.09      0.00      0.00     18.39
+09:05:43        all      2.49      0.00     79.30      0.00      0.00     18.20
+09:05:44        all      2.78      0.00     78.03      0.00      0.00     19.19
+09:05:45        all      4.13      0.00     78.55      0.00      0.00     17.31
+09:05:46        all      3.55      0.00     78.43      0.00      0.00     18.02
+09:05:47        all      3.30      0.00     77.16      0.00      0.00     19.54
+Average:        all      3.29      0.00     77.80      0.00      0.00     18.91
+stress-ng: info:  [2524308] successful run completed in 15.06s
+stress-ng: info:  [2524308] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2524308]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2524308] sigpipe         1654092     15.03     16.02     30.99    110018.92       35185.96        52.11
+
+ Performance counter stats for 'stress-ng --sigpipe 6 -t 15s --metrics':
+
+           1736858      cs                                                          
+
+      15.079352476 seconds time elapsed
+
+      16.074144000 seconds user
+      31.058177000 seconds sys
+
+
+
+start 6 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [3351666] setting to a 15 second run per stressor
+stress-ng: info:  [3351666] dispatching hogs: 6 sigpipe
+
+09:05:52        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:05:53        all      3.03      0.00     78.28      0.00      0.00     18.69
+09:05:54        all      3.47      0.00     78.47      0.00      0.00     18.07
+09:05:55        all      3.82      0.00     77.10      0.00      0.00     19.08
+09:05:56        all      4.48      0.00     77.61      0.00      0.00     17.91
+09:05:57        all      2.80      0.00     80.15      0.00      0.00     17.05
+09:05:58        all      2.51      0.00     79.90      0.00      0.00     17.59
+09:05:59        all      2.87      0.00     78.59      0.00      0.00     18.54
+09:06:00        all      3.57      0.00     78.06      0.00      0.00     18.37
+09:06:01        all      3.32      0.00     78.83      0.00      0.00     17.86
+09:06:02        all      3.93      0.00     77.15      0.00      0.00     18.92
+Average:        all      3.38      0.00     78.41      0.00      0.00     18.21
+stress-ng: info:  [3351666] successful run completed in 15.00s
+stress-ng: info:  [3351666] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [3351666]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [3351666] sigpipe         1542821     15.00     15.97     30.75    102851.87       33022.71        51.91
+
+ Performance counter stats for 'stress-ng --sigpipe 6 -t 15s --pipeherd-yield --metrics':
+
+           1636916      cs                                                          
+
+      15.013561594 seconds time elapsed
+
+      16.037536000 seconds user
+      30.822522000 seconds sys
+
+
+
+start 7 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [4123409] setting to a 15 second run per stressor
+stress-ng: info:  [4123409] dispatching hogs: 7 sigpipe
+
+09:06:07        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:06:08        all      4.02      0.00     80.40      0.00      0.00     15.58
+09:06:09        all      4.55      0.00     81.82      0.00      0.00     13.64
+09:06:10        all      3.54      0.00     82.78      0.00      0.00     13.67
+09:06:11        all      2.99      0.00     77.99      0.00      0.00     19.02
+09:06:12        all      3.98      0.00     84.08      0.00      0.00     11.94
+09:06:13        all      3.85      0.00     83.59      0.00      0.00     12.56
+09:06:14        all      4.34      0.00     81.12      0.00      0.00     14.54
+09:06:15        all      5.10      0.00     80.61      0.00      0.00     14.29
+09:06:16        all      4.22      0.00     81.89      0.00      0.00     13.90
+09:06:17        all      3.32      0.00     82.40      0.00      0.00     14.29
+Average:        all      4.00      0.00     81.70      0.00      0.00     14.31
+stress-ng: info:  [4123409] successful run completed in 15.00s
+stress-ng: info:  [4123409] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [4123409]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [4123409] sigpipe         1572634     15.00     16.15     32.21    104837.14       32519.31        46.05
+
+ Performance counter stats for 'stress-ng --sigpipe 7 -t 15s --metrics':
+
+           1610957      cs                                                          
+
+      15.012491250 seconds time elapsed
+
+      16.219296000 seconds user
+      32.284014000 seconds sys
+
+
+
+start 7 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [716197] setting to a 15 second run per stressor
+stress-ng: info:  [716197] dispatching hogs: 7 sigpipe
+
+09:06:22        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:06:23        all      4.00      0.00     81.00      0.00      0.00     15.00
+09:06:24        all      3.01      0.00     82.46      0.00      0.00     14.54
+09:06:25        all      2.56      0.00     82.82      0.00      0.00     14.62
+09:06:26        all      2.86      0.00     81.04      0.00      0.00     16.10
+09:06:27        all      2.35      0.00     82.25      0.00      0.00     15.40
+09:06:28        all      3.80      0.00     81.27      0.00      0.00     14.94
+09:06:29        all      3.25      0.00     83.25      0.00      0.00     13.50
+09:06:30        all      3.06      0.00     82.40      0.00      0.00     14.54
+09:06:31        all      4.74      0.00     81.55      0.00      0.00     13.72
+09:06:32        all      3.03      0.00     83.33      0.00      0.00     13.64
+Average:        all      3.27      0.00     82.14      0.00      0.00     14.59
+stress-ng: info:  [716197] successful run completed in 15.01s
+stress-ng: info:  [716197] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [716197]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [716197] sigpipe         1451991     15.00     15.68     32.47     96794.65       30155.58        45.85
+
+ Performance counter stats for 'stress-ng --sigpipe 7 -t 15s --pipeherd-yield --metrics':
+
+           1494067      cs                                                          
+
+      15.017333996 seconds time elapsed
+
+      15.759506000 seconds user
+      32.597069000 seconds sys
+
+
+
+start 8 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [1442611] setting to a 15 second run per stressor
+stress-ng: info:  [1442611] dispatching hogs: 8 sigpipe
+
+09:06:37        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:06:38        all      4.25      0.00     85.25      0.00      0.00     10.50
+09:06:39        all      5.04      0.00     86.65      0.00      0.00      8.31
+09:06:40        all      3.52      0.00     87.69      0.00      0.00      8.79
+09:06:41        all      3.80      0.00     88.10      0.00      0.00      8.10
+09:06:42        all      3.98      0.00     88.06      0.00      0.00      7.96
+09:06:43        all      4.29      0.00     86.36      0.00      0.00      9.34
+09:06:44        all      6.28      0.00     85.93      0.00      0.00      7.79
+09:06:45        all      4.91      0.00     86.82      0.00      0.00      8.27
+09:06:46        all      2.75      0.00     88.25      0.00      0.00      9.00
+09:06:47        all      3.76      0.00     87.97      0.00      0.00      8.27
+Average:        all      4.25      0.00     87.11      0.00      0.00      8.64
+stress-ng: info:  [1442611] successful run completed in 15.00s
+stress-ng: info:  [1442611] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [1442611]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [1442611] sigpipe         1968662     15.00     16.61     34.69    131238.79       38375.48        42.75
+
+ Performance counter stats for 'stress-ng --sigpipe 8 -t 15s --metrics':
+
+           2059515      cs                                                          
+
+      15.016922513 seconds time elapsed
+
+      16.707608000 seconds user
+      34.798957000 seconds sys
+
+
+
+start 8 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [2427381] setting to a 15 second run per stressor
+stress-ng: info:  [2427381] dispatching hogs: 8 sigpipe
+
+09:06:52        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:06:53        all      3.54      0.00     85.32      0.00      0.00     11.14
+09:06:54        all      4.52      0.00     87.69      0.00      0.00      7.79
+09:06:55        all      4.57      0.00     86.80      0.00      0.00      8.63
+09:06:56        all      4.70      0.00     87.87      0.00      0.00      7.43
+09:06:57        all      4.22      0.00     88.34      0.00      0.00      7.44
+09:06:58        all      3.50      0.00     87.25      0.00      0.00      9.25
+09:06:59        all      5.00      0.00     86.50      0.00      0.00      8.50
+09:07:00        all      4.25      0.00     90.75      0.00      0.00      5.00
+09:07:01        all      4.39      0.00     86.05      0.00      0.00      9.56
+09:07:02        all      5.00      0.00     87.50      0.00      0.00      7.50
+Average:        all      4.37      0.00     87.42      0.00      0.00      8.21
+stress-ng: info:  [2427381] successful run completed in 15.00s
+stress-ng: info:  [2427381] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [2427381]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [2427381] sigpipe         1957069     15.00     16.25     34.37    130467.58       38661.97        42.18
+
+ Performance counter stats for 'stress-ng --sigpipe 8 -t 15s --pipeherd-yield --metrics':
+
+           2031146      cs                                                          
+
+      15.014153688 seconds time elapsed
+
+      16.328359000 seconds user
+      34.456185000 seconds sys
+
+
+
+start 9 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [3406406] setting to a 15 second run per stressor
+stress-ng: info:  [3406406] dispatching hogs: 9 sigpipe
+
+09:07:07        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:07:08        all      5.19      0.00     91.85      0.00      0.00      2.96
+09:07:09        all      4.47      0.00     93.30      0.00      0.00      2.23
+09:07:10        all      5.28      0.00     92.71      0.00      0.00      2.01
+09:07:11        all      5.54      0.00     91.69      0.00      0.00      2.77
+09:07:12        all      5.21      0.00     92.56      0.00      0.00      2.23
+09:07:13        all      4.22      0.00     92.31      0.00      0.00      3.47
+09:07:14        all      6.03      0.00     92.21      0.00      0.00      1.76
+09:07:15        all      5.00      0.00     93.25      0.00      0.00      1.75
+09:07:16        all      5.67      0.00     91.87      0.00      0.00      2.46
+09:07:17        all      5.78      0.00     91.96      0.00      0.00      2.26
+Average:        all      5.24      0.00     92.37      0.00      0.00      2.39
+stress-ng: info:  [3406406] successful run completed in 15.00s
+stress-ng: info:  [3406406] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [3406406]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [3406406] sigpipe         2526008     15.00     16.27     36.39    168392.50       47968.25        39.01
+
+ Performance counter stats for 'stress-ng --sigpipe 9 -t 15s --metrics':
+
+           2950607      cs                                                          
+
+      15.012774064 seconds time elapsed
+
+      16.373923000 seconds user
+      36.489901000 seconds sys
+
+
+
+start 9 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [475872] setting to a 15 second run per stressor
+stress-ng: info:  [475872] dispatching hogs: 9 sigpipe
+
+09:07:22        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:07:23        all      6.23      0.00     90.52      0.00      0.00      3.24
+09:07:24        all      6.28      0.00     91.46      0.00      0.00      2.26
+09:07:25        all      6.40      0.00     91.87      0.00      0.00      1.72
+09:07:26        all      4.19      0.00     87.96      0.00      0.00      7.85
+09:07:27        all      1.76      0.00     85.00      0.00      0.00     13.24
+09:07:28        all      3.36      0.00     85.27      0.26      0.00     11.11
+09:07:29        all      4.76      0.00     89.97      0.00      0.00      5.26
+09:07:30        all      4.49      0.00     93.27      0.00      0.00      2.24
+09:07:31        all      5.26      0.00     92.73      0.00      0.00      2.01
+09:07:32        all      5.26      0.00     92.73      0.00      0.00      2.01
+Average:        all      4.86      0.00     90.18      0.03      0.00      4.93
+stress-ng: info:  [475872] successful run completed in 15.00s
+stress-ng: info:  [475872] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [475872]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [475872] sigpipe         2502445     15.00     15.74     37.83    166827.99       46713.55        39.68
+
+ Performance counter stats for 'stress-ng --sigpipe 9 -t 15s --pipeherd-yield --metrics':
+
+           2911290      cs                                                          
+
+      15.013654078 seconds time elapsed
+
+      15.849954000 seconds user
+      37.911891000 seconds sys
+
+
+
+start 10 worker(s) without flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [1727469] setting to a 15 second run per stressor
+stress-ng: info:  [1727469] dispatching hogs: 10 sigpipe
+
+09:07:37        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:07:38        all      5.22      0.00     91.04      0.00      0.00      3.73
+09:07:39        all      5.71      0.00     93.30      0.00      0.00      0.99
+09:07:40        all      5.56      0.00     94.44      0.00      0.00      0.00
+09:07:41        all      6.73      0.00     92.52      0.00      0.00      0.75
+09:07:42        all      6.03      0.00     92.96      0.00      0.00      1.01
+09:07:43        all      4.98      0.00     94.03      0.00      0.00      1.00
+09:07:44        all      6.72      0.00     93.28      0.00      0.00      0.00
+09:07:45        all      6.97      0.00     92.29      0.00      0.00      0.75
+09:07:46        all      5.49      0.00     94.26      0.00      0.00      0.25
+09:07:47        all      6.23      0.00     93.52      0.00      0.00      0.25
+Average:        all      5.96      0.00     93.16      0.00      0.00      0.87
+stress-ng: info:  [1727469] successful run completed in 15.00s
+stress-ng: info:  [1727469] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [1727469]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [1727469] sigpipe         3042276     15.00     16.00     39.09    202812.02       55223.74        36.73
+
+ Performance counter stats for 'stress-ng --sigpipe 10 -t 15s --metrics':
+
+           3818690      cs                                                          
+
+      15.029649264 seconds time elapsed
+
+      16.125653000 seconds user
+      39.219556000 seconds sys
+
+
+
+start 10 worker(s) with flag
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/23 	_aarch64_	(4 CPU)
+stress-ng: info:  [3248875] setting to a 15 second run per stressor
+stress-ng: info:  [3248875] dispatching hogs: 10 sigpipe
+
+09:07:52        CPU     %user     %nice   %system   %iowait    %steal     %idle
+09:07:53        all      3.57      0.00     90.66      0.00      0.00      5.77
+09:07:54        all      4.98      0.00     93.78      0.00      0.00      1.24
+09:07:55        all      6.30      0.00     92.70      0.00      0.00      1.01
+09:07:56        all      5.00      0.00     94.25      0.00      0.00      0.75
+09:07:57        all      5.81      0.00     91.67      0.00      0.00      2.53
+09:07:58        all      5.75      0.00     93.25      0.00      0.00      1.00
+09:07:59        all      6.47      0.00     93.03      0.00      0.00      0.50
+09:08:00        all      6.22      0.00     93.28      0.00      0.00      0.50
+09:08:01        all      5.04      0.00     91.51      0.00      0.00      3.45
+09:08:02        all      6.78      0.00     92.21      0.00      0.00      1.01
+Average:        all      5.61      0.00     92.66      0.00      0.00      1.73
+stress-ng: info:  [3248875] successful run completed in 15.02s
+stress-ng: info:  [3248875] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [3248875]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [3248875] sigpipe         2742969     15.00     15.67     39.57    182837.55       49655.49        36.82
+
+ Performance counter stats for 'stress-ng --sigpipe 10 -t 15s --pipeherd-yield --metrics':
+
+           3466615      cs                                                          
+
+      15.036355112 seconds time elapsed
+
+      15.794902000 seconds user
+      39.697138000 seconds sys
+
+

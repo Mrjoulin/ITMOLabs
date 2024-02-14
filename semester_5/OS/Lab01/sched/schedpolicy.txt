@@ -1,0 +1,761 @@
+Analize schedpolicy
+
+start 1 worker(s)
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [427401] setting to a 10 second run per stressor
+stress-ng: info:  [427401] dispatching hogs: 1 schedpolicy
+
+10:34:05 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:06 AM     all      0.25      0.00      1.00      0.00      0.00     98.75
+
+10:34:05 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:06 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:06 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:07 AM     all      0.00      0.00      0.00      0.00      0.00    100.00
+
+10:34:06 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:07 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:07 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:08 AM     all      0.00      0.00      0.00      0.00      0.00    100.00
+
+10:34:07 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:08 AM      5.00      0.00      5.00      0.00      0.00     40.00      0.00
+
+10:34:08 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:09 AM     all      0.00      0.00      0.25      0.00      0.00     99.75
+
+10:34:08 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:09 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:09 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:10 AM     all      0.00      0.00      0.25      0.00      0.00     99.75
+
+10:34:09 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:10 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:10 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:11 AM     all      0.50      0.00      1.00      0.25      0.00     98.25
+
+10:34:10 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:11 AM     37.00      0.00     37.00      0.00      0.00    448.00      0.00
+
+10:34:11 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:12 AM     all      0.00      0.00      0.50      0.00      0.00     99.50
+
+10:34:11 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:12 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:12 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:13 AM     all      0.00      0.00      0.00      0.00      0.00    100.00
+
+10:34:12 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:13 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:13 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:14 AM     all      1.51      0.00      0.00      0.00      0.00     98.49
+
+10:34:13 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:14 AM      1.00      0.00      1.00      0.00      0.00      8.00      0.00
+
+10:34:14 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:15 AM     all      0.00      0.00      0.25      0.00      0.00     99.75
+
+10:34:14 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:15 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all      0.22      0.00      0.33      0.03      0.00     99.42
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         4.30      0.00      4.30      0.00      0.00     49.55      0.00
+stress-ng: info:  [427401] successful run completed in 10.25s
+stress-ng: info:  [427401] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427401]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427401] schedpolicy         241     10.25      0.00      0.01        23.52       24100.00         0.10
+
+start 2 worker(s)
+
+stress-ng: info:  [427407] setting to a 10 second run per stressor
+stress-ng: info:  [427407] dispatching hogs: 2 schedpolicy
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+
+10:34:15 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:16 AM     all      5.43      0.00     21.48      0.00      0.00     73.09
+
+10:34:15 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:16 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:16 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:17 AM     all      5.67      0.00     20.44      0.00      0.00     73.89
+
+10:34:16 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:17 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:17 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:18 AM     all      6.95      0.00     18.61      0.00      0.00     74.44
+
+10:34:17 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:18 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:18 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:19 AM     all      6.51      0.00     25.54      0.00      0.00     67.95
+
+10:34:18 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:19 AM      2.00      0.00      2.00      0.00      0.00     16.00      0.00
+
+10:34:19 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:20 AM     all      5.45      0.00     26.59      0.00      0.00     67.95
+
+10:34:19 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:20 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:20 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:21 AM     all      4.28      0.00     24.70      0.00      0.00     71.02
+
+10:34:20 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:21 AM      5.00      0.00      5.00      0.00      0.00     80.00      0.00
+
+10:34:21 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:22 AM     all      4.75      0.00     20.25      0.00      0.00     75.00
+
+10:34:21 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:22 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:22 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:23 AM     all      6.25      0.00     19.00      0.00      0.00     74.75
+
+10:34:22 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:23 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:23 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:24 AM     all      6.52      0.00     18.55      0.00      0.00     74.94
+
+10:34:23 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:24 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:24 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:25 AM     all      5.06      0.00     19.75      0.00      0.00     75.19
+
+10:34:24 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:25 AM      1.00      0.00      1.00      0.00      0.00      8.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all      5.68      0.00     21.57      0.00      0.00     72.75
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         0.80      0.00      0.80      0.00      0.00     10.40      0.00
+stress-ng: info:  [427407] successful run completed in 10.25s
+stress-ng: info:  [427407] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427407]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427407] schedpolicy     1027344     10.12      2.27      7.56    101489.34      104511.09        48.55
+
+start 3 worker(s)
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [427420] setting to a 10 second run per stressor
+stress-ng: info:  [427420] dispatching hogs: 3 schedpolicy
+
+10:34:25 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:27 AM     all     10.95      0.00     40.15      0.00      0.00     48.91
+
+10:34:25 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:27 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:27 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:28 AM     all     10.09      0.00     45.29      0.00      0.00     44.62
+
+10:34:27 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:28 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:28 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:29 AM     all      9.42      0.00     45.74      0.00      0.00     44.84
+
+10:34:28 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:29 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:29 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:30 AM     all     10.00      0.00     44.55      0.00      0.00     45.45
+
+10:34:29 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:30 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:30 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:31 AM     all      8.81      0.00     43.81      0.00      0.00     47.38
+
+10:34:30 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:31 AM      5.00      0.00      5.00      0.00      0.00     80.00      0.00
+
+10:34:31 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:32 AM     all      9.38      0.00     42.79      0.00      0.00     47.84
+
+10:34:31 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:32 AM      1.00      0.00      1.00      0.00      0.00      8.00      0.00
+
+10:34:32 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:33 AM     all     10.23      0.00     43.49      0.00      0.00     46.28
+
+10:34:32 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:33 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:33 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:34 AM     all      9.03      0.00     43.47      0.00      0.00     47.51
+
+10:34:33 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:34 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:34 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:35 AM     all      9.33      0.00     42.82      0.00      0.00     47.85
+
+10:34:34 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:35 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:35 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:36 AM     all      8.31      0.00     45.73      0.00      0.00     45.96
+
+10:34:35 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:36 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all      9.55      0.00     43.82      0.00      0.00     46.62
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         0.60      0.00      0.60      0.00      0.00      8.79      0.00
+stress-ng: info:  [427420] successful run completed in 10.25s
+stress-ng: info:  [427420] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427420]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427420] schedpolicy     1869589     10.08      4.02     15.72    185449.84       94710.69        65.27
+
+start 4 worker(s)
+
+stress-ng: info:  [427426] setting to a 10 second run per stressor
+stress-ng: info:  [427426] dispatching hogs: 4 schedpolicy
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+
+10:34:36 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:37 AM     all     11.57      0.00     65.28      0.00      0.00     23.15
+
+10:34:36 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:37 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:37 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:38 AM     all     13.38      0.00     64.17      0.00      0.00     22.45
+
+10:34:37 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:38 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:38 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:39 AM     all     13.12      0.00     64.03      0.00      0.00     22.85
+
+10:34:38 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:39 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:39 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:40 AM     all     11.21      0.00     66.36      0.00      0.00     22.43
+
+10:34:39 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:40 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:40 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:41 AM     all     12.41      0.00     64.60      0.23      0.00     22.76
+
+10:34:40 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:41 AM      7.00      0.00      7.00      0.00      0.00     88.00      0.00
+
+10:34:41 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:42 AM     all     13.63      0.00     63.28      0.00      0.00     23.09
+
+10:34:41 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:42 AM      5.00      0.00      5.00      0.00      0.00     32.00      0.00
+
+10:34:42 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:43 AM     all     12.50      0.00     65.18      0.00      0.00     22.32
+
+10:34:42 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:43 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:43 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:44 AM     all     12.27      0.00     65.23      0.00      0.00     22.50
+
+10:34:43 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:44 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:44 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:45 AM     all     15.51      0.00     62.02      0.00      0.00     22.47
+
+10:34:44 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:45 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:45 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:46 AM     all     12.41      0.00     64.83      0.00      0.00     22.76
+
+10:34:45 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:46 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     12.81      0.00     64.49      0.02      0.00     22.68
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         1.20      0.00      1.20      0.00      0.00     12.00      0.00
+stress-ng: info:  [427426] successful run completed in 10.25s
+stress-ng: info:  [427426] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427426]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427426] schedpolicy     2529605     10.06      5.55     24.06    251419.73       85430.77        73.57
+
+start 5 worker(s)
+
+stress-ng: info:  [427433] setting to a 10 second run per stressor
+stress-ng: info:  [427433] dispatching hogs: 5 schedpolicy
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+
+10:34:46 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:47 AM     all     19.45      0.00     79.80      0.00      0.00      0.75
+
+10:34:46 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:47 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:47 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:48 AM     all     17.34      0.00     82.66      0.00      0.00      0.00
+
+10:34:47 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:48 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:48 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:49 AM     all     15.96      0.00     83.79      0.00      0.00      0.25
+
+10:34:48 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:49 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:49 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:50 AM     all     17.00      0.00     83.00      0.00      0.00      0.00
+
+10:34:49 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:50 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:50 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:51 AM     all     15.96      0.00     84.04      0.00      0.00      0.00
+
+10:34:50 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:51 AM      1.00      0.00      1.00      0.00      0.00      8.00      0.00
+
+10:34:51 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:52 AM     all     16.00      0.00     84.00      0.00      0.00      0.00
+
+10:34:51 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:52 AM      4.00      0.00      4.00      0.00      0.00     96.00      0.00
+
+10:34:52 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:53 AM     all     16.96      0.00     82.79      0.00      0.00      0.25
+
+10:34:52 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:53 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:53 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:54 AM     all     17.75      0.00     82.25      0.00      0.00      0.00
+
+10:34:53 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:54 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:54 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:55 AM     all     17.00      0.00     82.75      0.00      0.00      0.25
+
+10:34:54 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:55 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:55 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:56 AM     all     18.50      0.00     81.50      0.00      0.00      0.00
+
+10:34:55 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:56 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     17.19      0.00     82.66      0.00      0.00      0.15
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         0.50      0.00      0.50      0.00      0.00     10.40      0.00
+stress-ng: info:  [427433] successful run completed in 10.25s
+stress-ng: info:  [427433] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427433]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427433] schedpolicy     2937939     10.05      6.75     32.66    292371.32       74548.06        78.44
+
+start 6 worker(s)
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [427441] setting to a 10 second run per stressor
+stress-ng: info:  [427441] dispatching hogs: 6 schedpolicy
+
+10:34:56 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:57 AM     all     15.58      0.00     84.17      0.00      0.00      0.25
+
+10:34:56 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:57 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:57 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:58 AM     all     18.50      0.00     81.50      0.00      0.00      0.00
+
+10:34:57 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:58 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:58 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:34:59 AM     all     16.71      0.00     83.29      0.00      0.00      0.00
+
+10:34:58 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:34:59 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:34:59 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:00 AM     all     17.75      0.00     82.00      0.00      0.00      0.25
+
+10:34:59 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:00 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:00 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:01 AM     all     15.04      0.00     84.96      0.00      0.00      0.00
+
+10:35:00 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:01 AM      3.00      0.00      3.00      0.00      0.00    104.00      0.00
+
+10:35:01 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:02 AM     all     16.96      0.00     83.04      0.00      0.00      0.00
+
+10:35:01 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:02 AM      3.00      0.00      3.00      0.00      0.00     24.00      0.00
+
+10:35:02 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:03 AM     all     19.40      0.00     80.60      0.00      0.00      0.00
+
+10:35:02 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:03 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:03 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:04 AM     all     17.59      0.00     82.41      0.00      0.00      0.00
+
+10:35:03 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:04 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:04 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:05 AM     all     15.67      0.00     84.33      0.00      0.00      0.00
+
+10:35:04 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:05 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:05 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:06 AM     all     17.00      0.00     83.00      0.00      0.00      0.00
+
+10:35:05 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:06 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     17.02      0.00     82.93      0.00      0.00      0.05
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         0.60      0.00      0.60      0.00      0.00     12.79      0.00
+stress-ng: info:  [427441] successful run completed in 10.25s
+stress-ng: info:  [427441] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427441]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427441] schedpolicy     2973862     10.04      6.72     32.72    296169.42       75402.18        65.46
+
+start 7 worker(s)
+
+stress-ng: info:  [427453] setting to a 10 second run per stressor
+stress-ng: info:  [427453] dispatching hogs: 7 schedpolicy
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+
+10:35:07 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:08 AM     all     19.80      0.00     80.20      0.00      0.00      0.00
+
+10:35:07 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:08 AM      2.00      0.00      2.00      0.00      0.00     16.00      0.00
+
+10:35:08 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:09 AM     all     19.45      0.00     80.55      0.00      0.00      0.00
+
+10:35:08 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:09 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:09 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:10 AM     all     18.70      0.00     81.30      0.00      0.00      0.00
+
+10:35:09 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:10 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:10 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:11 AM     all     16.25      0.00     83.75      0.00      0.00      0.00
+
+10:35:10 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:11 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:11 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:12 AM     all     15.83      0.00     84.17      0.00      0.00      0.00
+
+10:35:11 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:12 AM      6.00      0.00      6.00      0.00      0.00     48.00      0.00
+
+10:35:12 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:13 AM     all     16.71      0.00     83.29      0.00      0.00      0.00
+
+10:35:12 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:13 AM      4.00      0.00      4.00      0.00      0.00     80.00      0.00
+
+10:35:13 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:14 AM     all     17.16      0.00     82.84      0.00      0.00      0.00
+
+10:35:13 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:14 AM      1.00      0.00      1.00      0.00      0.00      8.00      0.00
+
+10:35:14 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:15 AM     all     17.04      0.00     82.96      0.00      0.00      0.00
+
+10:35:14 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:15 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:15 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:16 AM     all     17.29      0.00     82.71      0.00      0.00      0.00
+
+10:35:15 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:16 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:16 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:17 AM     all     17.75      0.00     82.25      0.00      0.00      0.00
+
+10:35:16 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:17 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     17.60      0.00     82.40      0.00      0.00      0.00
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         1.30      0.00      1.30      0.00      0.00     15.20      0.00
+stress-ng: info:  [427453] successful run completed in 10.24s
+stress-ng: info:  [427453] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427453]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427453] schedpolicy     2952532     10.03      6.92     32.55    294241.43       74804.46        56.19
+
+start 8 worker(s)
+
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+stress-ng: info:  [427463] setting to a 10 second run per stressor
+stress-ng: info:  [427463] dispatching hogs: 8 schedpolicy
+
+10:35:17 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:18 AM     all     17.79      0.00     81.95      0.00      0.00      0.25
+
+10:35:17 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:18 AM     90.00      0.00     90.00      0.00      0.00    904.00      0.00
+
+10:35:18 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:19 AM     all     20.75      0.00     79.25      0.00      0.00      0.00
+
+10:35:18 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:19 AM      2.00      0.00      2.00      0.00      0.00     16.00      0.00
+
+10:35:19 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:20 AM     all     17.66      0.00     82.34      0.00      0.00      0.00
+
+10:35:19 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:20 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:20 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:21 AM     all     18.00      0.00     82.00      0.00      0.00      0.00
+
+10:35:20 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:21 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:21 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:22 AM     all     17.75      0.00     82.25      0.00      0.00      0.00
+
+10:35:21 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:22 AM      3.00      0.00      3.00      0.00      0.00     80.00      0.00
+
+10:35:22 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:23 AM     all     17.46      0.00     82.54      0.00      0.00      0.00
+
+10:35:22 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:23 AM      1.00      0.00      1.00      0.00      0.00      8.00      0.00
+
+10:35:23 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:24 AM     all     17.29      0.00     82.71      0.00      0.00      0.00
+
+10:35:23 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:24 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:24 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:25 AM     all     17.68      0.00     82.32      0.00      0.00      0.00
+
+10:35:24 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:25 AM      1.00      0.00      1.00      0.00      0.00      8.00      0.00
+
+10:35:25 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:26 AM     all     19.25      0.00     80.50      0.00      0.00      0.25
+
+10:35:25 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:26 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:26 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:27 AM     all     17.25      0.00     82.75      0.00      0.00      0.00
+
+10:35:26 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:27 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     18.09      0.00     81.86      0.00      0.00      0.05
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         9.70      0.00      9.70      0.00      0.00    101.60      0.00
+stress-ng: info:  [427463] successful run completed in 10.25s
+stress-ng: info:  [427463] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427463]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427463] schedpolicy     2804975     10.03      7.09     32.22    279635.70       71355.25        48.99
+
+start 9 worker(s)
+
+stress-ng: info:  [427474] setting to a 10 second run per stressor
+stress-ng: info:  [427474] dispatching hogs: 9 schedpolicy
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+
+10:35:27 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:28 AM     all     16.75      0.00     82.75      0.00      0.00      0.50
+
+10:35:27 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:28 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:28 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:29 AM     all     18.75      0.00     81.25      0.00      0.00      0.00
+
+10:35:28 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:29 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:29 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:30 AM     all     16.42      0.00     83.58      0.00      0.00      0.00
+
+10:35:29 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:30 AM      2.00      0.00      2.00      0.00      0.00     16.00      0.00
+
+10:35:30 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:31 AM     all     17.75      0.00     82.25      0.00      0.00      0.00
+
+10:35:30 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:31 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:31 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:32 AM     all     18.14      0.00     81.86      0.00      0.00      0.00
+
+10:35:31 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:32 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:32 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:33 AM     all     18.43      0.00     81.31      0.00      0.00      0.25
+
+10:35:32 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:33 AM      4.00      0.00      4.00      0.00      0.00     80.00      0.00
+
+10:35:33 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:34 AM     all     20.75      0.00     79.25      0.00      0.00      0.00
+
+10:35:33 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:34 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:34 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:35 AM     all     19.30      0.00     80.70      0.00      0.00      0.00
+
+10:35:34 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:35 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:35 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:36 AM     all     16.50      0.00     83.25      0.00      0.00      0.25
+
+10:35:35 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:36 AM      1.00      0.00      1.00      0.00      0.00      8.00      0.00
+
+10:35:36 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:37 AM     all     20.50      0.00     79.50      0.00      0.00      0.00
+
+10:35:36 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:37 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     18.33      0.00     81.57      0.00      0.00      0.10
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         0.70      0.00      0.70      0.00      0.00     10.38      0.00
+stress-ng: info:  [427474] successful run completed in 10.25s
+stress-ng: info:  [427474] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427474]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427474] schedpolicy     2785799     10.03      7.21     32.17    277815.25       70741.47        43.64
+
+start 10 worker(s)
+
+stress-ng: info:  [427486] setting to a 10 second run per stressor
+stress-ng: info:  [427486] dispatching hogs: 10 schedpolicy
+Linux 5.15.0-88-generic (matthewserver) 	11/13/2023 	_aarch64_	(4 CPU)
+
+10:35:37 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:38 AM     all     18.75      0.00     80.50      0.00      0.00      0.75
+
+10:35:37 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:38 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:38 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:39 AM     all     18.69      0.00     81.31      0.00      0.00      0.00
+
+10:35:38 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:39 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:39 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:40 AM     all     14.95      0.00     85.05      0.00      0.00      0.00
+
+10:35:39 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:40 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:40 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:41 AM     all     18.11      0.00     81.89      0.00      0.00      0.00
+
+10:35:40 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:41 AM      2.00      0.00      2.00      0.00      0.00     16.00      0.00
+
+10:35:41 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:42 AM     all     16.12      0.00     83.88      0.00      0.00      0.00
+
+10:35:41 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:42 AM      3.00      0.00      3.00      0.00      0.00     24.00      0.00
+
+10:35:42 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:43 AM     all     18.20      0.00     81.80      0.00      0.00      0.00
+
+10:35:42 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:43 AM      4.00      0.00      4.00      0.00      0.00     80.00      0.00
+
+10:35:43 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:44 AM     all     19.05      0.00     80.95      0.00      0.00      0.00
+
+10:35:43 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:44 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:44 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:45 AM     all     18.20      0.00     81.55      0.00      0.00      0.25
+
+10:35:44 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:45 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:45 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:46 AM     all     18.16      0.00     81.84      0.00      0.00      0.00
+
+10:35:45 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:46 AM      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+
+10:35:46 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:35:47 AM     all     19.65      0.00     80.35      0.00      0.00      0.00
+
+10:35:46 AM       tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+10:35:47 AM      1.00      0.00      1.00      0.00      0.00     16.00      0.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     18.00      0.00     81.90      0.00      0.00      0.10
+
+Average:          tps      rtps      wtps      dtps   bread/s   bwrtn/s   bdscd/s
+Average:         1.00      0.00      1.00      0.00      0.00     13.59      0.00
+stress-ng: info:  [427486] successful run completed in 10.25s
+stress-ng: info:  [427486] stressor       bogo ops real time  usr time  sys time   bogo ops/s     bogo ops/s CPU used per
+stress-ng: info:  [427486]                           (secs)    (secs)    (secs)   (real time) (usr+sys time) instance (%)
+stress-ng: info:  [427486] schedpolicy     2847544     10.02      7.06     32.31    284059.12       72327.76        39.27
