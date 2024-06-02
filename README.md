@@ -5,6 +5,99 @@
 * [Semester 2](https://github.com/Mrjoulin/ITMOLabs/tree/master#semester-2)
 * [Semester 3](https://github.com/Mrjoulin/ITMOLabs/tree/master#semester-3)
 * [Semester 4](https://github.com/Mrjoulin/ITMOLabs/tree/master#semester-4)
+* [Semester 5](https://github.com/Mrjoulin/ITMOLabs/tree/master#semester-5)
+* [Semester 6](https://github.com/Mrjoulin/ITMOLabs/tree/master#semester-6)
+
+# Semester 6
+
+## Business logic of software systems:
+
+### Lab 1:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/BLPS/Lab01) to view sources
+
+### Lab 2:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/BLPS/Lab02) to view sources
+
+### Lab 3:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/BLPS/Lab03) to view sources
+
+### Lab 4:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/BLPS/Lab04) to view sources
+
+## Distributed storage systems:
+
+### Lab 1:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/DSS/Lab01) to view sources
+
+### Lab 2:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_6/DSS/%D0%A0%D0%A1%D0%A5%D0%94%20%D0%9B%D0%B0%D0%B1%202.pdf) to view report
+
+### Lab 3:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_6/DSS/%D0%A0%D0%A1%D0%A5%D0%94%20%D0%9B%D0%B0%D0%B1%203.pdf) to view report
+
+### Lab 4:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_6/DSS/%D0%A0%D0%A1%D0%A5%D0%94%20%D0%9B%D0%B0%D0%B1%204.pdf) to view report
+
+## Testing
+
+### Lab 1:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/Testing/Lab01) to view sources
+
+### Lab 2:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/Testing/Lab02) to view sources
+
+### Lab 3:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/Testing/Lab03) to view sources
+
+### Lab 4:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_6/Testing/Lab04) to view sources
+
+# Semester 5
+
+## DataBases:
+
+### Lab 1:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/DB/Lab01) to view sources
+
+### Lab 2:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/DB/Lab02) to view sources
+
+### Lab 3:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/DB/Lab03) to view sources
+
+### Lab 4:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/DB/Lab04) to view sources
+
+## Operating Systems:
+
+### Lab 1:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/OS/Lab01) to view sources
+
+### Lab 2:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/OS/Lab02) to view sources
+
+## AI systems:
+
+### Lab 1:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/SysAI/Lab01) to view sources
+
+### Lab 2:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/SysAI/Lab02) to view sources
+
+### Lab 3:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/tree/master/semester_5/SysAI/Lab03) to view sources
+
+### Lab 4:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_5/SysAI/ITMO_AI_Lab_%E2%84%964.ipynb) to view sources
+
+### Lab 5:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_5/SysAI/ITMO_AI_Lab_%E2%84%965.ipynb) to view sources
+
+### Lab 6:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_5/SysAI/ITMO_AI_Lab_%E2%84%966.ipynb) to view sources
+
+### Lab 7:
+#### [Click here](https://github.com/Mrjoulin/ITMOLabs/blob/master/semester_5/SysAI/ITMO_AI_Lab_%E2%84%967.ipynb) to view sources
 
 
 # Semester 4
