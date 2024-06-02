@@ -1,0 +1,5 @@
+Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Sent KB/sec
+Request Configuration №3,180,580,588,599,610,677,510,686,7.222%,2.18325,0.49,0.33
+Request Configuration №2,180,776,787,797,801,807,711,848,100.000%,2.17978,0.49,0.33
+Request Configuration №1,180,1180,1188,1200,1211,1239,1110,1257,100.000%,2.16805,0.49,0.33
+TOTAL,540,845,787,1192,1196,1229,510,1257,69.074%,6.50414,1.47,1.00

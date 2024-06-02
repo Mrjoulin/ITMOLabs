@@ -1,0 +1,116 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "text": "Аудитория: {{auditory}}\nКоличество часов: {{hour_count}}\nПожелания: {{request_text}}",
+          "label": "Text view",
+          "type": "text",
+          "layout": {
+            "row": "Row_0in7jdj",
+            "columns": null
+          },
+          "id": "Field_04kq26r"
+        }
+      ],
+      "showOutline": true,
+      "label": "Пользователь хочет",
+      "type": "group",
+      "layout": {
+        "row": "Row_0idg7vq",
+        "columns": null
+      },
+      "id": "Field_1pkrewq"
+    },
+    {
+      "components": [
+        {
+          "label": "Заголовок объявления",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0o6rubn",
+            "columns": null
+          },
+          "id": "Field_115lfe6",
+          "key": "title",
+          "validate": {
+            "required": true,
+            "minLength": 10
+          }
+        },
+        {
+          "label": "Текст объявления",
+          "type": "textarea",
+          "layout": {
+            "row": "Row_1oyzbvg",
+            "columns": null
+          },
+          "id": "Field_1kui2sw",
+          "key": "text",
+          "validate": {
+            "required": true,
+            "minLength": 15
+          }
+        },
+        {
+          "values": [
+            {
+              "label": "Дети",
+              "value": "KIDS"
+            },
+            {
+              "label": "Подростки",
+              "value": "TEENAGERS"
+            },
+            {
+              "label": "18+",
+              "value": "ADULTS"
+            }
+          ],
+          "label": "Аудитория",
+          "type": "select",
+          "layout": {
+            "row": "Row_1gv3fjy",
+            "columns": null
+          },
+          "id": "Field_1wnhg4m",
+          "key": "auditory",
+          "validate": {
+            "required": true
+          }
+        },
+        {
+          "label": "Количество часов",
+          "type": "number",
+          "layout": {
+            "row": "Row_1gv3fjy",
+            "columns": null
+          },
+          "id": "Field_0z4kmwr",
+          "key": "hour_count",
+          "validate": {
+            "required": true,
+            "min": 1
+          }
+        }
+      ],
+      "showOutline": true,
+      "label": "Пользователь получит",
+      "type": "group",
+      "layout": {
+        "row": "Row_1pl3rhl",
+        "columns": null
+      },
+      "id": "Field_0iy8tep"
+    }
+  ],
+  "type": "default",
+  "id": "ad_preparation",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

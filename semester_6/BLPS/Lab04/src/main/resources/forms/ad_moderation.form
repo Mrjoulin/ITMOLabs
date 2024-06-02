@@ -1,0 +1,45 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "text": "Аудитория: {{auditory}}\nКоличество часов: {{hour_count}}\nПожелания: {{request_text}}",
+          "label": "Text view",
+          "type": "text",
+          "layout": {
+            "row": "Row_0in7jdj",
+            "columns": null
+          },
+          "id": "Field_04kq26r"
+        }
+      ],
+      "showOutline": true,
+      "label": "Пользователь хочет",
+      "type": "group",
+      "layout": {
+        "row": "Row_0idg7vq",
+        "columns": null
+      },
+      "id": "Field_1pkrewq"
+    },
+    {
+      "label": "Едет дальше",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_136a4ps",
+        "columns": null
+      },
+      "id": "Field_0oi2mqh",
+      "key": "ad_request_ready"
+    }
+  ],
+  "type": "default",
+  "id": "ad_moderation",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

@@ -1,0 +1,10 @@
+{
+  "resources": [
+    {
+      "pattern": "\\Qorg/apache/activemq/artemis/core/server/components/\\E.*"
+    },
+    {
+      "pattern": "\\Qorg/apache/activemq/artemis/utils/\\E.*"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "text": "{{comments}}",
+          "label": "Text view",
+          "type": "text",
+          "layout": {
+            "row": "Row_0ngqa1u",
+            "columns": null
+          },
+          "id": "Field_05raxu0"
+        }
+      ],
+      "showOutline": true,
+      "label": "Комментарии с ревью",
+      "type": "group",
+      "layout": {
+        "row": "Row_1a2s4r3",
+        "columns": null
+      },
+      "id": "Field_10r0mvm",
+      "conditional": {
+        "hide": "=comments = \"\" or comments = null"
+      }
+    },
+    {
+      "label": "Заголовок статьи",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0sb12kx",
+        "columns": null
+      },
+      "id": "Field_1exkp90",
+      "key": "article_title",
+      "validate": {
+        "required": true,
+        "minLength": 10
+      }
+    },
+    {
+      "label": "Текст статьи",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1is4yvy",
+        "columns": null
+      },
+      "id": "Field_1r7eu4f",
+      "key": "article_text",
+      "validate": {
+        "required": true,
+        "minLength": 50
+      }
+    },
+    {
+      "components": [
+        {
+          "label": "Ссылка",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_1lx1xkl",
+            "columns": null
+          },
+          "id": "Field_0f440hs",
+          "key": "link"
+        }
+      ],
+      "showOutline": true,
+      "isRepeating": true,
+      "allowAddRemove": true,
+      "defaultRepetitions": 1,
+      "label": "Ссылки на изображение",
+      "type": "dynamiclist",
+      "layout": {
+        "row": "Row_0ps9dlq",
+        "columns": null
+      },
+      "id": "Field_0jtfnlf",
+      "path": "img_links",
+      "disableCollapse": false,
+      "verticalAlignment": "start"
+    }
+  ],
+  "type": "default",
+  "id": "article_creation",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

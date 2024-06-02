@@ -1,0 +1,32 @@
+camunda.bpm:
+  database:
+    type: postgres
+  table-prefix: camunda.
+  schema-update: true
+
+  generic-properties:
+    properties:
+      historyTimeToLive: P1D
+  admin-user:
+    id: admin
+    password: admin
+    firstName: Admin
+  filter:
+    create: All tasks
+  authorization:
+    enabled: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?stringtype=unspecified
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}

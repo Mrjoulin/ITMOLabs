@@ -1,0 +1,81 @@
+{
+  "components": [
+    {
+      "values": [
+        {
+          "label": "Дети",
+          "value": "KIDS"
+        },
+        {
+          "label": "Подростки",
+          "value": "TEENAGERS"
+        },
+        {
+          "label": "18+",
+          "value": "ADULTS"
+        }
+      ],
+      "label": "Целевая аудитория",
+      "type": "select",
+      "layout": {
+        "row": "Row_10osydh",
+        "columns": null
+      },
+      "id": "Field_0vuesxo",
+      "key": "auditory",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Количество часов",
+      "type": "number",
+      "layout": {
+        "row": "Row_10osydh",
+        "columns": null
+      },
+      "id": "Field_11i9alc",
+      "key": "hour_count",
+      "validate": {
+        "required": true,
+        "min": 1
+      }
+    },
+    {
+      "label": "Общие пожелания",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_18gcb3n",
+        "columns": null
+      },
+      "id": "Field_14t8hh2",
+      "key": "request_text",
+      "validate": {
+        "required": true,
+        "minLength": 10
+      }
+    },
+    {
+      "label": "Ссылка",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1udxwa0",
+        "columns": null
+      },
+      "id": "Field_1awax9r",
+      "key": "target_link",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "ad_request",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

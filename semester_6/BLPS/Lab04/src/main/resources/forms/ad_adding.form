@@ -1,0 +1,125 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "text": "{{article_text}}",
+          "label": "Text view",
+          "type": "text",
+          "layout": {
+            "row": "Row_047xk1g",
+            "columns": null
+          },
+          "id": "Field_0y79trw"
+        },
+        {
+          "components": [
+            {
+              "text": "{{this.link}}",
+              "label": "Text view",
+              "type": "text",
+              "layout": {
+                "row": "Row_1fxafb5",
+                "columns": null
+              },
+              "id": "Field_17xjl4t"
+            }
+          ],
+          "showOutline": true,
+          "isRepeating": true,
+          "allowAddRemove": false,
+          "defaultRepetitions": 1,
+          "label": "Ссылки на картинки",
+          "type": "dynamiclist",
+          "layout": {
+            "row": "Row_0uealan",
+            "columns": null
+          },
+          "id": "Field_0zs7quo",
+          "path": "img_links"
+        }
+      ],
+      "showOutline": true,
+      "label": "Статья \"{{article_title}}\"",
+      "type": "group",
+      "layout": {
+        "row": "Row_1j0ck0b",
+        "columns": null
+      },
+      "id": "Field_0o1d2wk"
+    },
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "label": "ID",
+              "type": "number",
+              "layout": {
+                "row": "Row_1w8j9uv",
+                "columns": null
+              },
+              "id": "Field_0jfz589",
+              "key": "id",
+              "readonly": true
+            },
+            {
+              "text": "Реклама {{this.title}}",
+              "label": "Text view",
+              "type": "text",
+              "layout": {
+                "row": "Row_1w8j9uv",
+                "columns": null
+              },
+              "id": "Field_0tf9jz1"
+            },
+            {
+              "label": "Берём?",
+              "type": "checkbox",
+              "layout": {
+                "row": "Row_1w8j9uv",
+                "columns": null
+              },
+              "id": "Field_0jepfy3",
+              "key": "chosen",
+              "properties": {
+                "id": "{{this.id}}"
+              }
+            }
+          ],
+          "showOutline": true,
+          "label": "",
+          "type": "group",
+          "layout": {
+            "row": "Row_12fiv7v",
+            "columns": null
+          },
+          "id": "Field_10at1nz"
+        }
+      ],
+      "showOutline": true,
+      "isRepeating": true,
+      "allowAddRemove": false,
+      "defaultRepetitions": 1,
+      "label": "Рекламы",
+      "type": "dynamiclist",
+      "layout": {
+        "row": "Row_0bxr047",
+        "columns": null
+      },
+      "id": "Field_01uh6wt",
+      "path": "ad_posts",
+      "disableCollapse": false,
+      "properties": {}
+    }
+  ],
+  "type": "default",
+  "id": "ad_adding",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

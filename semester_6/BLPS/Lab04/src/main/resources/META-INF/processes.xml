@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<process-application
+        xmlns="http://www.camunda.org/schema/1.0/ProcessApplication"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <process-archive name="loan-approval">
+        <process-engine>default</process-engine>
+
+        <resource>processes/article_creation.bpmn</resource>
+        <resource>forms/article_creation.form</resource>
+        <resource>forms/article_moderation.form</resource>
+        <resource>forms/ad_adding.form</resource>
+
+        <resource>processes/ad_process.bpmn</resource>
+        <resource>forms/ad_request.form</resource>
+        <resource>forms/ad_moderation.form</resource>
+        <resource>forms/ad_preparation.form</resource>
+
+        <resource>processes/expired_check.bpmn</resource>
+
+        <properties>
+            <property name="isDeleteUponUndeploy">false</property>
+            <property name="isScanForProcessDefinitions">true</property>
+        </properties>
+    </process-archive>
+
+</process-application>

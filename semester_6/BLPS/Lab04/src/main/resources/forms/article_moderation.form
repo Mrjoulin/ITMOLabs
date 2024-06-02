@@ -1,0 +1,96 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "text": "# {{article_title}}",
+          "label": "Text view",
+          "type": "text",
+          "layout": {
+            "row": "Row_0h4kdvk",
+            "columns": null
+          },
+          "id": "Field_11eqblc"
+        },
+        {
+          "text": "{{article_text}}",
+          "label": "Text view",
+          "type": "text",
+          "layout": {
+            "row": "Row_1feo841",
+            "columns": null
+          },
+          "id": "Field_06ooclo"
+        },
+        {
+          "components": [
+            {
+              "text": "{{this.link}}",
+              "label": "Text view",
+              "type": "text",
+              "layout": {
+                "row": "Row_0yf902b",
+                "columns": null
+              },
+              "id": "Field_1avp4vn"
+            }
+          ],
+          "showOutline": true,
+          "isRepeating": true,
+          "allowAddRemove": false,
+          "defaultRepetitions": 1,
+          "label": "Ссылки",
+          "type": "dynamiclist",
+          "layout": {
+            "row": "Row_0uvt2im",
+            "columns": null
+          },
+          "id": "Field_0573bkg",
+          "path": "img_links",
+          "properties": {},
+          "nonCollapsedItems": null
+        }
+      ],
+      "showOutline": true,
+      "label": "Оно принесло",
+      "type": "group",
+      "layout": {
+        "row": "Row_0mrn9ri",
+        "columns": null
+      },
+      "id": "Field_1d4im7o"
+    },
+    {
+      "label": "Одобряем",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_11ptt6i",
+        "columns": null
+      },
+      "id": "Field_170v55k",
+      "key": "is_correct",
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "label": "Комментарии",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0s0tcja",
+        "columns": null
+      },
+      "id": "Field_0qg1sd9",
+      "key": "comments"
+    }
+  ],
+  "type": "default",
+  "id": "article_moderation",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}
