@@ -1,0 +1,21 @@
+zuul:
+  ignored-patterns:
+  - /actuator/**
+  - /swagger-ui
+  - /swagger-ui/**
+  routes:
+    killer:
+      path: /api/v1/killers/**
+      serviceId: killer
+      stripPrefix: true
+    caves:
+      path: /api/v1/caves/**
+      serviceId: dragon
+      stripPrefix: false
+      sensitiveHeaders:
+    dragon:
+      path: /api/v1/dragons/**
+      serviceId: dragon
+      stripPrefix: false
+      sensitiveHeaders:
+  retryable: true

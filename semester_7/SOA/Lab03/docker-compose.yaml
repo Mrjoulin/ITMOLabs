@@ -1,0 +1,95 @@
+version: "3"
+services:
+  dragon1:
+    build:
+      dockerfile: dragon.Dockerfile
+    ports:
+      - "8100:8100"
+    env_file:
+      - .env
+    environment:
+      - PORT=8100
+    depends_on:
+      - postgres
+      - consul
+    links:
+      - consul
+
+  dragon2:
+    build:
+      dockerfile: dragon.Dockerfile
+    ports:
+      - "8200:8200"
+    env_file:
+      - .env
+    environment:
+      - PORT=8200
+    depends_on:
+      - postgres
+      - consul
+    links:
+      - consul
+
+  haproxy:
+    image: haproxy:latest
+    ports:
+      - "8000:8000"
+      - "8404:8404"
+    user: root
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./haproxy/ssl:/etc/haproxy/ssl/
+    depends_on:
+      - dragon1
+      - dragon2
+
+  consul:
+    image: consul:1.14
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    command: agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0
+
+  killer:
+    build:
+      dockerfile: killer.Dockerfile
+    ports:
+      - "9000:8443"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - configuration
+      - zuul
+
+  zuul:
+    build:
+      dockerfile: zuul.Dockerfile
+    ports:
+      - "7500:8443"
+
+  configuration:
+    build:
+      dockerfile: configuration.Dockerfile
+    ports:
+      - "7777:7777"
+
+  front:
+    build:
+      dockerfile: front.Dockerfile
+    ports:
+      - "8443:443"
+    volumes:
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    environment:
+      - NODE_ENV=production
+
+  postgres:
+    image: postgres
+    env_file:
+      - .env
+    ports:
+      - "5444:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
