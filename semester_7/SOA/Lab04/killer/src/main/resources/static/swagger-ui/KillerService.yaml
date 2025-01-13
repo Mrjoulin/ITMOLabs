@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: D&D killer service
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:9000/api/v1/'
+tags:
+  - name: Killers
+    description: Everything about Killers
+paths:
+  /killers/teams/create/{teamName}/{teamSize}/{startCaveId}:
+    post:
+      summary: Create a new dragon slayer team and save it in the database
+      description: Create a new dragon slayer team and save it in the database
+      tags:
+        - Killers
+      parameters:
+        - name: teamName
+          in: path
+          required: true
+          schema:
+            type: string
+            example: big killers
+        - name: teamSize
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 2
+        - name: startCaveId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 2
+      responses:
+        '200':
+          description: Successful operation returns team id
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+                example: 10
+        '400':
+          description: Invalid args supplied
+          content:
+            application/json:
+              schema:
+                $ref: './DragonService.yaml#/components/schemas/Error400'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: './DragonService.yaml#/components/schemas/Error500'
+
+  /killers/team/{teamId}/move/{caveId}:
+    put:
+      summary: Send a team of dragon slayers to the specified cave
+      description: Send a team of dragon slayers to the specified cave
+      parameters:
+        - name: teamId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            exclusiveMinimum: true
+            example: 1
+        - name: caveId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            exclusiveMinimum: true
+            example: 2
+      tags:
+        - Killers
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid args supplied
+          content:
+            application/json:
+              schema:
+                $ref: './DragonService.yaml#/components/schemas/Error400'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: './DragonService.yaml#/components/schemas/Error500'

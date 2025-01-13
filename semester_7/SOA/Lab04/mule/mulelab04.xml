@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:sockets="http://www.mulesoft.org/schema/mule/sockets"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/sockets http://www.mulesoft.org/schema/mule/sockets/current/mule-sockets.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
+	<http:listener-config name="HTTPS_Listener_config" doc:name="HTTP Listener config" doc:id="9094d995-20a5-4678-bd15-53f30adb550d" >
+		<http:listener-connection protocol="HTTPS" host="0.0.0.0" port="7500" tlsContext="TLS__Context">
+		</http:listener-connection>
+	</http:listener-config>
+	<tls:context name="TLS__Context" doc:name="TLS Context" doc:id="388860e3-85c6-48c3-a338-583b17aab5a9" >
+		<tls:key-store type="jks" path="keystore.jks" alias="tomcat" keyPassword="password" password="password" />
+	</tls:context>
+	<wsc:config name="Web_Service_Consumer" doc:name="Web Service Consumer Config" doc:id="d767c562-31e5-4cdd-aaf7-08218253c787" >
+		<wsc:connection wsdlLocation="http://killer:8080/ws/schema.wsdl" address="http://killer:8080/ws" service="SchemaPortService" port="SchemaPortSoap11">
+		</wsc:connection>
+	</wsc:config>
+	<wsc:config name="Web_Service_Consumer_Local" doc:name="Web Service Consumer Config" doc:id="ada21da8-5cb7-4918-af5b-72720cfca98c" >
+		<wsc:connection wsdlLocation="http://localhost:9090/ws/schema.wsdl" service="SchemaPortService" port="SchemaPortSoap11" address="http://localhost:9090/ws" >
+			<wsc:web-service-security actor="http://schemas.xmlsoap.org/soap/actor/next" />
+		</wsc:connection>
+	</wsc:config>
+	<flow name="createTeamFlow" doc:id="3489446b-34c8-428f-9f46-f1a4261e3070" >
+		<http:listener doc:name="Listener" doc:id="9a796f11-ee6d-4214-9be9-a6d96e3daee3" path="/api/v1/killers/teams/create/{teamName}/{teamSize}/{startCaveId}" config-ref="HTTPS_Listener_config">
+			<http:response >
+				<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Access-Control-Allow-Origin" : "*",
+	"Access-Control-Allow-Methods" : "GET, PUT, POST, DELETE, HEAD, OPTIONS",
+	"Access-Control-Allow-Headers" : "*",
+	"Access-Control-Allow-Credentials" : "true"
+}]]]></http:headers>
+			</http:response>
+			<http:error-response >
+				<http:body ><![CDATA[#[%dw 2.0
+output application/json
+---
+{
+	"code": error.errorType.identifier,
+	"message": error.description,
+	"time": now()
+}]]]></http:body>
+				<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Access-Control-Allow-Origin" : "*",
+	"Access-Control-Allow-Headers" : "*"
+}]]]></http:headers>
+			</http:error-response>
+		</http:listener>
+		<ee:transform doc:name="Transform Message" doc:id="65b55fee-574d-4097-b8bf-acafc435d6d4">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output text/xml
+ns ent0 http://com/joulin/killerservice/dto
+---
+{
+    ent0#TeamRequest: {
+		ent0#teamName: attributes.uriParams.teamName,
+		ent0#teamSize: attributes.uriParams.teamSize,
+		ent0#startCaveId: attributes.uriParams.startCaveId
+	}
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="31a136b5-16b5-407c-9a88-466baef6fcec" message="Sending SOAP Request: #[payload]" />
+		<wsc:consume doc:name="Consume" doc:id="48e631e3-2b51-4e51-be8b-cd3a555569ff" config-ref="Web_Service_Consumer" operation="Team"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8bac8805-87dd-4b46-a48e-2c6b57ea7f11" message="Recieve SOAP response: #[payload]" />
+		<ee:transform doc:name="Transform Message" doc:id="0cc22a73-32f4-46e4-bde9-fd3982880aed" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ent0 http://com/joulin/killerservice/dto
+---
+{
+    "id": payload.body.ent0#TeamResponse.ent0#id,
+    "creationDate": payload.body.ent0#TeamResponse.ent0#creationDate,
+    "name": payload.body.ent0#TeamResponse.ent0#name,
+    "size": payload.body.ent0#TeamResponse.ent0#size,
+    "caveId": payload.body.ent0#TeamResponse.ent0#caveId
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e769ea73-35ff-48a8-a875-f812ef67664d" >
+				<ee:transform doc:name="Transform Message" doc:id="41105bae-a6ac-42d4-89b8-ebd08dcb69a5" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"code": error.errorType,
+	"message": error.description,
+	"time": now()
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+	<flow name="moveTeamFlow" doc:id="b5543f33-0d8e-4abf-9182-89631e0d4d70" >
+		<http:listener doc:name="Listener" doc:id="6688a26d-71cd-4a69-9f77-6d8114522231" config-ref="HTTPS_Listener_config" path="/api/v1/killers/team/{teamId}/move/{caveId}" >
+			<http:response >
+				<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Access-Control-Allow-Origin" : "*",
+	"Access-Control-Allow-Methods" : "GET, PUT, POST, DELETE, HEAD, OPTIONS",
+	"Access-Control-Allow-Headers" : "*",
+	"Access-Control-Allow-Credentials" : "true"
+}]]]></http:headers>
+			</http:response>
+			<http:error-response >
+				<http:body ><![CDATA[#[%dw 2.0
+output application/json
+---
+{
+	"code": error.errorType.identifier,
+	"message": error.description,
+	"time": now()
+}]]]></http:body>
+				<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Access-Control-Allow-Origin" : "*",
+	"Access-Control-Allow-Headers" : "*"
+}]]]></http:headers>
+			</http:error-response>
+		</http:listener>
+		<ee:transform doc:name="Transform Message" doc:id="0c05c691-61e2-493d-92e4-c6857b96b799" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output text/xml
+ns ent0 http://com/joulin/killerservice/dto
+---
+{
+    ent0#MoveTeamRequest: {
+		ent0#teamId: attributes.uriParams.teamId,
+		ent0#caveId: attributes.uriParams.caveId
+	}
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="1d2aced1-bb9e-4c56-90be-ff6d4cc69e29" message="Sending SOAP Request: #[payload]" />
+		<wsc:consume operation="MoveTeam" doc:name="Consume" doc:id="8ba0c5a2-3454-4fe4-a13b-f861f4acce11" config-ref="Web_Service_Consumer"/>
+		<logger level="INFO" doc:name="Logger1" doc:id="3c6b60ea-5748-4757-9638-8f46de6569cb" message="Recieve SOAP response: #[payload]" />
+		<ee:transform doc:name="Transform Message1" doc:id="96581b1d-759f-42fd-b522-dd5cf984f610" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ent0 http://com/joulin/killerservice/dto
+---
+{
+    "id": payload.body.ent0#MoveTeamResponse.ent0#id,
+    "creationDate": payload.body.ent0#MoveTeamResponse.ent0#creationDate,
+    "name": payload.body.ent0#MoveTeamResponse.ent0#name,
+    "size": payload.body.ent0#MoveTeamResponse.ent0#size,
+    "caveId": payload.body.ent0#MoveTeamResponse.ent0#caveId,
+    "oldCaveId": payload.body.ent0#MoveTeamResponse.ent0#oldCaveId
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="856a5dbb-5024-45dc-b239-40ff23e7cafb" >
+				<ee:transform doc:name="Transform Message" doc:id="4ac8b96b-52db-4579-be2b-53cacf66f934" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"code": error.errorType,
+	"message": error.description,
+	"time": now()
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+</mule>

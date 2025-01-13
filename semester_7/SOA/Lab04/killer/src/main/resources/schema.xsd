@@ -1,0 +1,47 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com/joulin/killerservice/dto"
+           targetNamespace="http://com/joulin/killerservice/dto"
+           elementFormDefault="qualified">
+
+    <xs:element name="TeamRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="teamName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="teamSize" type="xs:long" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="startCaveId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TeamResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="creationDate" type="xs:string"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="size" type="xs:long"/>
+                <xs:element name="caveId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="MoveTeamRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="teamId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="caveId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MoveTeamResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="creationDate" type="xs:string"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="size" type="xs:long"/>
+                <xs:element name="caveId" type="xs:long"/>
+                <xs:element name="oldCaveId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
